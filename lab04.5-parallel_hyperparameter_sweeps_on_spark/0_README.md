@@ -13,11 +13,17 @@ az group deployment create -g azurebootcamplab41 --template-file template-hdi.js
 az ml experiment prepare -c docker
 ```
 **Note:** At this point, there is a strange Docker behavior for which we propose an easy solution: we may get an error at the top about `image operating system "linux" cannot be used on this platform`.
-![](./images/linux-image-not-found.jpg =500x)
+
+![](./images/linux-image-not-found.jpg){:width="500px"}
+
 To resolve it we click on the Docker logo on the right-hand side in the taskbar and switch Docker to use Windows containers. This will result in a new Docker error:
-![](./images/docker-windows-image.jpg =400x)
+
+![](./images/docker-windows-image.jpg){:width="400px"}
+
 Now we switch Docker back to Linux containers (by going to the taskbar once more).
-![](./images/switch-linux-containers.jpg =300x)
+
+![](./images/switch-linux-containers.jpg){:width="300px"}
+
 We then return to the command prompt and run the above command again. This will take a few minutes. When finished, we should get a message saying `Your environment is now ready`.
 3. Return to the Workbench and go to **File > Open Project (Code)** to open it using Code. Examine the script `sweep_spark.py`. Find the learning algorithm we're using and the set of hyper-parameters that we want to optimize over and their ranges.
 4. Now we specify the Spark cluster as the compute target by running the following command.
