@@ -32,11 +32,11 @@ The Azure CLI is a command line utility for provisioning and managing Azure reso
 1. Download and install the [Azure CLI Installer (MSI)](https://aka.ms/InstallAzureCliWindows). Once the installation is complete open the command prompt and run `az login`, then copy the access code returned to us. In a browser, open a **private tab** and enter the URL `aka.ms/devicelogin`. When prompted, paste in the access code from above. We will next be prompted to authenticate using our Azure account.
 2. Log into the Azure Portal and click on <img src ="./images/new-resource.jpg" width="90"/> and search for and select **Data Science Virtual Machine - Windows 2016**. On the resources' page, click on the link in the buttom that says <u>Want to deploy programmatically? Get started ➔</u>. 
 
-![](./images/deploy-programmatically.jpg){:width="600px"}
+   ![](./images/deploy-programmatically.jpg){:width="600px"}
 
-Scroll down and make sure that the status is enabled for the intended subscription.
+   Scroll down and make sure that the status is enabled for the intended subscription.
 
-![](./images/enabled-subscription.jpg){:width="600px"}
+   ![](./images/enabled-subscription.jpg){:width="600px"}
 
 2. From **Windows Explorer** navigate to the course folder and from there launch the command prompt by going to the address bar and typing `cmd` (for the Windows command prompt) or `bash` (for the Linux command prompt assuming it is installed already) and type `az --version` to check the installation. Run `az group create -n azurebootcamp -l eastus2` to create a resource group called `azurebootcamp`. Next run the following command to provision the DSVM:
 ```
@@ -56,16 +56,13 @@ az vm restart -g azurebootcamp -n azbootcampdsvm
 
 We now have a DSVM provisioned and almost ready to use. In this part, we log into the DSVM and install the necessary pre-requsites in order to start using Azrue ML Workbench (or Workbench for short). In order to log into the DSVM, we type `rdp` from the **Start Menu** and click on **Remote Desktop Connection**. We then enter the DSVM's IP address, which we can find by logging into the Azure portal and clicking on the DSVM under our resource group `azurebootcamp`.
 
-
 ![](./images/dsvm-ip-address.jpg){:width="600px"}
-
 
 1. On the DSVM, open the browser and navigate to [https://aka.ms/azureml-wb-msi](https://aka.ms/azureml-wb-msi), run the downloader to install Workbench. This will take between 10 and 20 minutes.
 2. On the DSVM, download and run the [Docker installer](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe) for Windows. Logout upon completion, but do NOT log out until Workbench has finished installing (previous step).
 3. Log back into the DSVM and launch Docker. When prompted to enable Hyper-V, do so. After a few seconds, this will restart the server and we will need to log back in.
 
 ![](./images/enable-hyperv.jpg){:width="600px"}
-
 
 ### 2.2 Preparing the Workbench to run a project (10 minutes)
 
