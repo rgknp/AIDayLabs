@@ -8,6 +8,8 @@ For many of the labs, we will be using the [Windows Data Science Virtual Machine
 
 ### 1.1 Provisioning a DSVM using the Azure portal (15 minutes)
 
+**If you want to learn to provision a DSVM using an ARM template instead of the Azure portal (ARM templates are easier to automate), then you can skip step 1.1 and provision your DSVM using step 1.3 instead.**
+
 1. Open this location and follow the instructions [shown here](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/provision-vm).
   a) Select the Data Science Virtual Machine - Windows 2016;
   b) Use `azureuser` and `DataScience2017!` as the admin user name and password.
@@ -69,7 +71,7 @@ We now have a DSVM provisioned and almost ready to use. In this part, we log int
 For the remainder of this lab, we will be working exclusively on the DSVM. So log into the DSVM and then run through the steps outlined here.
 
 1. Launch Docker for Windows and while waiting for Docker to start running, open the Azure Machine Learning Workbench. When prompted to authenticate using an Azure account, please do so.
-2. Click on initials at the bottom-left corner of the Workbench and make sure that we are using the correct account (namely the Experimentation account and matching Model Management account we created in section 2.1.4).
+2. Click on initials at the bottom-left corner of the Workbench and make sure that we are using the correct account (if you already have a Model Management account, otherwise we will create one later).
 3. Go to **File > Configure Project IDE** and name the IDE `Code` with the following path `C:\Program Files\Microsoft VS Code\Code.exe`. This will allow us to open the entire project in Visual Studio Code, which is our editor of choice for this lab.
 4. Go to **File > Open Project (VSCode)** to open the project in Visual Studio Code. It is not necessary to use Code to make edit our course files but it is much more convenient. We will return to Code when we need to make changes to the existing scripts.
 5. We now log into the Azure CLI using our Azure account. Return to the Workbench and go to **File > Open Command Prompt**. Check that the Azure CLI is installed on the DSVM by typing `az -h`. Now type `az login` and copy the access code. In Firefox open a **private tab** using **CTRL+SHIFT+P** then enter the URL `aka.ms/devicelogin` and when prompted, paste in the access code. Next, authenticate using an Azure account.
