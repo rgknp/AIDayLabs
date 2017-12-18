@@ -1,5 +1,5 @@
 ## 3_TestCLI
-Estimated Time: 10-15 minutes
+Estimated Time: 20-25 minutes
 
 ## Exploring Cosmos DB
 
@@ -35,7 +35,7 @@ Run _TestCLI_, then open Command Prompt and navigate to your Starting-ImageProce
 By default, it will load your settings from `settings.json` (it builds it into the `.exe`), but you can provide your own using the `-settings` flag. To load images (and their metadata from Cognitive Services) into your cloud storage, you can just tell _TestCLI_ to `-process` your image directory as follows:
 
 ```
-    > .\bin\Debug\TestCLI.exe -process c:\my\image\directory
+    > .\bin\Debug\TestCLI.exe -process c:\users\[username]\lab01.1-computer_vision\resources\sample_images
 ```
 
 Once it's done processing, you can query against your Cosmos DB directly using _TestCLI_ as follows:
@@ -43,6 +43,9 @@ Once it's done processing, you can query against your Cosmos DB directly using _
 ```
     > .\bin\Debug\TestCLI.exe -query "select * from images"
 ```
+
+Take some time to look through the [sample_images](./resources/sample_images) (you can find them in resources/sample_images) and compare the images to the results in your application. 
+
 
 ### Continue to [4_Challenge_and_Closing](./4_Challenge_and_Closing.md)
 
