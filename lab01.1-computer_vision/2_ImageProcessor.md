@@ -40,7 +40,7 @@ Now let's take a step back for a minute. It isn't quite as simple as creating th
 
 
 
-### Lab: Creating `ImageProcessor.cs`
+### Lab 2.1: Creating `ImageProcessor.cs`
 
 
 Right-click on the solution and select "Build Solution". If you have errors related to `ImageProcessor.cs`, you can ignore them for now, because we are about to address them.
