@@ -7,14 +7,14 @@ You may activate an Azure free trial at [https://azure.microsoft.com/en-us/free/
 
 If you have been given an Azure Pass to complete this lab, you may go to [http://www.microsoftazurepass.com/](http://www.microsoftazurepass.com/) to activate it.  Please follow the instructions at [https://www.microsoftazurepass.com/howto](https://www.microsoftazurepass.com/howto), which document the activation process.  A Microsoft account may have **one free trial** on Azure and one Azure Pass associated with it, so if you have already activated an Azure Pass on your Microsoft account, you will need to use the free trial or use another Microsoft account.
 
-### Lab: Setting up your Data Science Virtual Machine
+### Lab 1.1: Setting up your Data Science Virtual Machine
 
 After creating an Azure account, you may access the [Azure portal](https://portal.azure.com). From the portal, [create a Resource Group for this lab](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-portal). Detailed information about the Data Science Virtual Machine can be [found online](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/overview), but we will just go over what's needed for this workshop. We are creating a VM and not doing it locally to ensure that we are all working from the same environment. This will make troubleshooting much easier. In your Resource Group, deploy and connect to a "{CSP} Data Science Virtual Machine - Windows 2016", with a size of **D4S_V3** (this is only available on certain regions, **put in the location that is closest to you: West US 2, East US, Central India, Brazil South, North Europe, West Europe, Southeast Asia, Australia East**). All other defaults are fine. 
 > Note: Be sure to put the resources in a [region that they are available](https://azure.microsoft.com/en-us/regions/services/) in. If not, you will have to start over.
 
 Once you're connected, there are several things you need to do to set up the DSVM for the workshop:
 
-1. In the Cortana search bar, type "git bash" and select "Git Bash Desktop App". Next, type `git clone https://github.com/Azure/LearnAI-Bootcamp.git` hit enter. This copies down all of the files from the GitHub site to **C:\Users\\[username]\LearnAI-Bootcamp**.  
+1. In the Cortana search bar, type "git bash" and select "Git Bash Desktop App". Next, type `cd c://` then enter, and `git clone https://github.com/Azure/LearnAI-Bootcamp.git` then enter. This copies down all of the files from the GitHub site to **C:\Users\\[username]\LearnAI-Bootcamp**.  
 *Validation step*: Go to **C:\Users\\[username]\LearnAI-Bootcamp** and confirm it exists.
 2. Open "ImageProcessing.sln" which is under **C:\Users\\[username]\LearnAI-Bootcamp\lab01.1-computer_vision\resources\Starting-ImageProcessing**. It may take a while for Visual Studio to open for the first time, and you will have to log in. If your company has two factor authentication, you will not be able to use your pin to log in. Use your password and mobile phone authentication.  
 *Validation step*: In the top right corner of Visual Studio, confirm that you see your name and account information.
@@ -26,7 +26,7 @@ Once you're connected, there are several things you need to do to set up the DSV
 > Note: Be sure to turn off your DSVM after the workshop so you don't get charged.
 
 
-### Lab: Collecting the Keys ###
+### Lab 1.2: Collecting the Keys ###
 
 Over the course of this lab, we will collect Cognitive Services keys and storage keys. You should save all of them in a text file so you can easily access them in future labs.
 

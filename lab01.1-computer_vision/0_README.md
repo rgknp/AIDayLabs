@@ -1,4 +1,4 @@
-# Using Portable Class Libraries to Simplify App Development with Cognitive Services
+# Using Portable Class Libraries to Simplify App Development with Cognitive Services (specifically Computer Vision API)
 
 This hands-on lab guides you through creating an intelligent console application from end-to-end using Cognitive Services (specifically the Computer Vision API). We will focus on the ImageProcessing portable class library (PCL), discussing its contents and how to use it in your own applications. 
 
@@ -37,7 +37,7 @@ We will build a simple C# application that allows you to ingest pictures from yo
 
 Once we have this data, we process it to pull out the details we need, and store it all into [Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/), our [NoSQL](https://en.wikipedia.org/wiki/NoSQL) [PaaS](https://azure.microsoft.com/en-us/overview/what-is-paas/) offering.
 
-In the continuation of this lab, `lab01.2-luis_and_search`, we'll build an [Azure Search](https://azure.microsoft.com/en-us/services/search/) Index (Azure Search is our PaaS offering for faceted, fault-tolerant search - think Elastic Search without the management overhead) on top of Cosmos DB. We'll show you how to query your data, and then build a [Bot Framework](https://dev.botframework.com/) bot to query it. Finally, we'll extend this bot with [LUIS](https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis) to automatically derive intent from your queries and use those to direct your searches intelligently. 
+In the continuation of this lab throughout the workshop, we'll build an [Azure Search](https://azure.microsoft.com/en-us/services/search/) Index (Azure Search is our PaaS offering for faceted, fault-tolerant search - think Elastic Search without the management overhead) on top of Cosmos DB. We'll show you how to query your data, and then build a [Bot Framework](https://dev.botframework.com/) bot to query it. Finally, we'll extend this bot with [LUIS](https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis) to automatically derive intent from your queries and use those to direct your searches intelligently. 
 
 ![Architecture Diagram](./resources/assets/AI_Immersion_Arch.png)
 
@@ -52,7 +52,6 @@ There are several directories in the [resources](./resources) folder:
 	- **Starting-ImageProcessing** and **Finished-ImageProcessing**: There is a folder for starting, which you should use if you are going through the labs, but there is also a finished folder if you get stuck or run out of time. Each folder contains a solution (.sln) that has several different projects for the workshop, let's take a high level look at them:
 		- **ProcessingLibrary**: This is a Portable Class Library (PCL) containing helper classes for accessing the various Cognitive Services related to Vision, and some "Insights" classes for encapsulating the results.
 		- **ImageStorageLibrary**: Since Cosmos DB does not (yet) support UWP, this is a non-portable library for accessing Blob Storage and Cosmos DB.
-		- **TestApp**: A UWP application that allows you to load your images and call the various cognitive services on them, then explore the results. Useful for experimentation and exploration of your images.
 		- **TestCLI**: A Console application allowing you to call the Computer Vision Cognitive Service and then upload the images and data to Azure. Images are uploaded to Blob Storage, and the various metadata (tags, captions, image ids) are uploaded to Cosmos DB.
 
 		_TestCLI_ contains a `settings.json` file containing the various keys and endpoints needed for accessing the Cognitive Services and Azure. It starts blank, so once you provision your resources, we will grab your service keys and set up your storage account and Cosmos DB instance.
@@ -62,10 +61,8 @@ There are several directories in the [resources](./resources) folder:
 This workshop has been broken down into five sections:
 - [1_Setup](./1_Setup.md): Here we'll get everything set up for you to perform these labs - Azure, a Data Science Virtual Machine, and Keys you'll need throughout the workshop. **This should be done prior to attending class**
 - [2_ImageProcessor](./2_ImageProcessor.md): You'll learn about portable class libraries, and how to build an image processor from service helpers
-TODO: need to edit these appropriately after completion
-- [3_TestApp](./3_TestCLI.md): We'll finish building our application and test it out, also storing our insights in `ImageInsights.json`
-- [4_TestCLI](./4_TestCLI2.md) (optional): Here we'll load our images into Cosmos DB and Azure Storage using a console application. You should complete this lab if you want to learn more about Cosmos DB, and if you plan on completing **lab01.2-luis_and_search**
-- [5_Challenge_and_Closing](./5_Challenge_and_Closing.md): If you get through all the labs, try this challenge. You will also find a summary of what you've done and where to learn more.
+- [3_TestCLI](./4_TestCLI2.md) (optional): Here we'll call the Computer Vision API and load our images into Cosmos DB and Azure Storage using a console application
+- [4_Challenge_and_Closing](./5_Challenge_and_Closing.md): If you get through all the labs, try this challenge. You will also find a summary of what you've done and where to learn more
 
 
 
