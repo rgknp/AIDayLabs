@@ -8,10 +8,6 @@ In this workshop, you will:
 - Understand how to implement Azure Search features to provide a positive search experience inside applications
 - Configure an Azure Search service to extend your data to enable full-text, language-aware search  
 
-While there is a focus on Azure Search, you will also leverage the following technologies:
-
-- Data Science Virtual Machine (DSVM)
-
 ## Prerequisites
 
 This workshop is meant for an AI Developer on Azure. Since this is a short workshop, there are certain things you need before you arrive.

@@ -1,4 +1,4 @@
-# Using Portable Class Libraries to Simplify App Development with Cognitive Services (specifically Computer Vision API)
+# Using Portable Class Libraries to Simplify App Development with Cognitive Services 
 
 This hands-on lab guides you through creating an intelligent console application from end-to-end using Cognitive Services (specifically the Computer Vision API). We will focus on the ImageProcessing portable class library (PCL), discussing its contents and how to use it in your own applications. 
 
@@ -19,7 +19,7 @@ While there is a focus on Cognitive Services, you will also leverage the followi
  
 ## Prerequisites
 
-This workshop is meant for an AI Developer on Azure. Since this only a short workshop, there are certain things you need before you arrive.
+This workshop is meant for an AI Developer on Azure. Since this is only a short workshop, there are certain things you need before you arrive.
 
 Firstly, you should have experience with Visual Studio. We will be using it for everything we are building in the workshop, so you should be familiar with [how to use it](https://docs.microsoft.com/en-us/visualstudio/ide/visual-studio-ide) to create applications. Additionally, this is not a class where we teach you how to code or develop applications. We assume you some familiarity with C# (you can learn [here](https://mva.microsoft.com/en-us/training-courses/c-fundamentals-for-absolute-beginners-16169?l=Lvld4EQIC_2706218949)), but you do not know how to implement solutions with Cognitive Services. 
 
@@ -29,7 +29,7 @@ Finally, before arriving at the workshop, we expect you to have completed [1_Set
 
 ## Introduction
 
-We're going to build an end-to-end application that allows you to pull in your own pictures, use Cognitive Services to obtain a caption and some tags about the images, and then store that information in Cosmos DB. In a continuation of this lab, `lab01.2-luis_and_search`, we will use the NoSQL Store (Cosmos DB) to populate an Azure Search index, and then build a Bot Framework bot using LUIS to allow easy, targeted querying.
+We're going to build an end-to-end application that allows you to pull in your own pictures, use Cognitive Services to obtain a caption and some tags about the images, and then store that information in Cosmos DB. In later labs, we will use the NoSQL Store (Cosmos DB) to populate an Azure Search index, and then build a Bot Framework bot using LUIS to allow easy, targeted querying.
 
 ## Architecture
 
@@ -51,7 +51,7 @@ There are several directories in the [resources](./resources) folder:
 - **code**: In here, there are several directories that we will use:
 	- **Starting-ImageProcessing** and **Finished-ImageProcessing**: There is a folder for starting, which you should use if you are going through the labs, but there is also a finished folder if you get stuck or run out of time. Each folder contains a solution (.sln) that has several different projects for the workshop, let's take a high level look at them:
 		- **ProcessingLibrary**: This is a Portable Class Library (PCL) containing helper classes for accessing the various Cognitive Services related to Vision, and some "Insights" classes for encapsulating the results.
-		- **ImageStorageLibrary**: Since Cosmos DB does not (yet) support UWP, this is a non-portable library for accessing Blob Storage and Cosmos DB.
+		- **ImageStorageLibrary**: This is a non-portable library for accessing Blob Storage and Cosmos DB.
 		- **TestCLI**: A Console application allowing you to call the Computer Vision Cognitive Service and then upload the images and data to Azure. Images are uploaded to Blob Storage, and the various metadata (tags, captions, image ids) are uploaded to Cosmos DB.
 
 		_TestCLI_ contains a `settings.json` file containing the various keys and endpoints needed for accessing the Cognitive Services and Azure. It starts blank, so once you provision your resources, we will grab your service keys and set up your storage account and Cosmos DB instance.
@@ -60,8 +60,8 @@ There are several directories in the [resources](./resources) folder:
 
 This workshop has been broken down into five sections:
 - [1_Setup](./1_Setup.md): Here we'll get everything set up for you to perform these labs - Azure, a Data Science Virtual Machine, and Keys you'll need throughout the workshop. **This should be done prior to attending class**
-- [2_ImageProcessor](./2_ImageProcessor.md): You'll learn about portable class libraries, and how to build an image processor from service helpers
-- [3_TestCLI](./4_TestCLI2.md) (optional): Here we'll call the Computer Vision API and load our images into Cosmos DB and Azure Storage using a console application
+- [2_ImageProcessor](./2_ImageProcessor.md): You'll learn about portable class libraries and how to build an image processor from service helpers
+- [3_TestCLI](./4_TestCLI2.md): Here we'll call the Computer Vision API and load our images into Cosmos DB and Azure Storage using a console application
 - [4_Challenge_and_Closing](./5_Challenge_and_Closing.md): If you get through all the labs, try this challenge. You will also find a summary of what you've done and where to learn more
 
 

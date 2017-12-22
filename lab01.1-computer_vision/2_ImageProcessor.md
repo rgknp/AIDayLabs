@@ -69,8 +69,6 @@ public static async Task<ImageInsights> ProcessImageAsync(Func<Task<Stream>> ima
         }
 ```
 
-TODO: run this by Buck and make sure that's what the code does.
-TODO: test remove Func?  
 In the above code, we use `Func<Task<Stream>>` because we want to make sure we can process the image multiple times (once for each service that needs it), so we have a Func that can hand us back a way to get the stream. Since getting a stream is usually an async operation, rather than the Func handing back the stream itself, it hands back a task that allows us to do so in an async fashion.
   
 In `ImageProcessor.cs`, within the `ProcessImageAsync` method, we're going to set up a [static array](https://stackoverflow.com/questions/4594850/definition-of-static-arrays) that we'll fill in throughout the processor. As you can see, these are the main attributes we want to call for `ImageInsights.cs`. Add the code below between the `{ }` of `ProcessImageAsync`:
@@ -102,7 +100,7 @@ Depending on your C# dev background, this may not be an easy task. Here are some
 3.  For Caption, you have to specify that you want only the first caption by using `[0]`.
 4.  For Tags, you have to put the tags into an array with `Select(t => t.Name).ToArray()`.
   
-Still stuck? You can take a peek at the solution at [resources>code>classes>ImageProcessor.cs](./resources/code/classes/ImageProcessor.cs) 
+Still stuck? You can take a peek at the solution at [resources>code>Finished-ImageProcessing>ProcessingLibrary>ImageProcessor.cs](./resources/code/Finished-ImageProcessing/ProcessingLibrary/ImageProcessor.cs) 
 
 So now we have the caption and tags that we need from the Computer Vision API, and each image's result (with imageId) is stored in "ImageInsights".
 
@@ -113,7 +111,7 @@ return result;
 
 Now that you've built `ImageProcessor.cs`, don't forget to save it! 
 
-Want to make sure you set up `ImageProcessor.cs` correctly? You can find the full class [here](./resources/code/classes/ImageProcessor.cs).
+Want to make sure you set up `ImageProcessor.cs` correctly? You can find the full class [here](./resources/code/Finished-ImageProcessing/ProcessingLibrary/ImageProcessor.cs).
 
 
 ### Continue to [3_TestCLI](./3_TestCLI.md)

@@ -85,6 +85,6 @@ This workshop has been broken down into five sections:
 
 
 
-### Continue to [1_Regex_and_ScorableGroups](./1_Regex_and_ScorableGroups)
+### Continue to [1_Regex_and_ScorableGroups](./1_Regex_and_ScorableGroups.md)
 
 
