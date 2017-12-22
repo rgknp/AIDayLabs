@@ -116,15 +116,9 @@ Finally, add methods for the rest of the intents.  The corresponding method will
 
 You may have noticed that we haven't implemented scorable groups for the intents we just added. Modify your code so that all of the `LuisIntent`s are of scorable group priority 1.
 
-Once you've modified your code, hit F5 to run in Visual Studio, and start up a new conversation in the Bot Framework Emulator.  Try chatting with the bot, and ensure that you get the expected responses.  If you get any unexpected results, note them down and we will revise LUIS.  
+Once you've modified your code, hit F5 to run in Visual Studio, and start up a new conversation in the Bot Framework Emulator.  Try chatting with the bot, and ensure that you get the expected responses.  If you get any unexpected results, note them down and [revise LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Train-Test).
 
-![Bot Test LUIS](./resources/assets/BotTestLuis.jpg) 
-
-In the above screenshot, I was expecting to get a different response when I said "order prints" to the bot.  It looks like this was mapped to the "SearchPics" intent instead of the "OrderPic" intent.  I can update my LUIS model by returning to http://luis.ai.  Click on the appropriate application, and then click on "Intents" in the left sidebar.  I could manually add this as a new utterance, or I could leverage the "suggested utterances" functionality in LUIS to improve my model.  Click on the "SearchPics" intent (or the one to which your utterance was mis-labeled) and then click "Suggested utterances".  Click the checkbox for the mis-labeled utterance, and then click "Reassign Intent" and select the correct intent.  
-
-![LUIS Reassign Intent](./resources/assets/LuisReassignIntent.jpg) 
-
-For these changes to be picked up by your bot, you must re-train and re-publish your LUIS model.  Click on "Publish App" in the left sidebar, and click the "Train" button and then the "Publish" button near the bottom.  Then you can return to your bot in the emulator and try again.  
+Don't forget, you must re-train and re-publish your LUIS model.  Then you can return to your bot in the emulator and try again.  
 
 > Fun Aside: The Suggested Utterances are extremely powerful.  LUIS makes smart decisions about which utterances to surface.  It chooses the ones that will help it improve the most to have manually labeled by a human-in-the-loop.  For example, if the LUIS model predicted that a given utterance mapped to Intent1 with 47% confidence and predicted that it mapped to Intent2 with 48% confidence, that is a strong candidate to surface to a human to manually map, since the model is very close between two intents.  
 
