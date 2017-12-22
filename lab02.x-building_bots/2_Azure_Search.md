@@ -1,4 +1,5 @@
 ## 2_Azure_Search:
+Estimated Time: 10-15 minutes
 
 ### Lab 2.1: Configure your bot for Azure Search 
 
