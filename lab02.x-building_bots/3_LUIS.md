@@ -1,4 +1,5 @@
 ## 3_LUIS:
+Estimated Time: 15-20 minutes
 
 ### Lab 3.1: Update bot to use LUIS
 

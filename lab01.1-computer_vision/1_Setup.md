@@ -14,9 +14,9 @@ After creating an Azure account, you may access the [Azure portal](https://porta
 
 Once you're connected, there are several things you need to do to set up the DSVM for the workshop:
 
-1. In the Cortana search bar, type "git bash" and select "Git Bash Desktop App". Next, type `cd c://` then enter, and `git clone https://github.com/Azure/LearnAI-Bootcamp.git` then enter. This copies down all of the files from the GitHub site to **C:\Users\\[username]\LearnAI-Bootcamp**.  
-*Validation step*: Go to **C:\Users\\[username]\LearnAI-Bootcamp** and confirm it exists.
-2. Open "ImageProcessing.sln" which is under **C:\Users\\[username]\LearnAI-Bootcamp\lab01.1-computer_vision\resources\Starting-ImageProcessing**. It may take a while for Visual Studio to open for the first time, and you will have to log in. If your company has two factor authentication, you will not be able to use your pin to log in. Use your password and mobile phone authentication.  
+1. In the Cortana search bar, type "git bash" and select "Git Bash Desktop App". Next, type `cd c://` then enter, and `git clone https://github.com/Azure/LearnAI-Bootcamp.git` then enter. This copies down all of the files from the GitHub site to **C:\LearnAI-Bootcamp**.  
+*Validation step*: Go to **C:\LearnAI-Bootcamp** and confirm it exists.
+2. Open "ImageProcessing.sln" which is under **C:\LearnAI-Bootcamp\lab01.1-computer_vision\resources\Starting-ImageProcessing**. It may take a while for Visual Studio to open for the first time, and you will have to log in. If your company has two factor authentication, you will not be able to use your pin to log in. Use your password and mobile phone authentication.  
 *Validation step*: In the top right corner of Visual Studio, confirm that you see your name and account information.
 3. Once you're in, if 'TestCLI' is not loaded, right-click on 'TestCLI' and select "Install Missing Features". This will prompt you to install **.Net Desktop Development**. Click **Install**, then **Install** again. You may get an error because Visual Studio needs to be closed to install updates. Close Visual Studio and then select **Retry**. It should only take 1-2 minutes to install.   
 *Validation step*: Reopen "ImageProcessing.sln", confirm that you are able to expand TestCLI and see its contents.  

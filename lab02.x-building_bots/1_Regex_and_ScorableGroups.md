@@ -1,5 +1,5 @@
 ## 1_Regex_and_ScorableGroups:
-Estimated Time: 30-40 minutes
+Estimated Time: 10-15 minutes
 
 ## Building a Bot
 

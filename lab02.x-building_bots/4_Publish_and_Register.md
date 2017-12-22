@@ -1,5 +1,5 @@
 ## 4_Publish_and_Register:
-
+Estimated Time: 10-15 minutes
 
 ### Lab 4.1: Publish your bot
 

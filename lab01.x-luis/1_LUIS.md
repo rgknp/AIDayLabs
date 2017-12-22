@@ -39,9 +39,9 @@ From [https://www.luis.ai/applications](https://www.luis.ai/applications), click
 
 ![LUIS New App](./resources/assets/LuisNewApp.png) 
 
-You will be taken to a Dashboard for your new app.  The App Id is displayed; note that down for later as your **LUIS App ID**.  Then click "Create an intent".  
+You will be taken to the Build section for your new app. 
 
-![LUIS Dashboard](./resources/assets/LuisDashboard.jpg) 
+![LUIS Dashboard](./resources/assets/LuisCreateIntent.png) 
 
 We want our bot to be able to do the following things:
 + Search/find pictures
@@ -49,19 +49,19 @@ We want our bot to be able to do the following things:
 + Order prints of pictures
 + Greet the user (although this can also be done other ways as we will see later)
 
-Let's create intents for the user requesting each of these.  Click the "Add intent" button.  
+Let's create intents for the user requesting each of these.  Click the "Create new intent" button.  
 
-Name the first intent "Greeting" and click "Save".  Then give several examples of things the user might say when greeting the bot, pressing "Enter" after each one.  After you have entered some utterances, click "Save".  
+Name the first intent "Greeting" and click "Enter".  Then give several examples of things the user might say when greeting the bot, pressing "Enter" after each one.  
 
-![LUIS Greeting Intent](./resources/assets/LuisGreetingIntent.jpg) 
+![LUIS Greeting Intent](./resources/assets/LuisGreetingIntent.png) 
 
 Let's see how to create an entity.  When the user requests to search the pictures, they may specify what they are looking for.  Let's capture that in an entity.  
 
-Click on "Entities" in the left-hand column and then click "Add custom entity".  Give it an entity name "facet" and entity type "Simple".  Then click "Save".  
+Click on "Entities" in the left-hand column and then click "Create new entity".  Give it an entity name "facet" and entity type ["Simple"](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/luis-concept-entity-types).  Then click "Done".  
 
-![Add Facet Entity](./resources/assets/AddFacetEntity.jpg) 
+![Add Facet Entity](./resources/assets/LuisCreateEntity.png) 
 
-Next, click "Intents" in the left-hand sidebar and then click the yellow "Add Intent" button.  Give it an intent name of "SearchPics" and then click "Save".  
+Next, click "Intents" in the left-hand sidebar and then click the yellow "Create new intent" button.  Give it an intent name of "SearchPics" and then click "Done".  
 
 Just as we did for Greetings, let's add some sample utterances (words/phrases/sentences the user might say when talking to the bot).  People might search for pictures in many ways.  Feel free to use some of the utterances below, and add your own wording for how you would ask a bot to search for pictures. 
 
@@ -72,24 +72,19 @@ Just as we did for Greetings, let's add some sample utterances (words/phrases/se
 + Please give me pics of 20-year-old women
 + Show me beach pics
 + I want to find dog photos
-+ Search for pictures of women indoors
++ Search for pictures of men indoors
 + Show me pictures of girls looking happy
-+ I want to see pics of sad girls
++ I want to see pics of sad boys
 + Show me happy baby pics
 
 Once we have some utterances, we have to teach LUIS how to pick out the **search topic** as the "facet" entity. Whatever the "facet" entity picks up is what will be searched. Hover and click over the word (or drag to select a group of words) and then select the "facet" entity. 
 
-![Labelling Entity](./resources/assets/LabellingEntity.jpg) 
+![Labelling Entity](./resources/assets/LuisFacet.png) 
 
-So the following list of utterances...
+So your utterances may become something like this when facets are labeled:
 
-![Add Facet Entity](./resources/assets/SearchPicsIntentBefore.jpg) 
-
-...may become something like this when the facets are labeled.  
-
-![Add Facet Entity](./resources/assets/SearchPicsIntentAfter.jpg) 
-
-Don't forget to click "Save" when you are done!  
+![Add Facet Entity](./resources/assets/SearchPicsIntentAfter.png) 
+ 
 
 Finally, click "Intents" in the left sidebar and add two more intents:
 + Name one intent **"SharePic"**.  This might be identified by utterances like "Share this pic", "Can you tweet that?", or "post to Twitter".  
@@ -98,31 +93,42 @@ When choosing utterances, it can be helpful to use a combination of questions, c
 
 Note too that there is one intent called "None".  Random utterances that don't map to any of your intents may be mapped to "None".  
 
-We are now ready to train our model.  Click "Train & Test" in the left sidebar.  Then click the train button.  This builds a model to do utterance --> intent mapping with the training data you've provided. Training is not always immediate. Sometimes, it gets queued and can take several minutes.
+We are now ready to train our model.  Click "Train" in the top right bar.  This builds a model to do utterance --> intent mapping with the training data you've provided. Training is not always immediate. Sometimes, it gets queued and can take several minutes.
 
-Then click on "Publish App" in the left sidebar.  You have several options when you publish your app, including enabling [verbose endpoint response or Bing spell checker](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp). If you have not already done so, select the endpoint key that you set up earlier, or follow the link to add a key from your Azure account.  You can leave the endpoint slot as "Production".  Then click "Publish".  
+Then click on "Publish" in the top bar.  You have several options when you publish your app, including enabling [including all predicted intent scores or Bing spell checker](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp). If you have not already done so, select the endpoint key that you set up earlier, or follow the link to add a key from your Azure account.  You can leave the endpoint slot as "Production".  Then click "Publish".  
 
 
 
-![Publish LUIS App](./resources/assets/PublishLuisApp.png) 
+![Publish LUIS App](./resources/assets/LuisPublish.png) 
 
 Publishing creates an endpoint to call the LUIS model.  The URL will be displayed, which will be explained in a later lab.
 
-Click on "Train & Test" in the left sidebar.  Check the "Enable published model" box to have the calls go through the published endpoint rather than call the model directly. Try typing a few utterances and see the intents returned.  
->Unfortunately, there is a bug open with "Enable published model", and it only works in Chrome. You can either download Chrome and try this, or skip it but remember that it's not enabled.
+Click on "Test" in the top right bar. Try typing a few utterances and see the intents returned. Familiarize yourself with [Interactive Testing](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Train-Test#interactive-testing) and [Relabeling Utterances/Retraining](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Train-Test#relabel-utterances-and-retrain) as you may want to do this now or in a future lab. 
 
-![Test LUIS](./resources/assets/TestLuis.png) 
+One quick example is shown below. I have noticed that my model incorrectly assigned "send me a swimming photo" as SharePic, when it should be SearchPic. I reassigned the intent.
+
+
+![Test LUIS](./resources/assets/ReassignIntent.png) 
+
+Now I need to retrain my app by selecting the Train button. I then tested the same utterance and compared the results between my recently trained and previously published model. 
+
+![Reassign Intent](./resources/assets/ReassignIntentAfter.png) 
+
 
 You can also [test your published endpoint in a browser](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp#test-your-published-endpoint-in-a-browser). Copy the URL, then replace the `{YOUR-KEY-HERE}` with one of the keys listed in the Key String column for the resource you want to use. To open this URL in your browser, set the URL parameter `&q` to your test query. For example, append `&q=Find pictures of dogs` to your URL, and then press Enter. The browser displays the JSON response of your HTTP endpoint.
 
 **Finish early? Try these extra credit tasks:**
 
 
-Create additional entities that can be leveraged by the "SearchPics" intent. For example, we know that our app determines age - try creating a prebuilt entity for age. 
+Create additional entities that can be leveraged by the "SearchPics" intent.
 
 Explore using custom entities of entity type "List" to capture emotion and gender. See the example of emotion below. 
 
-![Custom Emotion Entity with List](./resources/assets/CustomEmotionEntityWithList.jpg) 
+![Custom Emotion Entity with List](./resources/assets/emotionList.png) 
+
+
 
 > Note: When you add more entities or features, don't forget to go to **Intents>Utterances** and confirm/add more utterances with the entities you add. Also, you will need to retrain and publish your model.
 
+
+If you still have time, spend time exploring the www.luis.ai site. Select "Prebuilt domains" and see [what is already available for you](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-domains). You can also review some of the [other features](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-feature). 
