@@ -42,7 +42,7 @@ Run ```python churn_schema_gen.py``` from CLI to create service_schema.json.
 
 **Create the real-time web-service**
 
-```az ml service create realtime -f score_iris.py --model-file model.pkl -s service_schema.json -n irisapp -r python --collect-model-data true -c amlconfig\conda_dependencies.yml```
+```az ml service create realtime -f score.py --model-file model.pkl -s service_schema.json -n <name> -r python```
 
 ### Lab 2: Consume the web-service
 
