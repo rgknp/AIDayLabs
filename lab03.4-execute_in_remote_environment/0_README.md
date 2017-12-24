@@ -7,8 +7,6 @@ In this workshop, you will:
 - Understand how to execute your workloads on HDInsight Clusters running Spark
 - Understand how to execute your workloads on remote Data     Science VMs with GPU's
 
-You'll focus on the objectives above, not Data Science, Machine Learning or a difficult scenario.  
-
 ***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
   *  Programming using an Agile methodology
   *  Machine Learning and Data Science
