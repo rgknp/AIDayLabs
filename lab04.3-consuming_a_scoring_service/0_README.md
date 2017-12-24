@@ -46,6 +46,8 @@ Run ```python churn_schema_gen.py``` from CLI to create service_schema.json.
 
 ### Lab 2: Consume the web-service
 
+In this lab, we will send a request to the real-time web service created by following the below steps:
+
 **Get the service key**
 
 ```az ml service keys realtime -i <web service id>```
