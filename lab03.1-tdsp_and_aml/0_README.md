@@ -119,8 +119,8 @@ The final step in the Team Data Science Process is [Customer Acceptance](https:/
 ### Lab: Review Customer Acceptance and Closeout Documentation
 
 In this lab you will examine the final project close out document. In production implementations, you and your team will create this document. 
-- [ ] open the **WhateverYouNamedYourProject\docs\deliverable_docs\ProjectReport.md** file and examine its contents.
-- [ ] Is there more information needed there? Are there items you would also include? How should this document be communicated? Are there security implications?
+- [ ] [Navigate to this resource](https://github.com/Azure/MachineLearningSamples-TDSPUCIAdultIncome/blob/master/docs/deliverable_docs/ProjectReport.md) and evalaute the report you see there. This is what you would create as a deliverable for your project.
+- [ ] Is there additional information needed there? Are there items you would also include? How should this document be communicated? Are there security implications?
 
 ## Workshop Completion
 
