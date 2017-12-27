@@ -55,8 +55,7 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
   - 10:15-11:15: [Lab 2.2: Testing your Bot](https://aka.ms/LearnAI-EmergingAIDevBootcamp-02-2)
   - 11:15-12:00: Summary and Whiteboard Discussion of Logging and Testing
   - 12-1: Lunch
-  - 1:00-1:30: Discussion with Andy Hickl, GPM for Cognitive Services
-  - 1:30-2:00: Introduction and Context for Custom Vision Service
+  - 1:00-2:00: Introduction and Context for Custom Vision Service
   - 2:00-2:30: [Lab 2.3: Creating an Image Classification Application using the Custom Vision Service I](https://aka.ms/LearnAI-EmergingAIDevBootcamp-02-3)
   - 2:30-3:00: [Lab 2.4: Creating an Image Classification Application using the Custom Vision Service II](https://aka.ms/LearnAI-EmergingAIDevBootcamp-02-4)
   - 3:00-3:30: [Lab 2.5: Creating an Image Classification Application using the Custom Vision Service III](https://aka.ms/LearnAI-EmergingAIDevBootcamp-02-5)

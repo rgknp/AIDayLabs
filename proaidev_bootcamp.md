@@ -1,6 +1,6 @@
 # Welcome
 
-Welcome to the second two days of the Cloud AI Bootcamp. In these two days, we will focus on hands-on activities that develop proficiency in AI-oriented workflows leveraging Azure Machine Learning Workbench and Services, the Team Data Science Process, Visual Studio Team Services, Azure Batch AI, and Azure Container Services. These labs assume a introductory to intermediate knowledge of these services, and if this is not the case, then you should spend the time working through the pre-requisites.
+Welcome to the second two days of the Cloud AI Bootcamp. In these two days, we will focus on hands-on activities that develop proficiency in AI-oriented workflows leveraging Azure Machine Learning Workbench and Services, the Team Data Science Process, Visual Studio Team Services, and Azure Container Services. These labs assume a introductory to intermediate knowledge of these services, and if this is not the case, then you should spend the time working through the pre-requisites.
 
 # Pre-requisites
 
