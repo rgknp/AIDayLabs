@@ -3,11 +3,9 @@
 This hands-on lab guides you through executing a machine learning data preparation or model training work load in a remote environment using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
 
 In this workshop, you will:
-- [ ] Understand how to execute your workloads on remote Data Science Virtual Machines 
-- [ ] Understand how to execute your workloads on remote Data Science VMs with GPU's
-- [ ] Understand how to execute your workloads on HDInsight Clusters running Spark
-
-You'll focus on the objectives above, not Data Science, Machine Learning or a difficult scenario.  
+- Understand how to execute your workloads on remote Data Science Virtual Machines 
+- Understand how to execute your workloads on HDInsight Clusters running Spark
+- Understand how to execute your workloads on remote Data     Science VMs with GPU's
 
 ***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
   *  Programming using an Agile methodology
@@ -42,51 +40,103 @@ The Azure Machine Learning Services Workbench tool combines all of these compone
 
 ![Local AMLS Experiment run](https://docs.microsoft.com/en-us/azure/machine-learning/preview/media/experimentation-service-configuration/local-native-run.png)
 
-### Lab: Execute an Experiment Locally
+### Lab 1: Execution - Local and Docker Container
 
-In this lab you'll create an experiment, examine its configuration, and run the experiment locally, using both a `local` compute and a `localdocker` compute. You'll set up the experiment in the AML Workbench tool, and then run all experiments from the command line interface (CLI)
-- [ ] Open the Azure Machine Learning Workbench tool locally or on your Data Science Virtual Machine. 
-- [ ] Create a new experiment using the Iris example.
-- [ ] [Navigate to this resource](https://docs.microsoft.com/en-us/azure/machine-learning/preview/experimentation-service-configuration), and complete the sections marked **"Launching the CLI"** through **"Running a script on local Docker"**
-- [ ] Replace the line marked: `az ml experiment submit -c docker myscript.py` use `az ml experiment submit -c docker-python iris_sklearn.py`.
+In this lab you'll create an experiment, examine its configuration, and run the experiment locally, using both a `local` compute and a `docker` compute. You'll set up the experiment in the AML Workbench tool, and then run all experiments from the command line interface (CLI)
+- Open the Azure Machine Learning Workbench tool locally or on your Data Science Virtual Machine. 
+- Create a new experiment using the Churn example.
+- Launch the CLI. An easy way to launch the CLI is opening a project in Workbench and navigating to File-->Open Command Prompt.
+- **Authentication**: If you have not already authenticated against Azure, follow the steps below. Authentication token is cached locally for a period of time so you only need to repeat these steps when the token expires.
 
-## Executing an Experiment to a remote Data Science Virtual Machine in Azure
+```# to authenticate 
+$ az login
 
-You configure the Azure ML experiment flow for a remote run using this process: 
+# to list subscriptions
+$ az account list -o table
 
-![AMLS Remote Experiment Flow](https://docs.microsoft.com/en-us/azure/machine-learning/preview/media/experimentation-service-configuration/remote-vm-run.png)
+# to set current subscription to a particular subscription ID 
+$ az account set -s <subscription_id>
 
-### Lab: Execute an Experiment to a remote Data Science Virtual Machine
+# to verify your current Azure subscription
+$ az account show
+```
+
+- **Execution**: Workbench enables scripts to be run directly against the Workbench-installed Python 3.5.2 runtime. This configuration is not managed by Conda unlike Docker-based executions. The package dependencies would need to be manually provisioned for your local Workbench Python environment.
+
+To run locally, run the below command:
+
+```az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py```
+
+For running the script on local Docker, you can execute the following command in CLI:
+
+```az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py```
+
+You should see results as follows:
+
+![Naive Bayes](images/naive-bayes.png)
+
+### Lab 2: Execute an Experiment on a remote Data Science Virtual Machine
 
 In this lab you will create an experiment, examine its configuration, and run the experiment on a remote Docker container. You'll set up the experiment in the AMLS Workbench tool, and then run all experiments from the command line interface (CLI)
 
-- [ ] [Open this Reference and create an Ubuntu Data Science Virtual Machine](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro)
+- [Open this Reference and create an Ubuntu Data Science Virtual Machine](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro)
 
-    - [ ] Choose a size of *Standard D4s v3 (4 vcpus, 16 GB memory)*
-    - [ ] Use a password, not a SSH Key
-    - [ ] Start the VM and connect to it using ssh. If you use some version of bash, the command is: `ssh *nameyoupicked*@*ipaddressofvm*`
-    - [ ] Check to ensure Docker is functional on your Linux DSVM with the following command:
+    - Choose a size of *Standard D4s v3 (4 vcpus, 16 GB memory)*
+    - Use a password, not a SSH Key
+    - Start the VM and connect to it using ssh. If you use some version of bash, the command is: `ssh *nameyoupicked*@*ipaddressofvm*`
+    - Check to ensure Docker is functional on your Linux DSVM with the following command:
 
 ```
 sudo docker run docker/whalesay cowsay "The best debugging is done with CTRL-X. - Buck Woody"
 ```
 
-- [ ] Open the Azure Machine Learning Services Workbench tool locally or on your Windows Data Science Virtual Machine. 
-- [ ] [Navigate to this resource](https://docs.microsoft.com/en-us/azure/machine-learning/preview/experimentation-service-configuration), and complete the section marked **"Running a script on a remote Docker"**
+- Launch the CLI from Azure Machine Learning Services Workbench tool.
+- Run the following command to create both the compute target definition and run configuration for remote Docker-based executions.
 
-### Running on a remove Spark or GPU cluster
+```
+az ml computetarget attach remotedocker --name "remotevm" --address "remotevm_IP_address" --username "sshuser" --password "sshpassword"
+```
 
-To run your scripts on Spark, [review this link](https://docs.microsoft.com/en-us/azure/machine-learning/preview/experimentation-service-configuration), referencing the section marked **"Running a script on an HDInsight cluster"**
+- Before running against "remotevm", you need to prepare it with your project's environment by running:
+```
+az ml experiment prepare -c "remotevm"
+```
+
+- Once you configure the compute target, you can use the following command to run the churn script.
+```
+az ml experiment submit -c remotevm CATelcoCustomerChurnModelingWithoutDprep.py
+```
+Note that the execution environment is configured using the specifications in conda_dependencies.yml.
+
+### (Optional) Lab 3: Running on a remote Spark cluster
+
+The workbench is flexible to run experimentation on big data using HDInsight Spark clusters. Note that the HDInsight cluster must use Azure Blob as the primary storage (and Azure Data Lake storage is not supported yet). Additionally, you will need SSH access to the HDInsight cluster in order to execute experiments in this mode.
+
+- The first step in executing in HDInsight cluster is to create a compute target and run configuration for an HDInsight Spark cluster using the following command:
+
+```az ml computetarget attach cluster --name "myhdi" --address "<FQDN or IP address>" --username "sshuser" --password "sshpassword"```
+
+- Before running against "myhdi", you need to prepare it with your project's environment by running:
+
+```az ml experiment prepare -c "myhdi"```
+
+- Once you have the compute context, you can run the following CLI command to execute CATelcoCustomerChurnModelingWithoutDprep.py as follows.
+
+```az ml experiment submit -c "myhdi" CATelcoCustomerChurnModelingWithoutDprep.py```
+
+The execution environment on HDInsight cluster is managed using Conda. Configuration is managed by conda_dependencies.yml and spark_dependencies.yml configuration files. 
+
+### (Optional) Lab 4: Running scripts on GPU in a remote machine
 
 To run your scripts on GPU in a remote machine, you can follow the guidance in this article: [How to use GPU in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-use-gpu). Focus on the section **Configure Azure ML Workbench to Access GPU**
 
 ## Workshop Completion
 
 In this workshop you learned how to:
-- [ ] Execute your workloads on remote Data Science Virtual Machines 
-- [ ] Execute your workloads on remote Data Science VMs with GPU's
-- [ ] Execute your workloads on HDInsight Clusters running Spark
+- Execute your workloads on remote Data Science Virtual Machines 
+- Execute your workloads on HDInsight Clusters running Spark
+- Execute your workloads on remote Data Science VMs with GPU's
 
 You may now decommission and delete the following resources if you wish:
   * The Azure Machine Learning Services accounts and workspaces
-  * Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuming. 
+  * Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuming.
