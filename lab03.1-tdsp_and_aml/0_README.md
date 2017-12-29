@@ -57,7 +57,7 @@ Customer Churn is always an issue in any company. Orange would like to predict t
 
 To create a solution, you will use the Azure Machine Learning Services (AMLS) and the Azure Machine Learning Services Workbench (WB) in this lab. The general configuration for working with Azure Machine Learning has these components:
 
-![Azure Machine Learning Components](https://docs.microsoft.com/en-us/azure/machine-learning/preview/media/overview-general-concepts/hierarchy.png)
+![Azure Machine Learning Components](resources/docs/images/aml-architecture-1.png)
 
 ### Lab: Set up a generic TDSP Structure using the Azure Machine Learning Workbench
 
@@ -94,6 +94,11 @@ The [Modeling](https://docs.microsoft.com/en-us/azure/machine-learning/team-data
   * You'll begin by using the sklearn library with Naïve Bayesian and Decision Tree algorithms to develop a churn classifier, do an evaluation, and compare the models.
   * Finally, after the experiments run, you'll score the models to select the best one.
 
+An view of this process is here, shown on the *right* side of the Docker graphic: 
+
+![Image](resources/docs/images/aml-architecture-3.png)
+
+
 ### Lab: Feature Engineering, Modeling, and Scoring
 
 In this lab we'll use the same project you just created. You'll create your feature engineering file, run the model training, and create the final scores.
@@ -101,12 +106,12 @@ In this lab we'll use the same project you just created. You'll create your feat
 
 ## 4. Deployment
 
+An view of this process is here, shown on the *left* side of the Docker graphic: 
+
+![Image](resources/docs/images/aml-architecture-3.png)
+
 The [Deployment](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/lifecycle-deployment) phase of the TDSP entails outputting  the results to a data location, creating an Application Programming Interface (API) or another mechanism for the classification or prediction model to be consumed. 
 
-An outline of this process is here: 
-
-![Image](https://docs.microsoft.com/en-us/azure/machine-learning/preview/media/model-management-overview/modelmanagementworkflow.png)
- 
 ### Optional Lab: Deploy the solution using Containers, consume the results
 
 In this lab you will deploy the solution locally, and optionally to Docker.  **NOTE** This section takes quite some, so it's included here for completeness. The instructor will go over it with you. 
