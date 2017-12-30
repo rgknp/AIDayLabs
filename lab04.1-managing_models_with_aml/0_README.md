@@ -4,8 +4,7 @@ This hands-on lab guides you through managing and regtraining models using [Azur
 
 In this workshop, you will:
 - [ ] Understand Machine Learning Model versioning
-- [ ] Track models in production
-- [ ] Understand how to deploy models to production through AzureML Compute Environment with Azure Container Service and Kubernetes
+- [ ] Track models
 - [ ] Create Docker containers with the models and test them locally
 
 You'll focus on the objectives above, not Data Science, Machine Learning or a difficult scenario.  
@@ -74,9 +73,9 @@ TrackedRun: true
 8. Return to Code and add the following code snippet to the bottom of `CATelcoCustomerChurnModelingDocker.py` and rerun the experiment. The purpose of the code snippet is to serialize the model on disk in the `outputs` folder.
 ```
 import pickle
-print ("Export the model to model.pkl")
+print ("Export the naive bayes model to model.pkl")
 f = open('./model.pkl', 'wb')
-pickle.dump(dt, f)
+pickle.dump(model, f)
 f.close()
 ```
 9. Rerun the experiment and when finished click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output and download it and place it in new folder called `outputs` under the project directory.
@@ -109,25 +108,12 @@ az ml account modelmanagement set -n azureuseramlmm -g azurebootcamplab43
 
    ![](./images/model-management-services.jpg){:width="500px"}
 
-7. We will now recreate the same service, but in three separate commands instead of one command as we did adove. This will help us better understands how one steps leads to the next. First we will register the model object `model.pkl`.
-```
-az ml model register -m model.pkl -n model.pkl
-```
-Run `az ml model list -o table` and we can see that two different versions of the same model now exist. This is because the model was registered under the same name. We can now create a manifest for the model in Azure Container Services. To do so, in the next command, we replace `<model_id>` with the model ID that was returned in the last command:
-```
-az ml manifest create -n churnpred -f score.py -s service_schema.json -r python -i <model_id>
-```
-We can run `az ml manifest list -o table` to list our manifests, which returns the manifest ID. We can then replace `<manifest_id>` in the next command with our manifest ID to create an image from a model manifest.
-```
-az ml image create -n churnpred --manifest-id <manifest_id>
-```
-This creates the image and places it in the Azure container registry, which can be thought of as a compute environment for machine learning models on Azure. The above command creates an image with a matching image ID. We can look up the manifest ID and the image ID from the Azure portal as well. Finally, the last step is to create a service out of the image we have:
-```
-az ml service update realtime -i <service_id_on_portal> --image-id <new_image_id>
-```
-Notice that since a service already existed for the model, we used `az ml service update` to update it instead of `az ml service create` to create a new one. Updating the service is a preferable options for models in production because we won't need to make to make any changes to the REST APIs calling the service.
-8. Let's now create a new environment that plays the role of a *production* environment for us. This could be a bigger VM serving as a production VM or a VM in a different location so the service can be available in multiple locations.
-```
-az ml env setup --cluster -l eastus2 -n bootcampvmprod -g azurebootcamplab43
-```
-We can create a new service programmatically in the same way we did earlier. But we can also go to the Model Management portal, select the image and choose **Create Service** and switch the environment to the production environment `bootcampvmprod` we just created.
+## Workshop Completion
+
+In this workshop you learned how to:
+- [ ] Track models
+- [ ] Create Docker containers with the models and test them locally
+
+You may now decommission and delete the following resources if you wish:
+  * The Azure Machine Learning Services accounts and workspaces, and any Web API's
+  * Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuming.
