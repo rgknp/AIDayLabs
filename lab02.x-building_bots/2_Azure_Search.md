@@ -34,6 +34,8 @@ Right-click on your project in the Solution Explorer of Visual Studio, and selec
 
 Next, right-click on the Dialogs folder in the Solution Explorer of Visual Studio, and select Add-->Class.  Call your class "SearchDialog.cs". Add the contents from [here](./resources/code/SearchDialog.cs).
 
+Review the contents of the files you just added. Discuss with a neighbor what each of them does.
+
 We also need to update your RootDialog to call the SearchDialog.  In RootDialog.cs in the Dialogs folder, directly under the `ResumeAfterChoice` method, add these "ResumeAfter" methods:
 
 ```csharp
@@ -51,7 +53,7 @@ We also need to update your RootDialog to call the SearchDialog.  In RootDialog.
 
 ```
 
-In RootDialog.cs, you will also need to add `using PictureBot.Dialogs;` to the top of the file, and you will need to remove the comments (the `\\` at the beginning) from the line: `PromptDialog.Text(context, ResumeAfterSearchTopicClarification, "What kind of picture do you want to search for?");` within the `ResumeAfterChoice` method.
+In RootDialog.cs, you will also need to remove the comments (the `\\` at the beginning) from the line: `PromptDialog.Text(context, ResumeAfterSearchTopicClarification, "What kind of picture do you want to search for?");` within the `ResumeAfterChoice` method.
 
 Press F5 to run your bot again.  In the Bot Emulator, try searching for something like "dogs" or "water".  Ensure that you are seeing results when tags from your pictures are requested.  
 

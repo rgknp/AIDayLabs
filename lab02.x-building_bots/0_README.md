@@ -32,11 +32,11 @@ Thirdly, you should have experience with the portal and be able to create resour
 
 We're going to build an end-to-end scenario that allows you to pull in your own pictures, use Cognitive Services to find objects and people in the images, figure out how those people are feeling, and store all of that data into a NoSQL Store (DocumentDB). We'll use that NoSQL Store to populate an Azure Search index, and then build a Bot Framework bot using LUIS to allow easy, targeted querying.
 
-> Note: This lab combines some of the results obtained from various labs (Computer Vision, Azure Search, and LUIS) from earlier in this workshop. 
+> Note: This lab combines some of the results obtained from various labs (Computer Vision, Azure Search, and LUIS) from earlier in this workshop. If you did not complete the above listed labs, you will need to complete the Azure Search and LUIS lab before moving forwards. Alternatively, you can request to use a neighbor's keys from their Azure Search/LUIS labs.
 
 ## Architecture
 
-In `lab01.1-computer_vision`, we built a simple C# application that allows you to ingest pictures from your local drive, then invoke the [Computer Vision](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api) Cognitive Service to grab tags and a description for those images.
+In a previous lab, we built a simple C# application that allows you to ingest pictures from your local drive, then invoke the [Computer Vision](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api) Cognitive Service to grab tags and a description for those images.
 
 Once we had this data, we processed it and stored all the information needed in [DocumentDB](https://azure.microsoft.com/en-us/services/documentdb/), our [NoSQL](https://en.wikipedia.org/wiki/NoSQL) [PaaS](https://azure.microsoft.com/en-us/overview/what-is-paas/) offering.
 
@@ -54,9 +54,9 @@ There are several directories in the [resources](./resources) folder:
 - **assets**: This contains all of the images for the lab manual. You can ignore this folder.
 - **code**: In here, there are several directories that we will use:
 	- **Models**: These classes will be used when we add search to our PictureBot.
-	- **Finished-PictureBot_Regex**: Here there is the finished PictureBot.sln that includes additions for Regex. If you fall behind or get stuck, you can use this.
-	- **Finished-PictureBot_Search**: Here there is the finished PictureBot.sln that includes additions for Regex and Search. If you fall behind or get stuck, you can use this.
-	- **Finished-PictureBot_LUIS**: Here there is the finished PictureBot.sln that includes additions for Regex, LUIS and Azure Search. If you fall behind or get stuck, you can use this.
+	- **Finished-PictureBot_Regex**: Here there is the finished PictureBot.sln that includes additions for Regex. If you fall behind or get stuck, you can refer to this.
+	- **Finished-PictureBot_Search**: Here there is the finished PictureBot.sln that includes additions for Regex and Search. If you fall behind or get stuck, you can refer to this.
+	- **Finished-PictureBot_LUIS**: Here there is the finished PictureBot.sln that includes additions for Regex, LUIS and Azure Search. If you fall behind or get stuck, you can refer to this.
 
 > You need Visual Studio to run these labs, but if you have already deployed a Windows Data Science Virtual Machine for one of the workshops, you could use that.
 
