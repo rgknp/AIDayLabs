@@ -26,11 +26,9 @@ Typical Workflow:
 
 ### Lab 1.1: Create an Azure Search Service
 
-Within the Azure Portal, click **Create a resource->Web + Mobile->Azure Search**.
+Within the Azure Portal, click **Create a resource**, enter "azure search" in the search bar, and click **Azure Search->Create**.
 
 Once you click this, you'll have to fill out a few fields as you see fit. For this lab, the "F0" free tier is sufficient. You are only able to have one Free Azure Search instance per subscription, so if you or another member on your subscription have already done this, you will need to use the "Basic" pricing tier. Use the one Resource Group for all of the labs in this workshop. If you already have a resource group for this workshop, just use that one.
-
-![Create New Azure Search Service](./resources/assets/AzureSearch-CreateSearchService.png)
 
 Once creation is complete, open the panel for your new search service.
 
@@ -46,7 +44,7 @@ Within the Azure Search blade you just created, click **Import Data->Data Source
 
 ![Import Wizard for DocDB](./resources/assets/AzureSearch-DataSource.png) 
 
-Once you click this, choose a name for the Cosmos DB data source. If you completed the previous lab, `lab01.1-computer_vision`, choose the Cosmos DB account where your data resides as well as the corresponding Container and Collections. If you did not complete the previous lab, select "Or input a connection string" and paste in TODO update connection string: `AccountEndpoint=https://timedcosmosdb.documents.azure.com:443/;AccountKey=0aRt6JVgbf9KafBxRVuDMNfAj9YoSBbmpICdJ41N5CwHcjuMcVk7jWDBcu4BxbTitLR1zteauQsnF1Tgqs1A3g==;`. For both, the Database should be "images" and the Collection should be "metadata".
+Once you click this, choose a name for the Cosmos DB data source. If you completed the previous lab, `lab01.1-computer_vision`, choose the Cosmos DB account where your data resides as well as the corresponding Container and Collections. If you did not complete the previous lab, select "Or input a connection string" and paste in TODO update connection string: `AccountEndpoint=https://anthobootcampdb.documents.azure.com:443/;AccountKey=XzxwNshrS92RAycyikcSNLOtrDdTMQIYsOHDLko22QDHVCNi4b3YW7pqrzhDPZJupwelnlABrqY4m3nCr686Yw==;`. For both, the Database should be "images" and the Collection should be "metadata".
 
 Click **OK**.
 

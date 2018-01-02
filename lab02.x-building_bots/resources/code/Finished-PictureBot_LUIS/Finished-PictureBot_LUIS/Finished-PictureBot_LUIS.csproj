@@ -135,6 +135,8 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Properties\PublishProfiles\picturebotamt3 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\picturebotamt6 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -3,7 +3,7 @@
     "Vision": "acc07aeba80f424697ce8f47b109508b"
   },
   "AzureStorage": {
-    "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=anthobootcampsa;AccountKey=C44tcRhEVA1fG6/tiLmjOn6ogP5Sm3QipBMBHI1OpVpsFq22YE2Qhq3Hd6vW/Z6rokGJp4g0xdTYN6QA7noImw==;EndpointSuffix=core.windows.net",
+    "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=anthobootcampsa1;AccountKey=Ca8HLHDAItkuXOvP24dVr2H38DskvZIw44bUyQyXtQ/mkBgJU6X4AosDlCYYLx54YMcK7oESayYtFlJK1AjUkA==;EndpointSuffix=core.windows.net",
     "BlobContainer": "images"
   },
   "CosmosDB": {
