@@ -21,8 +21,7 @@ Once you're connected, there are several things you need to do to set up the DSV
 3. Once you're in, if 'TestCLI' is not loaded, right-click on 'TestCLI' and select "Install Missing Features". This will prompt you to install **.Net Desktop Development**. Click **Install**, then **Install** again. You may get an error because Visual Studio needs to be closed to install updates. Close Visual Studio and then select **Retry**. It should only take 1-2 minutes to install.   
 *Validation step*: Reopen "ImageProcessing.sln", confirm that you are able to expand TestCLI and see its contents.  
 4. Right-click on TestCLI and select "Set as StartUp Project". Right-click on the solution in Solution Explorer and select "Build".  
-*Validation step*: When you build the solution, the only errors you receive are related to `ImageProcessor.cs`.
-5. Once the install is complete and you have changed your developer settings and the User Account Control policy, reboot your DSVM. 
+*Validation step*: When you build the solution, the only errors you receive are related to `ImageProcessor.cs`. 
 > Note: Be sure to turn off your DSVM after the workshop so you don't get charged.
 
 
@@ -46,7 +45,7 @@ In the Portal, hit **Create a resource** and then enter **computer vision** in t
 
 ![Creating a Cognitive Service Key](./resources/assets/new-cognitive-services.PNG)
 
-This will lead you to fill out a few details for the API endpoint you'll be creating, choosing the API you're interested in and where you'd like your endpoint to reside (**Put in the region that is closest to you from the following list: East US, West US, Southeast Asia, West Europe**), as well as what pricing plan you'd like. We'll be using **S1** so that we have the throughput we need for the tutorial. Use the same Resource Group that you used to create your DSVM. We'll also use this resource group for Blob Storage and Cosmos DB. _Pin to dashboard_ so that you can easily find it. Since the Computer Vision API stores images internally at Microsoft (in a secure fashion), to help improve future Cognitive Services Vision offerings, you'll need to check the box that states you're ok with this before you can create the resource.
+This will lead you to fill out a few details for the API endpoint you'll be creating, choosing the API you're interested in and where you'd like your endpoint to reside (**Put in the West US region or it will not work**), as well as what pricing plan you'd like. We'll be using **S1** so that we have the throughput we need for the tutorial. Use the same Resource Group that you used to create your DSVM. We'll also use this resource group for Blob Storage and Cosmos DB. _Pin to dashboard_ so that you can easily find it. Since the Computer Vision API stores images internally at Microsoft (in a secure fashion), to help improve future Cognitive Services Vision offerings, you'll need to check the box that states you're ok with this before you can create the resource.
 
 > Note: The regions recommended in the instructions should be available. If you select a different region, be sure the resources [are available in that region](https://azure.microsoft.com/en-us/regions/services/) in. If not, you will have issues later and will have to start over.
 
@@ -95,7 +94,7 @@ Within the Azure Portal, click **Create a resource->Databases->Azure Cosmos DB**
 
 ![New Cosmos DB](./resources/assets/create-cosmosdb-portal.png)
 
-Once you click this, you'll have to fill out a few fields as you see fit. Set _Location_ to the region that is closest to you from the following list: East US, West US, Southeast Asia, North Europe, West Europe, Brazil South, Australia East.
+Once you click this, you'll have to fill out a few fields as you see fit. Set _Location_ to the region that is closest to you from the following list: East US, West US, Southeast Asia, West Europe.
 
 ![Cosmos DB Creation Form](./resources/assets/create-cosmosdb-formfill.png)
 
