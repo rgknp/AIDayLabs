@@ -28,7 +28,7 @@ Typical Workflow:
 
 Within the Azure Portal, click **Create a resource**, enter "azure search" in the search bar, and click **Azure Search->Create**.
 
-Once you click this, you'll have to fill out a few fields as you see fit. For this lab, the "F0" free tier is sufficient. You are only able to have one Free Azure Search instance per subscription, so if you or another member on your subscription have already done this, you will need to use the "Basic" pricing tier. Use the one Resource Group for all of the labs in this workshop. If you already have a resource group for this workshop, just use that one.
+Once you click this, you'll have to fill out a few fields as you see fit. For this lab, the "F0" free tier is sufficient. You are only able to have one Free Azure Search instance per subscription, so if you or another member on your subscription have already done this, you will need to use the "Basic" pricing tier. Use the one Resource Group for all of the labs in this workshop. If you already have a resource group for this workshop, just use that one. Put in one of the following locations: West US 2, East US, West Europe, Southeast Asia.
 
 Once creation is complete, open the panel for your new search service.
 
