@@ -60,8 +60,6 @@ Set all fields to be **Retrievable** (to allow the client to retrieve these fiel
 
 Set the fields **Tags** to be **Filterable** (to allow the client to filter results based on these values)
 
-Set the field **NumFaces** to be **Sortable** (to allow the client to sort the results based on the number of faces in the image)
-
 Set the fields **Tags** to be **Facetable** (to allow the client to group the results by count, for example for your search result, there were "5 pictures that had a Tag of "beach")
 
 Set the fields **Caption and Tags** to be **Searchable** (to allow the client to do full text search over the text in these fields)
