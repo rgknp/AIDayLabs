@@ -47,7 +47,7 @@ Right-click on the solution and select "Build Solution". If you have errors rela
 
 Navigate to `ImageProcessor.cs` within `ProcessingLibrary`. 
 
-Add the following code **to the top** of the class, with the other `using` statements:
+Add the following code **to the top** of the class:
 
 ```
 using System;
