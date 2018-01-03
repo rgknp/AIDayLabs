@@ -1,4 +1,4 @@
-# Welcome
+# Welcome 
 
 Welcome to the first two days of the Learn AI Bootcamp. In these two days, we will focus on hands-on activities that develop proficiency in AI-oriented services such as Azure Bot Services, Azure Search, and Cognitive Services. These labs assume a introductory to intermediate knowledge of these services, and if this is not the case, then you should spend the time working through the pre-requisites.
 
