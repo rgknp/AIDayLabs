@@ -50,7 +50,7 @@ So far we manually created and activated Conda environments. This is useful in o
     print("matplotlib version:", matplotlib.__version__)
     ```
     Now save changes by going to **File > Save All**.
-7. Return to Workbench and verify that the changes are visible. Now run `my_script.py` using Docker as the compute environment. To do so, we must first prepare the Docker environment. This will take a few minutes, after which, we can sumbit the experiment. Return to the command prompt run the following command: 
+7. Return to Workbench and verify that the changes are visible. To run `my_script.py` using Docker as the compute environment, we must first prepare the Docker environment. This will take a few minutes, after which, we can sumbit the experiment. Return to the command prompt run the following command: 
 
     ```
     az ml experiment prepare -c docker

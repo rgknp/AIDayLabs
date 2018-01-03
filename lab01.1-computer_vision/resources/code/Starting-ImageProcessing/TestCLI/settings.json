@@ -1,0 +1,15 @@
+﻿{
+  "CognitiveServicesKeys": {
+    "Vision": ""
+  },
+  "AzureStorage": {
+    "ConnectionString": "",
+    "BlobContainer": "images"
+  },
+  "CosmosDB": {
+    "EndpointURI": "",
+    "Key": "",
+    "DatabaseName": "images",
+    "CollectionName": "metadata"
+  }
+}

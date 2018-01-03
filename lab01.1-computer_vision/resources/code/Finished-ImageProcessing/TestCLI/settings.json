@@ -1,0 +1,15 @@
+﻿{
+  "CognitiveServicesKeys": {
+    "Vision": "acc07aeba80f424697ce8f47b109508b"
+  },
+  "AzureStorage": {
+    "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=anthobootcampsa1;AccountKey=Ca8HLHDAItkuXOvP24dVr2H38DskvZIw44bUyQyXtQ/mkBgJU6X4AosDlCYYLx54YMcK7oESayYtFlJK1AjUkA==;EndpointSuffix=core.windows.net",
+    "BlobContainer": "images"
+  },
+  "CosmosDB": {
+    "EndpointURI": "https://anthobootcampdb.documents.azure.com:443/",
+    "Key": "XzxwNshrS92RAycyikcSNLOtrDdTMQIYsOHDLko22QDHVCNi4b3YW7pqrzhDPZJupwelnlABrqY4m3nCr686Yw==",
+    "DatabaseName": "images",
+    "CollectionName": "metadata"
+  }
+}
