@@ -112,9 +112,11 @@ Finally, add methods for the rest of the intents.  The corresponding method will
 
 ```
 
+
+
 > Hint: The "SharePic" method contains a little code to show how to do a prompt for a yes/no confirmation as well as setting the ScorableGroup. This code doesn't actually post a tweet because we didn't want to spend time getting everyone set up with Twitter developer accounts and such, but you are welcome to implement if you want.
 
-You may have noticed that we haven't implemented scorable groups for the intents we just added. Modify your code so that all of the `LuisIntent`s are of scorable group priority 1.
+You may have noticed that we haven't implemented scorable groups for the intents we just added. Modify your code so that all of the `LuisIntent`s are of scorable group priority 1. Now that you've added LUIS functionality, you can uncomment the two `await` lines in the `ResumeAfterChoice` method.  
 
 Once you've modified your code, hit F5 to run in Visual Studio, and start up a new conversation in the Bot Framework Emulator.  Try chatting with the bot, and ensure that you get the expected responses.  If you get any unexpected results, note them down and [revise LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Train-Test).
 
