@@ -9,7 +9,7 @@ Most challenges observed by customers in these realms are in stitching multiple 
 At the end of this workshop, you should be able to:
 
 - Understand how to configure your apps to call Cognitive Services
-- Build an application that calls various Cognitive Services APIs (specifically Computer Vision, Face, Emotion)
+- Build an application that calls various Cognitive Services APIs (specifically Computer Vision)
 - Understand how to implement Azure Search features to provide a positive search experience inside applications
 - Configure an Azure Search service to extend your data to enable full-text, language-aware search
 - Build, train, and publish a LUIS model to help your bot communicate effectively
