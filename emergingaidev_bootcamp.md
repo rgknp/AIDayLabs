@@ -44,7 +44,7 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
 - Day 1: Cognitive Services
   - 8-9 (optional): Setup assistance
   - 9-10: Introduction and Context for Cognitive Services
-  - 10-12: [Lab 1.1: Using Portable Class Libraries to Simplify App Development with Cognitive Services (Computer Vision)](https://aka.ms/LearnAI-EmergingAIDevBootcamp-01-1)
+  - 10-12: [Lab 1.1: Simplifying Cognitive Services App Development using Portable Class Libraries](https://aka.ms/LearnAI-EmergingAIDevBootcamp-01-1)
   - 12-1: Lunch
   - 1-1:30: [Lab 1.2: Creating an Image Classification Application using the Custom Vision Service I](https://aka.ms/LearnAI-EmergingAIDevBootcamp-02-3)
   - 1:30-2:00: [Lab 1.3: Creating an Image Classification Application using the Custom Vision Service II](https://aka.ms/LearnAI-EmergingAIDevBootcamp-02-4)
