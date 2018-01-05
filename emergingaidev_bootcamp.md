@@ -29,9 +29,12 @@ Secondly, you should have some experience developing bots with Microsoft's Bot F
 Thirdly, you should have experience with the portal and be able to create resources (and spend money) on Azure. We will not be providing Azure passes for this workshop.
 
 Finally, before arriving at the workshop, we expect you to have completed [1_Setup](./lab01.1-computer_vision/1_Setup.md) along with the installing and configuring the following for Custom Vision:
-  * Training Client Library: https://www.nuget.org/packages/Microsoft.Cognitive.CustomVision.Training/Training package from NugGet 
+  * Training Client Library: Get the [package](https://www.nuget.org/packages/Microsoft.Cognitive.CustomVision.Training/) from NugGet 
     * You can install it through the Visual Studio Package manager. Access the package manager by navigating through: Tools->NuGet Package Manager->Package Manager Console. 
-    * In the console, add the NuGet with: `Install-Package Microsoft.Cognitive.CustomVision.Training -Version 1.0.0`
+    * In the console, add the NuGet with: 
+    ```
+    Install-Package Microsoft.Cognitive.CustomVision.Training -Version 1.0.0
+    ```
   * Training API Key: The training API key allows you to create, manage and train Custom Vision project programmatically.
     * You can obtain a key by creating a new project at https://customvision.ai and then clicking on the “setting” gear in the top right. 
 
