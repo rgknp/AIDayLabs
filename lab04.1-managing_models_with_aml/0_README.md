@@ -69,15 +69,7 @@ TrackedRun: true
 
    We then return to the command prompt and run the above command again. This will take a few minutes. When finished, we should get a message saying `Your environment is now ready`.
 6. We can now run our experiment in a Docker container by submitting the following command: `az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py`. Alternatively, we can go to the **Project Dashboard**, select "docker" as the run configuration, select the `CATelcoCustomerChurnModelingWithoutDprep.py` script and click on the run button. In either case, we should be able to see a new job starting on the **Jobs** in the pannel on the right-hand side. Click on the finished job to see the **Run Properties** such as **Duration**. Notice under **Outputs** there are no objects, so the script did not create any artifacts. Click on the green **Completed** to see any results printed by the script, including the model accuracy. It is worth noting that the Azure CLI runs on both the Windows and Linux command line. To see this in action, from the Windows command prompt type `bash` to switch to a Linux command prompt and submit `az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py` a second time.
-7. Return to Code and add the following code snippet to the bottom of `CATelcoCustomerChurnModelingWithoutDprep.py` and rerun the experiment. The purpose of the code snippet is to serialize the model on disk in the `outputs` folder.
-```
-import pickle
-print ("Export the naive bayes model to model.pkl")
-f = open('./model.pkl', 'wb')
-pickle.dump(model, f)
-f.close()
-```
-8. Rerun the experiment and when finished click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output, download it and place it in root folder.
+7. When finished, click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output, download it and place it in root folder.
 
 ### Creating a web service out of the scoring script
 
