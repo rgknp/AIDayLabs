@@ -76,3 +76,4 @@ We will also use a gitter forum for discussion. Please post comments and questio
 [lab-intelbot-311]: https://aka.ms/LearnAI-EmergingAIDevBootcamp-intelbot-311
 [lab-intelbot-321]:https://aka.ms/LearnAI-EmergingAIDevBootcamp-intelbot-321
 [gitter]: https://gitter.im/LearnAI-Bootcamps
+
