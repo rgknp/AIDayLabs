@@ -68,7 +68,7 @@ In this lab you'll set up your project's structure, conforming to the Team Data 
 ### Lab: Use-case evaluation for Data Science questions
 
 In this lab you'll evaluate a business scenario, and detail possible predictions, classifications, or other data science questions that you can begin to explore.
-- [ ] Read the scenario above carefully. You can optionally copy and paste the scenario text below into a new text file called *Business Understanding.md* in the /docs directory set up in the previous lab. AFter class discussion, you can enter the answers to the following questions in this document.
+- [ ] Read the scenario above carefully. You can optionally copy and paste the scenario text below into a new text file called *Business Understanding.md* in the /docs directory set up in the previous lab. After class discussion, you can enter the answers to the following questions in this document.
 - [ ] Is this something that you can use a Machine Learning system for a solution?  
 - [ ] Which algorithm or family of algorithms could you use to answer your question?
 - [ ] What data source(s) will you need to complete your prediction? 
