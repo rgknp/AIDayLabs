@@ -77,7 +77,7 @@ f = open('./model.pkl', 'wb')
 pickle.dump(model, f)
 f.close()
 ```
-8. Rerun the experiment and when finished click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output and download it and place it in root folder.
+8. Rerun the experiment and when finished click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output, download it and place it in root folder.
 
 ### Creating a web service out of the scoring script
 
