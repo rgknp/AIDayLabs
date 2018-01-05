@@ -16,18 +16,18 @@ Once you're connected, there are several things you need to do to set up the DSV
 
 1. In the Cortana search bar, type "git bash" and select "Git Bash Desktop App". Next, type `cd c://` then enter, and `git clone https://github.com/Azure/LearnAI-Bootcamp.git` then enter. This copies down all of the files from the GitHub site to **C:\LearnAI-Bootcamp**.  
 *Validation step*: Go to **C:\LearnAI-Bootcamp** and confirm it exists.
-2. Open "ImageProcessing.sln" which is under **C:\LearnAI-Bootcamp\lab01.1-computer_vision\resources\code\Starting-ImageProcessing**. It may take a while for Visual Studio to open for the first time, and you will have to log in. If your company has two factor authentication, you will not be able to use your pin to log in. Use your password and mobile phone authentication.  
+2. From File Explorer, open "ImageProcessing.sln" which is under **C:\LearnAI-Bootcamp\lab01.1-computer_vision\resources\code\Starting-ImageProcessing**. It may take a while for Visual Studio to open for the first time, and you will have to log in to your account. The account you use to log in should be the same as your Azure subscription account. *Note: If your company has two factor authentication, you may not be able to use your pin to log in. Use your password and mobile phone authentication to log in instead.*  
 *Validation step*: In the top right corner of Visual Studio, confirm that you see your name and account information.
-3. Once you're in, if 'TestCLI' is not loaded, right-click on 'TestCLI' and select "Install Missing Features". This will prompt you to install **.Net Desktop Development**. Click **Install**, then **Install** again. You may get an error because Visual Studio needs to be closed to install updates. Close Visual Studio and then select **Retry**. It should only take 1-2 minutes to install.   
-*Validation step*: Reopen "ImageProcessing.sln", confirm that you are able to expand TestCLI and see its contents.  
-4. Right-click on TestCLI and select "Set as StartUp Project". Right-click on the solution in Solution Explorer and select "Build".  
-*Validation step*: When you build the solution, the only errors you receive are related to `ImageProcessor.cs`. 
-> Note: Be sure to turn off your DSVM after the workshop so you don't get charged.
+3. After Visual Studio loads and the solution is open, right-click on TestCLI and select "Set as StartUp Project."        
+*Validation step*: TestCLI should appear **bold** in the Solution Explorer  
+*Note: If you get a message that TestCLI is unable to load, right-click on TestCLI and select "Install Missing Features". This will prompt you to install **.Net Desktop Development**. Click **Install**, then **Install** again. You may get an error because Visual Studio needs to be closed to install updates. Close Visual Studio and then select **Retry**. It should only take 1-2 minutes to install. Reopen "ImageProcessing.sln", confirm that you are able to expand TestCLI and see its contents. Then, right-click on TestCLI and select "Set as StartUp Project".*
+4. Right-click on the solution in Solution Explorer and select "Build".  
+*Validation step*: When you build the solution, the only errors you receive are related to `ImageProcessor.cs`. You do not need to worry about yellow warning messages.
 
 
 ### Lab 1.2: Collecting the Keys ###
 
-Over the course of this lab, we will collect Cognitive Services keys and storage keys. You should save all of them in a text file so you can easily access them in future labs.
+Over the course of this lab, we will collect Cognitive Services keys and storage keys. You should save all of them in a text file so you can easily access them in future labs. 
 
 - _Cognitive Services Keys_
   - Computer Vision API:
@@ -35,13 +35,18 @@ Over the course of this lab, we will collect Cognitive Services keys and storage
 - _Storage Keys_
   - Azure Blob Storage Connection String:
   - Cosmos DB URI:
-  - Cosmos DB key:
+  - Cosmos DB key:  
+
+
+In addition, you will need to add the keys to the **settings.json** file which is under **C:\LearnAI-Bootcamp\lab01.1-computer_vision\resources\code\Starting-ImageProcessing\TestCLI\settings.json**. You will have to replace `VisionKeyHere`, `ConnectionStringHere`, `CosmosURIHere`, and `CosmosKeyHere` with their corresponding keys that you collect in the next section. **Do not** change the blob container (`images`), the database name (`images`), or the collection name (`metadata`).
+
+![The settings.json file](./resources/assets/SettingsJson.png)
 
 **Getting Cognitive Services API Keys**
 
 Within the Portal, we'll first create keys for the Cognitive Services we'll be using. We'll primarily be using the [Computer Vision](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api) Cognitive Service, so let's create an API key for that first.
 
-In the Portal, hit **Create a resource** and then enter **computer vision** in the search box and choose **Computer Vision API**:
+In the Portal, click the **"+ New"** button (when you hover over it, it will say **Create a resource**) and then enter **computer vision** in the search box and choose **Computer Vision API**:
 
 ![Creating a Cognitive Service Key](./resources/assets/new-cognitive-services.PNG)
 
@@ -68,17 +73,16 @@ _Azure Blob Storage_
 
 Detailed "Getting Started" instructions can be [found online](https://docs.microsoft.com/en-us/azure/storage/storage-dotnet-how-to-use-blobs), but let's just go over what you need for this lab.
 
-Within the Azure Portal, click **Create a resource->Storage->Storage Account**
+In the Portal, click the **"+ New"** button (when you hover over it, it will say **Create a resource**) and then enter **storage** in the search box and choose **Storage account**. Select **create**.
 
-![New Azure Storage](./resources/assets/create-blob-storage.PNG)
-
-Once you click it, you'll be presented with the fields above to fill out. 
+Once you click it, you'll be presented with some fields to fill out. 
 
 - Choose your storage account name (lowercase letters and numbers), 
-- set _Account kind_ to _Blob storage_, 
-- set _Replication_ to _Locally-Redundant storage (LRS)_ (this is just to save money), 
-- use the same Resource Group as above, and 
-- set _Location_ to the region that is closest to you from the following list: East US, West US, Southeast Asia, West Europe.  (The list of Azure services that are available in each region is at [https://azure.microsoft.com/en-us/regions/services/](https://azure.microsoft.com/en-us/regions/services/)). _Pin to dashboard_ so that you can easily find it.
+- Set _Account kind_ to _Blob storage_, 
+- Set _Replication_ to _Locally-Redundant storage (LRS)_ (this is just to save money), 
+- Use the same Resource Group as above, and 
+- Set _Location_ to the region that is closest to you from the following list: East US, West US, Southeast Asia, West Europe.  (The list of Azure services that are available in each region is at [https://azure.microsoft.com/en-us/regions/services/](https://azure.microsoft.com/en-us/regions/services/)). _Pin to dashboard_ so that you can easily find it.
+- All other defaults are fine
 
 **Modifying `settings.json`, part two**
 
@@ -90,9 +94,7 @@ _Cosmos DB_
 
 Detailed "Getting Started" instructions can be [found online](https://docs.microsoft.com/en-us/azure/cosmos-db/documentdb-get-started), but we'll walk through what you need for this lab.
 
-Within the Azure Portal, click **Create a resource->Databases->Azure Cosmos DB**.
-
-![New Cosmos DB](./resources/assets/create-cosmosdb-portal.png)
+In the Portal, click the **"+ New"** button (when you hover over it, it will say **Create a resource**) and then enter **cosmos db** in the search box and choose **Azure Cosmos DB** and click **Create**.
 
 Once you click this, you'll have to fill out a few fields as you see fit. Set _Location_ to the region that is closest to you from the following list: East US, West US, Southeast Asia, West Europe.
 
@@ -107,6 +109,10 @@ Once creation is complete, open the panel for your new database and select the _
 ![Keys sub-panel for Cosmos DB](./resources/assets/docdb-keys.png)
 
 You'll need the **URI** and the **PRIMARY KEY** for your _TestCLI's_ `settings.json` file, so copy those into there and you're now ready to store images and data into the cloud.
+
+
+> Note: Be sure to turn off your DSVM **from the portal** after you have completed the Setup lab. When the workshop begins, you will need to start your DSVM from the portal to begin the labs. We recommend turning off your DSVM at the end of each day, and deleting all of the resources you create at the end of the workshop.
+
 
 
 ### Continue to [2_ImageProcessor](./2_ImageProcessor.md)
