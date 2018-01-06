@@ -92,6 +92,7 @@ Conda creates an execution environment for our project and binds our Python scri
       - matplotlib==2.0.2
       ## needed by AML:
       - psutil=5.2.2
+      ## needed by azureml.logging below. If left off here, pip tries to build it from source. Common compiler issues make it easier to install with conda rather than pip (on windows):
       - scipy=0.18.1
 
       - pip:
