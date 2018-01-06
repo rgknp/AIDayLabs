@@ -22,7 +22,7 @@ CRITICAL NOTE: conda is not used (by default) for local script runs, which use t
     Note the path to the Python executable and the `matplotlib` version. Now type `exit()` to leave the Python console and return to the command prompt.  
     If working locally without the use of Conda environments, we would be using our local root Python installation, which means that all projects would rely on the same environment and where conflicting dependencies can cause collusion, and where missing system dependencies can cause headaches when going from development to staging or production. Therefore, if working locally it is still better to leverage Docker (and Conda within Docker) instead of relying on the root Python executable as we did above. Let's now see how we can do this.
 2. To see if Conda is installed, type `conda --version`. Now type `conda list` to see a listing of installed python packages. Some of these packages are installed using `pip` or `easy_install`, some are installed using `conda install`.
-3. Open the project with Code by going to **File > Open Project (Code)**. Open the `conda_dependencies.yml` file and examine the content. What package dependencies are specified here? Add `matplotlib=2.0.2` to the list of dependencies for this project then save the file.
+3. Open the project with Code by going to **File > Open Project (Code)**. Open the `conda_dependencies.yml` file and examine the content. What package dependencies are specified here? Add `matplotlib==2.0.2` to the list of dependencies for this project then save the file.
 4. To create a Conda environment, return to the command prompt and type
 
     ```

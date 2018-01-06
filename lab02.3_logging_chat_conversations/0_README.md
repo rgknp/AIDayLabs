@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# lab02.3_logging_chat_conversations: Logging with Microsoft Bot Framework
+# Logging with Microsoft Bot Framework
 
 Unless your bot is logging the conversation data somewhere, the bot framework will not perform any logging for you automatically. This has privacy implications, and many bots simply can't allow that in their scenarios.
 

@@ -1,4 +1,4 @@
-# Developing LUIS Applications with LUIS 
+# Developing Intelligent Applications with LUIS 
 
 This hands-on lab guides you through creating a model to enhance the Natural Language Processing capabilities of your applications, using Microsoft's Language Understanding Intelligent Service (LUIS). 
 
