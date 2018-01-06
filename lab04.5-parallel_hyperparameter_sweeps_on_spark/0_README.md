@@ -29,8 +29,8 @@ az ml experiment prepare -c docker
 4. Now we specify the Spark cluster as the compute target by running the following command.
 The command may return an error message about having to prepare the environment first, even though the previous command should have been prepared the environment already. Running the rest of the code still works and the error message can safely be ignored.
 ```
-az ml computetarget attach --name azbootcamphdispark --address azbootcamphdispark-ssh.azurehdinsight.net --username sshuser --password DataScience2017! --type cluster
-az ml experiment prepare -c azbootcamphdispark -g azurebootcamplab41
+az ml computetarget attach cluster --name azbootcamphdispark --address azbootcamphdispark-ssh.azurehdinsight.net --username sshuser --password DataScience2017!
+az ml experiment prepare -c azbootcamphdispark
 ```
 This will create the files `aml_config/azbootcamphdispark.compute` and `aml_config/azbootcamphdispark.runconfig`. We now have a pair of such files for local, Docker and one for Spark.
 5. Finally, we can now run the job. We will first run it in Docker, which is great for debugging purposes and working locally while we're still in development mode. To do so just run this on the command line:

@@ -4,8 +4,7 @@ This hands-on lab guides you through managing and regtraining models using [Azur
 
 In this workshop, you will:
 - [ ] Understand Machine Learning Model versioning
-- [ ] Track models in production
-- [ ] Understand how to deploy models to production through AzureML Compute Environment with Azure Container Service and Kubernetes
+- [ ] Track models
 - [ ] Create Docker containers with the models and test them locally
 
 You'll focus on the objectives above, not Data Science, Machine Learning or a difficult scenario.  
@@ -70,15 +69,7 @@ TrackedRun: true
 
    We then return to the command prompt and run the above command again. This will take a few minutes. When finished, we should get a message saying `Your environment is now ready`.
 6. We can now run our experiment in a Docker container by submitting the following command: `az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py`. Alternatively, we can go to the **Project Dashboard**, select "docker" as the run configuration, select the `CATelcoCustomerChurnModelingWithoutDprep.py` script and click on the run button. In either case, we should be able to see a new job starting on the **Jobs** in the pannel on the right-hand side. Click on the finished job to see the **Run Properties** such as **Duration**. Notice under **Outputs** there are no objects, so the script did not create any artifacts. Click on the green **Completed** to see any results printed by the script, including the model accuracy. It is worth noting that the Azure CLI runs on both the Windows and Linux command line. To see this in action, from the Windows command prompt type `bash` to switch to a Linux command prompt and submit `az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py` a second time.
-7. Return to Code and add the following code snippet to the bottom of `CATelcoCustomerChurnModelingWithoutDprep.py` and rerun the experiment. The purpose of the code snippet is to serialize the model on disk in the `outputs` folder.
-```
-import pickle
-print ("Export the model to model.pkl")
-f = open('./model.pkl', 'wb')
-pickle.dump(dt, f)
-f.close()
-```
-8. Rerun the experiment and when finished click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output and download it and place it in new folder called `outputs` under the project directory.
+7. When finished, click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output, download it and place it in root folder.
 
 ### Creating a web service out of the scoring script
 
@@ -87,9 +78,9 @@ Let's now see how we can create a scoring web service from the above model insid
 1. Enable the Azure Container Service by running `az provider register -n Microsoft.ContainerService` from the command line.
 2. Run `az group create -n azurebootcamplab43 -l eastus2` to create a resource group called `azurebootcamplab43` for the resources we will provision throughout this lab. Then run `az ml account modelmanagement create -l eastus2 -n azureuseramlmm -g azurebootcamplab43` to create a model management account.
 3. Log into the Azure portal and find all the resources under the resource group `azurebootcamplab43`. This should include an Experimentation and a Model Management account. Open the Model Management resource and click on **Model Management** icon on the top.
-4. If we're doing this for the first time, then we need to set up an environment. We usually have a staging and a production environment. We can deploy our models to the staging environment to test them and then redeploy them to the production environment once we're happy with the result. To create a new environment run the following command:
+4. If we're doing this for the first time, then we need to set up an environment. We usually have a staging and a production environment. We can deploy our models to the staging environment to test them and then redeploy them to the production environment once we're happy with the result. To create a new environment run the following command. To use in production, we can use --cluster:
 ```
-az ml env setup --cluster -l eastus2 -n bootcampvmstage -g azurebootcamplab43
+az ml env setup -l eastus2 -n bootcampvmstage -g azurebootcamplab43
 ```
 We can look at all the environments uder our subscription using `az ml env list -o table`. Creating the new environment takes about one minute, after which we can activate it and show it using this:
 ```
@@ -100,7 +91,9 @@ az ml env show
 ```
 az ml account modelmanagement set -n azureuseramlmm -g azurebootcamplab43
 ```
-6. We are now finally ready to deploy our model as a web service. We do so by running `az ml service create realtime -n churnpred --model-file ./model.pkl -f score.py -r python -s service_schema.json`. Notice the three steps that take place as the command is running. First we register the model, then we create a manifest, then we create a Docker image, and finally we initialize a Docker container that services our prediction app. We can go to the Azure portal and go to click on the resource named `azureuseramlmm` under the resource group `azurebootcamplab43`, then click on **Model Management**.
+6. We are now finally ready to deploy our model as a web service. 
+
+Generate the schema by first running ```python churn_schema_gen.py```. We can then create a realtime service by running `az ml service create realtime -n churnpred --model-file ./model.pkl -f score.py -r python -s service_schema.json`. Notice the three steps that take place as the command is running. First we register the model, then we create a manifest, then we create a Docker image, and finally we initialize a Docker container that services our prediction app. We can go to the Azure portal and go to click on the resource named `azureuseramlmm` under the resource group `azurebootcamplab43`, then click on **Model Management**.
 
    ![](./images/model-management-portal.jpg){:width="500px"}
 
@@ -108,25 +101,12 @@ az ml account modelmanagement set -n azureuseramlmm -g azurebootcamplab43
 
    ![](./images/model-management-services.jpg){:width="500px"}
 
-7. We will now recreate the same service, but in three separate commands instead of one command as we did adove. This will help us better understands how one steps leads to the next. First we will register the model object `model.pkl`.
-```
-az ml model register -m model.pkl -n model.pkl
-```
-Run `az ml model list -o table` and we can see that two different versions of the same model now exist. This is because the model was registered under the same name. We can now create a manifest for the model in Azure Container Services. To do so, in the next command, we replace `<model_id>` with the model ID that was returned in the last command:
-```
-az ml manifest create -n churnpred -f score.py -s service_schema.json -r python -i <model_id>
-```
-We can run `az ml manifest list -o table` to list our manifests, which returns the manifest ID. We can then replace `<manifest_id>` in the next command with our manifest ID to create an image from a model manifest.
-```
-az ml image create -n churnpred --manifest-id <manifest_id>
-```
-This creates the image and places it in the Azure container registry, which can be thought of as a compute environment for machine learning models on Azure. The above command creates an image with a matching image ID. We can look up the manifest ID and the image ID from the Azure portal as well. Finally, the last step is to create a service out of the image we have:
-```
-az ml service update realtime -i <service_id_on_portal> --image-id <new_image_id>
-```
-Notice that since a service already existed for the model, we used `az ml service update` to update it instead of `az ml service create` to create a new one. Updating the service is a preferable options for models in production because we won't need to make to make any changes to the REST APIs calling the service.
-8. Let's now create a new environment that plays the role of a *production* environment for us. This could be a bigger VM serving as a production VM or a VM in a different location so the service can be available in multiple locations.
-```
-az ml env setup --cluster -l eastus2 -n bootcampvmprod -g azurebootcamplab43
-```
-We can create a new service programmatically in the same way we did earlier. But we can also go to the Model Management portal, select the image and choose **Create Service** and switch the environment to the production environment `bootcampvmprod` we just created.
+## Workshop Completion
+
+In this workshop you learned how to:
+- [ ] Track models
+- [ ] Create Docker containers with the models and test them locally
+
+You may now decommission and delete the following resources if you wish:
+  * The Azure Machine Learning Services accounts and workspaces, and any Web API's
+  * Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuming.
