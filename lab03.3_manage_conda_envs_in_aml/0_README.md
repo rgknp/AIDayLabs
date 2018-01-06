@@ -99,21 +99,21 @@ Conda creates an execution environment for our project and binds our Python scri
         - azure-ml-api-sdk==0.1.0a10
 
         # aml specific:
-        ## these are tagged to the version of AML
         - https://azuremldownloads.blob.core.windows.net/wheels/latest/azureml.assets-1.0.0-py3-none-any.whl?sv=2016-05-31&si=ro-2017&sr=c&sig=xnUdTm0B%2F%2FfknhTaRInBXyu2QTTt8wA3OsXwGVgU%2BJk%3D
         - https://azuremldownloads.blob.core.windows.net/wheels/latest/azureml.logging-1.0.79-py3-none-any.whl?sv=2016-05-31&si=ro-2017&sr=c&sig=xnUdTm0B%2F%2FfknhTaRInBXyu2QTTt8wA3OsXwGVgU%2BJk%3D
+        # note the version number of AML is in the whl name:
         - https://azuremldownloads.blob.core.windows.net/wheels/latest/azureml.dataprep-0.1.1711.15323-py3-none-any.whl?sv=2016-05-31&si=ro-2017&sr=c&sig=xnUdTm0B%2F%2FfknhTaRInBXyu2QTTt8wA3OsXwGVgU%2BJk%3D
         - applicationinsights==0.11.0
     ```
-    Notice in the above file we refer directly to the Conda environment using `name: hello_env`. In `aml_config/local.runconfig` change the `CondaDependenciesFile` to point to `"aml_config/localenv_conda_dependencies.yml"` instead.
-11. Return to the command prompt and remove your Conda environment `hello_env` using the following command:
+    Notice in the above file we refer directly to the Conda environment using `name: hello_env`. In `aml_config/local.runconfig` change the `CondaDependenciesFile` to point to `"aml_config/localenv_conda_dependencies.yml"` instead. As noted above, AML does not use this field for local runs. In spite of that, it's useful to make sure that the documents are consistent within a project. Additionally, it's useful to note the differences between `conda_dependencies.yml` and `localenv_conda_dependencies.yml`. The delta between those files correspond to dependencies that AML takes care of automatically when generating a docker image for experiment execution. 
+11. Return to the command prompt and remove your Conda environment `hello_env` using the following command in order to start from a clean slate:
 
     ```
     conda env remove -n hello_env
     ```
-    Now create a new Conda environment (also called `hello_env`) and point it to `aml_config/localenv_conda_dependencies.yml` instead (NOte that because the new dependencies file has the name field appropriate defined, you do not need to use the `-n` argument).
-12. From the command line, run the experiment on `my_script.py` again. This time we successfully run `my_script.py` in a local Conda environment. Does the `matplotlib` package version match what we specified in `conda_dependencies.yml`?  
-It bears repeting that using Conda locally is the right approach if Docker is not available, but otherwise it's better to use Conda inside a Docker image because Docker can also handle certain system dependencies that Conda wasn't built to handle.
+    Now create a new Conda environment called `hello_env` by using the  `aml_config/localenv_conda_dependencies.yml` file we just created (Note that because the new dependencies file has the `name` field appropriate defined, you do not need to use the `-n` argument).
+12. From the command line, use `az ml` to run `my_script.py` again. This time we successfully run `my_script.py` in a local Conda environment. Does the `matplotlib` package version match what we specified in `localenv_conda_dependencies.yml`?  
+It bears repeating that using Conda locally is the right approach if Docker is not available, but otherwise it's better to use Conda inside a Docker image because Docker can also handle certain system dependencies that Conda wasn't built to handle.
 
 ## Conclusions
 
@@ -121,8 +121,10 @@ When developing our code on a local machines (laptops) or on DSVMs:
 
 1. Try to always use versions for packages in `conda_dependencies.yml`.
 2. Leverage Docker images and Conda environments for every project. A Docker image manages system dependencies as well.
-3. If Docker is not available, still leverage Conda environments but be prepared to deal with additional system dependencies when moving the project to staging or production. The most common ones are compiler-related (such as C++ and Fortran).
-4. If you don't use Docker images and don't rely on Conda environments (in other words if you always run your projects using the local Python root executable), then you should expect to run into many headaches when 
+3. If Docker is not available, still leverage Conda environments but be prepared to deal with additional system dependencies when moving the project to staging or production. The most common problems are compiler-related (such as C++ and Fortran).
+4. If leveraging AML + conda without docker, be prepared to manage additional packages beyond those normally needed for docker execution with AML. See above for a list of some of the additional packages that could be required.
+4. If you don't use Docker images and don't rely on Conda environments (in other words if you always run your projects using the local Python root executable), then you should expect to run into headaches when 
   - upgrading any major Python packages (especially the data science and machine learning packages),
   - moving between different projects with different package dependencies
   - deploying the project to staging and production.
+  - you have packages installed in your user directory from sources such as `pip install --user`
