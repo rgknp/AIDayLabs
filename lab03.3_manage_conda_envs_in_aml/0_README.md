@@ -2,9 +2,9 @@
 
 ## What is conda?
 
-Conda is a multi-platform, open-source package management system. Fundamentally it tries to solve replicability by creating a clearn environment in which our code and all its dependencies can be placed and run. It is primarily used for python, but can be used for multiple languages (including R). It is generally packaged and distributed through the Anaconda python distribution supported by Anaconda, Inc (a Microsoft partner).
+Conda is a multi-platform, open-source package management system. Fundamentally it tries to solve replicability by creating a clean environment in which our code and all its dependencies can be placed and run. It is primarily used for python, but can be used for multiple languages (including R). It is generally packaged and distributed through the Anaconda python distribution supported by Anaconda, Inc (a Microsoft partner).
 
-In the context of Python, Conda is similar to `pip` and can be used to install and update Python packages, but Conda goes beyond that and also installs library dependencies outside of Python, such as C++ dependencies.
+In the context of Python, Conda is similar to `pip` and can be used to install and update Python packages, but Conda goes beyond that and can also install library dependencies outside of Python, such as C++ dependencies.
 
 With Azure ML Workbench projects, we use Docker for managing system requirements and dependencies between compute environments (local, remote, Spark). Within Docker itself, we use Conda to manage Python dependencies for a given project. We use the command line `conda` command to interact with `conda` (in the case of Python, we also have some control in Jupyter notebooks)
 
