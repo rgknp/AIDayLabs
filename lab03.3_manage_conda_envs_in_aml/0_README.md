@@ -8,7 +8,7 @@ In the context of Python, Conda is similar to `pip` and can be used to install a
 
 With Azure ML Workbench projects, we use Docker for managing system requirements and dependencies between compute environments (local, remote, Spark). Within Docker itself, we use Conda to manage Python dependencies for a given project. We use the command line `conda` command to interact with `conda` (in the case of Python, we also have some control in Jupyter notebooks)
 
-CRITICAL NOTE: conda is not used (by default) for local script runs, which use the root environment instead. This can cause dependencies to break between compute environments. As a general rule, it is better to use Docker even when working locally.
+CRITICAL NOTE: By default, conda is not used for local script runs -- local runs by default will use the ``root'' python environment instead. This can problems if you work on multiple projects, as different projects may have different types of dependencies. As a general rule, it is better to use Docker even when working locally.
 
 1. Open the Workbench and create a new project called `hello_bootcamp`, make it a blank project and place it in the `Documents` folder. Open the project and go to **File > Open Command Prompt** to access the command line from within the project parent folder. Type `python`, then in the python console paste this in:
 
@@ -28,7 +28,7 @@ CRITICAL NOTE: conda is not used (by default) for local script runs, which use t
     ```
     conda env create -f aml_config/conda_dependencies.yml
     ```
-    which creates an environment called `project_environment` by default (we can rename it using the `-n` switch). Once an environment is created, it needs to be activated by running `activate project_environment`. Activate the environment and run `python`, then in the python console type 
+    which creates an environment called `project_environment` by default (we can rename it using the `-n` switch, or by changing the 'name' field in the `conda_dependencies.yml` file). Once an environment is created, it needs to be activated by running `activate project_environment`. Activate the environment and run `python`. Then in the python console type 
 
     ```
     import sys
@@ -61,7 +61,7 @@ So far we manually created and activated Conda environments. This is useful in o
     az ml experiment submit -c docker my_script.py
     ```
 8. In the Workbench, go to the **Jobs** panel on the right and click on the green **Completed** button to see any results printed by the script. Does the `matplotlib` version number match the version number in `conda_dependencies.yml`?
-Conda creates an execution environment for our project and binds our Python scripts and their dependencies so that its execution environment can be isolated from that of other projects. My submitting the above command, we created a Docker image with our project and used Conda to handle the script and its dependencies, which Conda does by creating a new "environment" for the project. We created a Conda environment automatically in the last step is because in the `aml_config/docker.runconfig` file we point to `conda_dependencies.yml` and we set `PrepareEnvironment: true`.
+Conda creates an execution environment for our project and binds our Python scripts and their dependencies so that its execution environment can be isolated from that of other projects. By submitting the above command, we created a Docker image with our project and used Conda to handle the script and its dependencies, which Conda does by creating a new "environment" for the project. We created a Conda environment automatically in the last step is because in the `aml_config/docker.runconfig` file we point to `conda_dependencies.yml` and we set `PrepareEnvironment: true`.
 9. Most of us do not develop or test our Python scripts from the Python console. Instead we prefer to use an IDE like Code or Jupyter Notebooks. To launch a Jupyter notebook session for a given project, return to the command prompt and run `az ml notebook start`. This will open up a browser session (`localhost:8888`) and present our project parent directory. On the right side, click on **New** and examine the content of the dropdown. It should include `hello_bootcamp local` and `hello_bootcamp docker` with are the Conda environments associated with our project. Click on `hello_bootcamp docker` and paste in the following code in the cell of the new Jupyter notebook that opens.
 
     ```
@@ -72,9 +72,9 @@ Conda creates an execution environment for our project and binds our Python scri
     print("matplotlib version:", matplotlib.__version__)
     ```
     Check the `matplotlib` version and the Python executable path and confirm that it matches what we earlier.  
-    As we saw above, leveraging Docker and Conda gives us the ideal environment to run our projects, and we can leverage them both from the command line and Jupyter. However, Docker is not always available on Windows machines. On the DSVM for example, we need to use `D_v3` instances (and enable Hyper-V) in order be able to install and use Docker. When docker is not an option and we can only work locally, then we can (and definitely should) still use Conda. Let's see how this can be done.
-9. From the command prompt, create a new Conda environment by pointing to `conda_dependencies.yml` and use `-n myenv` to rename it from `project_environment` to `myenv` (renaming the Conda environment is an optional step). Go to the `aml_config/local.compute` file and point the Python location from the root Python directory to the Python directory specific to this environment. You can do so by replacing `pythonLocation: "python"` with `pythonLocation: "%USERPROFILE%/AppData/Local/amlworkbench/Python/envs/myenv/python.exe"`. To make sure that this works, run `my_script.py` locally and inspect the results generated by the script (just as we did in step 3). 
-10. It is likely that the run in the last step fails because of Python dependencies that are not properly set up in the local environment. Create a new file called `localenv_conda_dependencies.yml` and place it in `aml_config`. Place the following content inside of it and save it:
+    As we saw above, leveraging Docker and Conda gives us the ideal environment to run our projects, and we can leverage them both from the command line and Jupyter. However, Docker is not always available on Windows machines. On the DSVM for example, we need to use `DX_v3` instances (and enable Hyper-V) in order be able to install and use Docker. When docker is not an option and we can only work locally, then we can (and definitely should) still use Conda. Let's see how this can be done.
+9. From the command prompt, create a new Conda environment by pointing to `conda_dependencies.yml` and use `-n hello_env` to rename it from `project_environment` to `hello_env` (renaming the Conda environment is an optional step). Go to the `aml_config/local.compute` file and point the Python location from the root Python directory to the Python directory specific to this environment. You can do so by replacing `pythonLocation: "python"` with `pythonLocation: "%USERPROFILE%/AppData/Local/amlworkbench/Python/envs/hello_env/python.exe"`. To make sure that this works, run `my_script.py` locally and inspect the results generated by the script (just as we did in step 3). 
+10. It is likely that the run in the last step fails because some AML dependencies are not properly set up in the `hello_env` environment. Create a new file called `localenv_conda_dependencies.yml` and place it in `aml_config`. Place the following content inside of it and save it:
 
     ```
     # Conda environment specification. The dependencies defined in this file will be
@@ -85,37 +85,33 @@ Conda creates an execution environment for our project and binds our Python scri
 
     # For Spark packages and configuration, see spark_dependencies.yml.
 
-    name: myenv
+    name: hello_env
     dependencies:
       - python=3.5.2
-      - scikit-learn=0.18.1
       - ipykernel=4.6.1
-      ## aml specific
+      - matplotlib==2.0.2
+      ## needed by AML:
       - psutil=5.2.2
       - scipy=0.18.1
-      - numpy=1.11.3 # needed for appropriate version of pandas
-      - pandas=0.19.2 # needs this version.
-      - matplotlib==2.0.2
 
       - pip:
         # The API for Azure Machine Learning Model Management Service.
-        - azure-ml-api-sdk==0.1.0a11
+        - azure-ml-api-sdk==0.1.0a10
 
-        # Library for collecting data from operationalized models
-        - azureml.datacollector==0.1.0a13
         # aml specific:
         ## these are tagged to the version of AML
+        - https://azuremldownloads.blob.core.windows.net/wheels/latest/azureml.assets-1.0.0-py3-none-any.whl?sv=2016-05-31&si=ro-2017&sr=c&sig=xnUdTm0B%2F%2FfknhTaRInBXyu2QTTt8wA3OsXwGVgU%2BJk%3D
         - https://azuremldownloads.blob.core.windows.net/wheels/latest/azureml.logging-1.0.79-py3-none-any.whl?sv=2016-05-31&si=ro-2017&sr=c&sig=xnUdTm0B%2F%2FfknhTaRInBXyu2QTTt8wA3OsXwGVgU%2BJk%3D
-        - https://azuremldownloads.blob.core.windows.net/wheels/latest/azureml.dataprep-0.1.1711.15263-py3-none-any.whl?sv=2016-05-31&si=ro-2017&sr=c&sig=xnUdTm0B%2F%2FfknhTaRInBXyu2QTTt8wA3OsXwGVgU%2BJk%3D
+        - https://azuremldownloads.blob.core.windows.net/wheels/latest/azureml.dataprep-0.1.1711.15323-py3-none-any.whl?sv=2016-05-31&si=ro-2017&sr=c&sig=xnUdTm0B%2F%2FfknhTaRInBXyu2QTTt8wA3OsXwGVgU%2BJk%3D
         - applicationinsights==0.11.0
     ```
-    Notice in the above file we refer directly to the Conda environment using `name: myenv`. In `aml_config/local.runconfig` change the `CondaDependenciesFile` to point to `"aml_config/localenv_conda_dependencies.yml"` instead.
-11. Return to the command prompt and remove your Conda environment `myenv` using the following command:
+    Notice in the above file we refer directly to the Conda environment using `name: hello_env`. In `aml_config/local.runconfig` change the `CondaDependenciesFile` to point to `"aml_config/localenv_conda_dependencies.yml"` instead.
+11. Return to the command prompt and remove your Conda environment `hello_env` using the following command:
 
     ```
-    conda env remove -n myenv
+    conda env remove -n hello_env
     ```
-    Now create a new Conda environment (also called `myenv`) and point it to `aml_config/localenv_conda_dependencies.yml` instead.
+    Now create a new Conda environment (also called `hello_env`) and point it to `aml_config/localenv_conda_dependencies.yml` instead (NOte that because the new dependencies file has the name field appropriate defined, you do not need to use the `-n` argument).
 12. From the command line, run the experiment on `my_script.py` again. This time we successfully run `my_script.py` in a local Conda environment. Does the `matplotlib` package version match what we specified in `conda_dependencies.yml`?  
 It bears repeting that using Conda locally is the right approach if Docker is not available, but otherwise it's better to use Conda inside a Docker image because Docker can also handle certain system dependencies that Conda wasn't built to handle.
 
