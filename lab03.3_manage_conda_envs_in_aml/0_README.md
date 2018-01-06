@@ -128,3 +128,4 @@ When developing our code on a local machines (laptops) or on DSVMs:
   - moving between different projects with different package dependencies
   - deploying the project to staging and production.
   - you have packages installed in your user directory from sources such as `pip install --user`
+  - upgrade versions of AML, as some of the dependencies are tied to the AML version number.
