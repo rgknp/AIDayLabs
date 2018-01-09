@@ -10,14 +10,6 @@
 
 ### Potential answers to the questions
 
-**Which features from Azure Search should you take advantage of?**
-* Geospatial - maybe they want to know what's closest to them, or they only want to know about items in stock at a specific store
-* Boosting - you may want to return higher-profit bikes or items in your list when they search, or maybe you want use ranking and go from frequently purchased to not
-* Facets - maybe they want results in different areas, e.g. bikes, clothing, gloves, etc.
-* Regularly scheduled indexer for Azure SQL the options change depending on what's in stock
-* Monitoring, reporting and analyses to determine what is asked about, maybe things asked about more, you keep more and similar products in stock.
-
-
 **What might your main intents in LUIS be?**
 * Greeting
 * Help menu
@@ -28,19 +20,38 @@
 * Check out
 * Goodbye
 
-**What are some tasks you'll have to complete to create an efficient and functional calling bot?**
-* Call the Bing Speech API to get text-to-speech and speech-to-text
-* Incorporate LUIS and call the intents
-* Incorporate Search and call the service to search Azure SQL
-* Implement a Regex structure to minimize hits to LUIS
-* Might also be able to take advantage of FormFlow
-* Set up the Skype channel
 
 **Are there any additional Cognitive Services that you think the bot would benefit from?**  
 * Custom Speech Service - over come recognition barriers like speaking style, background, noise, and vocabulary
 * Speaker Recognition API - you could authenticate/identify return customers
 * Translator Speech API - give the user the option to speak in different languages
 * Recommendations API - predict and recommend items customers want
+
+In addition, the CIO has asked you for examples of how Custom Vision could be
+used to help to bring value to the business.
+
+**Find one example of how the Custom Vision API can help?**
+
+   **Potential Answer. (Other answers are also valid)**
+
+   * Custom Vision API is about the classification of pictures based on the tags
+   that have been trained within the model. Contoso would have to consider if
+   there is a business process that is dependent on classification
+
+   * One example could include bicycle part replacement. Contoso could train a
+   Custom Vision model to identify certain bicycle parts and tag the images
+   such as the front and rear wheel, saddles and handlebars.
+
+   * The user could return a list of replacement parts by simply taking a
+   picture of the part of their own bike, uploading the picture through a bot
+   application, which then passes the image to the model, that will then
+   classify the picture. Additional code within the application will take the
+   tag as an input parameter to return a list of specific parts that could be
+   purchased as a replacement.
+
+   * Check out the “Technology in Action” section on how the insurance industry
+   are thinking about a similar approach to insurance claims processing
+   http://www.telegraph.co.uk/business/risk-insights/is-insurance-industry-ready-for-ai/
 
 ### Additional Information
 Here's a [Learning Path](https://github.com/amthomas46/LearningPaths/blob/master/Developer/Learning%20Path%20-%20Interactive%20Voice%20Response%20Bot.md) I created if you want to know a little more about what goes into creating an Interactive Voice Response Bot.
