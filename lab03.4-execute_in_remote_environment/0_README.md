@@ -48,7 +48,8 @@ In this lab you'll create an experiment, examine its configuration, and run the 
 - Launch the CLI. An easy way to launch the CLI is opening a project in Workbench and navigating to File-->Open Command Prompt.
 - **Authentication**: If you have not already authenticated against Azure, follow the steps below. Authentication token is cached locally for a period of time so you only need to repeat these steps when the token expires.
 
-```# to authenticate 
+```
+# to authenticate 
 $ az login
 
 # to list subscriptions
@@ -65,11 +66,15 @@ $ az account show
 
 To run locally, run the below command:
 
-```az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py```
+```
+az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py
+```
 
 For running the script on local Docker, you can execute the following command in CLI:
 
-```az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py```
+```
+az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py
+```
 
 You should see results as follows:
 
@@ -114,15 +119,21 @@ The workbench is flexible to run experimentation on big data using HDInsight Spa
 
 - The first step in executing in HDInsight cluster is to create a compute target and run configuration for an HDInsight Spark cluster using the following command:
 
-```az ml computetarget attach cluster --name "myhdi" --address "<FQDN or IP address>" --username "sshuser" --password "sshpassword"```
+```
+az ml computetarget attach cluster --name "myhdi" --address "<FQDN or IP address>" --username "sshuser" --password "sshpassword"
+```
 
 - Before running against "myhdi", you need to prepare it with your project's environment by running:
 
-```az ml experiment prepare -c "myhdi"```
+```
+az ml experiment prepare -c "myhdi"
+```
 
 - Once you have the compute context, you can run the following CLI command to execute CATelcoCustomerChurnModelingWithoutDprep.py as follows.
 
-```az ml experiment submit -c "myhdi" CATelcoCustomerChurnModelingWithoutDprep.py```
+```
+az ml experiment submit -c "myhdi" CATelcoCustomerChurnModelingWithoutDprep.py
+```
 
 The execution environment on HDInsight cluster is managed using Conda. Configuration is managed by conda_dependencies.yml and spark_dependencies.yml configuration files. 
 
