@@ -50,16 +50,16 @@ In this lab you'll create an experiment, examine its configuration, and run the 
 
 ```
 # to authenticate 
-$ az login
+az login
 
 # to list subscriptions
-$ az account list -o table
+az account list -o table
 
 # to set current subscription to a particular subscription ID 
-$ az account set -s <subscription_id>
+az account set -s <subscription_id>
 
 # to verify your current Azure subscription
-$ az account show
+az account show
 ```
 
 - **Execution**: Workbench enables scripts to be run directly against the Workbench-installed Python 3.5.2 runtime. This configuration is not managed by Conda unlike Docker-based executions. The package dependencies would need to be manually provisioned for your local Workbench Python environment.
