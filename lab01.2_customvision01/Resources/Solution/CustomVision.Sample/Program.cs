@@ -60,7 +60,6 @@ namespace CustomVision.Sample
 
             // Create a new project  
             Console.WriteLine("Creating new project:");
-            var project = trainingApi.CreateProject("My New Project");
 
             // Make two tags in the new project
             var hemlockTag = trainingApi.CreateTag(project.Id, "Hemlock");
