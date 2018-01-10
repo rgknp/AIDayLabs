@@ -14,7 +14,7 @@ After creating an Azure account, you may access the [Azure portal](https://porta
 
 Once you're connected, there are several things you need to do to set up the DSVM for the workshop:
 
-1. In the Cortana search bar, type "git bash" and select "Git Bash Desktop App". Next, type `cd c://` then enter, and `git clone https://github.com/Azure/LearnAI-Bootcamp.git` then enter. This copies down all of the files from the GitHub site to **C:\LearnAI-Bootcamp**.  
+1. In the Cortana search bar, type "git bash" and select "Git Bash Desktop App", or type "cmd" and select "Command Prompt". Next, type `cd c://` then enter, and `git clone https://github.com/Azure/LearnAI-Bootcamp.git` then enter. This copies down all of the files from the GitHub site to **C:\LearnAI-Bootcamp**.  
 *Validation step*: Go to **C:\LearnAI-Bootcamp** and confirm it exists.
 2. From File Explorer, open "ImageProcessing.sln" which is under **C:\LearnAI-Bootcamp\lab01.1-computer_vision\resources\code\Starting-ImageProcessing**. It may take a while for Visual Studio to open for the first time, and you will have to log in to your account. The account you use to log in should be the same as your Azure subscription account. *Note: If your company has two factor authentication, you may not be able to use your pin to log in. Use your password and mobile phone authentication to log in instead.*  
 *Validation step*: In the top right corner of Visual Studio, confirm that you see your name and account information.
