@@ -37,7 +37,7 @@ Run _TestCLI_, then open Command Prompt and navigate to "C:\LearnAI-Bootcamp\lab
 By default, it will load your settings from `settings.json` (it builds it into the `.exe`), but you can provide your own using the `-settings` flag. To load images (and their metadata from Cognitive Services) into your cloud storage, you can just tell _TestCLI_ to `-process` your image directory as follows:
 
 ```
-    > TestCLI.exe -process c:\learnai-nootcamp\lab01.1-computer_vision\resources\sample_images
+    > TestCLI.exe -process c:\learnai-bootcamp\lab01.1-computer_vision\resources\sample_images
 ```
 
 Once it's done processing, you can query against your Cosmos DB directly using _TestCLI_ as follows:

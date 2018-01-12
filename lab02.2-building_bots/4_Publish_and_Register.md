@@ -24,9 +24,11 @@ Select the publish target of "Microsoft Azure App Service" and "Select Existing.
 
 ![Publish Bot to Azure App Service](./resources/assets/SelectExisting.png) 
 
-On the App Service screen, select the appropriate subscription, resource group, and your Bot Service.  
+On the App Service screen, select the appropriate subscription, resource group, and your Bot Service. Select Publish.
 
 ![Create App Service](./resources/assets/AzureAppService.png) 
+
+> If you get an error here, simply exit the browser window within Visual Studio and complete the next step.
 
 Now, you will see the Web Deploy settings, but we have to edit them one last time. Select "Settings" under the publish profile. Select Settings again and check the box next to "Remove additional files at destination". Click "Save" to exit the window, and now click "Publish".  The output window in Visual Studio will show the deployment process.  Then, your bot will be hosted at a URL like http://picturebotamt6.azurewebsites.net/, where "picturebotamt6" is the Bot Service app name.  
 

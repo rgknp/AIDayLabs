@@ -1,124 +1,272 @@
-**(If time permits)**
-=====================
+**Custom Vision API C\# Tutorial**
+==================================
 
- 
-
-**Modifying Custom Vision API C\# Tutorial**
-============================================
-
-In this lab you will take the solution from Lab 1 and modify the code to upload
-a new set of images, add tags to it; train the project and obtain the default
-prediction endpoint URL for the project. You will then use the endpoint to
-programmatically test an image. You can use this open source example as a
-template for building your own app for Windows using the Custom Vision AP. This
-lab deliberately has limited instructions, as it should build on the knowledge
-gained in Lab 2.
-
- 
+The goal of this tutorial is to explore a basic Windows application that uses
+the Computer Vision API to create a project, add tags to it, upload images,
+train the project, obtain the default prediction endpoint URL for the project,
+and use the endpoint to programmatically test an image. You can use this open
+source example as a template for building your own app for Windows using the
+Custom Vision API.  
 
 **Prerequisites**
 -----------------
-
-###  
-
-### Lab 1 completed
-
-This instructions in this example relies on the fact that the previous lab has
-been completed.
 
  
 
 ### Platform requirements
 
-This example has been developed for the .NET Framework using [Visual Studio
-2015, Community Edition](https://www.visualstudio.com/downloads/)
+This example has been tested using the .NET Framework using [Visual Studio 2017,
+Community Edition](https://www.visualstudio.com/downloads/)
 
  
 
 ### Training client library
 
-You may need to install the client library. The easiest way to get the training
-client library is to get the
+You may need to install the client library depending on your settings within
+Visual Studio. The easiest way to get the training client library is to install
+the
 [Microsoft.Cognitive.CustomVision.Training](https://www.nuget.org/packages/Microsoft.Cognitive.CustomVision.Training/)
-package from [nuget](ttp://nuget.org).
+package from nuget.
+
+You can install it through the Visual Studio Package manager. Access the package
+manager by navigating through:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Tools -> Nuget Package Manager -> Package Manager Console
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In that Console, add the nuget with:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Install-Package Microsoft.Cognitive.CustomVision.Training -Version 1.0.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  
 
 ### The Training API key
 
-The training API key allows you to create, manage and train Custom Vision
-projects programatically. All operations on the
-[website](https://customvision.ai)are exposed through this library, allowing you
-to automate all aspects of the Custom Vision Service. You can obtain a key by
-creating a project at at the website and finding the key in the setting of the
-project that you have created.
-
-<br>**Lab: Modifying a Custom Vision Application**
---------------------------------------------------
+You also need to have a training API key. The training API key allows you to
+create, manage, and train Custom Vision projects programatically. All operations
+on <https://customvision.ai> are exposed through this library, allowing you to
+automate all aspects of the Custom Vision Service. You can obtain a key by
+creating a new project at <https://customvision.ai> and then clicking on the
+"setting" gear in the top right.
 
  
+
+**Lab: Creating a Custom Vision Application**
+---------------------------------------------
 
 ### Step 1: Create a console application and prepare the training key and the images needed for the example.
 
  
 
 Start Visual Studio 2017, Community Edition, open the Visual Studio solution
-named CustomVision.Sample.sln in location
-\\Lab\\Starter\\Cognitive-CustomVision-Windows\\Samples\\CustomVision.Sample.
-This code defines a solution for training images using a custom.ai training key.
-The images for this particular lab can be found at  \\Lab\\Starter in a folder
-called LabImages. Use these images as you see fit. Once used, the solution
-performs a classification prediction on a test image that is uploaded. On
-opening the project the following code should be displayed from line 35.
+named **CustomVision.Sample.sln** in the sub-directory of where this lab is
+located:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This code defines and calls two helper methods. The method called
+`GetTrainingKey` prepares the training key. The one called `LoadImagesFromDisk`
+loads two sets of images that this example uses to train the project, and one
+test image that the example loads to demonstrate the use of the default
+prediction endpoint. On opening the project the following code should be
+displayed from line 35:
 
  
 
-### Step 2: Change the memory stream definition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using Microsoft.Cognitive.CustomVision;
 
-Change the variable names for the list items to match the names defined for the
-image types
+namespace CustomVision.Sample
+{
+    class Program
+    {
+        private static List<MemoryStream> MbikesImages;
+
+        private static List<MemoryStream> RbikesImages;
+
+        private static MemoryStream testImage;
+
+        static void Main(string[] args)
+        {
+            // You can either add your training key here, pass it on the command line, or type it in when the program runs
+            string trainingKey = GetTrainingKey("<your key here>", args);
+
+            // Create the Api, passing in a credentials object that contains the training key
+            TrainingApiCredentials trainingCredentials = new TrainingApiCredentials(trainingKey);
+            TrainingApi trainingApi = new TrainingApi(trainingCredentials);
+
+
+        }
+
+
+        private static string GetTrainingKey(string trainingKey, string[] args)
+        {
+            if (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Equals("<your key here>"))
+            {
+                if (args.Length >= 1)
+                {
+                    trainingKey = args[0];
+                }
+
+                while (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Length != 32)
+                {
+                    Console.Write("Enter your training key: ");
+                    trainingKey = Console.ReadLine();
+                }
+                Console.WriteLine();
+            }
+
+            return trainingKey;
+        }
+
+        private static void LoadImagesFromDisk()
+        {
+            // this loads the images to be uploaded from disk into memory
+            MbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Mountain").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            RbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Racing").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\test\bike2.jpg"));
+
+        }
+    }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  
 
-### Step 3: Modify a Custom Vision Service project name
+### Step 2: Create a Custom Vision Service project
 
-Modify Custom Vision Service project name to “My Third Project”, add the
-following change in the code in your **Main()** method after the call to
-**LoadImagesFromDisk().**
-
- 
-
-### Step 4: Add tags to your project
-
-Create new tags to your project to distinguish between pools and tracks, insert
-the following code after the call to **CreateProject(”My Third Project”);**.
+To create a new Custom Vision Service project named “Bike Type”, add the
+following code in the body of the `Main()` method after the call to `new
+TrainingApi().`
 
  
 
-### Step 5: Upload images to the project
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Create a new project  
+Console.WriteLine("Creating new project:");
+var project = trainingApi.CreateProject("Bike Type");
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
+
+### Step 3: Add tags to your project
+
+To add tags to your project, insert the following code after the call to
+`CreateProject("Bike Type");`.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Make two tags in the new project  
+var MbikesTag = trainingApi.CreateTag(project.Id, "Mountain");
+var RbikesTag = trainingApi.CreateTag(project.Id, "Racing");");
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
+
+### Step 4: Upload images to the project
 
 To add the images we have in memory to the project, insert the following code
-after the call to **CreateTag(project.Id, "Tracks")** method.
+after the call to `CreateTag(project.Id, "Racing")` method.
 
  
 
-### Step 6: Redefine the LoadImagesFromDisk() method
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Images can be uploaded one at a time  
+foreach (var image in MbikesImages)
+{
+  trainingApi.CreateImagesFromData(project.Id, image, new List< string> () { MbikesTag.Id.ToString() });
+}
 
-Use the images from the LabImages folder In this folder are three folders. The
-Pools folder contains pictures of swimming pools. The Tracks folder contains
-pictures of athletics tracks. These folders are used in the training of the
-classification model. The final folder named test contains a single picture
-named Sport.jpg that will be used to perform the prediction.
+// Or uploaded in a single batch   
+trainingApi.CreateImagesFromData(project.Id, RbikesImages, new List< Guid> () { RbikesTag.Id });
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Modify the code at the end of the Program.cs file on line 145 that makes
-reference to the new location of the images that are being used in the
-prediction. The code should look as follows:
+ 
+
+### Step 5: Train the project
+
+Now that we have added tags and images to the project, we can train it. Insert
+the following code after the end of code that you added in the prior step. This
+creates the first iteration in the project. We can then mark this iteration as
+the default iteration.
+
+ 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Now there are images with tags start training the project
+Console.WriteLine("\\tTraining");
+var iteration = trainingApi.TrainProject(project.Id);
+
+// The returned iteration will be in progress, and can be queried periodically to see when it has completed  
+while (iteration.Status == "Training")
+{
+    Thread.Sleep(1000);
+
+    // Re-query the iteration to get it's updated status  
+    iteration = trainingApi.GetIteration(project.Id, iteration.Id);
+}
+
+// The iteration is now trained. Make it the default project endpoint  
+iteration.IsDefault = true;
+trainingApi.UpdateIteration(project.Id, iteration.Id, iteration);
+Console.WriteLine("Done!\\n");
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Step 6: Get and use the default prediction endpoint
+
+We are now ready to use the model for prediction. First we obtain the endpoint
+associated with the default iteration. Then we send a test image to the project
+using that endpoint. Insert the code after the training code you have just
+entered.
+
+ 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Now there is a trained endpoint, it can be used to make a prediction  
+
+// Get the prediction key, which is used in place of the training key when making predictions  
+var account = trainingApi.GetAccountInfo();
+var predictionKey = account.Keys.PredictionKeys.PrimaryKey;
+
+// Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
+PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);
+PredictionEndpoint endpoint = new PredictionEndpoint(predictionEndpointCredentials);
+
+// Make a prediction against the new project  
+Console.WriteLine("Making a prediction:");
+var result = endpoint.PredictImage(project.Id, testImage);
+
+// Loop over each prediction and write out the results  
+foreach (var c in result.Predictions)
+{
+   Console.WriteLine($"\\t{c.Tag}: {c.Probability:P1}");
+}
+Console.ReadKey();
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  
 
 ### Step 7: Run the example
 
 Build and run the solution. You will be required to input your training API key
-into the console app when runing the solution so have this at the ready. The
-training and prediction of the images can take 2 mins The prediction results
+into the console app when running the solution so have this at the ready. The
+training and prediction of the images can take 2 minutes. The prediction results
 appear on the console.
+
+Further Reading
+---------------
+
+The source code for the Windows client library is available on
+[github](https://github.com/Microsoft/Cognitive-CustomVision-Windows/).
+
+The client library includes multiple sample applications, and this tutorial is
+based on the `CustomVision.Sample` demo within that repository.
