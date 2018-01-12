@@ -68,8 +68,9 @@ using ServiceHelpers;
 public static async Task<ImageInsights> ProcessImageAsync(Func<Task<Stream>> imageStreamCallback, string imageId)
         {
 
-        }
+        
 ```
+> Hint: Visual Studio will throw an error, due to the open bracket. Add what is necessary to the end of the method. Ask a neighbor if you need help.  
 
 In the above code, we use `Func<Task<Stream>>` because we want to make sure we can process the image multiple times (once for each service that needs it), so we have a Func that can hand us back a way to get the stream. Since getting a stream is usually an async operation, rather than the Func handing back the stream itself, it hands back a task that allows us to do so in an async fashion.
   

@@ -47,7 +47,7 @@ Now that we have it in DocumentDB, we'll build an [Azure Search](https://azure.m
 
 There are several directories in the [resources](./resources) folder:
 
-- **assets**: This contains all of the images for the lab manual. You can ignore this folder.
+- **assets**, **instructor**, **case**: You can ignore these folders for the purposes of this lab.
 - **code**: In here, there are several directories that we will use:
 	- **LUIS**: Here you will find the LUIS model for the PictureBot. You will create your own, but if you fall behind or want to test out a different LUIS model, you can use the .json file to import this LUIS app.
 
