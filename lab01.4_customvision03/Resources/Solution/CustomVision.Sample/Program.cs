@@ -43,9 +43,9 @@ namespace CustomVision.Sample
 {
     class Program
     {
-        private static List<MemoryStream> WriteOffImages;
+        private static List<MemoryStream> MbikesImages;
 
-        private static List<MemoryStream> DentImages;
+        private static List<MemoryStream> RbikesImages;
 
         private static MemoryStream testImage;
 
@@ -60,24 +60,24 @@ namespace CustomVision.Sample
 
             // Create a new project  
             Console.WriteLine("Creating new project:");
-            var project = trainingApi.CreateProject("Car Assessment");
+            var project = trainingApi.CreateProject("Bike Type");
 
             // Make two tags in the new project  
-            var WriteOffTag = trainingApi.CreateTag(project.Id, "WriteOff");
-            var DentTag = trainingApi.CreateTag(project.Id, "Dent");
+            var MbikesTag = trainingApi.CreateTag(project.Id, "Mountain");
+            var RbikesTag = trainingApi.CreateTag(project.Id, "Racing");
 
             // Add some images to the tags  
             Console.WriteLine("\\tUploading images");
             LoadImagesFromDisk();
 
             // Images can be uploaded one at a time  
-            foreach (var image in WriteOffImages)
+            foreach (var image in MbikesImages)
             {
-                trainingApi.CreateImagesFromData(project.Id, image, new List< string> () { WriteOffTag.Id.ToString() });
+                trainingApi.CreateImagesFromData(project.Id, image, new List< string> () { MbikesTag.Id.ToString() });
             }
 
             // Or uploaded in a single batch   
-            trainingApi.CreateImagesFromData(project.Id, DentImages, new List< Guid> () { DentTag.Id });
+            trainingApi.CreateImagesFromData(project.Id, RbikesImages, new List< Guid> () { RbikesTag.Id });
 
             // Now there are images with tags start training the project
             Console.WriteLine("\\tTraining");
@@ -147,9 +147,9 @@ namespace CustomVision.Sample
         private static void LoadImagesFromDisk()
         {
             // this loads the images to be uploaded from disk into memory
-            WriteOffImages = Directory.GetFiles(@"..\..\..\..\Images\writeoff").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            DentImages = Directory.GetFiles(@"..\..\..\..\Images\Dent").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\test\car1.jpg"));
+            MbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Mountain").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            RbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Racing").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\test\bike1.jpg"));
 
         }
     }

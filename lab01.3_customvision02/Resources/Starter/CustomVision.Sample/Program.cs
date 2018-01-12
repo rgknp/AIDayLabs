@@ -43,9 +43,9 @@ namespace CustomVision.Sample
 {
     class Program
     {
-        private static List<MemoryStream> hemlockImages;
+        private static List<MemoryStream> WriteOffImages;
 
-        private static List<MemoryStream> japaneseCherryImages;
+        private static List<MemoryStream> DentImages;
 
         private static MemoryStream testImage;
 
@@ -58,65 +58,6 @@ namespace CustomVision.Sample
             TrainingApiCredentials trainingCredentials = new TrainingApiCredentials(trainingKey);
             TrainingApi trainingApi = new TrainingApi(trainingCredentials);
 
-            // Create a new project  
-            Console.WriteLine("Creating new project:");
-            var project = trainingApi.CreateProject("My New Project");
-
-            // Make two tags in the new project
-            var hemlockTag = trainingApi.CreateTag(project.Id, "Hemlock");
-            var japaneseCherryTag = trainingApi.CreateTag(project.Id, "Japanese Cherry");
-
-            // Add some images to the tags  
-            Console.WriteLine("\\tUploading images");
-            LoadImagesFromDisk();
-
-            // Images can be uploaded one at a time  
-            foreach (var image in hemlockImages)
-            {
-                trainingApi.CreateImagesFromData(project.Id, image, new List<string>() { hemlockTag.Id.ToString() });
-            }
-
-            // Or uploaded in a single batch   
-            trainingApi.CreateImagesFromData(project.Id, japaneseCherryImages, new List<Guid>() { japaneseCherryTag.Id });
-
-            // Now there are images with tags start training the project  
-            Console.WriteLine("\\tTraining");
-            var iteration = trainingApi.TrainProject(project.Id);
-
-            // The returned iteration will be in progress, and can be queried periodically to see when it has completed  
-            while (iteration.Status == "Training")
-            {
-                Thread.Sleep(1000);
-
-                // Re-query the iteration to get it's updated status  
-                iteration = trainingApi.GetIteration(project.Id, iteration.Id);
-            }
-
-            // The iteration is now trained. Make it the default project endpoint  
-            iteration.IsDefault = true;
-            trainingApi.UpdateIteration(project.Id, iteration.Id, iteration);
-            Console.WriteLine("Done!\n");
-
-            // Now there is a trained endpoint, it can be used to make a prediction  
-
-            // Get the prediction key, which is used in place of the training key when making predictions  
-            var account = trainingApi.GetAccountInfo();
-            var predictionKey = account.Keys.PredictionKeys.PrimaryKey;
-
-            // Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
-            PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);
-            PredictionEndpoint endpoint = new PredictionEndpoint(predictionEndpointCredentials);
-
-            // Make a prediction against the new project  
-            Console.WriteLine("Making a prediction:");
-            var result = endpoint.PredictImage(project.Id, testImage);
-
-            // Loop over each prediction and write out the results  
-            foreach (var c in result.Predictions)
-            {
-                Console.WriteLine($"\t{c.Tag}: {c.Probability:P1}");
-            }
-            Console.ReadKey();
 
         }
 
@@ -144,9 +85,9 @@ namespace CustomVision.Sample
         private static void LoadImagesFromDisk()
         {
             // this loads the images to be uploaded from disk into memory
-            hemlockImages = Directory.GetFiles(@"..\..\..\..\Images\Hemlock").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            japaneseCherryImages = Directory.GetFiles(@"..\..\..\..\Images\Japanese Cherry").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\Test\test_image.jpg"));
+            WriteOffImages = Directory.GetFiles(@"..\..\..\..\Images\writeoff").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            DentImages = Directory.GetFiles(@"..\..\..\..\Images\Dent").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
+            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\test\car1.jpg"));
 
         }
     }
