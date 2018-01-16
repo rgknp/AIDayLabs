@@ -3,10 +3,12 @@
 This hands-on lab guides you through collecting Machine Learning scoring  data using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
 
 In this workshop, you will:
+
 - Use the Azure Machine Learning Services collection module to view scoring data from API calls
 - Use Azure Storage to view the results
 
-***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
+***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of:
+
   *  Programming using an Agile methodology
   *  Machine Learning and Data Science
   *  Intermediate to Advancced Python programming
@@ -189,9 +191,11 @@ To view the collected data in blob storage:
 ## Workshop Completion
 
 In this workshop you learned how to:
+
 - Use the Azure Machine Learning Services collection module to view scoring data from API calls
 - Use Azure Storage to view the results
 
 You may now decommission and delete the following resources if you wish:
-  * The Azure Machine Learning Services accounts and workspaces
-  * Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuming.
+
+- The Azure Machine Learning Services accounts and workspaces
+- Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuming.
