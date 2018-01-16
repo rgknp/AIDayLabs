@@ -59,8 +59,8 @@ namespace CustomVision.Sample
             TrainingApi trainingApi = new TrainingApi(trainingCredentials);
 
             // Create a new project  
-            Console.WriteLine("Creating new project:");
-            var project = trainingApi.CreateProject("My New Project");
+            Console.WriteLine("Creating new project:")
+            var project = trainingApi.CreateProject("My First Project");
 
             // Make two tags in the new project
             var hemlockTag = trainingApi.CreateTag(project.Id, "Hemlock");

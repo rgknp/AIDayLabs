@@ -51,7 +51,7 @@ Once we had it in DocumentDB, we built an [Azure Search](https://azure.microsoft
 
 There are several directories in the [resources](./resources) folder:
 
-- **assets**: This contains all of the images for the lab manual. You can ignore this folder.
+- **assets**, **case**, **instructor**: You can ignore these folders for the purposes of this lab.
 - **code**: In here, there are several directories that we will use:
 	- **Models**: These classes will be used when we add search to our PictureBot.
 	- **Finished-PictureBot_Regex**: Here there is the finished PictureBot.sln that includes additions for Regex. If you fall behind or get stuck, you can refer to this.
