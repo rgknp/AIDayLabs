@@ -130,7 +130,7 @@ The execution environment on HDInsight cluster is managed using Conda. Configura
 
 ### (Optional) Lab 4: Running scripts on GPU in a remote machine
 
-To run your scripts on GPU in a remote machine, you can follow the guidance in this article: [How to use GPU in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-use-gpu). Focus on the section **Configure Azure ML Workbench to Access GPU**
+To run your scripts on GPU in a remote machine, you can follow the guidance in this article: [How to use GPU in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-use-gpu). Focus on the section **Configure Azure ML Workbench to Access GPU**.
 
 ## Workshop Completion
 
