@@ -11,7 +11,9 @@ In this lab we will focus on how to use Workbench to facilitate model selection.
 
 Open the Workbench and create a new project called `classifying_iris`. Choose the **Classifying Iris** as the project template and `Documents` folder as its directory. Open the project and go to **File > Open Command Prompt** to access the command line from within the project parent folder.
 
-Launch Docker and wait for it to be running. From the command prompt, run the following command to submit the training experiment:
+Launch **Docker for Windows** and wait for it to be running (you can check the Docker icon in the taskbar). If you are prompted to register, you can ignore and close the Docker registeration page. 
+
+From the command prompt, run the following command to submit the training experiment:
 
 ```
 az ml experiment submit -c docker-python iris_sklearn.py
