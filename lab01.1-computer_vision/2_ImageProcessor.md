@@ -36,7 +36,7 @@ You can find additional service helpers for some of the other Cognitive Services
 
 **ProcessingLibrary: The "ImageInsights" class**
 
-Take a look at the "ImageInsights" class you can see that we're calling for `Caption` and `Tags` from the images, as well as a unique `ImageId`. "ImageInsights" pieces only the information we want together from the Computer Vision API (or from Cognitive Services, if we choose to call multiple).
+Take a look at the "ImageInsights" class. You can see that we're calling for `Caption` and `Tags` from the images, as well as a unique `ImageId`. "ImageInsights" pieces only the information we want together from the Computer Vision API (or from Cognitive Services, if we choose to call multiple).
 
 Now let's take a step back for a minute. It isn't quite as simple as creating the "ImageInsights" class and copying over some methods/error handling from service helpers. We still have to call the API and process the images somewhere. For the purpose of this lab, we are going to walk through creating `ImageProcessor.cs`, but in future projects, feel free to add this class to your PCL and start from there (it will need modification depending what Cognitive Services you are calling and what you are processing - images, text, voice, etc.).
 
@@ -122,4 +122,4 @@ Want to make sure you set up `ImageProcessor.cs` correctly? You can find the ful
 
 
 
-Back to [README](./0_readme.md)
+Back to [README](./0_README.md)
