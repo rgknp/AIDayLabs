@@ -52,3 +52,5 @@ Follow the hands-on labs in the sequential manner listed above.
 ## Extra credit
 
 After finishing all the activities, can you take an existing bot and selectively log conversations from the bot to a flat file?
+
+### Continue to [Testing your bot](../lab02.4_testing_bots/0_README)
