@@ -36,7 +36,7 @@ We will review these articles in class:
 
 In this lab, you'll create an Churn Prediction experiment, examine its configuration, and run the experiment locally to generate model files.
 - Open the Azure Machine Learning Services Workbench tool locally or on your Data Science Virtual Machine. 
-- Add the below code snippet to the end of CATelcoCustomerChurnModeling.py for exporting the decision tree model:
+- Add the below code snippet to the end of CATelcoCustomerChurnModelingWithoutDprep.py for exporting the decision tree model:
 ```python
 # serialize the decision tree on disk in the 'outputs' folder
 print ("Export the dt model to outputs/model.pkl")
@@ -44,7 +44,7 @@ f = open('./outputs/dt.pkl', 'wb')
 pickle.dump(dt, f)
 f.close()
 ```
-- Launch CLI and run ```az ml experiment submit -c local CATelcoCustomerChurnModeling.py```
+- Launch CLI and run ```az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py```
 - dt.pkl and model.pkl (naive bayes) should be exported in the output folder as shown below:
 
 ![CATelcoCustomer](images/CATelcoCustomer_gWithoutDprep.png)
@@ -108,7 +108,7 @@ There are three steps to perform in order to update the service:
 
 **1. Register dt model**
 
-```az ml model register -m dt.pkl -n dt.pkl```
+```az ml model register -m dt.pkl -n model.pkl```
 
 You will now be able to see the new model (or newer version if you had previously registered dt) when you run ```az ml model list -o table```
 
