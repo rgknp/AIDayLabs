@@ -21,7 +21,7 @@ Once you're connected, there are several things you need to do to set up the DSV
 3. After Visual Studio loads and the solution is open, right-click on TestCLI and select "Set as StartUp Project."        
 *Validation step*: TestCLI should appear **bold** in the Solution Explorer  
 *Note: If you get a message that TestCLI is unable to load, right-click on TestCLI and select "Install Missing Features". This will prompt you to install **.Net Desktop Development**. Click **Install**, then **Install** again. You may get an error because Visual Studio needs to be closed to install updates. Close Visual Studio and then select **Retry**. It should only take 1-2 minutes to install. Reopen "ImageProcessing.sln", confirm that you are able to expand TestCLI and see its contents. Then, right-click on TestCLI and select "Set as StartUp Project".*
-4. Right-click on the solution in Solution Explorer and select "Build".  
+4. Right-click on the solution in Solution Explorer and select "Build Solution".  
 *Validation step*: When you build the solution, the only errors you receive are related to `ImageProcessor.cs`. You do not need to worry about yellow warning messages.
 
 
@@ -111,8 +111,10 @@ Once creation is complete, open the panel for your new database and select the _
 You'll need the **URI** and the **PRIMARY KEY** for your _TestCLI's_ `settings.json` file, so copy those into there and you're now ready to store images and data into the cloud.
 
 
-> Note: Be sure to turn off your DSVM **from the portal** after you have completed the Setup lab. When the workshop begins, you will need to start your DSVM from the portal to begin the labs. We recommend turning off your DSVM at the end of each day, and deleting all of the resources you create at the end of the workshop.
+> Note: Be sure to turn off your DSVM **from the portal** after you have completed the Setup lab. When the workshop begins, you will need to start your DSVM from the portal to begin the labs. We recommend turning off your DSVM at the end of each day, and deleting all of the resources you create at the end of the workshop.  
 
+
+## You have completed the prerequisites. 
 
 
 ### Continue to [2_ImageProcessor](./2_ImageProcessor.md)
