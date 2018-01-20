@@ -11,7 +11,9 @@ In this lab we will focus on how to use Workbench to facilitate model selection.
 
 Open the Workbench and create a new project called `classifying_iris`. Choose the **Classifying Iris** as the project template and `Documents` folder as its directory. Open the project and go to **File > Open Command Prompt** to access the command line from within the project parent folder.
 
-Launch Docker and wait for it to be running. From the command prompt, run the following command to submit the training experiment:
+Launch **Docker for Windows** and wait for it to be running (you can check the Docker icon in the taskbar). If you are prompted to register, you can ignore and close the Docker registeration page. 
+
+From the command prompt, run the following command to submit the training experiment:
 
 ```
 az ml experiment submit -c docker-python iris_sklearn.py
@@ -20,15 +22,15 @@ az ml experiment submit -c docker-python iris_sklearn.py
 This runs a single training experiment. If we are doing this for the first time, then prior to running the experiment Workbench will create a docker image for us, which will take a few minutes. Once the image is ready, as long as we use the same image, we can run experiments on it quickly and without the initial delay. 
 **Note:** At this point, there is a strange Docker behavior for which we propose an easy solution: we may get an error at the top about `image operating system "linux" cannot be used on this platform`.
 
-![](./images/linux-image-not-found.jpg){:width="500px"}
+![](./images/linux-image-not-found.jpg)
 
 To resolve it we click on the Docker logo on the right-hand side in the taskbar and switch Docker to use Windows containers. This will result in a new Docker error:
 
-![](./images/docker-windows-image.jpg){:width="400px"}
+![](./images/docker-windows-image.jpg)
 
 Now we switch Docker back to Linux containers (by going to the taskbar once more).
 
-![](./images/switch-linux-containers.jpg){:width="300px"}
+![](./images/switch-linux-containers.jpg)
 
 We then return to the command prompt and run the above command again.
 

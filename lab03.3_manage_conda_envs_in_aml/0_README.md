@@ -1,4 +1,4 @@
-# Updating conda to include additional external dependencies for deep learning or MML
+# Behind the scenes: Docker images and Conda environments
 
 ## What is conda?
 
@@ -34,7 +34,7 @@ To create a Conda environment, return to the command prompt and type
 conda env create -f aml_config/conda_dependencies.yml
 ```
 
-which creates an environment called `project_environment` by default (we can rename it using the `-n` switch, or by changing the 'name' field in the `conda_dependencies.yml` file). Once an environment is created, it needs to be activated by running `activate project_environment`. Activate the environment and run `python`. Then in the python console type 
+which creates an environment called `project_environment` by default (we can rename it using the `-n` switch, or by changing the `name` field in the `conda_dependencies.yml` file). Once an environment is created, it needs to be activated by running `activate project_environment`. Activate the environment and run `python`. Then in the python console type 
 
 ```
 import sys

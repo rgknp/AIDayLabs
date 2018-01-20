@@ -1,6 +1,6 @@
 # Manage Models with Azure Machine Learning Workbench and related services
 
-This hands-on lab guides you through managing and regtraining models using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
+This hands-on lab guides you through managing and retraining models using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
 
 In this workshop, you will:
 
@@ -65,15 +65,15 @@ In order to run the experiment in a Docker container, we must prepare a Docker i
 
 **Note:** At this point, there is a strange Docker behavior for which we propose an easy solution: we may get an error at the top about `image operating system "linux" cannot be used on this platform`.
 
-![](./images/linux-image-not-found.jpg){:width="500px"}
+![](./images/linux-image-not-found.jpg)
 
 To resolve it we click on the Docker logo on the right-hand side in the taskbar and switch Docker to use Windows containers. This will result in a new Docker error:
 
-![](./images/docker-windows-image.jpg){:width="400px"}
+![](./images/docker-windows-image.jpg)
 
 Now we switch Docker back to Linux containers (by going to the taskbar once more).
 
-![](./images/switch-linux-containers.jpg){:width="300px"}
+![](./images/switch-linux-containers.jpg)
 
 We then return to the command prompt and run the above command again. This will take a few minutes. When finished, we should get a message saying `Your environment is now ready`.
 
@@ -87,38 +87,36 @@ Let's now see how we can create a scoring web service from the above model insid
 
 Enable the Azure Container Service by running `az provider register -n Microsoft.ContainerService` from the command line.
 
-Run `az group create -n azurebootcamplab43 -l eastus2` to create a resource group called `azurebootcamplab43` for the resources we will provision throughout this lab. Then run `az ml account modelmanagement create -l eastus2 -n azureuseramlmm -g azurebootcamplab43` to create a model management account.
-
-Log into the Azure portal and find all the resources under the resource group `azurebootcamplab43`. This should include an Experimentation and a Model Management account. Open the Model Management resource and click on **Model Management** icon on the top.
+Log into the Azure portal and find all the resources under the resource group. This should include an Experimentation and a Model Management account. Open the Model Management resource and click on **Model Management** icon on the top.
 
 If we're doing this for the first time, then we need to set up an environment. We usually have a staging and a production environment. We can deploy our models to the staging environment to test them and then redeploy them to the production environment once we're happy with the result. To create a new environment run the following command. To use in production, we can use --cluster:
 
 ```
-az ml env setup -l eastus2 -n bootcampvmstage -g azurebootcamplab43
+az ml env setup -l eastus2 -n bootcampvmstage -g <resource_group_name>
 ```
 
 We can look at all the environments uder our subscription using `az ml env list -o table`. Creating the new environment takes about one minute, after which we can activate it and show it using this:
 
 ```
-az ml env set -n bootcampvmstage -g azurebootcamplab43
+az ml env set -n bootcampvmstage -g <resource_group_name>
 az ml env show
 ```
 
 We next set our Model Management account by running this:
 
 ```
-az ml account modelmanagement set -n azureuseramlmm -g azurebootcamplab43
+az ml account modelmanagement set -n azureuseramlmm -g <resource_group_name>
 ```
 
 We are now finally ready to deploy our model as a web service. 
 
-Generate the schema by first running ```python churn_schema_gen.py```. We can then create a realtime service by running `az ml service create realtime -n churnpred --model-file ./model.pkl -f score.py -r python -s service_schema.json`. Notice the three steps that take place as the command is running. First we register the model, then we create a manifest, then we create a Docker image, and finally we initialize a Docker container that services our prediction app. We can go to the Azure portal and go to click on the resource named `azureuseramlmm` under the resource group `azurebootcamplab43`, then click on **Model Management**.
+Generate the schema by first running ```python churn_schema_gen.py```. We can then create a realtime service by running `az ml service create realtime -n churnpred --model-file ./model.pkl -f score.py -r python -s service_schema.json`. Notice the three steps that take place as the command is running. First we register the model, then we create a manifest, then we create a Docker image, and finally we initialize a Docker container that services our prediction app. We can go to the Azure portal and go to click on the resource named `azureuseramlmm` under the resource group `<resource_group_name>`, then click on **Model Management**.
 
-![](./images/model-management-portal.jpg){:width="500px"}
+![](./images/model-management-portal.jpg)
 
 In the Model Management portal, we can view the three resources that are created as the above command runs: the manifest, the image, and the service. Click on each to view the resources.
 
-![](./images/model-management-services.jpg){:width="500px"}
+![](./images/model-management-services.jpg)
 
 ## Workshop Completion
 
