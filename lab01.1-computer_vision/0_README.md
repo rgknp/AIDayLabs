@@ -61,8 +61,8 @@ There are several directories in the [resources](./resources) folder:
 This workshop has been broken down into five sections:
 - [1_Setup](./1_Setup.md): Here we'll get everything set up for you to perform these labs - Azure, a Data Science Virtual Machine, and Keys you'll need throughout the workshop. **This should be done prior to attending class**
 - [2_ImageProcessor](./2_ImageProcessor.md): You'll learn about portable class libraries and how to build an image processor from service helpers
-- [3_TestCLI](./4_TestCLI2.md): Here we'll call the Computer Vision API and load our images into Cosmos DB and Azure Storage using a console application
-- [4_Challenge_and_Closing](./5_Challenge_and_Closing.md): If you get through all the labs, try this challenge. You will also find a summary of what you've done and where to learn more
+- [3_TestCLI](./3_TestCLI.md): Here we'll call the Computer Vision API and load our images into Cosmos DB and Azure Storage using a console application
+- [4_Challenge_and_Closing](./4_Challenge_and_Closing.md): If you get through all the labs, try this challenge. You will also find a summary of what you've done and where to learn more
 
 
 
