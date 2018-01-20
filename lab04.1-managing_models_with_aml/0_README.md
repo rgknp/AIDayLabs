@@ -1,6 +1,6 @@
 # Manage Models with Azure Machine Learning Workbench and related services
 
-This hands-on lab guides you through managing and regtraining models using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
+This hands-on lab guides you through managing and retraining models using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
 
 In this workshop, you will:
 
@@ -65,15 +65,15 @@ In order to run the experiment in a Docker container, we must prepare a Docker i
 
 **Note:** At this point, there is a strange Docker behavior for which we propose an easy solution: we may get an error at the top about `image operating system "linux" cannot be used on this platform`.
 
-![](./images/linux-image-not-found.jpg){:width="500px"}
+![](./images/linux-image-not-found.jpg)
 
 To resolve it we click on the Docker logo on the right-hand side in the taskbar and switch Docker to use Windows containers. This will result in a new Docker error:
 
-![](./images/docker-windows-image.jpg){:width="400px"}
+![](./images/docker-windows-image.jpg)
 
 Now we switch Docker back to Linux containers (by going to the taskbar once more).
 
-![](./images/switch-linux-containers.jpg){:width="300px"}
+![](./images/switch-linux-containers.jpg)
 
 We then return to the command prompt and run the above command again. This will take a few minutes. When finished, we should get a message saying `Your environment is now ready`.
 
@@ -114,11 +114,11 @@ We are now finally ready to deploy our model as a web service.
 
 Generate the schema by first running ```python churn_schema_gen.py```. We can then create a realtime service by running `az ml service create realtime -n churnpred --model-file ./model.pkl -f score.py -r python -s service_schema.json`. Notice the three steps that take place as the command is running. First we register the model, then we create a manifest, then we create a Docker image, and finally we initialize a Docker container that services our prediction app. We can go to the Azure portal and go to click on the resource named `azureuseramlmm` under the resource group `azurebootcamplab43`, then click on **Model Management**.
 
-![](./images/model-management-portal.jpg){:width="500px"}
+![](./images/model-management-portal.jpg)
 
 In the Model Management portal, we can view the three resources that are created as the above command runs: the manifest, the image, and the service. Click on each to view the resources.
 
-![](./images/model-management-services.jpg){:width="500px"}
+![](./images/model-management-services.jpg)
 
 ## Workshop Completion
 

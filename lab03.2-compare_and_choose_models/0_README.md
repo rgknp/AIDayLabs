@@ -22,15 +22,15 @@ az ml experiment submit -c docker-python iris_sklearn.py
 This runs a single training experiment. If we are doing this for the first time, then prior to running the experiment Workbench will create a docker image for us, which will take a few minutes. Once the image is ready, as long as we use the same image, we can run experiments on it quickly and without the initial delay. 
 **Note:** At this point, there is a strange Docker behavior for which we propose an easy solution: we may get an error at the top about `image operating system "linux" cannot be used on this platform`.
 
-![](./images/linux-image-not-found.jpg){:width="500px"}
+![](./images/linux-image-not-found.jpg)
 
 To resolve it we click on the Docker logo on the right-hand side in the taskbar and switch Docker to use Windows containers. This will result in a new Docker error:
 
-![](./images/docker-windows-image.jpg){:width="400px"}
+![](./images/docker-windows-image.jpg)
 
 Now we switch Docker back to Linux containers (by going to the taskbar once more).
 
-![](./images/switch-linux-containers.jpg){:width="300px"}
+![](./images/switch-linux-containers.jpg)
 
 We then return to the command prompt and run the above command again.
 
