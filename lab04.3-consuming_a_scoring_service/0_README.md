@@ -18,6 +18,8 @@ There is a comprehensive Learning Path we can use to prepare for this course [lo
 
 In this lab, we create an experiment based on Churn Prediction and create a realtime cluster based service. The reason we use cluster is because key operations are not supported for local services.
 
+***You do not have to do Lab 1 if you already have a cluster based service.***
+
 We should now be familiar with many of the below steps from the previous labs:
 
 **Generate the scoring and schema files**

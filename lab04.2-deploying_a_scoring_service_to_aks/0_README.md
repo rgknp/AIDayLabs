@@ -45,7 +45,7 @@ f = open('./outputs/dt.pkl', 'wb')
 pickle.dump(dt, f)
 f.close()
 ```
-- Launch CLI and run ```az ml experiment submit -c local CATelcoCustomerChurnModeling.py```
+- Launch CLI and run ```az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py```
 - dt.pkl and model.pkl (naive bayes) should be exported in the output folder as shown below:
 
 ![CATelcoCustomer](images/CATelcoCustomer_gWithoutDprep.png)
@@ -121,10 +121,10 @@ There are three steps to perform in order to update the service:
 **1. Register dt model**
 
 ```
-az ml model register -m dt.pkl -n dt.pkl
+az ml model register -m dt.pkl -n model.pkl
 ```
 
-You will now be able to see the new model (or newer version if you had previously registered dt) when you run 
+You will now be able to see the new model (or newer version if you had previously registered `dt`) when you run 
 
 ```
 az ml model list -o table
