@@ -11,7 +11,7 @@ In this lab we will focus on how to use Workbench to facilitate model selection.
 
 Open the Workbench and create a new project called `classifying_iris`. Choose the **Classifying Iris** as the project template and `Documents` folder as its directory. Open the project and go to **File > Open Command Prompt** to access the command line from within the project parent folder.
 
-Launch **Docker for Windows** and wait for it to be running (you can check the Docker icon in the taskbar). If you are prompted to register, you can ignore and close the Docker registeration page. 
+Launch **Docker for Windows** and wait for it to be running (we can check the Docker icon in the taskbar). If we are prompted to register, we can ignore and close the Docker registeration page. 
 
 From the command prompt, run the following command to submit the training experiment:
 
@@ -115,13 +115,13 @@ In the window that opens, put a check mark in the box next to `MaxFscore` then c
 
 ![](./images/checkmark-fscore.jpg){:height="400px"}
 
-You should now see an additional plot showing the value for `MaxFscore` accross the different runs.
+We should now see an additional plot showing the value for `MaxFscore` accross the different runs.
 
 Choose the two models with the highest `MaxFscore` (simply click on the two highest point on the chart). Notice how doing so automatically selects them in the table with all the runs just below the chart. Now click on the **Compare** button to compare the two models.
 
 ![](./images/max-fscore.jpg){:height="700px"}
    
-Of the two models, find the one with the highest accuracy (you will find accuracy under **Logged Metrics**) and note its `runNumber` (at the very top). Then click on **Run List** to return to the table of all the runs and this time click on the `RUN NUMBER` for that model.
+Of the two models, find the one with the highest accuracy (we will find accuracy under **Logged Metrics**) and note its `runNumber` (at the very top). Then click on **Run List** to return to the table of all the runs and this time click on the `RUN NUMBER` for that model.
 
 In **Run Properties** under **Outputs** select the binary object that stores our model (called `model.pkl` by the script) and click on **Promote**.
 

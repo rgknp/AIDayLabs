@@ -1,14 +1,14 @@
 # Manage Models with Azure Machine Learning Workbench and related services
 
-This hands-on lab guides you through managing and retraining models using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
+This hands-on lab guides us through managing and retraining models using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
 
-In this workshop, you will:
+In this workshop, we will:
 
 - Understand Machine Learning Model versioning
 - Track models
 - Create Docker containers with the models and test them locally
 
-You'll focus on the objectives above, not data science, machine learning or a difficult scenario.  
+We focus on the objectives above, not data science, machine learning or a difficult scenario.  
 
 ***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
 
@@ -16,7 +16,7 @@ You'll focus on the objectives above, not data science, machine learning or a di
   - Machine Learning and Data Science
   - Working with the Microsoft Azure Portal
 
-There is a comprehensive Learning Path you can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
+There is a comprehensive Learning Path we can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
 
 ## Azure Machine Learning Model Management
 
@@ -120,12 +120,12 @@ In the Model Management portal, we can view the three resources that are created
 
 ## Workshop Completion
 
-In this workshop you learned how to:
+In this workshop we learned how to:
 
 - Track models
 - Create Docker containers with the models and test them locally
 
-You may now decommission and delete the following resources if you wish:
+We may now decommission and delete the following resources if we wish:
 
   - The Azure Machine Learning Services accounts and workspaces, and any Web API's
-  - Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuming.
+  - Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.

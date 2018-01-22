@@ -96,7 +96,7 @@ Once the model is served, we also go through a customer acceptance test to ensur
 
 # Our use-case example
 
-Your scenario is as follows: 
+Our scenario is as follows: 
 
 The Orange Telecom company in France is one of the largest operators of mobile and internet services in Europe and Africa and a global leader in corporate telecommunication services. They have 256 million customers worldwide. They have significant coverage in France, Spain, Belgium, Poland, Romania, Slovakia and Moldova, and a large presence Africa and the Middle East.
 

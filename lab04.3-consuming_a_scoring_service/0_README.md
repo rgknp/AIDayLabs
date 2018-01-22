@@ -1,8 +1,8 @@
 # Consuming a scoring service
 
-This hands-on lab guides you through consuming a Machine Learning scoring service using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
+This hands-on lab guides us through consuming a Machine Learning scoring service using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
 
-In this workshop, you will:
+In this workshop, we will:
 - Understand how to consume a deployed model from a Web API
 
 ***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
@@ -12,13 +12,13 @@ In this workshop, you will:
   *  Familiarity with Web Services and API Programming
   *  Familiarity with [Swagger](https://github.com/swagger-api/swagger-codegen)
 
-There is a comprehensive Learning Path you can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
+There is a comprehensive Learning Path we can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
 
 ### Lab 1: Creating a realtime service
 
-In this lab, you'll create an experiment based on Churn Prediction and create a realtime cluster based service. The reason we use cluster is because key operations are not supported for local services.
+In this lab, we create an experiment based on Churn Prediction and create a realtime cluster based service. The reason we use cluster is because key operations are not supported for local services.
 
-You should now be familiar with many of the below steps from the previous labs:
+We should now be familiar with many of the below steps from the previous labs:
 
 **Generate the scoring and schema files**
 
@@ -26,23 +26,33 @@ Run ```python churn_schema_gen.py``` from CLI to create service_schema.json.
 
 **Create the environment in cluster mode**
 
-```az ml env setup -n <new deployment environment name> --location <e.g. eastus2> -c```
+```
+az ml env setup -n <NEW_DEPLOYMENT_ENVIRONMENT_NAME> --location <REGION_NAME e.g. eastus2> -c
+```
 
 **Create a Model Management account**
 
-```az ml account modelmanagement create --location <e.g. eastus2> -n <new model management account name> -g <existing resource group name> --sku-name S1```
+```
+az ml account modelmanagement create --location <REGION_NAME e.g. eastus2> -n <NEW_MODEL_MANAGEMENT_ACCOUNT_NAME> -g <EXISTING_RESOURCE_GROUP_NAME> --sku-name S1
+```
 
 **Set the Model Management account**
 
-```az ml account modelmanagement set -n <youracctname> -g <yourresourcegroupname>```
+```
+az ml account modelmanagement set -n <ACCOUNT_NAME> -g <RESOURCE_GROUP>
+```
 
 **Set the environment**
 
-```az ml env set -n <deployment environment name> -g <existing resource group name>```
+```
+az ml env set -n <NEW_DEPLOYMENT_ENVIRONMENT_NAME> -g <RESOURCE_GROUP>
+```
 
 **Create the real-time web-service**
 
-```az ml service create realtime -f score.py --model-file model.pkl -s service_schema.json -n <name> -r python```
+```
+az ml service create realtime -f score.py --model-file model.pkl -s service_schema.json -n <SERVICE_NAME> -r python
+```
 
 ### Lab 2: Consume the web-service
 
@@ -50,19 +60,25 @@ In this lab, we will send a request to the real-time web service created by foll
 
 **Get the service key**
 
-```az ml service keys realtime -i <web service id>```
+```
+az ml service keys realtime -i <WEB_SERVICE_ID>
+```
 
-You will get PrimaryKey and SecondaryKey with this command. You can use either of the keys for authorization when consuming the web-service.
+We will get PrimaryKey and SecondaryKey with this command. We can use either of the keys for authorization when consuming the web-service.
 
 **Get the service URL**
 
 Obtain the service URL from the below command
 
-```az ml service usage realtime -i <service name>```
+```
+az ml service usage realtime -i <SERVICE_NAME>
+```
 
 The URL can be obtained from the sample CURL call. For example, the url is http://40.70.13.110:80/api/v1/service/churncluster333/score in the below sample CURL call:
 
-```curl -X POST -H "Content-Type:application/json" -H "Authorization:Bearer <key>" --data "{\"input_df\": [{\"callfailurerate\": 0, \"education\": \"Bachelor or equivalent\", \"usesinternetservice\": \"No\", \"gender\": \"Male\", \"unpaidbalance\": 19, \"occupation\": \"Technology Related Job\", \"year\": 2015, \"numberofcomplaints\": 0, \"avgcallduration\": 663, \"usesvoiceservice\": \"No\", \"annualincome\": 168147, \"totalminsusedinlastmonth\": 15, \"homeowner\": \"Yes\", \"age\": 12, \"maritalstatus\": \"Single\", \"month\": 1, \"calldroprate\": 0.06, \"percentagecalloutsidenetwork\": 0.82, \"penaltytoswitch\": 371, \"monthlybilledamount\": 71, \"churn\": 0, \"numdayscontractequipmentplanexpiring\": 96, \"totalcallduration\": 5971, \"callingnum\": 4251078442, \"state\": \"WA\", \"customerid\": 1, \"customersuspended\": \"Yes\", \"numberofmonthunpaid\": 7, \"noadditionallines\": \"\\N\"}]}" http://40.70.13.110:80/api/v1/service/churncluster333/score```
+```
+curl -X POST -H "Content-Type:application/json" -H "Authorization:Bearer <key>" --data "{\"input_df\": [{\"callfailurerate\": 0, \"education\": \"Bachelor or equivalent\", \"usesinternetservice\": \"No\", \"gender\": \"Male\", \"unpaidbalance\": 19, \"occupation\": \"Technology Related Job\", \"year\": 2015, \"numberofcomplaints\": 0, \"avgcallduration\": 663, \"usesvoiceservice\": \"No\", \"annualincome\": 168147, \"totalminsusedinlastmonth\": 15, \"homeowner\": \"Yes\", \"age\": 12, \"maritalstatus\": \"Single\", \"month\": 1, \"calldroprate\": 0.06, \"percentagecalloutsidenetwork\": 0.82, \"penaltytoswitch\": 371, \"monthlybilledamount\": 71, \"churn\": 0, \"numdayscontractequipmentplanexpiring\": 96, \"totalcallduration\": 5971, \"callingnum\": 4251078442, \"state\": \"WA\", \"customerid\": 1, \"customersuspended\": \"Yes\", \"numberofmonthunpaid\": 7, \"noadditionallines\": \"\\N\"}]}" http://40.70.13.110:80/api/v1/service/churncluster333/score
+```
 
 **Swagger document**
 
@@ -70,11 +86,11 @@ If the service API schema was supplied, the service endpoint would expose a Swag
 
 **Call the web service using curl**
 
-Obtain the curl command from ```az ml service usage realtime -i <service name>``` and replace &lt;key&gt; with PrimaryKey / SecondaryKey.
+Obtain the curl command from ```az ml service usage realtime -i <SERVICE_NAME>``` and replace &lt;key&gt; with PrimaryKey / SecondaryKey.
 
 **Call the web service using Python**
 
-Use Python to send a request to your real-time web service. 
+Use Python to send a request to the real-time web service. 
 
 1. Copy the following code sample to a new Python file.
 2. Update the data, url, and api_key parameters. For local web services, remove the 'Authorization' header.
@@ -108,7 +124,7 @@ In Visual Studio, create a new Console App:
 - In Project References, set references to System.Net, and System.Net.Http.
 Click Tools -> NuGet Package Manager -> Package Manager Console, then install the Microsoft.AspNet.WebApi.Client package.
 - Open Program.cs file, and replace the code with the following code:
-Update the SERVICE_URL and API_KEY parameters with the information from your web service.
+Update the SERVICE_URL and API_KEY parameters with the information from the web service.
 - Run the project.
 
 ````C#
@@ -180,9 +196,9 @@ namespace MyFirstService
 
 ## Workshop Completion
 
-In this workshop you learned how to:
+In this workshop we learned how to:
 - Understand how to consume a deployed model from a Web API
 
-You may now decommission and delete the following resources if you wish:
+We may now decommission and delete the following resources if we wish:
   * The Azure Machine Learning Services accounts and workspaces, and any Web API's
-  * Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuming.
+  * Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.
