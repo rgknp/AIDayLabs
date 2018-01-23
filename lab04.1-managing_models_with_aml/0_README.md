@@ -92,20 +92,20 @@ Log into the Azure portal and find all the resources under the resource group. T
 If we're doing this for the first time, then we need to set up an environment. We usually have a staging and a production environment. We can deploy our models to the staging environment to test them and then redeploy them to the production environment once we're happy with the result. To create a new environment run the following command. To use in production, we can use --cluster:
 
 ```
-az ml env setup -l eastus2 -n bootcampvmstage -g <resource_group_name>
+az ml env setup -l eastus2 -n bootcampvmstage -g <RESOURCE_GROUP>
 ```
 
 We can look at all the environments uder our subscription using `az ml env list -o table`. Creating the new environment takes about one minute, after which we can activate it and show it using this:
 
 ```
-az ml env set -n bootcampvmstage -g <resource_group_name>
+az ml env set -n bootcampvmstage -g <RESOURCE_GROUP>
 az ml env show
 ```
 
 We next set our Model Management account by running this:
 
 ```
-az ml account modelmanagement set -n azureuseramlmm -g <resource_group_name>
+az ml account modelmanagement set -n azureuseramlmm -g <RESOURCE_GROUP>
 ```
 
 We are now finally ready to deploy our model as a web service. 

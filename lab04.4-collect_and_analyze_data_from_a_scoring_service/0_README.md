@@ -179,7 +179,7 @@ To view the collected data in blob storage:
 
     To see data start propagating to the storage account, we need to wait up to 10 minutes after the first web service request. Data flows into blobs with the following container path:
 
-    ```/modeldata/<subscription_id>/<resource_group_name>/<model_management_account_name>/<webservice_name>/<model_id>-<model_name>-<model_version>/<identifier>/<year>/<month>/<day>/data.csv```
+    ```/modeldata/<SUBSCRIPTION_ID>/<RESOURCE_GROUP>/<MODEL_MANAGEMENT_ACCOUNT>/<WEBSERVICE>/<MODEL_ID>-<MODEL>-<MODEL_VERSION>/<IDENTIFIER>/<YEAR>/<MONTH>/<DAY>/data.csv```
 
     The inputs and prediction folders in the container would be created as follows:
 

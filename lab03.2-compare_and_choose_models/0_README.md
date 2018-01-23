@@ -142,13 +142,13 @@ Later registered models can be used to create a scoring service. We learn more a
 Before we finish this lab, let's just briefly go over how to programmatically do what we did above by using the Azure CLI instead of the Workbench GUI. Go to **File > Open Command Prompt** from Workbench and enter `az ml history list -o table` to get the history of runs. Select a particular run by copying its `Run_id` then paste it into the following command to see artifacts from a given run:
 
 ```
-az ml history info --run <run_id> --artifact driver_log
+az ml history info --run <RUN_ID> --artifact driver_log
 ```
 
 The resulting output matches the output we saw when clicking on the green **Completed** button of a given run. To promote a model object, we simply run
 
 ```
-az ml history promote --run <run_id> --artifact-path outputs/model.pkl --name model.pkl
+az ml history promote --run <RUN_ID> --artifact-path outputs/model.pkl --name model.pkl
 ```
 
 The model object is assumed to be in `outputs/model.pkl` in the above command. The name given to the model object in the Model Management portal will also `model.pkl`. If models with this name is already in the Model Management portal, then each additional one will appear with a new version so that scoring services can later be rolled back to older models if need be. A promoted model object can be downloaded (and put in a folder called `output`) using the following command:
