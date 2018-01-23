@@ -1,6 +1,6 @@
 # Setting up for the bootcamp
 
-The following steps will get us up and running for the bootcamp. These activities take about 2.5 hours in total and should be completed **prior to attending** the bootcamp. Failure to do so will result in falling behind during the workshop and divert time and attention from the material covered throughout the bootcamp. As proof of completion the below steps, bring the "Web Service ID" code (described below) to sign in at the bootcamp.
+The following steps will get us up and running for the bootcamp. These activities take about 2.5 hours in total and should be completed **prior to attending** the bootcamp. Failure to do so will result in falling behind during the workshop and divert time and attention from the material covered throughout the bootcamp.
  
 ##  What we will need for this workshop: 
 
@@ -10,13 +10,11 @@ The following steps will get us up and running for the bootcamp. These activitie
 
 ##  Setting up the environment 
 
-Once we have the above requirements in place, we should be able to execute most of the online Iris tutorial, by performing the below tasks. If we cannot complete all of these pre-requisites, contact the event organizer prior to arrival.
+For the remainder of this lab, we will be working exclusively on the DSVM. So log into the DSVM and then run through the steps outlined here.
 
-1. Complete all of the steps in the [Iris tutorial part 1][iris-tut-1].
-2. Complete all of the steps in the [Iris tutorial part 2][iris-tut-2].
-3. Complete most of the steps in the [Iris tutorial part 3][iris-tut-3]. We stop at the section marked **Create a real-time web service in one command**.
-4. As a result of running the previous step, we should have a **Web Service ID** which we must bring to the bootcamp in order to sign in.
- 
-[iris-tut-1]: https://docs.microsoft.com/en-us/azure/machine-learning/preview/tutorial-classifying-iris-part-1
-[iris-tut-2]: https://docs.microsoft.com/en-us/azure/machine-learning/preview/tutorial-classifying-iris-part-2
-[iris-tut-3]: https://docs.microsoft.com/en-us/azure/machine-learning/preview/tutorial-classifying-iris-part-3
+1. Launch Docker for Windows and while waiting for Docker to start running, open the Azure Machine Learning Workbench. When prompted to authenticate using an Azure account, please do so.
+2. Click on initials at the bottom-left corner of the Workbench and make sure that we are using the correct account (if you already have a Model Management account, otherwise we will create one later).
+3. Go to **File > Configure Project IDE** and name the IDE `Code` with the following path `C:\Program Files\Microsoft VS Code\Code.exe`. This will allow us to open the entire project in Visual Studio Code, which is our editor of choice for this lab.
+4. Go to **File > Open Project (VSCode)** to open the project in Visual Studio Code. It is not necessary to use Code to make edit our course files but it is much more convenient. We will return to Code when we need to make changes to the existing scripts.
+5. We now log into the Azure CLI using our Azure account. Return to the Workbench and go to **File > Open Command Prompt**. Check that the Azure CLI is installed on the DSVM by typing `az -h`. Now type `az login` and copy the access code. In Firefox open a **private tab** using **CTRL+SHIFT+P** then enter the URL `aka.ms/devicelogin` and when prompted, paste in the access code. Next, authenticate using an Azure account.
+6. We now set the Azure CLI to use the right Azure account. From the command prompt, enter `az account list –o table` to see available accounts. Then copy the subscription ID from the Azure account used to create an AML Workbench account and type `az account set –s <SUBSCRIPTION_ID>`, replacing `<SUBSCRIPTION_ID>` with the account ID.
