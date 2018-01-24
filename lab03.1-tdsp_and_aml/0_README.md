@@ -8,7 +8,7 @@ The goal of the workshop is to learn the tools that facilitate being a data scie
 
 ![Image](resources/docs/images/tdsp.png)
 
-A typical data science workfolw for building a predictive model looks like this:
+A typical data science workflow for building a predictive model looks like this:
 
 ![Image](resources/docs/images/machine-learning-process.jpg)
 
