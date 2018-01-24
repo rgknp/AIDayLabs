@@ -1,8 +1,8 @@
 # Behind the scenes: Docker images and Conda environments
 
-## What is conda?
+## What is Conda?
 
-Conda is a multi-platform, open-source package management system. Fundamentally it tries to solve replicability by creating a clean environment in which our code and all its dependencies can be placed and run. It is primarily used for python, but can be used for multiple languages (including R). It is generally packaged and distributed through the Anaconda python distribution supported by Anaconda, Inc (a Microsoft partner).
+Conda is a multi-platform, open-source package management system. Fundamentally it tries to solve replicability by creating a clean environment in which our code and all its dependencies can be placed and run. It is primarily used for Python, but can be used for multiple languages (including R). It is generally packaged and distributed through the Anaconda python distribution supported by Anaconda, Inc (a Microsoft partner).
 
 In the context of Python, Conda is similar to `pip` and can be used to install and update Python packages, but Conda goes beyond that and can also install library dependencies outside of Python, such as C++ dependencies.
 
