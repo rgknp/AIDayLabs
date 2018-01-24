@@ -1,16 +1,16 @@
 # Consuming a scoring service
 
-This hands-on lab guides us through consuming a Machine Learning scoring service using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
+This hands-on lab guides us through consuming a Machine Learning scoring service using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
 
 In this workshop, we will:
 - Understand how to consume a deployed model from a Web API
 
 ***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
-  *  Programming using an Agile methodology
-  *  Machine Learning and Data Science
-  *  Intermediate to Advancced Python programming
-  *  Familiarity with Web Services and API Programming
-  *  Familiarity with [Swagger](https://github.com/swagger-api/swagger-codegen)
+  -  Programming using an Agile methodology
+  -  Machine Learning and Data Science
+  -  Intermediate to Advancced Python programming
+  -  Familiarity with Web Services and API Programming
+  -  Familiarity with [Swagger](https://github.com/swagger-api/swagger-codegen)
 
 There is a comprehensive Learning Path we can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
 
@@ -24,7 +24,7 @@ We should now be familiar with many of the below steps from the previous labs:
 
 **Generate the scoring and schema files**
 
-Run ```python churn_schema_gen.py``` from CLI to create service_schema.json.
+Run `python churn_schema_gen.py` from CLI to create `service_schema.json`.
 
 **Create the environment in cluster mode**
 
@@ -88,7 +88,7 @@ If the service API schema was supplied, the service endpoint would expose a Swag
 
 **Call the web service using curl**
 
-Obtain the curl command from ```az ml service usage realtime -i <SERVICE_NAME>``` and replace &lt;key&gt; with PrimaryKey / SecondaryKey.
+Obtain the curl command from `az ml service usage realtime -i <SERVICE_NAME>` and replace &lt;key&gt; with PrimaryKey / SecondaryKey.
 
 **Call the web service using Python**
 
@@ -120,14 +120,12 @@ resp.text
 Use the service URL to send a request from a C# Console App. 
 
 In Visual Studio, create a new Console App: 
-- In the menu, click, File -> New -> Project
-- Under Visual Studio C#, click Windows Class Desktop, then select Console App.
-- Enter MyFirstService as the Name of the project, then click OK.
-- In Project References, set references to System.Net, and System.Net.Http.
-Click Tools -> NuGet Package Manager -> Package Manager Console, then install the Microsoft.AspNet.WebApi.Client package.
-- Open Program.cs file, and replace the code with the following code:
-Update the SERVICE_URL and API_KEY parameters with the information from the web service.
-- Run the project.
+- In the menu, click, **File > New > Project**
+- Under **Visual Studio C#**, click **Windows Class Desktop**, then select **Console App**.
+- Enter `MyFirstService` as the name of the project, then click OK.
+- In **Project References**, set references to `System.Net` and `System.Net.Http`.
+- Click **Tools > NuGet Package Manager > Package Manager Console**, then install `Microsoft.AspNet.WebApi.Client` package.
+- Open `Program.cs` file, and replace the code with the following code (Update the SERVICE_URL and API_KEY parameters with the information from the web service), then run the project.
 
 ````C#
 using System;
@@ -202,5 +200,5 @@ In this workshop we learned how to:
 - Understand how to consume a deployed model from a Web API
 
 We may now decommission and delete the following resources if we wish:
-  * The Azure Machine Learning Services accounts and workspaces, and any Web API's
-  * Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.
+  - The Azure Machine Learning Services accounts and workspaces, and any Web API's
+  - Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.

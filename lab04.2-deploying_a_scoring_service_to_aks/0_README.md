@@ -1,6 +1,6 @@
 # Deploying a scoring service to the Azure Container Service (AKS)
 
-This hands-on lab guides us through deploying a Machine Learning scoring file to a remote environment using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. 
+This hands-on lab guides us through deploying a Machine Learning scoring file to a remote environment using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
 
 In this workshop, we will:
 - Understand how to create a model file
@@ -36,8 +36,7 @@ We will review these articles in class:
 
 In this lab, we create an Churn Prediction experiment, examine its configuration, and run the experiment locally to generate model files.
 
-- Open the Azure Machine Learning Services Workbench tool locally or on the Data Science Virtual Machine. 
-- Add the below code snippet to the end of CATelcoCustomerChurnModeling.py for exporting the decision tree model:
+Open Workbench and add the below code snippet to the end of `CATelcoCustomerChurnModeling.py` for exporting the decision tree model:
 
 ```
 # serialize the decision tree on disk in the 'outputs' folder
@@ -45,13 +44,17 @@ f = open('./outputs/dt.pkl', 'wb')
 pickle.dump(dt, f)
 f.close()
 ```
-- Launch CLI and run ```az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py```
-- dt.pkl and model.pkl (naive bayes) should be exported in the output folder as shown below:
+Launch CLI and run the following code:
+
+```
+az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py
+```
+
+As a result, `dt.pkl` (decision tree) and `model.pkl` (naive bayes) should be exported in the output folder as shown below:
 
 ![CATelcoCustomer](images/CATelcoCustomer_gWithoutDprep.png)
 
-- Download the model files and put in root folder.
-- If we have not already done so, we can generate the schema by running ```python churn_schema_gen.py```
+Download the model files and put them in the root folder. If we have not already done so, we can generate the schema by running `python churn_schema_gen.py`.
 
 ### Lab 2: Deploy Service to Production
 
