@@ -74,6 +74,7 @@ In this lab we create an experiment, examine its configuration, and run the expe
 
 - [Open this Reference and create an Ubuntu Data Science Virtual Machine](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro)
 
+  - Choose a **Data Science Virtual Machine for Linux Ubuntu CSP**
   - Choose a size of *Standard D4s v3 (4 vcpus, 16 GB memory)*
   - Use a password, not a SSH Key
   - Start the VM and connect to it using ssh. If we use some version of bash, the command is: `ssh <USER_NAME>@<VM_IP_ADDRESS>`
