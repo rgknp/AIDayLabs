@@ -77,27 +77,26 @@ In this lab we create an experiment, examine its configuration, and run the expe
   - Choose a **Data Science Virtual Machine for Linux Ubuntu CSP**
   - Choose a size of *Standard D4s v3 (4 vcpus, 16 GB memory)*
   - Use a password, not a SSH Key
-  - Start the VM and connect to it using ssh. If we use some version of bash, the command is: `ssh <USER_NAME>@<VM_IP_ADDRESS>`
-  - Check to ensure Docker is functional on the Linux DSVM with the following command:
+
+Start the VM and connect to it using ssh. If we use some version of bash, the command is: `ssh <USER_NAME>@<VM_IP_ADDRESS>`. Check to ensure Docker is functional on the Linux DSVM with the following command:
 
 ```
 sudo docker run docker/whalesay cowsay "The best debugging is done with CTRL-X. - Buck Woody"
 ```
 
-- Launch the CLI from Azure Machine Learning Services Workbench tool.
-- Run the following command to create both the compute target definition and run configuration for remote Docker-based executions.
+Launch the CLI from Azure Machine Learning Services Workbench tool. Run the following command to create both the compute target definition and run configuration for remote Docker-based executions.
 
 ```
 az ml computetarget attach remotedocker --name "remotevm" --address "remotevm_IP_address" --username "sshuser" --password "sshpassword"
 ```
 
-- Before running against "remotevm", we need to prepare it with the project's environment by running:
+Before running against `remotevm`, we need to prepare it with the project's environment by running:
 
 ```
 az ml experiment prepare -c "remotevm"
 ```
 
-- Once we configure the compute target, we can use the following command to run the churn script.
+Once we configure the compute target, we can use the following command to run the churn script.
 
 ```
 az ml experiment submit -c remotevm CATelcoCustomerChurnModelingWithoutDprep.py
@@ -109,19 +108,19 @@ Note that the execution environment is configured using the specifications in co
 
 The workbench is flexible to run experimentation on big data using HDInsight Spark clusters. Note that the HDInsight cluster must use Azure Blob as the primary storage (and Azure Data Lake storage is not supported yet). Additionally, we need SSH access to the HDInsight cluster in order to execute experiments in this mode.
 
-- The first step in executing in HDInsight cluster is to create a compute target and run configuration for an HDInsight Spark cluster using the following command:
+The first step in executing in HDInsight cluster is to create a compute target and run configuration for an HDInsight Spark cluster using the following command:
 
 ```
 az ml computetarget attach cluster --name "myhdi" --address "<FQDN or IP address>" --username "sshuser" --password "sshpassword"
 ```
 
-- Before running against "myhdi", we need to prepare it with the project's environment by running:
+Before running against `myhdi`, we need to prepare it with the project's environment by running:
 
 ```
 az ml experiment prepare -c "myhdi"
 ```
 
-- Once we have the compute context, we can run the following CLI command to execute CATelcoCustomerChurnModelingWithoutDprep.py as follows.
+Once we have the compute context, we can run the following CLI command:
 
 ```
 az ml experiment submit -c "myhdi" CATelcoCustomerChurnModelingWithoutDprep.py
