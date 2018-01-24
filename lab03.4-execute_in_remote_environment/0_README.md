@@ -87,19 +87,19 @@ sudo docker run docker/whalesay cowsay "The best debugging is done with CTRL-X. 
 Launch the CLI from Azure Machine Learning Services Workbench tool. Run the following command to create both the compute target definition and run configuration for remote Docker-based executions.
 
 ```
-az ml computetarget attach remotedocker --name "remotevm" --address "remotevm_IP_address" --username "sshuser" --password "sshpassword"
+az ml computetarget attach remotedocker --name <REMOTE_VM> --address <IP_ADDRESS> --username <SSH_USER> --password <SSH_PASSWORD>
 ```
 
-Before running against `remotevm`, we need to prepare it with the project's environment by running:
+Before running against the remote VM, we need to prepare it with the project's environment by running:
 
 ```
-az ml experiment prepare -c "remotevm"
+az ml experiment prepare -c <REMOTE_VM>
 ```
 
 Once we configure the compute target, we can use the following command to run the churn script.
 
 ```
-az ml experiment submit -c remotevm CATelcoCustomerChurnModelingWithoutDprep.py
+az ml experiment submit -c <REMOTE_VM> CATelcoCustomerChurnModelingWithoutDprep.py
 ```
 
 Note that the execution environment is configured using the specifications in conda_dependencies.yml.
@@ -111,19 +111,19 @@ The workbench is flexible to run experimentation on big data using HDInsight Spa
 The first step in executing in HDInsight cluster is to create a compute target and run configuration for an HDInsight Spark cluster using the following command:
 
 ```
-az ml computetarget attach cluster --name "myhdi" --address "<FQDN or IP address>" --username "sshuser" --password "sshpassword"
+az ml computetarget attach cluster --name <HDI_CLUSTER> --address <FQDN_or_IP_ADDRESS> --username <SSH_USER> --password <SSH_PASSWORD>
 ```
 
-Before running against `myhdi`, we need to prepare it with the project's environment by running:
+Before running against the HDI cluster, we need to prepare it with the project's environment by running:
 
 ```
-az ml experiment prepare -c "myhdi"
+az ml experiment prepare -c <HDI_CLUSTER>
 ```
 
 Once we have the compute context, we can run the following CLI command:
 
 ```
-az ml experiment submit -c "myhdi" CATelcoCustomerChurnModelingWithoutDprep.py
+az ml experiment submit -c <HDI_CLUSTER> CATelcoCustomerChurnModelingWithoutDprep.py
 ```
 
 The execution environment on HDInsight cluster is managed using Conda. Configuration is managed by conda_dependencies.yml and spark_dependencies.yml configuration files. 
