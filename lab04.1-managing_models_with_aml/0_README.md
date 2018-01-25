@@ -104,14 +104,9 @@ In the Model Management portal, we can view the three resources that are created
 
 ![](./images/model-management-services.jpg)
 
-## Workshop Completion
+## Lab Completion
 
 In this workshop we learned how to:
 
 - Track models
 - Create Docker containers with the models and test them locally
-
-We may now decommission and delete the following resources if we wish:
-
-  - The Azure Machine Learning Services accounts and workspaces, and any Web API's
-  - Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.

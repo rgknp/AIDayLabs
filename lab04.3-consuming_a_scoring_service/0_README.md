@@ -194,11 +194,7 @@ namespace MyFirstService
 }
 ````
 
-## Workshop Completion
+## Lab Completion
 
 In this workshop we learned how to:
 - Understand how to consume a deployed model from a Web API
-
-We may now decommission and delete the following resources if we wish:
-  - The Azure Machine Learning Services accounts and workspaces, and any Web API's
-  - Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.

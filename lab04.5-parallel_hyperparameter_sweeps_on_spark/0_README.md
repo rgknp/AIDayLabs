@@ -30,3 +30,10 @@ az ml experiment submit -c docker .\sweep_spark.py
 If we were able to run the Docker example successfully, we can now see if we can replicate it in Spark. To do so simply replace `docker` with `azbootcamphdispark` in the above command and rerun it. If the Docker run failed, we may need to swich Docker to a Windows context (by right-clicking on the Docker icon in the taskbar) and upon getting an error message, switch it back to a Linux context and then try again.
 
 Report the accuracy of the best model that came out of the parameter sweep.
+
+## Workshop Completion
+
+We may now decommission and delete the following resources if we wish:
+
+- The Azure Machine Learning Services accounts and workspaces
+- Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.

@@ -182,14 +182,9 @@ Data can be consumed from Azure blobs in multiple ways. Some examples are:
 - **Spark**: Create a data frame with a large portion of .csv data.
 - **Hive**: Load .csv data into a Hive table and perform SQL queries directly against the blob.
 
-## Workshop Completion
+## Lab Completion
 
 In this workshop we learned how to:
 
 - Use the Azure Machine Learning Services collection module to view scoring data from API calls
 - Use Azure Storage to view the results
-
-We may now decommission and delete the following resources if we wish:
-
-- The Azure Machine Learning Services accounts and workspaces
-- Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.

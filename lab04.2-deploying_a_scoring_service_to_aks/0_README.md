@@ -21,7 +21,7 @@ There is a comprehensive Learning Path we can use to prepare for this course [lo
 
 (Note - [Our primary example is here](https://docs.microsoft.com/en-us/azure/machine-learning/preview/tutorial-classifying-iris-part-3) and [Another example is here](https://blogs.technet.microsoft.com/machinelearning/2017/09/25/deploying-machine-learning-models-using-azure-machine-learning/) )
 
-The general configuration for working with the  Azure Container Service has this architecture:
+The general configuration for working with the Azure Container Service has this architecture:
 
 ![AKS](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/15159959-b5cd-4fe9-aeba-441139943ecd.png)
 
@@ -67,7 +67,7 @@ az ml env setup --cluster -n <ENVIRONMENT_NAME> -l <AZURE_REGION e.g. eastus2> [
 This sets up an ACS cluster with Kubernetes as the orchestrator. The cluster environment setup command creates the following resources in our subscription:
 
 1.  A resource group (if not provided, or if the name provided does not exist)
-2.  A storage account
+2.  A storage account (use the existing one)
 3.  An Azure Container Registry (ACR)
 4.  A Kubernetes deployment on an Azure Container Service (ACS) cluster
 5.  An Application insights account
@@ -156,7 +156,7 @@ Finally, the last step is to update the existing service out of the new image cr
 az ml service update realtime -i <SERVICE_ID_ON_PORTAL> --image-id <NEW_IMAGE_ID>
 ```
 
-## Workshop Completion
+## Lab Completion
 
 In this workshop you learned how to:
 - Understand how to create a model file
@@ -164,7 +164,3 @@ In this workshop you learned how to:
 - Prepare your scoring environment
 - Deploy models to production
 - Update service
-
-You may now decommission and delete the following resources if you wish:
-  * The Azure Machine Learning Services accounts and workspaces
-  * Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuming.

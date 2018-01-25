@@ -131,15 +131,10 @@ The execution environment on HDInsight cluster is managed using Conda. Configura
 
 To run the scripts on GPU in a remote machine, we can follow the guidance in this article: [How to use GPU in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-use-gpu). Focus on the section **Configure Azure ML Workbench to Access GPU**.
 
-## Workshop Completion
+## Lab Completion
 
 In this workshop we learned how to:
 
 - Execute our workloads on remote Data Science Virtual Machines 
 - Execute our workloads on HDInsight Clusters running Spark
 - Execute our workloads on remote Data Science VMs with GPU's
-
-We may now decommission and delete the following resources if we wish:
-
-- The Azure Machine Learning Services accounts and workspaces
-- Any Data Science Virtual Machines we created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.
