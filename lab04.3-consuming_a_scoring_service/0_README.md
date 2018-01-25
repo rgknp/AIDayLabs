@@ -73,7 +73,7 @@ We will get PrimaryKey and SecondaryKey with this command. We can use either of 
 Obtain the service URL from the below command
 
 ```
-az ml service usage realtime -i <SERVICE_NAME>
+az ml service usage realtime -i <WEB_SERVICE_ID>
 ```
 
 The URL can be obtained from the sample CURL call. For example, the url is http://40.70.13.110:80/api/v1/service/churncluster333/score in the below sample CURL call:
