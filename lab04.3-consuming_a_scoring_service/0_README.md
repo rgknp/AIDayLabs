@@ -115,7 +115,7 @@ resp.text
 
 ***NOTE:*** Some of the field values to test can potentially have backslashes in input_df when copying from ```az ml service usage realtime -i <service name>``` execution results. For example, \\"noadditionallines\\": \\"\\\N\\". In the python code, this would need to be changed to \\"noadditionallines\\": \\"\\\\\\\\N\\".
 
-### (Optional) Lab 3: Consume the web-service using C#
+### (Optional) Lab 3: Consume the web-service using C\#
 
 Use the service URL to send a request from a C# Console App. 
 
