@@ -36,7 +36,7 @@ We will review these articles in class:
 
 In this lab, we create an Churn Prediction experiment, examine its configuration, and run the experiment locally to generate model files.
 
-Open Workbench and add the below code snippet to the end of `CATelcoCustomerChurnModeling.py` for exporting the decision tree model:
+Open Workbench and add the below code snippet to the end of `CATelcoCustomerChurnModelingWithoutDprep.py` for exporting the decision tree model:
 
 ```
 # serialize the decision tree on disk in the 'outputs' folder
