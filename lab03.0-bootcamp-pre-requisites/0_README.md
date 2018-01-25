@@ -60,3 +60,19 @@ We now log into the Azure CLI using our Azure account. Return to the Workbench a
 Once we log in through the browser, we can return to the command prompt and enter `az account show` to see some information about our Azue account including our subscription ID and user name. This will confirm that we are logged in to the Azure CLI.
 
 **Note:** If we have multiple Azure subscriptions, from the command prompt we enter `az account list –o table` to see available accounts. Then copy the subscription ID from the Azure account used to create an AML Workbench account and type `az account set –s <SUBSCRIPTION_ID>`, replacing `<SUBSCRIPTION_ID>` with the account ID.
+
+## A potential issue with Docker on the Windows DSVM
+
+During the labs, when running an experiment you may run into a strange Docker behavior where we get an error at the top about `image operating system "linux" cannot be used on this platform`.
+
+![](./images/linux-image-not-found.jpg)
+
+To resolve it we click on the Docker logo on the right-hand side in the taskbar and switch Docker to use Windows containers. This will result in a new Docker error:
+
+![](./images/docker-windows-image.jpg)
+
+Now we switch Docker back to Linux containers (by going to the taskbar once more).
+
+![](./images/switch-linux-containers.jpg)
+
+We then return to the command prompt and run the above command again. This will take a few minutes. When finished, we should get a message saying `Your environment is now ready`.
