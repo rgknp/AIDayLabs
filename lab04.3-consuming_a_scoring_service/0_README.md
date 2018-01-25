@@ -115,13 +115,13 @@ resp.text
 
 ***NOTE:*** Some of the field values to test can potentially have backslashes in input_df when copying from ```az ml service usage realtime -i <service name>``` execution results. For example, \\"noadditionallines\\": \\"\\\N\\". In the python code, this would need to be changed to \\"noadditionallines\\": \\"\\\\\\\\N\\".
 
-### (Optional) Lab 3: Consume the web-service using C#
+### (Optional) Lab 3: Consume the web-service using C\#
 
-Use the service URL to send a request from a C# Console App. 
+Use the service URL to send a request from a C\# Console App. 
 
 In Visual Studio, create a new Console App: 
 - In the menu, click, File -> New -> Project
-- Under Visual Studio C#, click Windows Class Desktop, then select Console App.
+- Under Visual Studio C\#, click Windows Class Desktop, then select Console App.
 - Enter MyFirstService as the Name of the project, then click OK.
 - In Project References, set references to System.Net, and System.Net.Http.
 Click Tools -> NuGet Package Manager -> Package Manager Console, then install the Microsoft.AspNet.WebApi.Client package.
@@ -129,7 +129,7 @@ Click Tools -> NuGet Package Manager -> Package Manager Console, then install th
 Update the SERVICE_URL and API_KEY parameters with the information from the web service.
 - Run the project.
 
-````C#
+````C\#
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
