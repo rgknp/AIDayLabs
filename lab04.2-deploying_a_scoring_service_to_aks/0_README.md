@@ -61,10 +61,11 @@ Download the model files and put them in the root folder. If we have not already
 To deploy the web service to a production environment, first set up the environment using the following command:
 
 ```
-az ml env setup --cluster -n [ENVIRONMENT_NAME] -l [AZURE_REGION e.g. eastus2] [-g [RESOURCE_GROUP]]
+az ml env setup --cluster -n <ENVIRONMENT_NAME> -l <AZURE_REGION e.g. eastus2> [-g <RESOURCE_GROUP>]
 ```
 
-This sets up an ACS cluster with Kubernetes as the orchestrator. The cluster environment setup command creates the following resources in our subscription: 
+This sets up an ACS cluster with Kubernetes as the orchestrator. The cluster environment setup command creates the following resources in our subscription:
+
 1.  A resource group (if not provided, or if the name provided does not exist)
 2.  A storage account
 3.  An Azure Container Registry (ACR)
@@ -80,7 +81,7 @@ The resource group, storage account, and ACR are created quickly. The ACS deploy
 To check the status of an ongoing cluster provisioning, use the following command:
 
 ```
-az ml env show -n [ENVIRONMENT_NAME] -g [RESOURCE_GROUP]
+az ml env show -n <ENVIRONMENT_NAME> -g <RESOURCE_GROUP>
 ```
 
 Ensure that "Provisioning State" is set to "Succeeded" before proceeding.
@@ -88,7 +89,7 @@ Ensure that "Provisioning State" is set to "Succeeded" before proceeding.
 **Set the environment**
 
 ```
-az ml env set -n [ENVIRONMENT_NAME] -g [RESOURCE_GROUP]
+az ml env set -n <ENVIRONMENT_NAME> -g <RESOURCE_GROUP>
 ```
 
 **Create a Model Management Account**
@@ -98,13 +99,13 @@ A model management account is required for deploying models. We need to do this 
 To create a new account, use the following command:
 
 ```
-az ml account modelmanagement create -l [AZURE_REGION e.g. eastus2] -n [ACCOUNT_NAME] -g [RESOURCE_GROUP] --sku-instances [NUMBER_OF_INSTANCES, e.g. 1] --sku-name [PRICING_TIER for example S1]
+az ml account modelmanagement create -l <AZURE_REGION e.g. eastus2> -n <ACCOUNT_NAME> -g <RESOURCE_GROUP> --sku-instances <NUMBER_OF_INSTANCES, e.g. 1> --sku-name <PRICING_TIER for example S1>
 ```
 
 To use an existing account, use the following command:
 
 ```
-az ml account modelmanagement set -n [ACCOUNT_NAME] -g [RESOURCE_GROUP]
+az ml account modelmanagement set -n <ACCOUNT_NAME> -g <RESOURCE_GROUP>
 ```
 
 **Deploy your model**
