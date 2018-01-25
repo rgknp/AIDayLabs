@@ -73,7 +73,7 @@ We will get PrimaryKey and SecondaryKey with this command. We can use either of 
 Obtain the service URL from the below command
 
 ```
-az ml service usage realtime -i <SERVICE_NAME>
+az ml service usage realtime -i <WEB_SERVICE_ID>
 ```
 
 The URL can be obtained from the sample CURL call. For example, the url is http://40.70.13.110:80/api/v1/service/churncluster333/score in the below sample CURL call:
@@ -115,13 +115,13 @@ resp.text
 
 ***NOTE:*** Some of the field values to test can potentially have backslashes in input_df when copying from ```az ml service usage realtime -i <service name>``` execution results. For example, \\"noadditionallines\\": \\"\\\N\\". In the python code, this would need to be changed to \\"noadditionallines\\": \\"\\\\\\\\N\\".
 
-### (Optional) Lab 3: Consume the web-service using C#
+### (Optional) Lab 3: Consume the web-service using C\#
 
-Use the service URL to send a request from a C# Console App. 
+Use the service URL to send a request from a C\# Console App. 
 
 In Visual Studio, create a new Console App: 
 - In the menu, click, File -> New -> Project
-- Under Visual Studio C#, click Windows Class Desktop, then select Console App.
+- Under Visual Studio C\#, click Windows Class Desktop, then select Console App.
 - Enter MyFirstService as the Name of the project, then click OK.
 - In Project References, set references to System.Net, and System.Net.Http.
 Click Tools -> NuGet Package Manager -> Package Manager Console, then install the Microsoft.AspNet.WebApi.Client package.
@@ -129,7 +129,7 @@ Click Tools -> NuGet Package Manager -> Package Manager Console, then install th
 Update the SERVICE_URL and API_KEY parameters with the information from the web service.
 - Run the project.
 
-````C#
+````C\#
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
