@@ -6,7 +6,7 @@ The following steps will get us up and running for the bootcamp. These activitie
 
  -  A Microsoft Azure account where you can create resources, including Application Insights. This could be an organization account, an MSDN subscription account, a Trial Account, or an account provided by your company.
  -  A Microsoft Azure Machine Learning Experimentation and Model Management Account.
- -  A Windows (or Mac) machine on which you can install software, and which can run docker. In order to accomplish the steps below, this machine must have Docker and Azure Machine Learning installed on it. This machine **can** be a virtual machine hosted in Azure (e.g. a Windows DSVM), but creating such a VM that appropriately runs docker is non-trivial, and is not officially supported. 
+ -  A Windows machine on which you can install software, and which can run Docker. In order to accomplish the steps below, this machine must have Docker and Azure Machine Learning installed on it. 
 
 ##  Setting up your environment 
 

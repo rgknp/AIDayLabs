@@ -1,6 +1,6 @@
 # The Team Data Science Process using Azure Machine Learning
 
-This hands-on lab guides you through using the [Team Data Science Process](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/overview) using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. We will be using a [Customer Churn Analysis example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction) throughout this Workshp.
+This hands-on lab guides you through using the [Team Data Science Process](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/overview) using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. We will be using a [Customer Churn Analysis example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction) throughout this Workshop (which we will download in a lab below).
 
 In this workshop, you will:
 - [ ] Understand and use the TDSP to clearly define business goals and success criteria
@@ -24,23 +24,7 @@ There is a comprehensive Learning Path you can use to prepare for this course [l
 
 [The Primary Concepts for this lab are here](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction). We'll refer to these throughout the lab.
 
-***NOTE*** The following steps must be completed ***prior*** to attempting this workshop:
-
-  *  You will need a Microsoft Azure account. You can use a production Azure account if you are able to create objects. You can also use your Microsoft Developer Network (MSDN) account (if you have one) to complete this workshop. If you don't have access to a corporate or MSDN account: 
-       *  Create a free account [using this process](https://azure.microsoft.com/free/)
-  *  You will need an Azure Machine Learning Services account. 
-       *  [Open this reference](https://docs.microsoft.com/en-us/azure/machine-learning/preview/quickstart-installation), and complete only the sections marked **"Sign in to the Azure portal"** and **"Create Azure Machine Learning accounts"**. 
-       *  Write down the *Experimentation account name* and bring it to class
-
-  *  You can use a Windows Data Science Virtual Machine (DSVM) to run this lab: 
-        *  [Navigate to this path](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/microsoft-ads.windows-data-science-vm), and create a Windows Azure Data Science Virtual Machine (DSVM). 
-           *  Choose a VM size of: D4S_V3, with 4 virtual CPUs and 14-Gb RAM. This VM size is not available in all regions, so choose an appropriate region (`West US 2` is a good choice).
-           *  When the DSVM is deployed, start it using the [Azure portal.](https://portal.azure.com)
-        *  After you create and Start the DSVM, log in to it and double-click the "Install Azure Machine Learning Workbench" icon. Finish the installation by following the on-screen instructions. The installer downloads all the necessary dependent components, such as Python, Miniconda, and other related libraries. The installation might take around half an hour to finish all the components. When complete, the Azure Machine Learning Workbench is installed in the following directory: C:\\Users\\%USERNAME%\\AppData\\Local\\AmlWorkbench
-
-  *  If you do not wish to use a Data Science Virtual Machine, you can install the Azure Machine Learning Workbench and Docker locally:
-        *  [Open this reference](https://docs.microsoft.com/en-us/azure/machine-learning/preview/quickstart-installation) and follow the sections marked **Install Azure Machine Learning Workbench on Windows**
-        *  You'll also need Docker for certain parts of the lab. To install it, [open this reference](https://www.docker.com/docker-windows) and follow the instructions for installing Docker locally.
+Please see this [file](../lab03.0-bootcamp-pre-requisites/0_README.md) for additional pre-requisites.
 
 ## Introduction to the TDSP
 
@@ -91,12 +75,12 @@ In this lab you will load the data set, inspect it, make a few changes, and then
 
 The [Modeling](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/lifecycle-modeling) phase of the Team Data Science Process involves creating experiments using one or more algorithms and base data to create a repeatable prediction or classification. 
 
-  * You'll begin by using the sklearn library with Naïve Bayesian and Decision Tree algorithms to develop a churn classifier, do an evaluation, and compare the models.
+  * You'll begin by using the `sklearn` library with Naïve Bayesian and Decision Tree algorithms to develop a churn classifier, do an evaluation, and compare the models.
   * Finally, after the experiments run, you'll score the models to select the best one.
 
-An view of this process is here, shown on the *right* side of the Docker graphic: 
+A view of this process is here, shown on the *right* side of the Docker graphic: 
 
-![Image](resources/docs/images/aml-architecture-1.png)
+![Image](resources/docs/images/aml-architecture-2.png)
 
 
 ### Lab: Feature Engineering, Modeling, and Scoring
@@ -106,7 +90,7 @@ In this lab we'll use the same project you just created. You'll create your feat
 
 ## 4. Deployment
 
-An view of this process is here, shown on the *left* side of the Docker graphic: 
+A view of this process is here, shown on the *left* side of the Docker graphic: 
 
 ![Image](resources/docs/images/aml-architecture-2.png)
 
