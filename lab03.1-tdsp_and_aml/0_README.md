@@ -1,129 +1,129 @@
 # The Team Data Science Process using Azure Machine Learning
 
-This workshop is comprised of many hands-on labs that will guide us through using the [Team Data Science Process (TDSP)](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/overview) using [Azure Machine Learning Services (AMLS)](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench (which we call Workbench for short). We will be using a [Customer Churn Analysis example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction) throughout this workshop.
+This hands-on lab guides you through using the [Team Data Science Process](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/overview) using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench. We will be using a [Customer Churn Analysis example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction) throughout this Workshop (which we will download in a lab below).
 
-The goal of the workshop is to learn the tools that facilitate being a data scientist. We do not cover machine learning and best practices in any detail, other than introduce some basic terminology. But we strongly emphasize data science as a process and how to use the Workbench to test and build data science solutions.
+In this workshop, you will:
+- [ ] Understand and use the TDSP to clearly define business goals and success criteria
+- [ ] Understand how to use a code-repository system with the Azure Machine Learning Workbench using the TDSP structure
+- [ ] Create an example environment
+- [ ] Use the TDSP and AMLS for data acquisition and understanding
+- [ ] Use the TDSP and AMLS for creating an experiment with a model and evaluation of models
+- [ ] Use the TDSP and AMLS for deployment
+- [ ] Use the TDSP and AMLS for project close-out and customer acceptance
 
-### Introduction to the TDSP
+You'll focus on the objectives above, not Data Science, Machine Learning or a difficult scenario.  
+
+***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
+  *  Programming using an Agile methodology
+  *  Machine Learning and Data Science
+  *  Working with the Microsoft Azure Portal
+
+There is a comprehensive Learning Path you can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
+
+## Introduction and setup 
+
+[The Primary Concepts for this lab are here](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction). We'll refer to these throughout the lab.
+
+Please see this [file](../lab03.0-bootcamp-pre-requisites/0_README.md) for additional pre-requisites.
+
+## Introduction to the TDSP
 
 ![Image](resources/docs/images/tdsp.png)
 
-A typical data science workflow for building a predictive model looks like this:
+## 1. Business Understanding
 
-![Image](resources/docs/images/machine-learning-process.jpg)
+In the [Business Understanding](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/lifecycle-business-understanding) phase of the TDSP, you discover the questions that the organization would like answered from data. This is a group effort, involving the organization, the Data Science team, and the DevOps team along with other stakeholders. 
 
-We break this up into three different stages and review each stage separately. Let's begin with the first stage.
+Your scenario is as follows: 
 
-## Part 1: Pre-modeling
+The Orange Telecom company in France is one of the largest operators of mobile and internet services in Europe and Africa and a global leader in corporate telecommunication services. They have 256 million customers worldwide. They have significant coverage in France, Spain, Belgium, Poland, Romania, Slovakia Moldova, and a large presence Africa and the Middle East.
+Customer Churn is always an issue in any company. Orange would like to predict the propensity of customers to switch provider (churn), buy new products or services (appetency), or buy upgrades or add-ons proposed to them to make the sale more profitable (up-selling). For this effort, they think churn is the first thing they would like to focus on. 
 
-![Image](resources/docs/images/machine-learning-process-1.jpg)
-
-In this early stage, we focus on a business understanding of the data and the problem at hand. This is a group effort involving the business, the data science team, data admins and the DevOps team along with other stakeholders. Data scientists tend to spend a lot of time on this, because failure to understand the data can lead to unexpected results further down the path. This is sometimes referred to as garbage-in-garbage-out. As such, we need to ensure that we have good data by taking steps to clean and process the data if necessary. This is sometimes referred to as data wrangling, data massaging, or pre-processing. Here is a breakdown of the steps usually involved:
-
-### Data acquisition and understanding
-
-- Formulating the business question as a prediction problem
-- Deciding which data sources we need to answer the business question
-- Run summary statistics and visualizations
-- Collecting a sort of **data dictionary**
-- Running various quality checks
-
-### Data wrangling or pre-processing
-
-- Setting up an efficient data pipeline
-- Deal with missing value
-- Choose how to deal with outliers (extreme values, unusual values)
-- Does the data need to be aggregated
-
-### Feature selection and feature engineering
-
-Feature engineering is the process of going <mark>from raw data to data that is ready for modeling</mark>. It can serve multiple purposes:
-
-- make the models easier to interpret (e.g. binning)
-- capture more complex relationships (e.g. NNs)
-- reduce data redundancy and dimensionality (e.g. PCA)
-- rescale variables (e.g. standardizing or normalizing)
-
-Different models may have different feature engineering requirements. Some ML packages offer built-in feature engineering for certain models.
-
-## Part 2: Model development
-
-![Image](resources/docs/images/machine-learning-process-2.jpg)
-
-### What's a model?
-
-At a high level, a **model** is a simplification of something more complex. It is usually expressed in terms of "simple" **rules**. We say **“All models are wrong, but some are useful.”**. A machine learning algorithm <mark>uses data to automatically learn the rules</mark>. It simplifies the complexity of the data into relationships described by such rules. A predictive model is an algorithm that learns the prediction rule (equations or logical statements leading to a prediction) from *labeled* data. Once we have a predicive model, we can use it to score (obtain predictions on) historical data as well as future data. Since historical data is labeled it can be used to evaluate the accuracy of the predicive model, i.e. how close its predictions come to the true value (labels). If we are happy with the model, we can deploy it to an application and start scoring future data with it.
-
-| term               | what is needed                              | results in           |
-| ------------------ | ------------------------------------------- | -------------------- |
-| training (a model) | appropriate ML algorithm + labeled data     | trained model        |
-| scoring (data)     | trained model + data (labeled or unlabeled) | scores (predictions) |
-| evaluating a model | scoring labeled data                        | evaluation metrics   |
-
-Sometimes data scientists use the word model to refer to a trained model, and sometimes they use it to refer to the ML algorithm. Data science is a multi-disciplinary subject and different disciplines have different preferences in their choice of vocabulary. To those with enough experience, this ambiguity is clear from context, but the rest of us can find it confusing.
-
-| what the machine learning community calls it | what the community of statisticians calls it       |
-| -------------------------------------------- | -------------------------------------------------- |
-| supervised learning algorithm (or model)     | predictive model                                   |
-| trained model                                | fitted model                                       |
-| supervised learning                          | prediction problem                                 |
-| unsupervised learning                        | data-mining or pattern recognition                 |
-| features or attributes                       | explanatory or independent variables               |
-| target or labels                             | response or dependent variables                    |
-| training (a model on labeled data)           | fitting (a model to labled data)                   |
-| scoring (new data with a model)              | predicting (new data using a model)                |
-
-### What's a good predictive model?
-
-A good predictive model should meet the following criteria:
-
-- **Accurate**: Are we making good predictions?
-- **Interpretable**: How easy is it to explain how the predictions are made?
-- **Fast**: How long does it take to build a model, and how long does the model take to make predictions?
-- **Scalable**: How much longer do we have to wait if we build/predict using a lot more data?
-
-This usually makes finding a good predictive model a difficult task which involves a lot of trial and error. For example, we need to choose some candidate machine learning algorithms. Each algorithm can also be *tuned* via different choices of **hyperparameters**. Different hyperparameter choices can affect the accuracy, explanability and efficiency of the resulting model. Therefore, we often run many many models before we settle on a few good models which we can take to the next stage.
-
-## Part 3: Model deployment or operationalization
-
-![Image](resources/docs/images/machine-learning-process-3.jpg)
-
-The deployment or operationalization phase entails taking our trained model and putting it in a production environment where it can be consumed (used to score future data). This can happen by creating an Application Programming Interface (API) or some other mechanism.
-
-Once the model is served, we also go through a customer acceptance test to ensure that the model performed within acceptable time and accuracy rates, as well as address other business concerns. The customer acceptance test should address the following questions:
-
----
-
-# Our use-case example
-
-Our scenario is as follows: 
-
-The Orange Telecom company in France is one of the largest operators of mobile and internet services in Europe and Africa and a global leader in corporate telecommunication services. They have 256 million customers worldwide. They have significant coverage in France, Spain, Belgium, Poland, Romania, Slovakia and Moldova, and a large presence Africa and the Middle East.
-
-Customer churn is always an issue in any company. Orange would like to predict the propensity of customers to switch providers (churn), buy new products or services (appetency), or buy upgrades or add-ons proposed to them to make the sale more profitable (up-selling). In this effort, they think churn is the first thing they would like to focus on.
-
----
-
-# Azure Machine Learning Workbench
-
-We learn throughout this workshop how Workbench can be used to accomplish the above tasks with relative ease. Our focus is primarily on phase 2 and 3 or the data science workfolw. We will explore how Workbench makes it easy to create and compare many different models and how it facilitates taking models into production.
-
-Workbench is a tool that allows a data scientist to train and deploy models with ease, in oder words to develop production-ready machine learning applications. It is comprised of a graphical user interface (GUI) and a command line utility called the Azure CLI. Using Workbench, we can quickly prototype machine learning solutions on a local machine, and use Microsoft Azure to serve them on the cloud. Workbench supports the Python programming language and its machine learning libraries. Let's take a high-level view of the different pieces that make up the Workbench architecture:
+To create a solution, you will use the Azure Machine Learning Services (AMLS) and the Azure Machine Learning Services Workbench (WB) in this lab. The general configuration for working with Azure Machine Learning has these components:
 
 ![Azure Machine Learning Components](resources/docs/images/aml-architecture.png)
 
-Throughout the workshop, we should return to the above chart and think about the pieces invoked by each lab. This will help us appropriate everything that happens behind the scenes as we build our machine learning application.
+### Lab: Set up a generic TDSP Structure using the Azure Machine Learning Workbench
 
-We begin by installing Workbench on a local workstation or VM. This will install the Workbench desktop application, Python and its ML libraries, and the Azure CLI. We can then start a new project which will give us a folder structure containing our Python scripts, confguration files and other files.
+In this lab you'll set up your project's structure, conforming to the Team Data Science Process, using the Azure Machine Learning Workbench.
+- [ ] [Open this link](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-use-tdsp-in-azure-ml), read from the top and complete the steps there. Do not complete the steps marked **"Next Steps"**. 
+- [ ] [Review this link](https://github.com/Azure/Azure-TDSP-ProjectTemplate) and verify that you have the structure shown in the directory you specified. You will use this structure throughout this workshop.
 
-![Image](resources/docs/images/aml-architecture-1.png)
+### Lab: Use-case evaluation for Data Science questions
 
-While working on a local machine can make it easy to iterate and run experiments, dependency and compatibility issues can later cause problems in production. Therefore, Workbench relies on [Docker](https://www.docker.com/) to build and test our machine learning applications. Docker containers offer us a clean environment where we can build our applications in isolation.
+In this lab you'll evaluate a business scenario, and detail possible predictions, classifications, or other data science questions that you can begin to explore.
+- [ ] Read the scenario above carefully. You can optionally copy and paste the scenario text below into a new text file called *Business Understanding.md* in the /docs directory set up in the previous lab. After class discussion, you can enter the answers to the following questions in this document.
+- [ ] Is this something that you can use a Machine Learning system for a solution?  
+- [ ] Which algorithm or family of algorithms could you use to answer your question?
+- [ ] What data source(s) will you need to complete your prediction? 
+- [ ] How will the users interact with the solution?
+
+## 2. Data Acquisition and Understanding
+
+The [Data Aquisition and Understanding](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/lifecycle-data) phase of the TDSP you ingest or access data from various locations to answer the questions the organization has asked. In most cases, this data will be in multiple locations. 
+Once the data is ingested into the system, you'll need to examine it to see what it holds. All data needs cleaning, so after the inspection phase, you'll replace missing values, add and change columns. You'll cover more extensive Data Wrangling tasks in other labs. 
+
+In this workshop, we'll use a single file-based dataset to train our model.
+
+### Lab: Ingest data from a local source
+
+In this lab you will load the data set, inspect it, make a few changes, and then save the Data Wrangling steps as a Python package. 
+
+- [ ] Open [this reference](https://github.com/Azure/MachineLearningSamples-ChurnPrediction/blob/master/docs/DataPreparation.md) and follow the steps you see there.
+
+## 3. Modeling
+
+The [Modeling](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/lifecycle-modeling) phase of the Team Data Science Process involves creating experiments using one or more algorithms and base data to create a repeatable prediction or classification. 
+
+  * You'll begin by using the `sklearn` library with Naïve Bayesian and Decision Tree algorithms to develop a churn classifier, do an evaluation, and compare the models.
+  * Finally, after the experiments run, you'll score the models to select the best one.
+
+A view of this process is here, shown on the *right* side of the Docker graphic: 
 
 ![Image](resources/docs/images/aml-architecture-2.png)
 
-Finally, Workbench uses Microsoft Azure to serve our applications on the cloud and give us control over it. We can use manage our trained models and monitor our deployments.
 
-![Image](resources/docs/images/aml-architecture-3.png)
+### Lab: Feature Engineering, Modeling, and Scoring
 
-All of this will be explored in much more detail in later labs throughout the workshop.
+In this lab we'll use the same project you just created. You'll create your feature engineering file, run the model training, and create the final scores.
+- [ ] [Navigate to this resource](https://github.com/Azure/MachineLearningSamples-ChurnPrediction/blob/master/docs/ModelingAndEvaluation.md), and complete the steps 1-4. 
+
+## 4. Deployment
+
+A view of this process is here, shown on the *left* side of the Docker graphic: 
+
+![Image](resources/docs/images/aml-architecture-2.png)
+
+The [Deployment](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/lifecycle-deployment) phase of the TDSP entails outputting  the results to a data location, creating an Application Programming Interface (API) or another mechanism for the classification or prediction model to be consumed. 
+
+### Optional Lab: Deploy the solution using Containers, consume the results
+
+In this lab you will deploy the solution locally, and optionally to Docker.  **NOTE** This section takes quite some, so it's included here for completeness. The instructor will go over it with you. 
+
+- [ ] [Navigate to this resource](https://github.com/Azure/MachineLearningSamples-ChurnPrediction/blob/master/docs/ModelingAndEvaluation.md), and complete the steps 5-8. 
+
+## 5. Customer Acceptance
+
+The final step in the Team Data Science Process is [Customer Acceptance](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/lifecycle-acceptance). Here you focus on ensuring that the model performed within acceptable time and accuracy rates, and also present your findings in a comprehensive project document.
+### Lab: Review Customer Acceptance and Closeout Documentation
+
+In this lab you will examine the final project close out document. In production implementations, you and your team will create this document. 
+- [ ] [Navigate to this resource](https://github.com/Azure/MachineLearningSamples-TDSPUCIAdultIncome/blob/master/docs/deliverable_docs/ProjectReport.md) and evalaute the report you see there. This is what you would create as a deliverable for your project.
+- [ ] Is there additional information needed there? Are there items you would also include? How should this document be communicated? Are there security implications?
+
+## Workshop Completion
+
+In this workshop you learned how to:
+- [ ] Understand and use the TDSP to clearly define business goals and success criteria
+- [ ] Understand how to use a code-repository system with the Azure Machine Learning Workbench using the TDSP structure
+- [ ] Create an example environment
+- [ ] Use the TDSP and AMLS for data acquisition and understanding
+- [ ] Use the TDSP and AMLS for creating an experiment with a model and evaluation of models
+- [ ] Use the TDSP and AMLS for deployment
+- [ ] Use the TDSP and AMLS for project close-out and customer acceptance
+
+You may now delete and decommission the following resources if you wish:
+  * The Azure Machine Learning Services accounts and workspaces
+  * The Visual Studio Team Services Repository
+  * Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuimg. 
+
