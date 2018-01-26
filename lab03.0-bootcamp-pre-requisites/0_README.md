@@ -6,7 +6,7 @@ The following steps will get us up and running for the bootcamp. These activitie
 
  -  A Microsoft Azure account where you can create resources, including Application Insights. This could be an organization account, an MSDN subscription account, a Trial Account, or an account provided by your company.
  -  A Microsoft Azure Machine Learning Experimentation and Model Management Account.
- -  A Windows laptop on which you can install software **OR** any machine with **Remote Desktop Connection** so that you can access a remote Windows Data Science Virtual Machine (Note: a **v3** type VM is required to leverage Docker if you chose an Azure DSVM, and this is officially not yet supported).
+ -  A Windows (or Mac) machine on which you can install software, and which can run docker. In order to accomplish the steps below, this machine must have Docker and Azure Machine Learning installed on it. This machine **can** be a virtual machine hosted in Azure (e.g. a Windows DSVM), but creating such a VM that appropriately runs docker is non-trivial, and is not officially supported. 
 
 ##  Setting up your environment 
 
@@ -16,7 +16,8 @@ Once you have the above requirements in place, you should be able to execute mos
 2. Complete all of the steps you find in the [Iris tutorial part 2][iris-tut-2].
 3. Complete most of the steps you find in the [Iris tutorial part 3][iris-tut-3]. You may stop after the section marked **Create a real-time web service in one command**.
 4. As a result of running the previous step, you should have a **Web Service ID**. Bring that number with you to the bootcamp to sign in.
- 
+
+
 [iris-tut-1]: https://docs.microsoft.com/en-us/azure/machine-learning/preview/tutorial-classifying-iris-part-1
 [iris-tut-2]: https://docs.microsoft.com/en-us/azure/machine-learning/preview/tutorial-classifying-iris-part-2
 [iris-tut-3]: https://docs.microsoft.com/en-us/azure/machine-learning/preview/tutorial-classifying-iris-part-3
