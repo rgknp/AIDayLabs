@@ -36,7 +36,7 @@ Customer churn is always an issue in any company. Orange would like to predict t
 
 To create a solution, we use the Azure Machine Learning Services (AMLS) and the Azure Machine Learning Services Workbench (WB) in this lab. In general Azure Machine Learning is configured with these components:
 
-![Azure Machine Learning Components](resources/docs/images/aml-architecture-1.png)
+![Azure Machine Learning Components](resources/docs/images/aml-architecture.png)
 
 ### Lab: Set up a generic TDSP Structure using the Azure Machine Learning Workbench
 
@@ -77,7 +77,7 @@ The [modeling](https://docs.microsoft.com/en-us/azure/machine-learning/team-data
 
 An view of this process is here, shown on the *right* side of the Docker graphic: 
 
-![Image](resources/docs/images/aml-architecture-3.png)
+![Image](resources/docs/images/aml-architecture-1.png)
 
 
 ### Lab: Feature Engineering, Modeling, and Scoring
@@ -90,7 +90,7 @@ In this lab we'll use the same project you just created. You'll create your feat
 
 An view of this process is here, shown on the *left* side of the Docker graphic: 
 
-![Image](resources/docs/images/aml-architecture-3.png)
+![Image](resources/docs/images/aml-architecture-2.png)
 
 The [deployment](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/lifecycle-deployment) phase of the TDSP entails serving the model's predictions by creating an Application Programming Interface (API) or another mechanism, so that the model can be consumed in some production environment.
 
