@@ -37,7 +37,7 @@ We will review these articles in class:
 In this lab, we create an Churn Prediction experiment, examine its configuration, and run the experiment locally to generate model files.
 
 - Open the Azure Machine Learning Services Workbench tool locally or on the Data Science Virtual Machine. 
-- Add the below code snippet to the end of CATelcoCustomerChurnModeling.py for exporting the decision tree model:
+- Add the below code snippet to the end of CATelcoCustomerChurnModelingWithoutDprep.py for exporting the decision tree model:
 
 ```
 # serialize the decision tree on disk in the 'outputs' folder
@@ -112,7 +112,7 @@ To deploy your saved model as a web service, execute the below command:
 az ml service create realtime --model-file [MODEL_FILE_RELATIVE_PATH] -f [SCORING_FILE e.g. score.py] -n [SERVICE_NAME] -s [SCHEMA_FILE e.g. service_schema.json] -r [DOCKER_RUNTIME e.g. spark-py or python] -c [CONDA_DEPENDENCIES_FILE]
 ```
 
-### Lab 3: Update Service with new model
+### (Optional) Lab 3: Update Service with new model
 
 To use a different model in the service, we can perform a simple update to the service. In the Churn Prediction experiment, the accuracy of Decision Tree is slightly higher than Naive Bayes. So, we can update the service to use the dt.pkl file.
 To use a specific model in your scoring file, change references from model.pkl to the model you want to use. Replace model.pkl with dt.pkl to use decision tree model.
