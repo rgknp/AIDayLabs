@@ -111,3 +111,6 @@ From the database page of the portal, select Tools -> Query editor (preview) to 
 This is a quick way to see results but is not the only way of doing it. Feel free to use any SQL client to perform query operations. Run the query ````Select * from userChatLog```` to view chat inserts into the table userChatLog. In the below example, the message ````My Beautiful Los Angeles```` sent via the bot emulator is logged along with the ids.
 
 ![Query Editor](images/QueryEditor.png)
+
+
+### Continue to [0_README](../0_README.md) to review lab and attempt extra credit
