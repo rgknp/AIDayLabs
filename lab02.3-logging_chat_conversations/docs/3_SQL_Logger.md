@@ -20,7 +20,7 @@ The aim of this lab is to log chat conversations to Azure SQL database. This lab
 
 ![Firewall Settings](images/FirewallSettings.png)
 
-2.4.   Create a new table called userChatLog with the below create table statement (or schema). You can run the below query in the Query Editor by selecting Tools -> Query Editor.
+2.4.   Create a new table called userChatLog with the below create table statement (or schema). Within the Azure Portal, click "Data Explorer (preview)" on the left menu. To login, use the same account and password you specified when creating the database. Paste the script below and click "Run". The expected result is the message "Query succeeded: Affected rows: 0.". 
 
 ```
 CREATE TABLE userChatLog(id int IDENTITY(1, 1),fromId varchar(25),toId varchar(25),message varchar(max),PRIMARY KEY(id));
