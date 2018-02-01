@@ -1,6 +1,6 @@
 # Developing Intelligent Applications with Azure Search
 
-This hands-on lab guides you through creating an Azure Search service that will be used in later labs to increase the effectiveness of your Picture Bot that returns images a user searches for. 
+This hands-on lab guides you through creating an Azure Search service that will be used to create an intelligent bot (that you will create in later labs) that returns images a user searches for. 
 
 
 ## Objectives
