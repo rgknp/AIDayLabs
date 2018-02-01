@@ -65,6 +65,13 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
 
 We will also use a gitter forum for discussion. Please post comments and questions [here][gitter].
 
+# Software Dependencies
+
+These materials have been tested on Windows with:
+
+- Docker Community Edition v`17.12.0-ce-win47 (15139)`
+- Azure Machine Learning Workbench v`0.1.1712.18263`
+
 [prereq3.0]: https://aka.ms/learnai-proaidevbootcamp-03-0
 [lab3.1]: https://aka.ms/learnai-proaidevbootcamp-03-1
 [lab3.2]: https://aka.ms/learnai-proaidevbootcamp-03-2
