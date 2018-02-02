@@ -133,4 +133,3 @@ In this workshop we learned how to:
 
 - Execute our workloads on remote Data Science Virtual Machines 
 - Execute our workloads on HDInsight Clusters running Spark
-- Execute our workloads on remote Data Science VMs with GPU's
