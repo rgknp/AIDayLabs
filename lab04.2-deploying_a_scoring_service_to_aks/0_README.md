@@ -2,35 +2,35 @@
 
 This hands-on lab guides us through deploying a Machine Learning scoring file to a remote environment using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
 
-In this workshop, we will:
+In this workshop, we will
+
 - Understand how to create a model file
 - Generate a scoring script and schema file
 - Prepare the scoring environment
 - Deploy the model
 - Run and update the real-time web service
 
-***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
-  *  Programming using an Agile methodology
-  *  Machine Learning and Data Science
-  *  Intermediate to Advanced Python programming
-  *  Familiarity with Docker containers and Kubernetes
+***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of
+
+- Programming using an Agile methodology
+- Machine Learning and Data Science
+- Intermediate to Advanced Python programming
+- Familiarity with Docker containers and Kubernetes
 
 There is a comprehensive Learning Path we can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
 
 ## Building the scoring for remote deployment
 
-(Note - [Our primary example is here](https://docs.microsoft.com/en-us/azure/machine-learning/preview/tutorial-classifying-iris-part-3) and [Another example is here](https://blogs.technet.microsoft.com/machinelearning/2017/09/25/deploying-machine-learning-models-using-azure-machine-learning/) )
-
 The general configuration for working with the Azure Container Service has this architecture:
 
 ![AKS](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/15159959-b5cd-4fe9-aeba-441139943ecd.png)
 
-We will review these articles in class: 
-  1.  [A quick overview of the Azure Container Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
-  2.  [Understanding Service Principals](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal)
-  3.  [Scoring Setup and Configuration](https://docs.microsoft.com/en-us/azure/machine-learning/preview/deployment-setup-configuration)
-  4.  [Scaling Clusters](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-scale-clusters)
+We will review these articles in class:
 
+1. [A quick overview of the Azure Container Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
+2. [Understanding Service Principals](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal)
+3. [Scoring Setup and Configuration](https://docs.microsoft.com/en-us/azure/machine-learning/preview/deployment-setup-configuration)
+4. [Scaling Clusters](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-scale-clusters)
 
 ### Lab 1: Generate model files
 
@@ -158,7 +158,8 @@ az ml service update realtime -i <SERVICE_ID_ON_PORTAL> --image-id <NEW_IMAGE_ID
 
 ## Lab Completion
 
-In this workshop you learned how to:
+In this workshop you learned how to
+
 - Understand how to create a model file
 - Generate a scoring script and schema file
 - Prepare your scoring environment
