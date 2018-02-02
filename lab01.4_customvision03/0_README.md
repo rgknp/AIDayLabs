@@ -180,6 +180,10 @@ after the call to `CreateTag(project.Id, "Racing")` method.
  
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Add some images to the tags
+Console.WriteLine("\tUploading images");
+LoadImagesFromDisk();
+
 // Images can be uploaded one at a time  
 foreach (var image in MbikesImages)
 {
