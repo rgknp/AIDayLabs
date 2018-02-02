@@ -8,19 +8,19 @@ The aim of this lab is to log chat conversations to Azure SQL database. This lab
 
 2.1.   Import the project from code\sql-core-Middleware in Visual Studio.
 
-2.2.   Since we will be writing to a SQL database, either we can use a database that you may already have or create a new one. To create a new one, go to the azure portal and follow the [Create DB - Portal](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal) steps to create a database called Botlog as shown below.
+2.2.   Since we will be writing to a SQL database. To create a new one, go to the azure portal and follow the [Create DB - Portal](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal) steps. But create a database called Botlog, not "MySampleDatabase" as suggested in the link. At the end of the process, you should see the Overview tab, as you can see in the image below.
 
 ![Botlog](images/BotLog.png)
 
-2.2.   Select Show database connection strings from the Overview tab and make a note of the connection string as we will be using it later in the lab.
+2.2.   Select "Show database connection strings" from the Overview tab and make a note (paste in a text document) of the connection string as we will be using it later in the lab.
 
 ![Connection Strings](images/ConnectionStrings.png)
 
-2.3.   Change your firewall settings to capture your ip address. You may have already done this if you followed the steps from [Create DB - Portal](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal)
+2.3.   Change your firewall settings to capture your ip address. You may have already done this if you followed the steps from [Create DB - Portal](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal) . Your ip address can be found here: https://whatismyipaddress.com/ 
 
 ![Firewall Settings](images/FirewallSettings.png)
 
-2.4.   Create a new table called userChatLog with the below create table statement (or schema). Within the Azure Portal, click "Data Explorer (preview)" on the left menu. To login, use the same account and password you specified when creating the database. Paste the script below and click "Run". The expected result is the message "Query succeeded: Affected rows: 0.". 
+2.4.   Create a new table called userChatLog with the below create table statement (or schema). We will use the same tool of the "Query the SQL database" section at the [Create DB - Portal](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal) link. Within the Azure Portal, click "Data Explorer (preview)" on the left menu. To login, use the same account and password you specified when creating the database. Paste the script below and click "Run". The expected result is the message "Query succeeded: Affected rows: 0.". 
 
 ```
 CREATE TABLE userChatLog(id int IDENTITY(1, 1),fromId varchar(25),toId varchar(25),message varchar(max),PRIMARY KEY(id));
