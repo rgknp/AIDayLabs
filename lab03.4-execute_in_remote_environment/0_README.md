@@ -127,10 +127,6 @@ az ml experiment submit -c <HDI_CLUSTER> CATelcoCustomerChurnModelingWithoutDpre
 
 The execution environment on HDInsight cluster is managed using Conda. Configuration is managed by conda_dependencies.yml and spark_dependencies.yml configuration files. 
 
-### (Optional) Lab 4: Running scripts on GPU in a remote machine
-
-To run the scripts on GPU in a remote machine, we can follow the guidance in this article: [How to use GPU in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-use-gpu). Focus on the section **Configure Azure ML Workbench to Access GPU**.
-
 ## Lab Completion
 
 In this workshop we learned how to:
