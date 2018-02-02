@@ -69,21 +69,21 @@ We should see results as follows:
 
 ### Lab 2: Execute an Experiment on a remote Data Science Virtual Machine
 
-In this lab we create an experiment, examine its configuration, and run the experiment on a remote Docker container. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI)
+In this lab we create an experiment, examine its configuration, and run the experiment on a remote Docker container. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI).
 
-- [Open this Reference and create an Ubuntu Data Science Virtual Machine](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro)
+- [Open this Reference and create an Ubuntu Data Science Virtual Machine](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro#create-your-data-science-virtual-machine-for-linux)
 
   - Choose a **Data Science Virtual Machine for Linux Ubuntu CSP**
   - Choose a size of *Standard D4s v3 (4 vcpus, 16 GB memory)*
   - Use a password, not a SSH Key
 
-Start the VM and connect to it using ssh. If we use some version of bash, the command is: `ssh <USER_NAME>@<VM_IP_ADDRESS>`. Check to ensure Docker is functional on the Linux DSVM with the following command:
+Start the VM and connect to it using `ssh <USER_NAME>@<VM_IP_ADDRESS>`. The IP address of the VM can be found on the resources page in the Azure portal. Check to ensure Docker is functional on the Linux DSVM with the following command:
 
 ```
 sudo docker run docker/whalesay cowsay "The best debugging is done with CTRL-X. - Buck Woody"
 ```
 
-Launch the CLI from Workbench. Run the following command to create both the compute target definition and run configuration for remote Docker-based executions.
+Type `exit` to leave the Linux DSVM and return to the command prompt on the "local" Windows DSVM. Modify and run the following command to create both the compute target definition and run configuration for remote Docker-based executions. Note that `<REMOTE_VM>` is a name of our choosing for the remote VM. It doesn't need to match the name we chose when we provisioned the Linux DSVM. Also note that no quotes are needed for any of the arguments in the command below.
 
 ```
 az ml computetarget attach remotedocker --name <REMOTE_VM> --address <IP_ADDRESS> --username <SSH_USER> --password <SSH_PASSWORD>
