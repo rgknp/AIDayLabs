@@ -2,61 +2,19 @@
 
 This hands-on lab guides us through consuming a Machine Learning scoring service using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
 
-In this workshop, we will:
-- Understand how to consume a deployed model from a Web API
+In this workshop, we will see how to consume a deployed model from a Web API.
 
-***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
-  -  Programming using an Agile methodology
-  -  Machine Learning and Data Science
-  -  Intermediate to Advancced Python programming
-  -  Familiarity with Web Services and API Programming
-  -  Familiarity with [Swagger](https://github.com/swagger-api/swagger-codegen)
+***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of
+
+- Programming using an Agile methodology
+- Machine Learning and Data Science
+- Intermediate to Advancced Python programming
+- Familiarity with Web Services and API Programming
+- Familiarity with [Swagger](https://github.com/swagger-api/swagger-codegen)
 
 There is a comprehensive Learning Path we can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
 
-### Lab 1: Creating a realtime service
-
-In this lab, we create an experiment based on Churn Prediction and create a realtime cluster based service. The reason we use cluster is because key operations are not supported for local services.
-
-***You do not have to do Lab 1 if you already have a cluster based service.***
-
-We should now be familiar with many of the below steps from the previous labs:
-
-**Generate the scoring and schema files**
-
-Run `python churn_schema_gen.py` from CLI to create `service_schema.json`.
-
-**Create the environment in cluster mode**
-
-```
-az ml env setup -n <NEW_DEPLOYMENT_ENVIRONMENT_NAME> --location <REGION_NAME e.g. eastus2> -c
-```
-
-**Create a Model Management account**
-
-```
-az ml account modelmanagement create --location <REGION_NAME e.g. eastus2> -n <NEW_MODEL_MANAGEMENT_ACCOUNT_NAME> -g <EXISTING_RESOURCE_GROUP_NAME> --sku-name S1
-```
-
-**Set the Model Management account**
-
-```
-az ml account modelmanagement set -n <ACCOUNT_NAME> -g <RESOURCE_GROUP>
-```
-
-**Set the environment**
-
-```
-az ml env set -n <NEW_DEPLOYMENT_ENVIRONMENT_NAME> -g <RESOURCE_GROUP>
-```
-
-**Create the real-time web-service**
-
-```
-az ml service create realtime -f score.py --model-file model.pkl -s service_schema.json -n <SERVICE_NAME> -r python
-```
-
-### Lab 2: Consume the web-service
+### Lab 1: Consume the web-service
 
 In this lab, we will send a request to the real-time web service created by following the below steps:
 
