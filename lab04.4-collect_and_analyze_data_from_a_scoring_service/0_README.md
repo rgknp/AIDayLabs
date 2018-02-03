@@ -2,18 +2,18 @@
 
 This hands-on lab guides us through collecting Machine Learning scoring  data using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
 
-In this workshop, we will:
+In this workshop, we will
 
 - Use the Azure Machine Learning Services collection module to view scoring data from API calls
 - Use Azure Storage to view the results
 
-***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of:
+***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of
 
-  -  Programming using an Agile methodology
-  -  Machine Learning and Data Science
-  -  Intermediate to Advancced Python programming
-  -  Microsoft Azure Storage concepts
-  -  Working with the Azure Portal
+- Programming using an Agile methodology
+- Machine Learning and Data Science
+- Intermediate to Advancced Python programming
+- Microsoft Azure Storage concepts
+- Working with the Azure Portal
 
 There is a comprehensive Learning Path we can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
 
@@ -30,17 +30,15 @@ The process and flow for using Azure Machine Learning Services has this layout:
 
 In this lab, we demonstrate the model data collection feature in Workbench to archive model inputs and predictions from a web service.
 
-In Workbench open the Churn Prediction project (created from the previous labs). Then, install the data collection package by running `pip install azureml.datacollector` from CLI.
+In Workbench open the Churn Prediction project we created from the previous labs. Then, install the data collection package by running `pip install azureml.datacollector` from CLI.
 
-**Collect Data**
-
-To use model data collection, add the following code at the top of the scoring file:
+To use model data collection, add the following code at the top of the scoring file `score.py`:
 
 ```
 from azureml.datacollector import ModelDataCollector
 ```
 
-Add the following lines of code to the `init()` function:
+Add the following lines of code to the `init()` function (making sure that you preserve indentation):
 
 ```
 global inputs_dc, prediction_dc
@@ -135,9 +133,7 @@ def run(input_df):
     return json.dumps(str(pred[0]))
 ```
 
-**collect-model-data**
-
-Use the `az ml service create realtime` command with the `--collect-model-data true` switch to create a real-time web service. This step makes sure that the model data is collected when the service is run.
+We now use the `az ml service create realtime` command with the `--collect-model-data true` switch to create a real-time web service. This step makes sure that the model data is collected when the service is called.
 
 ```
 az ml service create realtime -f score.py --model-file model.pkl -s service_schema.json -n churnapp -r python --collect-model-data true
@@ -155,8 +151,7 @@ To view the collected data in blob storage:
 
 Sign in to the [Azure portal](https://portal.azure.com/) and select **More Services**. In the search box, type **Storage accounts** and hit Enter. From the Storage accounts search blade, select the **Storage account** resource. To determine the storage account, use the following steps:
 
-- Go to Workbench, select the project, and open a command prompt.
-- Enter `az ml env show -v` and check the `storage_account` value. This is the name of the storage account. For example, we will see a line related to `storage_account` as follows after executing `az ml env show -v`. In the below `json`, the `storage_account` is `mlcrpstg33b516491a05`.
+Go to Workbench, select the project, and open a command prompt. Then enter `az ml env show -v` and check the `storage_account` value. This is the name of the storage account. For example, we will see a line related to `storage_account` as follows after executing `az ml env show -v`. For example, in the below `json`, the `storage_account` is `mlcrpstg33b516491a05`.
 
 ```
 "storage_account": {
@@ -164,17 +159,17 @@ Sign in to the [Azure portal](https://portal.azure.com/) and select **More Servi
 }
 ```
 
-- Select **Blobs** under **Services** in the Storage account blade menu, and then the container called `modeldata`. To see data start propagating to the storage account, we need to wait up to 10 minutes after the first web service request. Data flows into blobs with the following container path:
+Now return to the Azure portal and under your storage account select **Blobs** under **Services** in the Storage account blade menu, and then the container called `modeldata`. To see data start propagating to the storage account, we need to wait up to 10 minutes after the first web service request. Data flows into blobs with the following container path:
 
 ```
 /modeldata/<SUBSCRIPTION_ID>/<RESOURCE_GROUP>/<MODEL_MANAGEMENT_ACCOUNT>/<WEBSERVICE>/<MODEL_ID>-<MODEL>-<MODEL_VERSION>/<IDENTIFIER>/<YEAR>/<MONTH>/<DAY>/data.csv
 ```
 
-- The inputs and prediction folders in the container would be created as follows:
+The inputs and prediction folders in the container would be created as follows:
 
 ![Image](images/container.png)
 
-Data can be consumed from Azure blobs in multiple ways. Some examples are:
+Data can be consumed from Azure blobs in multiple ways. Some examples are
 
 - **Azure Machine Learning Workbench**: Open the .csv file in Azure Machine Learning Workbench by adding the .csv file as a data source.
 - **Excel**: Open the daily .csv files as a spreadsheet.
