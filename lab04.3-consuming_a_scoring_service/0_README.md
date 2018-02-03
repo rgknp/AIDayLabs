@@ -16,45 +16,36 @@ There is a comprehensive Learning Path we can use to prepare for this course [lo
 
 ### Lab 1: Consume the web-service
 
-In this lab, we will send a request to the real-time web service created by following the below steps:
-
-**Get the service key**
+In this lab, we will send a request to the real-time web service created in a previous lab. We begin by obtaining the service key for the web service.
 
 ```
-az ml service keys realtime -i <WEB_SERVICE_ID>
+az ml service keys realtime -i <SERVICE_ID>
 ```
 
-We will get PrimaryKey and SecondaryKey with this command. We can use either of the keys for authorization when consuming the web-service.
+We will get `PrimaryKey` and `SecondaryKey` with this command. We can use either of the keys for authorization when consuming the web-service.
 
-**Get the service URL**
-
-Obtain the service URL from the below command
+Obtain the service URL using the following command:
 
 ```
-az ml service usage realtime -i <WEB_SERVICE_ID>
+az ml service usage realtime -i <SERVICE_ID>
 ```
 
-The URL can be obtained from the sample CURL call. For example, the url is http://40.70.13.110:80/api/v1/service/churncluster333/score in the below sample CURL call:
+The URL can be obtained from the sample `curl` call. For example, the URL is http://40.70.13.110:80/api/v1/service/churncluster333/score in the below sample `curl` call:
 
 ```
 curl -X POST -H "Content-Type:application/json" -H "Authorization:Bearer <key>" --data "{\"input_df\": [{\"callfailurerate\": 0, \"education\": \"Bachelor or equivalent\", \"usesinternetservice\": \"No\", \"gender\": \"Male\", \"unpaidbalance\": 19, \"occupation\": \"Technology Related Job\", \"year\": 2015, \"numberofcomplaints\": 0, \"avgcallduration\": 663, \"usesvoiceservice\": \"No\", \"annualincome\": 168147, \"totalminsusedinlastmonth\": 15, \"homeowner\": \"Yes\", \"age\": 12, \"maritalstatus\": \"Single\", \"month\": 1, \"calldroprate\": 0.06, \"percentagecalloutsidenetwork\": 0.82, \"penaltytoswitch\": 371, \"monthlybilledamount\": 71, \"churn\": 0, \"numdayscontractequipmentplanexpiring\": 96, \"totalcallduration\": 5971, \"callingnum\": 4251078442, \"state\": \"WA\", \"customerid\": 1, \"customersuspended\": \"Yes\", \"numberofmonthunpaid\": 7, \"noadditionallines\": \"\\N\"}]}" http://40.70.13.110:80/api/v1/service/churncluster333/score
 ```
 
-**Swagger document**
+To run the above command and call the service, simply replace `<key>` with either `PrimaryKey` or `SecondaryKey` and submit the command. If submitting from `bash` instead of `cmd` we have to replace `\\` with `\\\\`.
 
-If the service API schema was supplied, the service endpoint would expose a Swagger document at http://<ip>/api/v1/service/<service name>/swagger.json. The Swagger document can be used to automatically generate the service client and explore the expected input data and other details about the service.
+If the service API schema was supplied, the service endpoint would expose a Swagger document at `http://<ip>/api/v1/service/<service name>/swagger.json`. The Swagger document can be used to automatically generate the service client and explore the expected input data and other details about the service.
 
-**Call the web service using curl**
+Instead of using the command line, we can use Python to send a request to the real-time web service:
 
-Obtain the curl command from `az ml service usage realtime -i <SERVICE_NAME>` and replace &lt;key&gt; with PrimaryKey / SecondaryKey.
-
-**Call the web service using Python**
-
-Use Python to send a request to the real-time web service. 
-
-1. Copy the following code sample to a new Python file.
-2. Update the data, url, and api_key parameters. For local web services, remove the 'Authorization' header.
-3. Run the code. 
+1. Copy the following code sample to a new Python file called `call_service.py` and save it in the project's root folder.
+2. Update the data, URL, and `api_key` parameters. For local web services, remove the `Authorization` header.
+3. Escape any backslash characters by replacing `\\` with `\\\\`.
+4. Run the code by simply typing `python call_service.py` from the command line.
 
 ```
 import requests
@@ -68,16 +59,15 @@ api_key = 'your service key'
 headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
 resp = requests.post(url, data, headers=headers)
-resp.text
+print(resp.text)
 ```
-
-***NOTE:*** Some of the field values to test can potentially have backslashes in input_df when copying from ```az ml service usage realtime -i <service name>``` execution results. For example, \\"noadditionallines\\": \\"\\\N\\". In the python code, this would need to be changed to \\"noadditionallines\\": \\"\\\\\\\\N\\".
 
 ### (Optional) Lab 3: Consume the web-service using C\#
 
 Use the service URL to send a request from a C\# Console App. 
 
-In Visual Studio, create a new Console App: 
+In Visual Studio, create a new Console App:
+
 - In the menu, click, **File > New > Project**
 - Under **Visual Studio C#**, click **Windows Class Desktop**, then select **Console App**.
 - Enter `MyFirstService` as the name of the project, then click OK.
