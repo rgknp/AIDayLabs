@@ -29,15 +29,15 @@ We will now run multiple experiments in order to perform model selection. Each e
 
 Return to the command line and run `python run.py` to run multiple experiments. As the experiments are running, return to the Workbench and open the **Jobs** pannel on the right-hand side and monitor jobs as they're running. Click on the green **Completed** button for one of the jobs to examine the logs created by the script.
 
-![](./images/jobs-pannel.jpg){:height="300px"}
+![Images](./images/jobs-pannel.jpg)
 
 Once all the jobs finish running, go to the the **Runs** tab on the left-hand side and click on **All Runs**. Then examine the metrics and visualizations we are presented with.
 
-![](./images/runs-tab.jpg){:height="300px"}
+![Images](./images/runs-tab.jpg)
   
 At the top we have four pannels, one showing information about the jobs we ran and the other three showing some metrics collected by each run (a run here is a single experiment).
 
-![](./images/top-four-pannel.jpg){:height="700px"}
+![Images](./images/top-four-pannel.jpg)
 
 To see how these metrics tie back to the Python script, open `iris_sklearn.py` in **Code** and find where the model's accuracy is being logged. Hint: the Python object storing it is called `accuracy` in the script. 
 
@@ -45,19 +45,19 @@ Note that we have two ways of logging information in Workbench:
 
 We can simply rely on Python's `print` function, as can be seen by `print("Accuracy is {}".format(accuracy))` for example. In such a case, we can go the the **Jobs** pannel and click on the green **Completed** button to see any printed logs for a given run.
 
-![](./images/click-completed.jpg){:height="600px"}
+![Images](./images/click-completed.jpg)
 
 We can rely on the `get_azureml_logger` method to instantiate a logger object and use it to log information, such as in `run_logger.log("Accuracy", accuracy)`. This produces the accuracy chart from the **Runs** tab.
   
-![](./images/accuracy-chart.jpg){:height="400px"}
+![Images](./images/accuracy-chart.jpg)
   
 The biggest advantage of this second approach is that the chart has an interactive component to it. For example, we can click on the chart to select the point with the highest accuracy and as we do so, the corresponding run is automatically selected and we can examine its content by clicking on it.
   
-![](./images/highest-accuracy.jpg){:height="700px"}
+![Images](./images/highest-accuracy.jpg)
   
 We can also hold down **CTRL** and click on the next run with the highest accuracy and once again as we do so the run is automatically selected for us. With two or more selected runs, we can now click on **Compare** to compare them across various metrics.
   
-![](./images/runs-table.jpg){:height="700px"}
+![Images](./images/runs-table.jpg)
   
 This allows us to compare meta-data between runs, any metrics we collected using the `get_azureml_logger` method, as well as any visualizations created by the Python script as part of the run.
 
@@ -76,53 +76,53 @@ print ("Max F_1 is {}".format(max(f_score)))
 
 Return to the Workbench and go the the **Runs** tab and click on **All Runs**. Scroll down to the table listing all the runs, click on the checkbox next to `RUN NUMBER` to select them all and click on **Archive**. Repeat this until all the runs have been archived.
 
-![](./images/archive-runs.jpg){:height="600px"}
+![Images](./images/archive-runs.jpg)
 
 From the **Command Prompt** rerun `python run.py` and go to the **Jobs** pannel to monitor jobs as they are running. Once all the jobs are finish running, click on the green **Completed** button to view their output. Find the job with regularization rate 0.009765625 and report its maximum F-score (under `Max F_1 is ...`). The output on this page is produced as a result of `print` statements in the script (or functions that return output). 
 
-![](./images/printed-output.jpg){:height="700px"}
+![Images](./images/printed-output.jpg)
 
 For the same run, now click on the blue link just above the green **Completed** button to see the **Run Properties** pane. Find the regularization rate and the F-score in this tab. The output in this pane is created partly as a result of meta-data collected for each job (such as **Start Time** and **Duration**) and partly as a result of metrics that we logged using the `run_logger.log` function. 
 
-![](./images/run-properties.jpg){:height="700px"}
+![Images](./images/run-properties.jpg)
 
 Scroll down to see the visuals created by array we logged, including the `Fscore` visual that should now also appear.
 
-![](./images/array-visuals.jpg){:height="600px"}
+![Images](./images/array-visuals.jpg)
 
 Scroll further down to look at visualizations created by the Python script itself. These visualizations were not explicitly logged, but they are also tracked and presented here.
 
-![](./images/python-visualizations.jpg){:height="700px"}
+![Images](./images/python-visualizations.jpg)
 
 Click on **All Runs** from the **Runs** tab and click on the little settings icon on the right.
 
-![](./images/run-settings.jpg){:height="700px"}
+![Images](./images/run-settings.jpg)
    
 In the window that opens, put a check mark in the box next to `MaxFscore` then click on **Apply**.
 
-![](./images/checkmark-fscore.jpg){:height="400px"}
+![Images](./images/checkmark-fscore.jpg)
 
 We should now see an additional plot showing the value for `MaxFscore` accross the different runs.
 
 Choose the two models with the highest `MaxFscore` (simply click on the two highest point on the chart). Notice how doing so automatically selects them in the table with all the runs just below the chart. Now click on the **Compare** button to compare the two models.
 
-![](./images/max-fscore.jpg){:height="700px"}
+![Images](./images/max-fscore.jpg)
    
 Of the two models, find the one with the highest accuracy (we will find accuracy under **Logged Metrics**) and note its `runNumber` (at the very top). Then click on **Run List** to return to the table of all the runs and this time click on the `RUN NUMBER` for that model.
 
 In **Run Properties** under **Outputs** select the binary object that stores our model (called `model.pkl` by the script) and click on **Promote**.
 
-![](./images/promote-model.jpg){:height="700px"}
+![Images](./images/promote-model.jpg)
    
 Click on **Project Dashboard** and then on the project path at the top. 
 
-![](./images/project-dashboard.jpg){:height="500px"}
+![Images](./images/project-dashboard.jpg)
 
 A Windows Explorer window will open. From there go to the `classifying_iris` folder. When we promote a model, a new folder is created in our project directory called `assets` (if there was none before) and a link to the `model.pkl` is placed there, called `model.pkl.link`. The model object can also be directly downloaded using the **Download** button under **Outputs** in **Run Properties**. Once we have the model object, we can use it to create a scoring script.  
 
 Promoted models are registered and versioned in our **Azure Model Management** account and can be viewed in the Azure portal under the Model Management portal. This link can be used to later download the model object itself. 
 
-![](./images/models-in-mm-portal.jpg){:height="600px"}
+![Images](./images/models-in-mm-portal.jpg)
 
 Later registered models can be used to create a scoring service. We learn more about this and the Model Management portal in later labs.
 
