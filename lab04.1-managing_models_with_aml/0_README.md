@@ -52,7 +52,7 @@ ArgumentVector:
 Target: "docker"
 EnvironmentVariables:
   "EXAMPLE_ENV_VAR": "Example Value"
-Framework: "PySpark"
+Framework: "Python"
 CondaDependenciesFile: "aml_config/conda_dependencies.yml"
 SparkDependenciesFile: "aml_config/spark_dependencies.yml"
 PrepareEnvironment: true
@@ -63,69 +63,62 @@ On Code, go to **File > Save All** to save all the above changes. Then return to
 
 In order to run the experiment in a Docker container, we must prepare a Docker image. We will do so programatically by going to **File > Open Command Prompt** and typing `az ml experiment prepare -c docker`. Notice all the changes that are happening as this command is running. This should take a few minutes.
 
-**Note:** At this point, there is a strange Docker behavior for which we propose an easy solution: we may get an error at the top about `image operating system "linux" cannot be used on this platform`.
-
-![](./images/linux-image-not-found.jpg)
-
-To resolve it we click on the Docker logo on the right-hand side in the taskbar and switch Docker to use Windows containers. This will result in a new Docker error:
-
-![](./images/docker-windows-image.jpg)
-
-Now we switch Docker back to Linux containers (by going to the taskbar once more).
-
-![](./images/switch-linux-containers.jpg)
-
-We then return to the command prompt and run the above command again. This will take a few minutes. When finished, we should get a message saying `Your environment is now ready`.
-
 We can now run our experiment in a Docker container by submitting the following command: `az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py`. Alternatively, we can go to the **Project Dashboard**, select "docker" as the run configuration, select the `CATelcoCustomerChurnModelingWithoutDprep.py` script and click on the run button. In either case, we should be able to see a new job starting on the **Jobs** in the pannel on the right-hand side. Click on the finished job to see the **Run Properties** such as **Duration**. Notice under **Outputs** there are no objects, so the script did not create any artifacts. Click on the green **Completed** to see any results printed by the script, including the model accuracy. It is worth noting that the Azure CLI runs on both the Windows and Linux command line. To see this in action, from the Windows command prompt type `bash` to switch to a Linux command prompt and submit `az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py` a second time.
 
-When finished, click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output, download it and place it in root folder.
+When finished, click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output, download it and place it the project's root folder.
 
 ### Creating a web service out of the scoring script
 
 Let's now see how we can create a scoring web service from the above model inside a docker image. There are multiple steps that go into doing that. We will be running commands from the command line, but we will also log into the Azure portal in order to see which resources are being created as we run various Azure CLI commands.
 
-Enable the Azure Container Service by running `az provider register -n Microsoft.ContainerService` from the command line.
+Enable the Azure Container Service by running `az provider register -n Microsoft.ContainerService` from the command line. We can check the status of our registration by running `az provider show -n Microsoft.ContainerService -o table`.
 
 Log into the Azure portal and find all the resources under the resource group. This should include an Experimentation and a Model Management account. Open the Model Management resource and click on **Model Management** icon on the top.
 
-If we're doing this for the first time, then we need to set up an environment. We usually have a staging and a production environment. We can deploy our models to the staging environment to test them and then redeploy them to the production environment once we're happy with the result. To create a new environment run the following command. To use in production, we can use --cluster:
+If we're doing this for the first time, then we need to set up an environment. We usually have a staging and a production environment. We can deploy our models to the staging environment to test them and then redeploy them to the production environment once we're happy with the result. To create a new environment run the following command after choosing a name for the staging environment. To use in production, we can provide the additional `--cluster` argument (covered in a later lab):
 
 ```
-az ml env setup -l eastus2 -n bootcampvmstage -g <RESOURCE_GROUP>
+az ml env setup -l eastus2 -n <STAGING_ENVIRONMENT> -g <RESOURCE_GROUP>
 ```
 
 We can look at all the environments uder our subscription using `az ml env list -o table`. Creating the new environment takes about one minute, after which we can activate it and show it using this:
 
 ```
-az ml env set -n bootcampvmstage -g <RESOURCE_GROUP>
+az ml env set -n <STAGING_ENVIRONMENT> -g <RESOURCE_GROUP>
 az ml env show
 ```
 
-We next set our Model Management account by running this:
+We next set our Model Management account by running the following command. We can look up the Model Management account name from the Azure portal.
 
 ```
-az ml account modelmanagement set -n azureuseramlmm -g <RESOURCE_GROUP>
+az ml account modelmanagement set -n <MODEL_MANAGEMENT_ACCOUNT> -g <RESOURCE_GROUP>
 ```
 
 We are now finally ready to deploy our model as a web service. 
 
-Generate the schema by first running ```python churn_schema_gen.py```. We can then create a realtime service by running `az ml service create realtime -n churnpred --model-file ./model.pkl -f score.py -r python -s service_schema.json`. Notice the three steps that take place as the command is running. First we register the model, then we create a manifest, then we create a Docker image, and finally we initialize a Docker container that services our prediction app. We can go to the Azure portal and go to click on the resource named `azureuseramlmm` under the resource group `<resource_group_name>`, then click on **Model Management**.
+Generate the schema by first running `python churn_schema_gen.py`. We can then create a realtime service by running 
+
+```
+az ml service create realtime -n churnpred --model-file ./model.pkl -f score.py -r python -s service_schema.json -c ./aml_config/conda_dependencies.yml
+```
+
+Notice the three steps that take place as the command is running. First we register the model, then we create a manifest, then we create a Docker image, and finally we initialize a Docker container that services our prediction app. We can go to the Azure portal and find and click on the Model Management resource, then click on **Model Management**.
 
 ![](./images/model-management-portal.jpg)
 
-In the Model Management portal, we can view the three resources that are created as the above command runs: the manifest, the image, and the service. Click on each to view the resources.
+In the Model Management portal, we can view the three resources that are created as the above command runs: the model, the manifest, the image, and the service. Click on each to view the resources.
 
 ![](./images/model-management-services.jpg)
 
-## Workshop Completion
+Note that we can see the model, the manifest and the image on the Azure portal, but we can't see the service we created. This is because we ran `az ml env setup ...` *without* the `--cluster` argument, which means the service was created locally. This can be useful for the purpose of testing the service as we develop our application. In a future lab, the same service will be deployed remotely to Azure Container Services and will be visible from the Azure portal.
+
+Return to the command line and test the service by running the example command given in the line `Usage for cmd: az ml service run realtime ...` which can be found in the output generated by the last command. As a result, the command should return `"0"`, which is the prediction made by the model (this model predicts whether someone churns (`"1"`) or doesn't not churn (`"0"`) based on the information provided). This is not the most convinient way to test the service but it has the advantange of being done directly from the command line. In a later lab we will test the service using the Python API instead.
+
+Note: If we run `az ml service run realtime ...` from `bash`, we need to change `"\\N\"` to `"\\\\N\"` because the backslash character has to be escaped using a second backslash character.
+
+## Lab Completion
 
 In this workshop we learned how to:
 
 - Track models
 - Create Docker containers with the models and test them locally
-
-We may now decommission and delete the following resources if we wish:
-
-  - The Azure Machine Learning Services accounts and workspaces, and any Web API's
-  - Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.

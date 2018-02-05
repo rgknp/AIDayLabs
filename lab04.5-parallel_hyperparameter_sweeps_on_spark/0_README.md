@@ -10,20 +10,6 @@ Type the following commands to prepare the docker environment and the Spark clus
 az ml experiment prepare -c docker
 ```
 
-**Note:** At this point, there is a strange Docker behavior for which we propose an easy solution: we may get an error at the top about `image operating system "linux" cannot be used on this platform`.
-
-![](./images/linux-image-not-found.jpg)
-
-To resolve it we click on the Docker logo on the right-hand side in the taskbar and switch Docker to use Windows containers. This will result in a new Docker error:
-
-![](./images/docker-windows-image.jpg)
-
-Now we switch Docker back to Linux containers (by going to the taskbar once more).
-
-![](./images/switch-linux-containers.jpg)
-
-We then return to the command prompt and run the above command again. This will take a few minutes. When finished, we should get a message saying `Your environment is now ready`.
-
 Return to the Workbench and go to **File > Open Project (Code)** to open it using Code. Examine the script `sweep_spark.py`. Find the learning algorithm we're using and the set of hyper-parameters that we want to optimize over and their ranges.
 
 Now we specify the Spark cluster as the compute target by running the following command.
@@ -44,3 +30,10 @@ az ml experiment submit -c docker .\sweep_spark.py
 If we were able to run the Docker example successfully, we can now see if we can replicate it in Spark. To do so simply replace `docker` with `azbootcamphdispark` in the above command and rerun it. If the Docker run failed, we may need to swich Docker to a Windows context (by right-clicking on the Docker icon in the taskbar) and upon getting an error message, switch it back to a Linux context and then try again.
 
 Report the accuracy of the best model that came out of the parameter sweep.
+
+## Workshop Completion
+
+We may now decommission and delete the following resources if we wish:
+
+- The Azure Machine Learning Services accounts and workspaces
+- Any Data Science Virtual Machines we have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal we are incurring run-time charges. If we Stop them in the Azure Portal, we will be charged for the storage the Virtual Machines are consuming.
