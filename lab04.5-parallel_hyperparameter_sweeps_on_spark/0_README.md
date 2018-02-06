@@ -16,18 +16,19 @@ Now we specify the Spark cluster as the compute target by running the following 
 The command may return an error message about having to prepare the environment first, even though the previous command should have been prepared the environment already. Running the rest of the code still works and the error message can safely be ignored.
 
 ```
-az ml computetarget attach cluster --name azbootcamphdispark --address azbootcamphdispark-ssh.azurehdinsight.net --username sshuser --password DataScience2017!
-az ml experiment prepare -c azbootcamphdispark
+az ml computetarget attach cluster --name <TARGET_NAME> --address <HDI_DNS_NAME> --username <SSH_USER> --password <SSH_PASSWORD>
+az ml experiment prepare -c <TARGET_NAME>
 ```
 
-This will create the files `aml_config/azbootcamphdispark.compute` and `aml_config/azbootcamphdispark.runconfig`. We now have a pair of such files for local, Docker and one for Spark.
+This will create the two files for our compute target (with the same name as the target name we provided above) in `aml_config` with file extensions `.compute` and `.runconfig`. We now have a pair of such files for local, Docker and one for Spark.
+
 Finally, we can now run the job. We will first run it in Docker, which is great for debugging purposes and working locally while we're still in development mode. To do so just run this on the command line:
 
 ```
 az ml experiment submit -c docker .\sweep_spark.py
 ```
 
-If we were able to run the Docker example successfully, we can now see if we can replicate it in Spark. To do so simply replace `docker` with `azbootcamphdispark` in the above command and rerun it. If the Docker run failed, we may need to swich Docker to a Windows context (by right-clicking on the Docker icon in the taskbar) and upon getting an error message, switch it back to a Linux context and then try again.
+If we were able to run the Docker example successfully, we can now see if we can replicate it in Spark. To do so simply replace `docker` with the name of our new compute target in the above command and rerun it. If the Docker run failed, we may need to swich Docker to a Windows context (by right-clicking on the Docker icon in the taskbar) and upon getting an error message, switch it back to a Linux context and then try again.
 
 Report the accuracy of the best model that came out of the parameter sweep.
 
