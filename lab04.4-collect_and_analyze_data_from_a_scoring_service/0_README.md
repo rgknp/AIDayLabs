@@ -1,6 +1,6 @@
 # Collect data from a scoring service
 
-This hands-on lab guides us through collecting Machine Learning scoring  data using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
+This hands-on lab guides us through collecting Machine Learning scoring data using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
 
 In this workshop, we will
 
@@ -142,7 +142,7 @@ az ml service create realtime -f score.py --model-file model.pkl -s service_sche
 To test the data collection, run the `az ml service run realtime` command:
 
 ```
-az ml service run realtime -i churnapp -d "ADD INPUT DATA HERE!!"
+az ml service run realtime -i <SERVICE_ID> -d "ADD INPUT DATA HERE!!"
 ```
 
 ### Lab 2: View Collect Data
