@@ -101,7 +101,9 @@ Once we configure the compute target, we can use the following command to run th
 az ml experiment submit -c <REMOTE_VM> CATelcoCustomerChurnModelingWithoutDprep.py
 ```
 
-Note that the execution environment is configured using the specifications in conda_dependencies.yml.
+Note that the execution environment is configured using the specifications in `conda_dependencies.yml`.
+
+Please take a moment to delete the Ubuntu DSVM before moving to the next lab.
 
 ### (Optional) Lab 3: Running on a remote Spark cluster
 
@@ -125,7 +127,7 @@ Once we have the compute context, we can run the following CLI command:
 az ml experiment submit -c <HDI_CLUSTER> CATelcoCustomerChurnModelingWithoutDprep.py
 ```
 
-The execution environment on HDInsight cluster is managed using Conda. Configuration is managed by conda_dependencies.yml and spark_dependencies.yml configuration files. 
+The execution environment on HDInsight cluster is managed using Conda. Configuration is managed by `conda_dependencies.yml` and `spark_dependencies.yml` configuration files. 
 
 ## Lab Completion
 
