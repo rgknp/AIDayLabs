@@ -104,7 +104,7 @@ az ml account modelmanagement set -n <ACCOUNT_NAME> -g <RESOURCE_GROUP>
 To deploy the saved model as a web service, we execute the below command:
 
 ```
-az ml service create realtime --model-file [MODEL_FILE_RELATIVE_PATH] -f [SCORING_FILE e.g. score.py] -n [SERVICE_NAME] -s [SCHEMA_FILE e.g. service_schema.json] -r [DOCKER_RUNTIME e.g. spark-py or python] -c [CONDA_DEPENDENCIES_FILE]
+az ml service create realtime --model-file [MODEL_FILE_RELATIVE_PATH] -f [SCORING_FILE e.g. score.py] -n [SERVICE_NAME] -s [SCHEMA_FILE e.g. service_schema.json] -r [DOCKER_RUNTIME e.g. spark-py or python]
 ```
 
 ### Lab 3: Update Service with new model
