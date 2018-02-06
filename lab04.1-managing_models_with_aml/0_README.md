@@ -71,7 +71,7 @@ When finished, click on the job and notice the output `model.pkl` in the **Run P
 
 Let's now see how we can create a scoring web service from the above model inside a docker image. There are multiple steps that go into doing that. We will be running commands from the command line, but we will also log into the Azure portal in order to see which resources are being created as we run various Azure CLI commands.
 
-Enable the Azure Container Service by running `az provider register -n Microsoft.ContainerService` from the command line. We can check the status of our registration by running `az provider show -n Microsoft.ContainerService -o table`.
+Enable the Azure Container Service by running `az provider register -n Microsoft.ContainerService` and `az provider register -n Microsoft.ContainerRegistry`. We can check the status of our registration by running `az provider list -o table` and check that you are registered for both services.
 
 Log into the Azure portal and find all the resources under the resource group. This should include an Experimentation and a Model Management account. Open the Model Management resource and click on **Model Management** icon on the top.
 

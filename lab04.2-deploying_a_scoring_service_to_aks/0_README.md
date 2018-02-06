@@ -40,21 +40,22 @@ Open Workbench and add the below code snippet to the end of `CATelcoCustomerChur
 
 ```
 # serialize the decision tree on disk in the 'outputs' folder
-f = open('./outputs/dt.pkl', 'wb')
+f = open('./outputs/model.pkl', 'wb')
 pickle.dump(dt, f)
 f.close()
 ```
+
 Launch CLI and run the following code:
 
 ```
 az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py
 ```
 
-As a result, `dt.pkl` (decision tree) and `model.pkl` (naive bayes) should be exported in the output folder as shown below:
+As a result, the decision tree model file will overwrite the naive bayes model file in the `output` subfolder. This is fine since the earlier model was already registered when the local service was created in a prior lab. This means we can always roll back to that model if need be.
 
 ![CATelcoCustomer](images/CATelcoCustomer_gWithoutDprep.png)
 
-Download the model files and put them in the project's root folder. If we have not already done so, we can generate the schema by running `python churn_schema_gen.py`.
+When finished, click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output, download it and place it the project's root folder. If we have not already done so, we can generate the schema by running `python churn_schema_gen.py`.
 
 ### Lab 2: Deploy Service to Production
 
@@ -108,16 +109,14 @@ az ml service create realtime --model-file [MODEL_FILE_RELATIVE_PATH] -f [SCORIN
 
 ### Lab 3: Update Service with new model
 
-To use a different model in the service, we can perform a simple update to the service. In the Churn Prediction experiment, the accuracy of Decision Tree is slightly higher than Naive Bayes. So, we can update the service to use the dt.pkl file.
-
-To use a specific model in the scoring file, change references from `model.pkl` to the model we want to use. Replace `model.pkl` with `dt.pkl` to use decision tree model.
+To use a different model in the service, we can perform a simple update to the service. In the Churn Prediction experiment, the accuracy of Decision Tree is slightly higher than Naive Bayes. So, we can update the service to use the decision tree model instead.
 
 There are three steps to perform in order to update the service:
 
-We first register the new model. The new model is stored in `dt.pkl`, but when registering it we call it `model.pkl` so that it can have the same name as the last registered model. Giving it the same name won't overwrite the old model. Instead it will start versioning the model.
+We first register the new model, and we do so under the same name as the old model. This will NOT overwrite the old model. Instead it will create a new version of it, which we can tag using the `-t` and add a description using `-d` arguments.
 
 ```
-az ml model register -m dt.pkl -n model.pkl
+az ml model register -m model.pkl -n model.pkl -t DecisionTree -d "Using a new model because of higher accuracy"
 ```
 
 We can see the new model (along with other versions if we had previously registered models under the same name) by running
