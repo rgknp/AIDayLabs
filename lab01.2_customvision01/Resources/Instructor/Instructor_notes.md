@@ -24,7 +24,7 @@ We had two people presenting this, and it worked really nicely to have a back-an
         *	Retrieve a training and prediction key
         *	Perform a prediction with an independent image
 
-        It is recommended to perform all of the above agenda through the customvision.ai website first and then show code to reinforce the action
+        It is recommended to perform all of the above agenda through the customvision.ai website first and then show code to reinforce the action. Don't be afraid to experiment with different prediction images that have different angle and perspectives of the objects that you predicting, and focus on the probability output of the results asking the students why they think the probability is what it is
 
     *	Materials
         *	Show them where the materials are
