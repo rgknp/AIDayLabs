@@ -167,7 +167,7 @@ To add tags to your project, insert the following code after the call to
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Make two tags in the new project  
 var MbikesTag = trainingApi.CreateTag(project.Id, "Mountain");
-var RbikesTag = trainingApi.CreateTag(project.Id, "Racing");");
+var RbikesTag = trainingApi.CreateTag(project.Id, "Racing");
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  
