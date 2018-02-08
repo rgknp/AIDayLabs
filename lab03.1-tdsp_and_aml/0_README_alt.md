@@ -6,9 +6,19 @@ The goal of the workshop is to learn the tools that facilitate being a data scie
 
 ### Introduction to the TDSP
 
+At a high level, data science as a process consists more or less of the following steps:
+
 ![Image](resources/docs/images/tdsp.png)
 
-A typical data science workflow for building a predictive model looks like this:
+However in practice data science does not follow a linear workflow. Instead there is a lot of trial and error and we move forward and backward in the process of trying to build and deploy a data science solution.
+
+![Image](resources/docs/images/tdsp-lifecycle2.png)
+
+Another complication arises from the fact that data science today is much more of a team effort than it was before. Devoloping and operationlizing a data science solution requires the knowledge and expertise of not just the data scientist, but also data engineers, DevOps, and the larger business. As such, we need to follow a more process-oriented workflow in order to bring a data science project to completion.
+
+![Image](resources/docs/images/tdsp-tasks-by-roles.png)
+
+We will now simplify things a bit in order to introduce some vocabulary and concepts. A typical data science workflow for building a predictive model looks like this:
 
 ![Image](resources/docs/images/machine-learning-process.jpg)
 

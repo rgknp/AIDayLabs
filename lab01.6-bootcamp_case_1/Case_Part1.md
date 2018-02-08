@@ -6,7 +6,7 @@ You've been assigned a new customer, Contoso LLC, which sells bicycles and bicyc
 ## Architecture
 Your team recently presented a potential architecture (below) that Contoso LLC approved. 
 
-![architecture](./images/arch.png)
+![architecture](./resources/assets/arch.png)
 
 * [Skype Client](https://www.skype.com/)  
 User initiates call
