@@ -45,3 +45,7 @@ The Application_Start method is called only one time during the life cycle of an
 Run the bot application and test in the emulator with messages. The log data is written using Debug.WriteLine. You can view the result using Output window. Ensure Debug is selected for *Show output from*. If Output is not visible, select View->Output from the menu. You will see an entry such as ````From:56800324 - To:2c1c7fa3 - Message:hello````. Since this is an echo bot, you will also see the echoed message logged.
 
 ![Log Results](images/LogResults.png)
+
+### Continue to [2_File_Logger](2_File_Logger.md)
+
+Back to [0_README](../0_README.md)

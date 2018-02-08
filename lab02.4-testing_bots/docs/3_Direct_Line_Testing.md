@@ -112,3 +112,6 @@ Using Direct Line API, a client can send messages to your bot by issuing HTTP Po
 	Enter this text using the client and view the results via curl as shown below. You will find the image url displayed in the images array.
 
 	![Images Array](images/ImagesArray.png)
+
+	
+ ### Continue to [README](../0_README.md) to review lab
