@@ -40,11 +40,11 @@ For this lab, we will use the [Azure Search Indexer for Cosmos DB](https://docs.
 
 ![Import Wizard](./resources/assets/AzureSearch-ImportData.png) 
 
-Within the Azure Search blade you just created, click **Import Data->Data Source->Document DB**.
+Within the Azure Search blade you just created, click **Import Data->Data Source->Cosmos DB**.
 
 ![Import Wizard for DocDB](./resources/assets/AzureSearch-DataSource.png) 
 
-Once you click this, choose a name for the Cosmos DB data source. If you completed the previous lab, `lab01.1-computer_vision`, choose the Cosmos DB account where your data resides as well as the corresponding Container and Collections. If you did not complete the previous lab, select "Or input a connection string" and paste in TODO update connection string: `AccountEndpoint=https://anthobootcampdb.documents.azure.com:443/;AccountKey=XzxwNshrS92RAycyikcSNLOtrDdTMQIYsOHDLko22QDHVCNi4b3YW7pqrzhDPZJupwelnlABrqY4m3nCr686Yw==;`. For both, the Database should be "images" and the Collection should be "metadata".
+Once you click this, choose a name for the Cosmos DB data source. If you completed the previous lab, `lab01.1-computer_vision`, choose the Cosmos DB account where your data resides as well as the corresponding Container and Collections. If you did not complete the previous lab, select "Or input a connection string" and paste in the connection string: `AccountEndpoint=https://anthobootcampdb.documents.azure.com:443/;AccountKey=XzxwNshrS92RAycyikcSNLOtrDdTMQIYsOHDLko22QDHVCNi4b3YW7pqrzhDPZJupwelnlABrqY4m3nCr686Yw==;`. For both, the Database should be "images" and the Collection should be "metadata".
 
 Click **OK**.
 
