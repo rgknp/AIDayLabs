@@ -73,15 +73,15 @@ Respond with no to the question about `Reuse storage and ACR (Y/n)?`. This sets 
 4. A Kubernetes deployment on an Azure Container Service (ACS) cluster
 5. An Application insights account
 
-The resource group, storage account, and ACR are created quickly. The ACS deployment can take up to 20 minutes.
-
-Use the following command to check the status of an ongoing cluster provisioning:
+The resource group, storage account, and ACR are created quickly. The ACS deployment can take up to 20 minutes. We use the following command to check the status of an ongoing cluster provisioning:
 
 ```
 az ml env show -n <ENVIRONMENT_NAME> -g <RESOURCE_GROUP>
 ```
 
-Ensure that `"Provisioning State"` changes from `"Creating"` to `"Succeeded"` before proceeding. This can take between 5 to 15 minutes. Once this is done, we can set the environment.
+If the deployment fails the first time and we get an error message saying `Resource quota limit exceeded.` then it means we are over the utilization limit for our subscription. In this case, we can go to the Azure portal and delete any resources we are not using, then delete the above cluster `az ml env delete --cluster <ENVIRONMENT_NAME> -g <RESOURCE_GROUP>`, and finally re-create the cluster using `az ml env setup...` as we did earlier.
+
+Ensure that `"Provisioning State"` changes from `"Creating"` to `"Succeeded"` before proceeding further. Once this is done, we can set the above environment as our compute environment:
 
 ```
 az ml env set -n <ENVIRONMENT_NAME> -g <RESOURCE_GROUP>
