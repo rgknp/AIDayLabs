@@ -14,7 +14,7 @@ In this lab we covered creating an intelligent bot from end-to-end using the Mic
 You should have learned:
 - What the various Cognitive Services APIs are
 - How to configure your apps to call Cognitive Services
-- How to build an application that calls various Cognitive Services APIs (specifically Computer Vision, Face, Emotion and LUIS) in .NET applications
+- How to build an application that calls various Cognitive Services  (specifically Computer Vision and LUIS) in .NET applications
 
 
 

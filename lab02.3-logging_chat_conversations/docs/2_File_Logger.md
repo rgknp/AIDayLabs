@@ -162,3 +162,8 @@ public class DebugActivityLogger : IActivityLogger
         }
 }
 ````
+
+
+### Continue to [3_SQL_Logger](3_SQL_Logger.md)
+
+Back to [0_README](../0_README.md)

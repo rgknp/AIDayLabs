@@ -21,9 +21,8 @@ Once we've thought out our app, we are ready to [build and train it](https://doc
 
 In the Portal, hit **Create a resource** and then enter **LUIS** in the search box and choose **Language Understanding Intelligent Service**:
 
-This will lead you to fill out a few details for the API endpoint you'll be creating, choosing the API you're interested in and where you'd like your endpoint to reside, as well as what pricing plan you'd like. **You must put the resource in West US**. The free tier is sufficient for this lab. Since LUIS stores images internally at Microsoft (in a secure fashion), to help improve future Cognitive Services offerings, you'll need to check the box to confirm you're ok with this.
+This will lead you to fill out a few details for the API endpoint you'll be creating, choosing the API you're interested in and where you'd like your endpoint to reside, as well as what pricing plan you'd like. Put it in a location that is close to you and available. The free tier is sufficient for this lab. Since LUIS stores images internally at Microsoft (in a secure fashion), to help improve future Cognitive Services offerings, you'll need to check the box to confirm you're ok with this.
 
-**Double check you have put your LUIS service in West US.**
 
 Once you have created your new API subscription, you can grab the key from the appropriate section of the blade and add it to your list of keys.
 
@@ -33,17 +32,19 @@ Once you have created your new API subscription, you can grab the key from the a
 
 In a lab tomorrow, we will create our PictureBot. First, let's look at how we can use LUIS to add some natural language capabilities. LUIS allows you to map natural language utterances (words/phrases/sentences the user might say when talking to the bot) to intents (tasks or actions the user wants to perform).  For our application, we might have several intents: finding pictures, sharing pictures, and ordering prints of pictures, for example.  We can give a few example utterances as ways to ask for each of these things, and LUIS will map additional new utterances to each intent based on what it has learned.  
 
-Navigate to [https://www.luis.ai](https://www.luis.ai) and sign in using your Microsoft account.  (This should be the same account that you used to create the LUIS key in the previous section).  You should be redirected to a list of your LUIS applications at [https://www.luis.ai/applications](https://www.luis.ai/applications).  We will create a new LUIS app to support our bot.  
+Navigate to [https://www.luis.ai](https://www.luis.ai) and sign in using your Microsoft account.  (This should be the same account that you used to create the LUIS key in the previous section).  You should be redirected to a list of your LUIS applications.  We will create a new LUIS app to support our bot.
 
 > Fun Aside: Notice that there is also an "Import App" next to the "New App" button on [the current page](https://www.luis.ai/applications).  After creating your LUIS application, you have the ability to export the entire app as JSON and check it into source control.  This is a recommended best practice, so you can version your LUIS models as you version your code.  An exported LUIS app may be re-imported using that "Import App" button.  If you fall behind during the lab and want to cheat, you can click the "Import App" button and import the [LUIS model](./resources/code/LUIS/PictureBotLuisModel.json).  
 
-From [https://www.luis.ai/applications](https://www.luis.ai/applications), click the "New App" button.  Give it a name (I chose "PictureBotLuisModel") and set the Culture to "English".  You can optionally provide a description. Then click "Create".  
+From the main page, click the "Create new app" button.  Give it a name (I chose "PictureBotLuisModel") and set the Culture to "English".  You can optionally provide a description. Then click "Done".  
 
 ![LUIS New App](./resources/assets/LuisNewApp.png) 
 
 You will be taken to the Build section for your new app. 
 
 ![LUIS Dashboard](./resources/assets/LuisCreateIntent.png) 
+
+> Note that there is one intent called "None".  Random utterances that don't map to any of your intents may be mapped to "None".  
 
 We want our bot to be able to do the following things:
 + Search/find pictures
@@ -53,7 +54,7 @@ We want our bot to be able to do the following things:
 
 Let's create intents for the user requesting each of these.  Click the "Create new intent" button.  
 
-Name the first intent "Greeting" and click "Enter".  Then give several examples of things the user might say when greeting the bot, pressing "Enter" after each one.  
+Name the first intent "Greeting" and click "Done".  Then give several examples of things the user might say when greeting the bot, pressing "Enter" after each one.  
 
 ![LUIS Greeting Intent](./resources/assets/LuisGreetingIntent.png) 
 
@@ -63,7 +64,7 @@ Click on "Entities" in the left-hand column and then click "Create new entity". 
 
 ![Add Facet Entity](./resources/assets/LuisCreateEntity.png) 
 
-Next, click "Intents" in the left-hand sidebar and then click the yellow "Create new intent" button.  Give it an intent name of "SearchPics" and then click "Done".  
+Next, click "Intents" in the left-hand sidebar and then click the blue "Create new intent" button.  Give it an intent name of "SearchPics" and then click "Done".  
 
 Just as we did for Greetings, let's add some sample utterances (words/phrases/sentences the user might say when talking to the bot).  People might search for pictures in many ways.  Feel free to use some of the utterances below, and add your own wording for how you would ask a bot to search for pictures. 
 
@@ -93,7 +94,6 @@ Finally, click "Intents" in the left sidebar and add two more intents:
 + Create another intent named **"OrderPic"**.  This could be communicated with utterances like "Print this picture", "I would like to order prints", "Can I get an 8x10 of that one?", and "Order wallets".  
 When choosing utterances, it can be helpful to use a combination of questions, commands, and "I would like to..." formats.  
 
-Note too that there is one intent called "None".  Random utterances that don't map to any of your intents may be mapped to "None".  
 
 We are now ready to train our model.  Click "Train" in the top right bar.  This builds a model to do utterance --> intent mapping with the training data you've provided. Training is not always immediate. Sometimes, it gets queued and can take several minutes.
 

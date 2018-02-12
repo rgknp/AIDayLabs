@@ -36,7 +36,7 @@ We will review these articles in class:
 
 In this lab, we create an Churn Prediction experiment, examine its configuration, and run the experiment locally to generate model files.
 
-Open Workbench and add the below code snippet to the end of `CATelcoCustomerChurnModelingWithoutDprep.py` for exporting the decision tree model:
+Edit `CATelcoCustomerChurnModelingWithoutDprep.py` and add the below code snippet to the end of the file in order to export the decision tree model:
 
 ```
 # serialize the decision tree on disk in the 'outputs' folder
@@ -107,7 +107,7 @@ To deploy the saved model as a web service, we execute the below command:
 az ml service create realtime --model-file <MODEL_FILE_RELATIVE_PATH> -f <SCORING_FILE e.g. score.py> -n <SERVICE_NAME> -s <SCHEMA_FILE e.g. service_schema.json> -r <DOCKER_RUNTIME e.g. spark-py or python> -c <CONDA_DEPENDENCIES_FILE>
 ```
 
-### Lab 3: Update Service with new model
+### (Optional) Lab 3: Update Service with new model
 
 To use a different model in the service, we can perform a simple update to the service. In the Churn Prediction experiment, the accuracy of Decision Tree is slightly higher than Naive Bayes. So, we can update the service to use the decision tree model instead.
 

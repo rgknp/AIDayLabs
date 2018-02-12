@@ -40,11 +40,11 @@ __docs__: Contains all the hands-on labs
 __code__: Contains all the code for the hands-on labs
 
 The order of Hands-on Labs to carry out the solution is as follows:
-1. Activity Logger:
+1. [Activity Logger](docs/1_Activity_Logger.md):
 The aim of this hands-on lab is to implement the IActivityLogger interface that writes message activities when running in debug. 
-2. File Logger:
+2. [File Logger](docs/2_File_Logger.md):
 This hands-on lab is to demonstrate how you can log conversations to a file using global events.
-3. SQL Logger:
+3. [SQL Logger](docs/3_SQL_Logger.md):
 This hands-on lab is an extension of the file logger. The same code from the previous task is extended to log conversations in SQL.
 
 Follow the hands-on labs in the sequential manner listed above.
@@ -53,4 +53,4 @@ Follow the hands-on labs in the sequential manner listed above.
 
 After finishing all the activities, can you take an existing bot and selectively log conversations from the bot to a flat file?
 
-### Continue to [Testing your bot](../lab02.4_testing_bots/0_README)
+### Continue to [Lab 2.4 - Testing your bot](../lab02.4-testing_bots/0_README.md)
