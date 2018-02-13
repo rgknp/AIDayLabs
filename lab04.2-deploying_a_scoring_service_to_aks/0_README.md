@@ -45,13 +45,13 @@ pickle.dump(dt, f)
 f.close()
 ```
 
-Launch CLI and run the following code:
+Notice the difference between the above code chunk and the one proceeding it: By running the above code chunk, we replace `model.pkl` which contained the earlier Naive Bayes model (stored in the `model` object in the Python script) with the decision tree model represented by `dt`. Launch CLI and run the following code:
 
 ```
 az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py
 ```
 
-As a result, the decision tree model file will overwrite the naive bayes model file in the `outputs` subfolder. This is fine since the earlier model was already registered when the local service was created (in a prior lab). This means we can always roll back to that model if need be.
+As a result, the decision tree model file will overwrite the Naive Bayes model file in the `outputs` subfolder. This is fine since the earlier model was already registered when the local service was created (in a prior lab). This means we can always roll back to that model if need be.
 
 ![CATelcoCustomer](images/CATelcoCustomer_gWithoutDprep.png)
 
@@ -104,8 +104,10 @@ az ml account modelmanagement set -n <ACCOUNT_NAME> -g <RESOURCE_GROUP>
 To deploy the saved model as a web service, we execute the below command:
 
 ```
-az ml service create realtime --model-file <MODEL_FILE_RELATIVE_PATH> -f <SCORING_FILE e.g. score.py> -n <SERVICE_NAME> -s <SCHEMA_FILE e.g. service_schema.json> -r <DOCKER_RUNTIME e.g. spark-py or python> -c <CONDA_DEPENDENCIES_FILE>
+az ml service create realtime --model-file <MODEL_FILE_RELATIVE_PATH> -f <SCORING_FILE e.g. score.py> -n <SERVICE_NAME> -s <SCHEMA_FILE e.g. service_schema.json> -r <DOCKER_RUNTIME e.g. spark-py or python>
 ```
+
+#! this needs to move to the top, then the model update in the script, then the service update
 
 ### (Optional) Lab 3: Update Service with new model
 
