@@ -1,6 +1,6 @@
 ## 1_AzureSearch:
 Estimated Time: 20-30 minutes
-
+  
 ## Azure Search 
 
 [Azure Search](https://docs.microsoft.com/en-us/azure/search/search-what-is-azure-search) is a search-as-a-service solution allowing developers to incorporate great search experiences into applications without managing infrastructure or needing to become search experts.
