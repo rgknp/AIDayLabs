@@ -2,7 +2,7 @@
 ==================================
 
 The goal of this tutorial is to explore a basic Windows application that uses
-the Computer Vision API to create a project, add tags to it, upload images,
+the Custom Vision API to create a project, add tags to it, upload images,
 train the project, obtain the default prediction endpoint URL for the project,
 and use the endpoint to programmatically test an image. You can use this open
 source example as a template for building your own app for Windows using the
@@ -52,7 +52,18 @@ automate all aspects of the Custom Vision Service. You can obtain a key by
 creating a new project at <https://customvision.ai> and then clicking on the
 "setting" gear in the top right.
 
- 
+### The Images used for Training and Predicting
+
+In the Resources\Images folder are three folders:
+
+- Dent
+- writeoff
+- test
+
+The Dent and writeoff folders contain images of these types of damages to vehicles
+that will be trained and tagged. The Test folder contains an image that will be used 
+to perform the test prediction.
+
 
 **Lab: Creating a Custom Vision Application**
 ---------------------------------------------
@@ -148,7 +159,7 @@ namespace CustomVision.Sample
             var DentTag = trainingApi.CreateTag(project.Id, "Dent");
 
             // Add some images to the tags  
-            Console.WriteLine("\\tUploading images");
+            Console.WriteLine("\tUploading images");
             LoadImagesFromDisk();
 
             // Images can be uploaded one at a time  
@@ -161,7 +172,7 @@ namespace CustomVision.Sample
             trainingApi.CreateImagesFromData(project.Id, DentImages, new List< Guid> () { DentTag.Id });
 
             // Now there are images with tags start training the project
-            Console.WriteLine("\\tTraining");
+            Console.WriteLine("\tTraining");
             var iteration = trainingApi.TrainProject(project.Id);
 
             // The returned iteration will be in progress, and can be queried periodically to see when it has completed  
@@ -195,7 +206,7 @@ namespace CustomVision.Sample
             // Loop over each prediction and write out the results  
             foreach (var c in result.Predictions)
             {
-                Console.WriteLine($"\\t{c.Tag}: {c.Probability:P1}");
+                Console.WriteLine($"\t{c.Tag}: {c.Probability:P1}");
             }
             Console.ReadKey();
 
@@ -250,7 +261,7 @@ the bottom from the file.
 ### Step 3: Create code that will upload images from the local disk
 
 To upload files form disk, review and insert the following code after the code
-you have just inserted "return trainingKey; }
+you have just inserted "return trainingKey; }"
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         private static void LoadImagesFromDisk()

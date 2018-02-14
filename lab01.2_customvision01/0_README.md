@@ -2,7 +2,7 @@
 ==================================
 
 The goal of this tutorial is to explore a basic Windows application that uses
-the Computer Vision API to create a project, add tags to it, upload images,
+the Custom Vision API to create a project, add tags to it, upload images,
 train the project, obtain the default prediction endpoint URL for the project,
 and use the endpoint to programmatically test an image. You can use this open
 source example as a template for building your own app for Windows using the
@@ -52,7 +52,18 @@ automate all aspects of the Custom Vision Service. You can obtain a key by
 creating a new project at <https://customvision.ai> and then clicking on the
 "setting" gear in the top right.
 
- 
+### The Images used for Training and Predicting
+
+In the Resources\Images folder are three folders:
+
+- Hemlock
+- Japanese Cherry
+- Test
+
+The Hemlock and Japenese Cherry folders contain images of these types of plants that
+will be trained and tagged. The Test folder contains an image that will be used to 
+perform the test prediction
+
 
 **Lab: Creating a Custom Vision Application**
 ---------------------------------------------

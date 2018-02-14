@@ -4,7 +4,7 @@
 ----------------------
 
 The goal of this tutorial is to explore a basic Windows application that uses
-the Computer Vision API to create a project, add tags to it, upload images,
+the Custom Vision API to create a project, add tags to it, upload images,
 train the project, obtain the default prediction endpoint URL for the project,
 and use the endpoint to programmatically test an image. You can use this open
 source example as a template for building your own app for Windows using the
@@ -53,7 +53,17 @@ automate all aspects of the Custom Vision Service. You can obtain a key by
 creating a new project at <https://customvision.ai> and then clicking on the
 "setting" gear in the top right.
 
- 
+### The Images used for Training and Predicting
+
+In the Resources\Images folder are three folders:
+
+- Racing
+- Mountain
+- test
+
+The Racing and Mountain folders contain images of these types of bikes 
+that will be trained and tagged. The Test folder contains an image that will be used 
+to perform the test prediction.
 
 **Lab: Creating a Custom Vision Application**
 ---------------------------------------------
@@ -119,9 +129,9 @@ namespace CustomVision.Sample
 Create a method GetTrainingKey with two parameters of trainingKey 
 with a data type of string, and a second parameter of args with the data type
 of string, using the value from the trainingkey variable.
-The code can include control of flow logic to either use the key if it already
-defined, or to prompt for the key should it be missing. create the
-following code at the bootom of the cs file, underneath the } that is third from
+The code can include control of flow logic to either use the key if it is already
+defined, or to prompt for the key should it be missing. Create the
+following code at the bottom of the cs file, underneath the } that is third from
 the bottom of the file.
   
 
@@ -155,7 +165,7 @@ to "Racing". To add tags to your project, create the code after the call to
 
 To add the images we have in memory to the project, call the LoadImagesFromDisk()
 that either uploads images one at a time, or as a batch. The variables MbikesImages
-and RbikesImages should be used as the source of the image uplaod to the project.
+and RbikesImages should be used as the source of the image upload to the project.
 The variables MbikesTag and RbikesTag can be used to associate the tags to the images
 using the CreateImagesFromData method from the trainingApi class.
 Add the code after the call to `CreateTag(project.Id, "Racing")` method.
@@ -164,7 +174,7 @@ Add the code after the call to `CreateTag(project.Id, "Racing")` method.
 
 ### Step 7: Train the project
 
-Use the TrainProject method of the trainingApi class against bthe current projectid
+Use the TrainProject method of the trainingApi class against the current projectid
 to start the training of the images. Use a while clause with the Status method of 
 the iteration class to check the progress of the training. Then set the iteration as
 Default using the IsDefault method of the iteration class. Finally update the iteration
@@ -180,17 +190,17 @@ using that endpoint. Insert the code after the training code you have just
 entered.
 
 Create two variable named account and predictionKey that holds the account information 
-and the prediction key respectively. Then Create a prediction endpoint, passing in a 
-prediction credentials object that contains the obtained prediction key. Make a prediction
-against the new project and then loop over each prediction and write out the results  
+and the prediction key respectively. Then create a prediction endpoint, passing in a 
+prediction credentials object that contains the obtained prediction key. Make a prediction 
+against the new project, loop over each prediction, and write the results to the console. 
 Insert the code after the training code you have just entered.
 
 ### Step 9: Run the example
 
 Build and run the solution. You will be required to input your training API key
 into the console app when running the solution so have this at the ready. The
-training and prediction of the images can take 2 minutes. The prediction results
-appear on the console.
+training and prediction of the images can take 2 minutes. If you've completed the 
+lab successfully, the prediction results should appear on the console.
 
 Further Reading
 ---------------
