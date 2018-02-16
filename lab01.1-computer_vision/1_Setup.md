@@ -12,7 +12,7 @@ If you have been given an Azure Pass to complete this lab, you may go to [http:/
 After creating an Azure account, you may access the [Azure portal](https://portal.azure.com). From the portal, [create a Resource Group for this lab](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-portal). Detailed information about the Data Science Virtual Machine can be [found online](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/overview), but we will just go over what's needed for this workshop. We are creating a VM and not doing it locally to ensure that we are all working from the same environment. This will make troubleshooting much easier. In your Resource Group, deploy and connect to a "{CSP} Data Science Virtual Machine - Windows 2016", with a size of 2-4 vCPUs and 8-12 GB RAM, some examples include but are not limited to DS4_V3, B4MS, DS3, DS3_V2, etc. **Put in the location that is closest to you: West US 2, East US, West Europe, Southeast Asia**. All other defaults are fine. 
 > Note: Testing was completed on both West US 2 DS4_V3 and Southeast Asia DS4_V3.
 
-Once you're connected, there are several things you need to do to set up the DSVM for the workshop:
+[Connect to your VM](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/connect-logon). Once you're connected, there are several things you need to do to set up the DSVM for the workshop:
 
 1. In the Cortana search bar, type "git bash" and select "Git Bash Desktop App", or type "cmd" and select "Command Prompt". Next, type `cd c://` then enter, and `git clone https://github.com/Azure/LearnAI-Bootcamp.git` then enter. This copies down all of the files from the GitHub site to **C:\LearnAI-Bootcamp**.  
 *Validation step*: Go to **C:\LearnAI-Bootcamp** and confirm it exists.
@@ -111,8 +111,7 @@ Once creation is complete, open the panel for your new database and select the _
 You'll need the **URI** and the **PRIMARY KEY** for your _TestCLI's_ `settings.json` file, so copy those into there and you're now ready to store images and data into the cloud.
 
 
-> Note: Be sure to turn off your DSVM **from the portal** after you have completed the Setup lab. When the workshop begins, you will need to start your DSVM from the portal to begin the labs. We recommend turning off your DSVM at the end of each day, and deleting all of the resources you create at the end of the workshop.  
-
+> Note: Be sure to turn off your DSVM **from the portal** after you have completed the Setup lab. When the workshop begins, you will need to start your DSVM from the portal to begin the labs. We recommend turning off your DSVM at the end of each day, and deleting all of the resources you create at the end of the workshop. Alternatively, you can [set up auto-shutdown for your DSVM](https://blogs.msdn.microsoft.com/devtestlab/2018/01/02/set-auto-shutdown-for-virtual-machines-in-azure/). Be sure to set the correct time zone.
 
 ## You have completed the prerequisites. 
 
