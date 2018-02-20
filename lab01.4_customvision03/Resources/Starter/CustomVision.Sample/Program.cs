@@ -62,33 +62,6 @@ namespace CustomVision.Sample
         }
 
 
-        private static string GetTrainingKey(string trainingKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    trainingKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Length != 32)
-                {
-                    Console.Write("Enter your training key: ");
-                    trainingKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return trainingKey;
-        }
-
-        private static void LoadImagesFromDisk()
-        {
-            // this loads the images to be uploaded from disk into memory
-            MbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Mountain").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            RbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Racing").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\test\bike2.jpg"));
-
-        }
+ 
     }
 }

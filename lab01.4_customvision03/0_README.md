@@ -1,8 +1,10 @@
 **Custom Vision API C\# Tutorial**
 ==================================
+**Challenge Exercise**
+----------------------
 
 The goal of this tutorial is to explore a basic Windows application that uses
-the Computer Vision API to create a project, add tags to it, upload images,
+the Custom Vision API to create a project, add tags to it, upload images,
 train the project, obtain the default prediction endpoint URL for the project,
 and use the endpoint to programmatically test an image. You can use this open
 source example as a template for building your own app for Windows using the
@@ -11,7 +13,6 @@ Custom Vision API.  
 **Prerequisites**
 -----------------
 
- 
 
 ### Platform requirements
 
@@ -52,7 +53,17 @@ automate all aspects of the Custom Vision Service. You can obtain a key by
 creating a new project at <https://customvision.ai> and then clicking on the
 "setting" gear in the top right.
 
- 
+### The Images used for Training and Predicting
+
+In the Resources\Images folder are three folders:
+
+- Racing
+- Mountain
+- test
+
+The Racing and Mountain folders contain images of these types of bikes 
+that will be trained and tagged. The Test folder contains an image that will be used 
+to perform the test prediction.
 
 **Lab: Creating a Custom Vision Application**
 ---------------------------------------------
@@ -69,7 +80,7 @@ located:
 Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This code defines and calls two helper methods. The method called
+This code calls two helper methods which we will define below. The method called
 `GetTrainingKey` prepares the training key. The one called `LoadImagesFromDisk`
 loads two sets of images that this example uses to train the project, and one
 test image that the example loads to demonstrate the use of the default
@@ -109,162 +120,87 @@ namespace CustomVision.Sample
         }
 
 
-        private static string GetTrainingKey(string trainingKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    trainingKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Length != 32)
-                {
-                    Console.Write("Enter your training key: ");
-                    trainingKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return trainingKey;
-        }
-
-        private static void LoadImagesFromDisk()
-        {
-            // this loads the images to be uploaded from disk into memory
-            MbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Mountain").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            RbikesImages = Directory.GetFiles(@"..\..\..\..\Images\Racing").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\test\bike2.jpg"));
-
-        }
     }
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- 
+### Step 2: Add code to get and manage the training key
 
-### Step 2: Create a Custom Vision Service project
+Create a method `GetTrainingKey()` with two parameters of `trainingKey` 
+with a data type of string, and a second parameter of args with the data type
+of string, using the value from the trainingkey variable.
+The code can include control of flow logic to either use the key if it is already
+defined, or to prompt for the key should it be missing. Create the
+following code at the bottom of the cs file, underneath the } that is third from
+the bottom of the file.
+  
 
-To create a new Custom Vision Service project named “Bike Type”, add the
-following code in the body of the `Main()` method after the call to `new
-TrainingApi().`
+### Step 3: Create code that will upload images from the local disk
 
- 
+Create a method named `LoadImagesFromDisk()` that creates two variables named
+`MbikesImages` and `RbikesImages`. Each of thes variables should use the `GetFiles()`
+method to retrieve the images located in the Images\Mountain and Images\Racing
+folder of your Github location respectively. A third variable named testImage 
+should be created that defines a new MemoryStream which loads the image bike1.jpg 
+from the Images\test folder of your Github location. Create code underneath the 
+code created in step 2
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Create a new project  
-Console.WriteLine("Creating new project:");
-var project = trainingApi.CreateProject("Bike Type");
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- 
+### Step 4: Create a Custom Vision Service project
 
-### Step 3: Add tags to your project
+Create a new Custom Vision Service project named "Bike Type", create the
+code in the body of the `Main()` method after the call to `new TrainingApi().`
 
-To add tags to your project, insert the following code after the call to
+
+### Step 5: Add tags to your project
+
+Create two variable named MbikesTag and RbikesTag that call the CreateTag
+method of the class trainingAPI for the current project. The MbikesTag 
+variable should be set to "Mountain". The RbikesTag variable should be set 
+to "Racing". To add tags to your project, create the code after the call to
 `CreateProject("Bike Type");`.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Make two tags in the new project  
-var MbikesTag = trainingApi.CreateTag(project.Id, "Mountain");
-var RbikesTag = trainingApi.CreateTag(project.Id, "Racing");
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- 
+### Step 6: Upload images to the project
 
-### Step 4: Upload images to the project
+To add the images we have in memory to the project, call the LoadImagesFromDisk()
+that either uploads images one at a time, or as a batch. The variables MbikesImages
+and RbikesImages should be used as the source of the image upload to the project.
+The variables MbikesTag and RbikesTag can be used to associate the tags to the images
+using the CreateImagesFromData method from the trainingApi class.
+Add the code after the call to `CreateTag(project.Id, "Racing")` method.
 
-To add the images we have in memory to the project, insert the following code
-after the call to `CreateTag(project.Id, "Racing")` method.
 
- 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Add some images to the tags  
-Console.WriteLine("\\tUploading images");
-LoadImagesFromDisk();
+### Step 7: Train the project
 
-// Images can be uploaded one at a time  
-foreach (var image in MbikesImages)
-{
-  trainingApi.CreateImagesFromData(project.Id, image, new List< string> () { MbikesTag.Id.ToString() });
-}
+Use the TrainProject method of the trainingApi class against the current projectid
+to start the training of the images. Use a while clause with the Status method of 
+the iteration class to check the progress of the training. Then set the iteration as
+Default using the IsDefault method of the iteration class. Finally update the iteration
+and set it as default within the project using the UpdateIteration method of the 
+trainingApi class. Insert your code after the end of code that you added in the prior step. 
 
-// Or uploaded in a single batch   
-trainingApi.CreateImagesFromData(project.Id, RbikesImages, new List< Guid> () { RbikesTag.Id });
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- 
-
-### Step 5: Train the project
-
-Now that we have added tags and images to the project, we can train it. Insert
-the following code after the end of code that you added in the prior step. This
-creates the first iteration in the project. We can then mark this iteration as
-the default iteration.
-
- 
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Now there are images with tags start training the project
-Console.WriteLine("\\tTraining");
-var iteration = trainingApi.TrainProject(project.Id);
-
-// The returned iteration will be in progress, and can be queried periodically to see when it has completed  
-while (iteration.Status == "Training")
-{
-    Thread.Sleep(1000);
-
-    // Re-query the iteration to get it's updated status  
-    iteration = trainingApi.GetIteration(project.Id, iteration.Id);
-}
-
-// The iteration is now trained. Make it the default project endpoint  
-iteration.IsDefault = true;
-trainingApi.UpdateIteration(project.Id, iteration.Id, iteration);
-Console.WriteLine("Done!\\n");
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-### Step 6: Get and use the default prediction endpoint
+### Step 8: Get and use the default prediction endpoint
 
 We are now ready to use the model for prediction. First we obtain the endpoint
 associated with the default iteration. Then we send a test image to the project
 using that endpoint. Insert the code after the training code you have just
 entered.
 
- 
+Create two variable named account and predictionKey that holds the account information 
+and the prediction key respectively. Then create a prediction endpoint, passing in a 
+prediction credentials object that contains the obtained prediction key. Make a prediction 
+against the new project, loop over each prediction, and write the results to the console. 
+Insert the code after the training code you have just entered.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Now there is a trained endpoint, it can be used to make a prediction  
-
-// Get the prediction key, which is used in place of the training key when making predictions  
-var account = trainingApi.GetAccountInfo();
-var predictionKey = account.Keys.PredictionKeys.PrimaryKey;
-
-// Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
-PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);
-PredictionEndpoint endpoint = new PredictionEndpoint(predictionEndpointCredentials);
-
-// Make a prediction against the new project  
-Console.WriteLine("Making a prediction:");
-var result = endpoint.PredictImage(project.Id, testImage);
-
-// Loop over each prediction and write out the results  
-foreach (var c in result.Predictions)
-{
-   Console.WriteLine($"\\t{c.Tag}: {c.Probability:P1}");
-}
-Console.ReadKey();
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
- 
-
-### Step 7: Run the example
+### Step 9: Run the example
 
 Build and run the solution. You will be required to input your training API key
 into the console app when running the solution so have this at the ready. The
-training and prediction of the images can take 2 minutes. The prediction results
-appear on the console.
+training and prediction of the images can take 2 minutes. If you've completed the 
+lab successfully, the prediction results should appear on the console.
 
 Further Reading
 ---------------
