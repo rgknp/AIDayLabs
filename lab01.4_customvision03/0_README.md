@@ -80,7 +80,7 @@ located:
 Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This code defines and calls two helper methods. The method called
+This code calls two helper methods which we will define below. The method called
 `GetTrainingKey` prepares the training key. The one called `LoadImagesFromDisk`
 loads two sets of images that this example uses to train the project, and one
 test image that the example loads to demonstrate the use of the default
@@ -126,7 +126,7 @@ namespace CustomVision.Sample
 
 ### Step 2: Add code to get and manage the training key
 
-Create a method GetTrainingKey with two parameters of trainingKey 
+Create a method `GetTrainingKey()` with two parameters of `trainingKey` 
 with a data type of string, and a second parameter of args with the data type
 of string, using the value from the trainingkey variable.
 The code can include control of flow logic to either use the key if it is already
@@ -137,8 +137,8 @@ the bottom of the file.
 
 ### Step 3: Create code that will upload images from the local disk
 
-Create a method named LoadImagesFromDisk() that creates two variables named
-MbikesImages and RbikesImages. Each of thes variables should use the GetFiles
+Create a method named `LoadImagesFromDisk()` that creates two variables named
+`MbikesImages` and `RbikesImages`. Each of thes variables should use the `GetFiles()`
 method to retrieve the images located in the Images\Mountain and Images\Racing
 folder of your Github location respectively. A third variable named testImage 
 should be created that defines a new MemoryStream which loads the image bike1.jpg 
