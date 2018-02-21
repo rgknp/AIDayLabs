@@ -14,20 +14,15 @@ To use DirectLineBot, you must:
 
 - Deploy it to Azure. Follow [this tutorial](https://docs.microsoft.com/en-us/bot-framework/deploy-dotnet-bot-visual-studio) to learn how to deploy a .NET bot to Azure directly from Visual Studio.
 
-- Register it with the Bot Framework before others can use DirectLineBot. The steps to register can be found in the [registration instructions](https://docs.microsoft.com/en-us/bot-framework/portal-register-bot).
+- Register it in the portal before others can use DirectLineBot. The steps to register can be found in the [registration instructions](https://docs.microsoft.com/en-us/bot-framework/portal-register-bot).
 
 
 DirectLineSampleClient is the client that will send messages to the bot.
 
 ## Authentication
 
-Direct Line API requests can be authenticated either by using a secret that you obtain from the Direct Line channel configuration page in the Bot Framework Portal. Go to the Bot Framework Portal and find your bot. Add Direct Line via *Connect to channels* for your bot.
+Direct Line API requests can be authenticated by using a secret that you obtain from the Direct Line channel configuration page in the Azure Portal. Go to the Azure Portal and find your bot. Add Direct Line by selecting **Channels** under "Bot Management," then select "Direct Line". You can obtain a Secret Key from the Direct Line channel configure page by selecting "Show" and copying the key.
 
-![Connect to channels](images/ConnectToChannels.png)
-
-You can obtain a Secret Key from the Direct Line channel after adding as shown below:
-
-![Direct Line](images/DirectLine.png)
 
 **Security Scope**
 
@@ -35,17 +30,16 @@ Secret Key: Secret key is application wide and is embedded in the client applica
 
 Tokens: A token is conversation specific. You request a token using that secret and you can initiate a conversation with that token. Its valid for 30 minutes from when it is issued but it can be refreshed.
 
-## App Config
+## Web Config
 
-The Secret key obtained from *Configure Direct Line* in the Bot Framework Portal is then added to the Configuration settings in App.config file as shown below. In addition, for the published bot, capture the bot id (also known as the app id) and enter in the appSettings part of App.config from DirectLineSampleClient project. The relevant lines of App.config to enter in the App.config are listed as follows:
+The Secret key obtained from *Configure Direct Line* in the Azure Portal should then be added to the Configuration settings in Web.config file for your published bot. In addition, you will need to capture and add the bot id (also known as the bot handle), app password, and app ID, and enter in the appSettings part of App.config from DirectLineSampleClient project. The relevant lines of Web.config to enter/edit in the App.config are listed as follows:
 
-```
+```csharp
 <add key="DirectLineSecret" value="YourBotDirectLineSecret" />
 <add key="BotId" value="YourBotId/" />
+<add key="MicrosoftAppId" value="YourAppId" />
+<add key="MicrosoftAppPassword" value="YourAppPassword" />
 ```
-
-
-![Config](images/Config.png)
 
 ## Sending and Receiving Messages
 
