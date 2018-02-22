@@ -19,7 +19,7 @@ This workshop demonstrates how you can perform logging using Microsoft Bot Frame
 In the advanced analytics space, there are plenty of uses for storing log converstaions. Having a corpus of chat conversations can allow developers to: 
 1. Build question and answer engines specific to a domain.
 2. Introduce a personality to bots.
-3. Perform analyses on specific topics or products to identify trends.
+3. Perform analysis on specific topics or products to identify trends.
 
 ## Prerequisites
 
