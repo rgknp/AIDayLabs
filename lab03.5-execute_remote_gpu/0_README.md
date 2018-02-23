@@ -1,6 +1,6 @@
 # Training a Convolutional Neural Network on a GPU-enabled Virtual Machine
 
-This hands-on lab guides you with how to configure Azure ML Workbench to use a Data Science Virtual Machine (DSVM) equipped with GPUs as an execution target. By now, you should be familiar with how to execute locally (with and without docker).
+This hands-on lab guides you with how to configure Azure Machine Learning to use a Data Science Virtual Machine (DSVM) equipped with GPUs as an execution target. By now, you should be familiar with how to execute locally (with and without docker).
 
 ***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of: 
   *  Machine Learning and Data Science
@@ -10,21 +10,21 @@ This hands-on lab guides you with how to configure Azure ML Workbench to use a D
 
 ## Background
 
-Sentiment analysis is a well-known task in the realm of natural language processing. Sentiment analysis aims to determine the attitude of a speaker/writer. In this lab, we will use `sentiment_reviews.py` (located in the resources folder) that uses Deep Learning for predicting sentiment from IMDB movie reviews. The script uses [keras](https://keras.io/) with [tensorflow](https://www.tensorflow.org/) as the backend for building a model that processes natural language, and is part
+Sentiment analysis is a well-known task in the realm of natural language processing (NLP), and it aims to determine the attitude of a speaker/writer. Frequently, artificial neural networks (and deep learning) are used to estimate such sentiment. In this lab, we will use this approach. In the [resources](resources) folder, there is a `sentiment_reviews.py` script that builds a neural network to predict sentiment from IMDB movie reviews. The script uses [keras](https://keras.io/) with [tensorflow](https://www.tensorflow.org/) as the backend. It is part
 of a larger [real-world example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-sentiment-analysis-deep-learning).
 
 ## 1. Setup
 
-A. Create a new blank project.
+A. Create a new blank project, and call it 'sentiment-gpu'.
 
 B. From the resources folder, copy `sentiment_analysis.py` to the project folder.
 
-C. Review `sentiment_analysis.py` file. Take particular note of the following:
+C. Review the `sentiment_analysis.py` file. Take particular note of the following:
   - The `keras` dependencies loaded at the top of the file
   - The `build_model()` method that both constructs the architecture of the network and fits it.
-  - The last 20 lines, which correspond to the control flow of what the script does.
+  - The last 20 lines, which correspond to the control flow of what the script does when executed.
 
-Once you are comfortable with this, we will execute this on a remote VM with GPU hardware.
+Once you are comfortable with this script, we will execute this on a remote VM with GPU hardware.
 
 ## 2. Remote Execution on a DSVM equipped with GPU
 
@@ -43,11 +43,11 @@ D. Fill in the `Basics` blade with the required information. When selecting the 
 
 E. Choose the size of the virtual machine. Select one of the sizes with NC-prefixed VMs, which are equipped with NVidia GPU chips. Click View All to see the full list as needed. Learn more about [GPU-equipped Azure VMs](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-gpu).
 
-F. Finish the remaining settings and review the purchase information. Click Purchase to Create the VM. Take note of the IP address allocated to the virtual machine. 
+F. Finish the remaining settings and review the purchase information. Click Purchase to Create the VM. Take note of the IP address allocated to the virtual machine - you will need this (or a domain name) in the next section when you are configuring AML to 
 
 ### 2.2 Create a new Compute Target
 
-A. Launch the command line from Azure ML Workbench. 
+A. With the new project called 'sentiment-gpu' open in AML Workbench, launch the command line. 
 
 B. Enter the following command. Replace the placeholder text from the example below with your own values for the name, IP address, username, and password. 
 
@@ -55,11 +55,22 @@ B. Enter the following command. Replace the placeholder text from the example be
 
 For example, your command could look like:
 
-```az ml computetarget attach remotedocker --name myNCdsvm --address 128.0.0.1 --username dsvmuser --password myterriblepassword123```
+```az ml computetarget attach remotedocker --name myNCdsvm --address 127.0.0.1 --username dsvmuser --password myterriblepassword123```
 
-This will create two files in the `aml_config` directory associated with the project you opened. It will create `<COMPUTETARGETNAME>.runconfig` and `<COMPUTETARGETNAME>.compute` files for the computetarget you just created. Take a moment a look at those two files.
+This will create two files in the `aml_config` directory associated with the project. Specifically, within that directory, it will create `<COMPUTETARGETNAME>.runconfig` and `<COMPUTETARGETNAME>.compute` files for the computetarget you just created. Take a moment a look at those two files.
 
-C. Edit `conda_dependencies.yml` in the `aml_config` directory. We need to include the deep learning packages (`tensorflow-gpu` and `keras`) as dependencies that must be managed. The best way to include the `tensorflow-gpu` package is to include the specific version available in the `anaconda` channel. The `conda_dependencies.yml` should look as follows:
+### 2.3 Configure the compute target to leverage GPU compute.
+
+In order to run the script on a remote VM with GPU support, we need to edit three files: 
+
+- `aml_config/conda_dependencies.yml` to include the python dependencies
+- `<COMPUTETARGETNAME>.compute>` to make sure that the docker image that will be created can support GPU execution
+- `<COMPUTETARGETNAME>.runconfig>` to make sure that the runtime environment is python.
+
+From the workbench, open File View, and hit the Refresh button. Navigate to the `aml_config` directory, and find the `conda_dependencies.yml`, `<COMPUTETARGETNAME>.compute`, and `<COMPUTETARGETNAME>.runconfig` files.
+
+
+A. Edit `conda_dependencies.yml`. This file is referenced in `<COMPUTETARGETNAME>.runconfig` and specifies the python dependencies that we need to have installed on the compute target. We need to include the deep learning packages (`tensorflow-gpu` and `keras`) as dependencies that must be managed. The best way to include the `tensorflow-gpu` package is to include the specific version available in the `anaconda` channel. Once we add these dependencies, the `conda_dependencies.yml` should look as follows:
 
 ```
 name: sentiment-gpu-project
@@ -81,11 +92,8 @@ dependencies:
     - azure-ml-api-sdk==0.1.0a10  
 ```
 
-D. Configure the compute target to leverage GPU compute.
 
-In order to enable GPU support, we must now edit the two files created when we attached the remote compute target. From the workbench, open File View, and hit the Refresh button. Navigate to the `aml_config` directory, and find the `.compute` and `.runconfig` files you created earlier.
-
-First, open the `<COMPUTETARGETNAME>.compute` file and make two changes:
+B. Open the `<COMPUTETARGETNAME>.compute` file and make two changes:
 
 - Change the `baseDockerImage` value to `microsoft/mmlspark:plus-gpu-0.9.9` 
 - Add a new line `nvidiaDocker: true`. So the file should have these two lines:
@@ -95,7 +103,7 @@ baseDockerImage: microsoft/mmlspark:plus-gpu-0.9.9
 nvidiaDocker: true
 ```
 
-Next, open the `<COMPUTETARGETNAME>.runconfig` file, and make one change:
+C. Open the `<COMPUTETARGETNAME>.runconfig` file, and make one change:
 
 - Change the `Framework` value from `Pyspark` to `Python`. 
 
@@ -111,7 +119,7 @@ In the prior example, it would look like:
 
 This will take a little time (5-10 minutes).
 
-E. Execute
+### 2.4 Execute on the remote VM
 
 Once this has successfully completed, you can run `sentiment_reviews.py` script from the command line:
 
@@ -127,4 +135,6 @@ Total memory: 11.17GiB Free memory: 11.10GiB
 2018-02-01 19:55:58.353261: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1045] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla K80, pci bus id: 5884:00:00.0)
 ```
 
-If this succeeded, then congratulations, you have just executed on a remote VM using GPU compute. This concludes this lab. If you would like to examine how to operationalize this model in a scoring service, you can view the [real-world example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-sentiment-analysis-deep-learning).
+If this succeeded, then congratulations, you have just executed on a remote VM using GPU compute. 
+
+This concludes this lab. If you would like to examine how to operationalize this model in a scoring service, you can view the [real-world example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-sentiment-analysis-deep-learning).
