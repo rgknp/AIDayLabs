@@ -48,16 +48,17 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
   - 11-12: [Lab 3.2: Comparing and Managing Models with Azure Machine Learning][lab3.2]
   - 12-1: Lunch
   - 1-2:20 [Lab 3.3: Managing conda environments for Azure Machine Learning workflows][lab3.3]
-  - 2:30-3:50 [Lab 3.4: Executing a data engineering or model training workflow to a remote execution environment][lab3.4]
+  - 2:30-3:50 [Lab 3.4: Executing a data engineering or model training workflow in a remote execution environment][lab3.4]
   - 4-5: Summary and White-board Discussion
 - Day 2 
-  - 9-10: Introduction and Context.
-  - 10-11: [Lab 4.1: Managing Models using Azure Machine Learning][lab4.1]
-  - 11-12:00: [Lab 4.2: Deploying a scoring service to Azure Container Service (AKS)][lab4.2]
+  - 9-9:20: Review and Next Steps
+  - 9:20-10:20: [Lab 3.5: Executing a neural network workflow remotely using GPUs][lab3.5] 
+  - 10:30-10:50: Introduction to Deployment and Context
+  - 11-12:00: [Lab 4.1: Managing Models using Azure Machine Learning][lab4.1]
   - 12:00-1: Lunch
-  - 1:00-1:50: [Lab 4.3: Consuming the final service][lab4.3]
-  - 2:00-2:50: [Lab 4.4: Collect data from a scoring service][lab4.4]
-  - 3:00-3:50: [Lab 4.5: Explore hyper-parameters on Spark using Azure Machine Learning (if time)][lab4.5]
+  - 1:00-1:50: [Lab 4.2: Deploying a scoring service to Azure Container Service (AKS)][lab4.2]
+  - 2:00-2:50: [Lab 4.3: Consuming the final service][lab4.3]
+  - 3:00-3:50: [Lab 4.4: Collect data from a scoring service][lab4.4]
   - 4:00-5:00: Q&A and Feedback for Pro AI Bootcamp
 
 
@@ -77,6 +78,7 @@ These materials have been tested on Windows with:
 [lab3.2]: https://aka.ms/learnai-proaidevbootcamp-03-2
 [lab3.3]: https://aka.ms/learnai-proaidevbootcamp-03-3
 [lab3.4]: https://aka.ms/learnai-proaidevbootcamp-03-4
+[lab3.5]: lab03.5-execute_remote_gpu/0_README.md
 [lab4.1]: https://aka.ms/learnai-proaidevbootcamp-04-1
 [lab4.2]: https://aka.ms/learnai-proaidevbootcamp-04-2
 [lab4.3]: https://aka.ms/learnai-proaidevbootcamp-04-3
