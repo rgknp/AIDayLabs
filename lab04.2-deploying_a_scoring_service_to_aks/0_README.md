@@ -108,6 +108,7 @@ az ml service create realtime --model-file <MODEL_FILE_RELATIVE_PATH> -f <SCORIN
 ```
 
 #! this needs to move to the top, then the model update in the script, then the service update
+#! would be great to show a case with a different prediction
 
 ### (Optional) Lab 3: Update Service with new model
 

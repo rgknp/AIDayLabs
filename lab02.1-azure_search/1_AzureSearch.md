@@ -1,6 +1,6 @@
 ## 1_AzureSearch:
 Estimated Time: 20-30 minutes
-
+  
 ## Azure Search 
 
 [Azure Search](https://docs.microsoft.com/en-us/azure/search/search-what-is-azure-search) is a search-as-a-service solution allowing developers to incorporate great search experiences into applications without managing infrastructure or needing to become search experts.
@@ -34,17 +34,17 @@ Once creation is complete, open the panel for your new search service.
 
 ### Lab 1.2: Create an Azure Search Index
 
-An index is a persistent store of documents and other constructs used by an Azure Search service. An index is like a database that holds your data and can accept search queries. You define the index schema to map to reflect the structure of the documents you wish to search, similar to fields in a database. These fields can have properties that tell things such as if it is full text searchable, or if it is filterable.  You can populate content into Azure Search by programmatically [pushing content](https://docs.microsoft.com/en-us/rest/api/searchservice/addupdate-or-delete-documents) or by using the [Azure Search Indexer](https://docs.microsoft.com/en-us/azure/search/search-indexer-overview) (which can crawl common datastores for data).
+An index is a persistent store of documents and other constructs used by an Azure Search service. An index is like a database that holds your data and can accept search queries. You define the index schema to map to the structure of the documents you wish to search, similar to fields in a database. These fields can have properties that tell things such as if it is full text searchable, or if it is filterable.  You can populate content into Azure Search by programmatically [pushing content](https://docs.microsoft.com/en-us/rest/api/searchservice/addupdate-or-delete-documents) or by using the [Azure Search Indexer](https://docs.microsoft.com/en-us/azure/search/search-indexer-overview) (which can crawl common datastores for data).
 
 For this lab, we will use the [Azure Search Indexer for Cosmos DB](https://docs.microsoft.com/en-us/azure/search/search-howto-index-documentdb) to crawl the data in the Cosmos DB collection. 
 
 ![Import Wizard](./resources/assets/AzureSearch-ImportData.png) 
 
-Within the Azure Search blade you just created, click **Import Data->Data Source->Document DB**.
+Within the Azure Search blade you just created, click **Import Data->Data Source->Cosmos DB**.
 
 ![Import Wizard for DocDB](./resources/assets/AzureSearch-DataSource.png) 
 
-Once you click this, choose a name for the Cosmos DB data source. If you completed the previous lab, `lab01.1-computer_vision`, choose the Cosmos DB account where your data resides as well as the corresponding Container and Collections. If you did not complete the previous lab, select "Or input a connection string" and paste in TODO update connection string: `AccountEndpoint=https://anthobootcampdb.documents.azure.com:443/;AccountKey=XzxwNshrS92RAycyikcSNLOtrDdTMQIYsOHDLko22QDHVCNi4b3YW7pqrzhDPZJupwelnlABrqY4m3nCr686Yw==;`. For both, the Database should be "images" and the Collection should be "metadata".
+Once you click this, choose a name for the Cosmos DB data source. If you completed the previous lab, `lab01.1-computer_vision`, choose the Cosmos DB account where your data resides as well as the corresponding Container and Collections. If you did not complete the previous lab, select "Or input a connection string" and paste in the connection string: `AccountEndpoint=https://anthobootcampdb.documents.azure.com:443/;AccountKey=XzxwNshrS92RAycyikcSNLOtrDdTMQIYsOHDLko22QDHVCNi4b3YW7pqrzhDPZJupwelnlABrqY4m3nCr686Yw==;`. For both, the Database should be "images" and the Collection should be "metadata".
 
 Click **OK**.
 
