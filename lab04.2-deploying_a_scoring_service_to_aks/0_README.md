@@ -32,9 +32,9 @@ We will review these articles in class:
 3. [Scoring Setup and Configuration](https://docs.microsoft.com/en-us/azure/machine-learning/preview/deployment-setup-configuration)
 4. [Scaling Clusters](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-scale-clusters)
 
-### Lab 1: Generate model files
+### Section 1: Generate model files
 
-In this lab, we create an Churn Prediction experiment, examine its configuration, and run the experiment locally to generate model files.
+In this section, we create an Churn Prediction experiment, examine its configuration, and run the experiment locally to generate model files.
 
 ```
 az ml experiment submit -c local CATelcoCustomerChurnModelingWithoutDprep.py
@@ -46,9 +46,9 @@ As a result a trained model based on the Naive Bayes algorithm gets created and 
 
 When finished, click on the job and notice the output `model.pkl` in the **Run Properties** pane under **Outputs**. Select this output, download it and place it the project's root folder. If we have not already done so, we can generate the schema by running `python churn_schema_gen.py`.
 
-### Lab 3: Deploy Service to production
+### Section 2: Deploy Service to production
 
-In this lab, we will recreate the service, but this time not as a local service but a remote service. To deploy the web service to a production environment, first set up the environment using the following command:
+In this section, we will recreate the service, but this time not as a local service but a remote service. To deploy the web service to a production environment, first set up the environment using the following command:
 
 ```
 az ml env setup --cluster -n <ENVIRONMENT_NAME> -l <AZURE_REGION e.g. eastus2> [-g <RESOURCE_GROUP>]
@@ -153,7 +153,7 @@ That's it. We now have the remote service up and running. We can run some querie
   - create and register a Docker image
   - spinn a container from the Docker image
 
-### Lab 3: Register a new model
+### Section 3: Register a new model
 
 Open and examine `CATelcoCustomerChurnModelingWithoutDprep.py`. In this Python script, we create two models: A naive Bayes model, which is stored in the Python variable called `model` and a decision tree model, stored in the Python variable called `dt`. For the sake of argument, let's assume that the decision tree is a newer and better model (i.e. makes more accurate predictions) than the naive Bayes model. So far we haven't done anything with `dt` once the model is trained. Scroll to them bottom part of the file in order to make a small change: Replace `pickle.dump(model, f)` with `pickle.dump(dt, f)`. This will replace `model.pkl` which contained the earlier Naive Bayes model with the decision tree model represented by `dt`.
 
@@ -171,7 +171,7 @@ Now based on the commands from the last section, run through the following
 
 Notice that we do not spin a new service from the new image. Instead, in the next seciton, we learn how we can update the current service with the new image. Updating a service has the advantage of letting us keep the service's endpoints unchanged while replacing an older model with a new and improved one. It also allows us to perform roll-backs if things don't work.
 
-### (Optional) Lab 4: Update Service with new model
+### (Optional) Section 4: Update Service with new model
 
 To use a different model in the service, we can perform a simple update to the service. In the Churn Prediction experiment, the accuracy of Decision Tree is slightly higher than Naive Bayes. So, we can update the service to use the decision tree model instead.
 

@@ -43,9 +43,9 @@ Workbench combines all of these components into one location. We can use a graph
 
 ![Local AMLS Experiment run](https://docs.microsoft.com/en-us/azure/machine-learning/preview/media/experimentation-service-configuration/local-native-run.png)
 
-### Lab 1: Execution - Local and Docker Container
+### Section 1: Execution - Local and Docker Container
 
-In this lab we create an experiment, examine its configuration, and run the experiment locally, using both a `local` compute and a `docker` compute. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI)
+In this seciton we create an experiment, examine its configuration, and run the experiment locally, using both a `local` compute and a `docker` compute. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI)
 
 - Open Workbench and Create a new experiment using the Churn example.
 - Launch the Azure CLI. An easy way to launch the CLI is opening a project in Workbench and navigating to **File > Open Command Prompt**.
@@ -67,9 +67,9 @@ We should see results as follows:
 
 ![Naive Bayes](images/naive-bayes.png)
 
-### Lab 2: Execute an Experiment on a remote Data Science Virtual Machine
+### Section 2: Execute an Experiment on a remote Data Science Virtual Machine
 
-In this lab we create an experiment, examine its configuration, and run the experiment on a remote Docker container. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI).
+In this section we create an experiment, examine its configuration, and run the experiment on a remote Docker container. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI).
 
 - [Open this Reference and create an Ubuntu Data Science Virtual Machine](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro#create-your-data-science-virtual-machine-for-linux)
 
@@ -103,9 +103,9 @@ az ml experiment submit -c <REMOTE_VM> CATelcoCustomerChurnModelingWithoutDprep.
 
 Note that the execution environment is configured using the specifications in `conda_dependencies.yml`.
 
-Please take a moment to delete the Ubuntu DSVM before moving to the next lab.
+Please take a moment to delete the Ubuntu DSVM before moving to the next section.
 
-### (Optional) Lab 3: Running on a remote Spark cluster
+### (Optional) Section 3: Running on a remote Spark cluster
 
 Workbench is flexible to run experimentation on big data using HDInsight Spark clusters. Note that the HDInsight cluster must use Azure Blob as the primary storage (and Azure Data Lake storage is not supported yet). Additionally, we need SSH access to the HDInsight cluster in order to execute experiments in this mode.
 

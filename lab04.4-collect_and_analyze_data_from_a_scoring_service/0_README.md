@@ -26,12 +26,12 @@ The process and flow for using Azure Machine Learning Services has this layout:
 
 ![Image](https://docs.microsoft.com/en-us/azure/machine-learning/preview/media/model-management-overview/modelmanagementworkflow.png)
 
-## Lab 1: Collecting Model Data
+## Section 1: Collecting Model Data
 
-In this lab, we demonstrate the model data collection feature in Workbench to archive model inputs and predictions from a web service.
+In this section, we demonstrate the model data collection feature in Workbench to archive model inputs and predictions from a web service.
 
 
-## Step 1.1: Update the code to collect data with the appropriate libraries
+### Step 1.1: Update the code to collect data with the appropriate libraries
 
 In Workbench open the Churn Prediction project we created from the previous labs. 
 
@@ -167,7 +167,7 @@ To test the data collection, run the `az ml service run realtime` command:
 az ml service run realtime -i <SERVICE_ID> -d "ADD INPUT DATA HERE!!"
 ```
 
-### Lab 2: View Collect Data
+### Section 2: View Collect Data
 
 To view the collected data in blob storage:
 
