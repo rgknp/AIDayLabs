@@ -27,12 +27,12 @@ The process and flow for using Azure Machine Learning Services has this layout:
 
 ## Lab 1: Collecting Model Data
 
-In this lab, we demonstrate the model data collection feature in Workbench to archive model inputs and predictions from a web service.
+In this lab, we demonstrate the model data collection feature in AML to archive model inputs and predictions from a web service.
 
 
 ### Step 1.1: Update the code to collect data with the appropriate libraries
 
-In Workbench open the Churn Prediction project we created from the previous labs. 
+Open the Churn Prediction project we created from the previous labs. 
 
 To use model data collection, add the following code at the top of the scoring file `score.py`:
 
@@ -196,5 +196,5 @@ Data can be consumed from Azure blobs in multiple ways. Some examples are
 
 In this workshop we learned how to:
 
-- Use the Azure Machine Learning Services collection module to view scoring data from API calls
+- Use the `azureml.datacollector` module to collect data from scoring calls
 - Use Azure Storage to view the results
