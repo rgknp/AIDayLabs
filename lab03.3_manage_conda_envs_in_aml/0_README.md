@@ -26,7 +26,7 @@ If working locally without the use of Conda environments, we would be using our 
 
 To see if Conda is installed, type `conda --version`. Now type `conda list` to see a listing of installed python packages. Some of these packages are installed using `pip` or `easy_install`, some are installed using `conda install`.
 
-Open the project with Code by going to **File > Open Project (Code)**. Open the `conda_dependencies.yml` file and examine the content. What package dependencies are specified here? Add `matplotlib=2.0.2` to the list of dependencies for this project then save the file. Depending on your `pip` version, you may need to comment out the following three lines (in Code, use **CTRL+/** to comment and uncomment a code chunk):
+Open the project with Code by going to **File > Open Project (Code)**. Open the `conda_dependencies.yml` file and examine the content. What package dependencies are specified here? Add `matplotlib=2.0.2` to the list of dependencies for this project then save the file. If your version of `conda` is less than `4.4.0`, you will need to comment out the following three lines (in Code, use **CTRL+/** to comment and uncomment a code chunk):
 
 ```
 - --index-url https://azuremldownloads.azureedge.net/python-repository/preview
