@@ -45,7 +45,7 @@ Workbench combines all of these components into one location. We can use a graph
 
 ### Section 1: Execution - Local and Docker Container
 
-In this seciton we create an experiment, examine its configuration, and run the experiment locally, using both a `local` compute and a `docker` compute. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI)
+In this section we create an experiment, examine its configuration, and run the experiment locally, using both a `local` compute and a `docker` compute. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI)
 
 - Open Workbench and Create a new experiment using the Churn example.
 - Launch the Azure CLI. An easy way to launch the CLI is opening a project in Workbench and navigating to **File > Open Command Prompt**.
