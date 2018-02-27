@@ -55,7 +55,7 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
   - 12-1: Lunch
   - 1-2:  [Lab 2.3: Log Chat Conversations in your Bot][lab-intelbot-311]
   - 2-3: [Lab 2.4: Testing your Bot][lab-intelbot-321]
-  - 3-4: [Business Case II - Bots](./lab02.5-bootcamp_case_2/case_part2.md)
+  - 3-4: [Business Case II - Bots](./lab02.5-bootcamp_case_2/Case_Part2.md)
   - 4-5: Q&A and Feedback for Emerging AI Bootcamp
 
 
