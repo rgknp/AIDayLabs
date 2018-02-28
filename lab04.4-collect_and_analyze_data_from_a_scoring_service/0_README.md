@@ -1,15 +1,14 @@
 # Collect data from a scoring service
 
-This hands-on lab guides us through collecting Machine Learning scoring data using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
+This hands-on lab guides us through collecting Machine Learning scoring data using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml). 
 
 In this workshop, we will
 
-- Use the Azure Machine Learning Services collection module to view scoring data from API calls
+- Use the `azureml.datacollector` module to collect data from scoring calls
 - Use Azure Storage to view the results
 
 ***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of
 
-- Programming using an Agile methodology
 - Machine Learning and Data Science
 - Intermediate to Advancced Python programming
 - Microsoft Azure Storage concepts
@@ -28,12 +27,12 @@ The process and flow for using Azure Machine Learning Services has this layout:
 
 ## Section 1: Collecting Model Data
 
-In this section, we demonstrate the model data collection feature in Workbench to archive model inputs and predictions from a web service.
+In this section, we demonstrate the model data collection feature in AML to archive model inputs and predictions from a web service.
 
 
 ### Step 1.1: Update the code to collect data with the appropriate libraries
 
-In Workbench open the Churn Prediction project we created from the previous labs. 
+Open the Churn Prediction project we created from the previous labs. 
 
 To use model data collection, add the following code at the top of the scoring file `score.py`:
 
@@ -138,13 +137,15 @@ def run(input_df):
 
 ### Step 1.2: Update environment variables
 
-Before we create a local service using `az ml service create`, we must set two environment variables to enable data collection: `AML_MODEL_DC_STORAGE_ENABLED` and `AML_MODEL_DC_STORAGE`. `AML_MODEL_DC_STORAGE_ENABLED` must be set to `true`, and `AML_MODEL_DC_STORAGE` must be set to the connection string for the storage account you would like to use. A good option for the storage account is the storage account associated with your local compute env. When using an AKS cluster as a compute environment, the storage account associated with the env is the storage account used for data collection.
+Before we create a local service using `az ml service create`, we must set two environment variables to enable data collection: `AML_MODEL_DC_STORAGE_ENABLED` and `AML_MODEL_DC_STORAGE`. `AML_MODEL_DC_STORAGE_ENABLED` must be set to `true`, and `AML_MODEL_DC_STORAGE` must be set to the connection string for the storage account you would like to use. One good option for the storage account is the storage account associated with your local compute env. When using an Azure Container Service cluster as a compute environment, the storage account associated with the env is the storage account used for data collection by default.
+
+To see the name of the storage account used by your compute environment, you can type:
 
 ```
 az ml env show -v
 ```
 
-In order to set these two environment variables, the commands would look like:
+The commands to set these environment variables would look something like:
 
 ```
 set AML_MODEL_DC_STORAGE_ENABLED=true
@@ -167,7 +168,7 @@ To test the data collection, run the `az ml service run realtime` command:
 az ml service run realtime -i <SERVICE_ID> -d "ADD INPUT DATA HERE!!"
 ```
 
-### Section 2: View Collect Data
+### Section 2: View Collected Data
 
 To view the collected data in blob storage:
 
@@ -195,5 +196,5 @@ Data can be consumed from Azure blobs in multiple ways. Some examples are
 
 In this workshop we learned how to:
 
-- Use the Azure Machine Learning Services collection module to view scoring data from API calls
+- Use the `azureml.datacollector` module to collect data from scoring calls
 - Use Azure Storage to view the results
