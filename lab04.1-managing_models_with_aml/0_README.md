@@ -36,50 +36,63 @@ After this lab is finished, we will have a better idea of how to use AML in orde
 - Smooth out the transition of going from development to production for operationalizing ML models
 - Get back to doing more data science and less administrative or devops types of tasks
 
+## Requirements for Operationalizing models
+
+In order to operationalize a model, we need (at a minimum) a code file that runs the scoring protocol. Typically, we also use an estimated model (from an experiment run) and a schema file that indicates the structure of the POST command that the service will expect. 
+
+Below, we will gather all of these requirments. We will create a template project that already includes a code file called `score.py` that implements a scoring protocol. We will complete an experiment run and download the estimated model, and we will generate the schema file.
+
+
+### Create a project and review the score.py script
+
+Open AML and press **CTRL+N** to create a new project. Name the project `churn_prediction` and use the `Documents` folder as the project directory. Finally, in the box called `Search Project Templates`, type `churn` and select the template called `Customer Churn Prediction`. Press **Create** to create the project.
+
+Once the project is created and open, look in the `Files` section for a file called `score.py`. Examine this file, and note what dependencies it has (both in terms of the modules and files it loads).
+
 ### Running the modeling script in Docker
 
-Our task in this section is to successfully estimate a model in a Docker container. To do so, we will need to start a new Workbench project based on an existing template and make a set of changes to the project in order to run it successfully. 
-
-Open the Workbench and press **CTRL+N** to create a new project. Name the project `churn_prediction` and use the `Documents` folder as the project directory. Finally, in the box called `Search Project Templates`, type `churn` and select the template called `Customer Churn Prediction`. Press **Create** to create the project.
-
-Go to **File > Open Project (Code)** to edit the project scripts using Code. Find the script `CATelcoCustomerChurnModelingWithoutDprep.py` and find the line where the data is read: `df = pd.read_csv('data/CATelcoCustomerChurnTrainingSample.csv')` to see how the raw data is read.
-
-Go to `aml_config/docker.runconfig` and replace its content with 
-
-```
-ArgumentVector:
-  - "$file"
-Target: "docker"
-EnvironmentVariables:
-  "EXAMPLE_ENV_VAR": "Example Value"
-Framework: "Python"
-CondaDependenciesFile: "aml_config/conda_dependencies.yml"
-SparkDependenciesFile: "aml_config/spark_dependencies.yml"
-PrepareEnvironment: true
-TrackedRun: true
-```
-
-On Code, go to **File > Save All** to save all the above changes. Then return to the Workbench and check to make sure the changes are visible here. We can check by clicking on the **Files** tab on the left pannel and opening one of the files we changed.
+One requirement you will notice in `score.py` is that it loads a file called `model.pkl` in the `init()` function. This file is a binary representation of an estimated model. Our task in this section is to create that file. We will do so by running an experiment and then downloading the results.
 
 In order to run the experiment in a Docker container, we must prepare a Docker image. We will do so programatically by going to **File > Open Command Prompt** and typing:
  
- ```az ml experiment prepare -c docker```
+ ```
+ az ml experiment prepare -c docker
+ ```
  
- Notice all the changes that are happening as this command is running. This should take a few minutes.
+This should take a few minutes.
 
-We can now run our experiment in a Docker container by submitting the following command: 
+Once this is complete, we can run our model estimation script in a Docker container. The script that estimates models is `CATelcoCustomerChurnModelingWithoutDprep.py`, and can be run by executing the following command: 
 
-```az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py```
+```
+az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py
+```
 
 Alternatively, we can go to the **Project Dashboard**, select "docker" as the run configuration, select the `CATelcoCustomerChurnModelingWithoutDprep.py` script and click on the run button. In either case, we should be able to see a new job starting on the **Jobs** in the pannel on the right-hand side. Click on the finished job to see the **Run Properties** such as **Duration**. Notice under **Outputs** there are no objects, so the script did not create any artifacts. Click on the green **Completed** to see any results printed by the script, including the model accuracy. It is worth noting that the Azure CLI runs on both the CMD and Linux command line. To see this in action, from the Windows command prompt type `bash` to switch to a Linux command prompt and type:
 
-```az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py```
+```
+az ml experiment submit -c docker CATelcoCustomerChurnModelingWithoutDprep.py
+```
 
-When finished, click on the job and notice the `model.pkl` entry in the **Run Properties** pane under **Outputs**. Select this output, download it and place it the project's root folder.
 
-### Creating a web service out of the scoring script
+When finished, select the `Runs` tab (clock icon on the left), select 'All Runs', and select the job that just completed (the `SCRIPT NAME` column should equal `CATelcoCustomerChurnModelingWithoutDprep.py`). Once you have selected that run, find the `model.pkl` entry under **Outputs**. 
 
-Let's now see how we can create a scoring web service from the above model inside a docker image. There are multiple steps that go into doing that. We will be running commands from the command line, but we will also log into the Azure portal in order to see which resources are being created as we run various Azure CLI commands.
+Select the `model.pkl` file in that section, download it, and place it in the project's root folder.
+
+### Generate the Schema
+
+Once we have the scoring script and the model file, we should create the schema file. In this template, we can generate the schema json file by running: 
+
+```python churn_schema_gen.py```
+
+This will create a `service_schema.json` file that specifies the structure of the inputs that the scoring function `score.py` expects.
+
+Once we have the `score.py` script (included in the template), the `model.pkl` (from the experiment run), and the `service_schema.json` (from `churn_schema_gen.py`) files, we are ready to create the service.
+
+## Creating a web service out of the scoring script
+
+Let's now see how we can create a scoring web service from the above model. There are multiple steps that go into doing this. We will be running commands from the command line, but we will also log into the Azure portal in order to see which resources are being created as we run various Azure CLI commands.
+
+### Register Azure Providers
 
 Enable the Azure Container Service and Azure Container Registry by making sure they are providers that are registered with your current subscription: 
 
@@ -96,7 +109,28 @@ az provider list --query "[?contains(namespace,'Container')]" -o table
 
 `Microsoft.ContainerService` and `Microsoft.ContainerRegistry` should have `registrationState` of `Registered`.
 
-Log into the Azure portal and find all the resources under the resource group. This should include an Experimentation and a Model Management account. Open the Model Management resource and click on **Model Management** icon on the top.
+
+### Review and set your Model Management account
+
+You must have an Azure Machine Learning Model Management account in order to create a scoring service. Log into the Azure portal and find all the resources under your resource group. This should include Experimentation and a Model Management accounts.
+
+We can also list, show, and set model management accounts at the command line:
+
+```
+az ml account modelmanagement list -o table
+az ml account modelmanagement set -n <MODEL_MANAGEMENT_ACCOUNT> -g <RESOURCE_GROUP>
+az ml account modelmanagement show
+```
+
+If you do not have a model management account, you can create one from the command line with:
+
+```
+az ml account modelmanagement create -l <AZUREREGION> -n <NAME> -g <RESOURCE_GROUP>
+```
+
+Once you have set a model management account, we can create a compute environment.
+
+### Create a Compute Environment
 
 If we're doing this for the first time, then we need to set up an environment. We usually have a staging and a production environment. We can deploy our models to the staging environment to test them and then redeploy them to the production environment once we're happy with the result. To create a new environment run the following command after choosing a name for the staging environment. To use in production, we can provide the additional `--cluster` argument (covered in a later lab):
 
@@ -111,20 +145,9 @@ az ml env set -n <STAGING_ENVIRONMENT> -g <RESOURCE_GROUP>
 az ml env show
 ```
 
-We next set our Model Management account by running the following command. We can look up the Model Management account name from the Azure portal or by listing it:
+### Create the scoring service
 
-```
-az ml account modelmanagement list -o table
-az ml account modelmanagement set -n <MODEL_MANAGEMENT_ACCOUNT> -g <RESOURCE_GROUP>
-```
-
-We are now finally ready to deploy our model as a web service. 
-
-Generate the schema by first running: 
-
-```python churn_schema_gen.py```
-
-This will create a `service_schema.json` file that specifies the structure of the inputs that the scoring function `score.py` expects. Once we have this json file, we can then create a realtime scoring service in a single command by running: 
+Once we have the `env` and the model management account, we are ready to create the scoring service:
 
 ```
 az ml service create realtime -n churnpred --model-file ./model.pkl -f score.py -r python -s service_schema.json 
