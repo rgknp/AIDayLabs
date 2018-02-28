@@ -204,8 +204,6 @@ az ml image create -n <IMAGE_NAME> --manifest-id <MANIFEST_ID>
 
 Finally, the last step is to update the existing service out of the new image created. We would need the image ID created from the last step along with the service ID. To obtain the service id, we can run `az ml service list realtime` to get a list of all the service IDs, or we can look up the service on the Azure portal. Run the below command to update the service:
 
-#! I'm here.
-
 ```
 az ml service update realtime -i <SERVICE_ID> --image-id <NEW_IMAGE_ID>
 ```
@@ -218,4 +216,4 @@ In this workshop we learned how to
 - Generate a scoring script and schema file
 - Prepare the scoring environment
 - Deploy models to production
-- Update service
+- Update a scoring service
