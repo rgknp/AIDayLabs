@@ -52,7 +52,7 @@ print("matplotlib version:", matplotlib.__version__)
 
 Compare the path to the Python executable and the `matplotlib` version to the one we obtained earlier. Type `exit()` to return from the Python console to the command line. We can type `conda env list` to see available Conda environments. A star indicates which one is active.
 
-To deactivate an environment simply type `source deactivate`. Note that an environment is only active for the open Command Prompt session and will be deactivated if we close the session. We can also permanently remove this environment using `conda env remove -n project_environment`. Deactivate and remove the Conda environment.
+To deactivate an environment simply type `deactivate`. Note that an environment is only active for the open Command Prompt session and will be deactivated if we close the session. We can also permanently remove this environment using `conda env remove -n project_environment`. Deactivate and remove the Conda environment.
 
 So far we manually created and activated Conda environments. This is useful in order to see some of what happens behind the scene when we run an experiment in Workbench. However, in practice the above steps are built-in and automatically handled by Workbench itself.
 
