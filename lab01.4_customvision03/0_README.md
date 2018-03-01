@@ -133,9 +133,19 @@ The code can include control of flow logic to either use the key if it is alread
 defined, or to prompt for the key should it be missing. Create the
 following code at the bottom of the cs file, underneath the } that is third from
 the bottom of the file.
+
+### Step 3: Add code to get and manage the prediction key
+
+On Line 147, create a method `GetPredictionKey` with two parameters of `predictionKey` 
+with a data type of string, and a second parameter of args with the data type
+of string, using the value from the predictionkey variable.
+The code can include control of flow logic to either use the key if it already
+defined, or to prompt for the key should it be missing. Add the
+following code at the bootom of the cs file, underneath the code you have just added
+for the training key in step 2.
   
 
-### Step 3: Create code that will upload images from the local disk
+### Step 4: Create code that will upload images from the local disk
 
 Create a method named `LoadImagesFromDisk()` that creates two variables named
 `MbikesImages` and `RbikesImages`. Each of thes variables should use the `GetFiles()`
@@ -146,13 +156,13 @@ from the Images\test folder of your Github location. Create code underneath the
 code created in step 2
 
 
-### Step 4: Create a Custom Vision Service project
+### Step 5: Create a Custom Vision Service project
 
 Create a new Custom Vision Service project named "Bike Type", create the
 code in the body of the `Main()` method after the call to `new TrainingApi().`
 
 
-### Step 5: Add tags to your project
+### Step 6: Add tags to your project
 
 Create two variable named MbikesTag and RbikesTag that call the CreateTag
 method of the class trainingAPI for the current project. The MbikesTag 
@@ -161,7 +171,7 @@ to "Racing". To add tags to your project, create the code after the call to
 `CreateProject("Bike Type");`.
 
 
-### Step 6: Upload images to the project
+### Step 7: Upload images to the project
 
 To add the images we have in memory to the project, call the LoadImagesFromDisk()
 that either uploads images one at a time, or as a batch. The variables MbikesImages
@@ -172,7 +182,7 @@ Add the code after the call to `CreateTag(project.Id, "Racing")` method.
 
 
 
-### Step 7: Train the project
+### Step 8: Train the project
 
 Use the TrainProject method of the trainingApi class against the current projectid
 to start the training of the images. Use a while clause with the Status method of 
@@ -182,7 +192,7 @@ and set it as default within the project using the UpdateIteration method of the
 trainingApi class. Insert your code after the end of code that you added in the prior step. 
 
 
-### Step 8: Get and use the default prediction endpoint
+### Step 9: Get and use the default prediction endpoint
 
 We are now ready to use the model for prediction. First we obtain the endpoint
 associated with the default iteration. Then we send a test image to the project
@@ -195,7 +205,7 @@ prediction credentials object that contains the obtained prediction key. Make a 
 against the new project, loop over each prediction, and write the results to the console. 
 Insert the code after the training code you have just entered.
 
-### Step 9: Run the example
+### Step 10: Run the example
 
 Build and run the solution. You will be required to input your training API key
 into the console app when running the solution so have this at the ready. The
