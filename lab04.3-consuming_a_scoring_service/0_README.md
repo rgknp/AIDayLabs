@@ -52,7 +52,7 @@ import requests
 import json
 
 data = "{\"input_df\": [{\"feature1\": value1, \"feature2\": value2}]}"
-body = str.encode(json.dumps(data))
+# body = str.encode(json.dumps(data))
 
 url = 'http://<service ip address>:80/api/v1/service/<service name>/score'
 api_key = 'your service key' 
