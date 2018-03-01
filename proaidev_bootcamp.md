@@ -48,7 +48,7 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
   - 11-12: [Lab 3.2: Comparing and Managing Models with Azure Machine Learning][lab3.2]
   - 12-1: Lunch
   - 1-2:20 [Lab 3.3: Behind the scenes: Docker images and Conda environments][lab3.3]
-  - 2:30-3:50 [Lab 3.4: Executing a data engineering or model training workflow to a remote execution environment][lab3.4]
+  - 2:30-3:50 [Lab 3.4: Executing a data engineering or model training workflow in a remote execution environment][lab3.4]
   - 4-5: Summary and White-board Discussion
 - Day 2 
   - 9-9:20: Review and Next Steps

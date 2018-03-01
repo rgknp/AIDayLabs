@@ -1,6 +1,10 @@
 # Collect data from a scoring service
 
+<<<<<<< HEAD
 This hands-on lab guides us through collecting Machine Learning scoring data using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) and Workbench.
+=======
+This hands-on lab guides us through collecting Machine Learning scoring data using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml). 
+>>>>>>> 1bb82d92185a9b471c45d526bb4888cca0d710bd
 
 In this lab, we will
 
@@ -27,7 +31,12 @@ The process and flow for using Azure Machine Learning Services has this layout:
 
 ## Section 1: Collecting Model Data
 
+<<<<<<< HEAD
 In this section, we demonstrate the model data collection feature in Workbench to archive model inputs and predictions from a web service.
+=======
+In this section, we demonstrate the model data collection feature in AML to archive model inputs and predictions from a web service.
+
+>>>>>>> 1bb82d92185a9b471c45d526bb4888cca0d710bd
 
 ### Step 1.1: Update the code to collect data with the appropriate libraries
 
@@ -167,7 +176,11 @@ To test the data collection, run the `az ml service run realtime` command:
 az ml service run realtime -i <SERVICE_ID> -d "ADD INPUT DATA HERE!!"
 ```
 
+<<<<<<< HEAD
 ### Section 2: View Collect Data
+=======
+### Section 2: View Collected Data
+>>>>>>> 1bb82d92185a9b471c45d526bb4888cca0d710bd
 
 To view the collected data in blob storage:
 
