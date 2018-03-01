@@ -157,9 +157,9 @@ namespace CustomVision.Sample
 
             // Now there is a trained endpoint, it can be used to make a prediction  
 
-            // Get the prediction key, which is used in place of the training key when making predictions  
-            var account = trainingApi.GetAccountInfo();
-            var predictionKey = account.Keys.PredictionKeys.PrimaryKey;
+            // Add your prediction key from the settings page of the portal 
+            // The prediction key is used in place of the training key when making predictions 
+            string predictionKey = GetPredictionKey("<your key here>", args);
 
             // Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
             PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);
@@ -222,9 +222,20 @@ the bottom from the file.
         }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+### Step 3: Add code to get and manage the prediction key
+
+On Line 147, create a method GetPredictionKey with two parameters of trainingKey 
+with a data type of string, and a second parameter of args with the data type
+of string, using the value from the predictionkey variable.
+The code can include control of flow logic to either use the key if it already
+defined, or to prompt for the key should it be missing. Add the
+following code at the bootom of the cs file, underneath the } that is third from
+the bottom from the file.
+
+--NOTE THAT THE CODE IS MISSING BY DESIGN
  
 
-### Step 3: Create code that will upload images from the local disk
+### Step 4: Create code that will upload images from the local disk
 
 To upload files form disk, review and insert the following code after the code
 you have just inserted "return trainingKey; }"
