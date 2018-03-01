@@ -2,7 +2,7 @@
 
 This hands-on lab guides us through executing a machine learning data preparation or model training work load in a remote environment using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
 
-In this workshop, we will:
+In this lab, we will:
 
 - Understand how to execute our workloads on remote Data Science Virtual Machines 
 - Understand how to execute our workloads on HDInsight Clusters running Spark
@@ -131,7 +131,7 @@ The execution environment on HDInsight cluster is managed using Conda. Configura
 
 ## Lab Completion
 
-In this workshop we learned how to:
+In this lab we learned how to:
 
 - Execute our workloads on remote Data Science Virtual Machines 
 - Execute our workloads on HDInsight Clusters running Spark

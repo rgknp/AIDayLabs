@@ -32,7 +32,7 @@ If we were able to run the Docker example successfully, we can now see if we can
 
 Report the accuracy of the best model that came out of the parameter sweep.
 
-## Workshop Completion
+## Lab completion
 
 We may now decommission and delete the following resources if we wish:
 

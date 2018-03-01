@@ -176,7 +176,7 @@ Note: If we run `az ml service run realtime ...` from `bash`, we need to change 
 
 ## Lab Completion
 
-In this workshop we learned how to:
+In this lab we learned how to:
 
 - Track models
 - Create Docker containers with the models and test them locally

@@ -2,7 +2,7 @@
 
 This hands-on lab guides us through deploying a Machine Learning scoring function to a remote environment using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml). 
 
-In this workshop, we will
+In this lab, we will
 
 - Understand how to create a model file
 - Generate a scoring script and schema file
@@ -210,7 +210,7 @@ az ml service update realtime -i <SERVICE_ID> --image-id <NEW_IMAGE_ID>
 
 ## Lab Completion
 
-In this workshop we learned how to
+In this lab we learned how to
 
 - Understand how to create a model file
 - Generate a scoring script and schema file

@@ -2,7 +2,7 @@
 
 This hands-on lab guides us through consuming a Machine Learning scoring service using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
 
-In this workshop, we will see how to consume a deployed model from a Web API.
+In this lab, we will see how to consume a deployed model from a Web API.
 
 ***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of
 
@@ -144,5 +144,5 @@ namespace MyFirstService
 
 ## Lab Completion
 
-In this workshop we learned how to:
+In this lab we learned how to:
 - Understand how to consume a deployed model from a Web API

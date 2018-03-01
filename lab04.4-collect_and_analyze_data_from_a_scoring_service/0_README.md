@@ -206,7 +206,7 @@ Data can be consumed from Azure blobs in multiple ways. Some examples are
 
 ## Lab Completion
 
-In this workshop we learned how to:
+In this lab we learned how to:
 
 - Use the `azureml.datacollector` module to collect data from scoring calls
 - Use Azure Storage to view the results
