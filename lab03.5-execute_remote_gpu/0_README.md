@@ -47,7 +47,7 @@ F. Finish the remaining settings and review the purchase information. Click **Pu
 
 ### 2.2 Create a new Compute Target
 
-A. With the new project called 'sentiment-gpu' open in AML Workbench, launch the command line. 
+A. With the new project called 'sentiment-gpu' open in Workbench, launch the command line. 
 
 B. Enter the following command. Replace the placeholder text from the example below with your own values for the name, IP address, username, and password. 
 
@@ -67,7 +67,7 @@ In order to run the script on a remote VM with GPU support, we need to edit thre
 - `<COMPUTETARGETNAME>.compute>` to make sure that the docker image that will be created can support GPU execution.
 - `<COMPUTETARGETNAME>.runconfig>` to make sure that the runtime environment is python.
 
-From the workbench, open File View, and hit the Refresh button. Navigate to the `aml_config` directory, and find the `conda_dependencies.yml`, `<COMPUTETARGETNAME>.compute`, and `<COMPUTETARGETNAME>.runconfig` files.
+From Workbench, open File View, and hit the Refresh button. Navigate to the `aml_config` directory, and find the `conda_dependencies.yml`, `<COMPUTETARGETNAME>.compute`, and `<COMPUTETARGETNAME>.runconfig` files.
 
 
 A. Edit `conda_dependencies.yml`. This file is referenced in `<COMPUTETARGETNAME>.runconfig` and specifies the python dependencies that we need to have installed on the compute target. We need to include the deep learning packages (`tensorflow-gpu` and `keras`) as dependencies that must be managed. The best way to include the `tensorflow-gpu` package is to include the specific version available in the `anaconda` channel. Once we add these dependencies, the `conda_dependencies.yml` should look as follows:

@@ -1,6 +1,6 @@
 # Consuming a scoring service
 
-This hands-on lab guides us through consuming a Machine Learning scoring service using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
+This hands-on lab guides us through consuming a Machine Learning scoring service using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml). 
 
 In this lab, we will see how to consume a deployed model from a Web API.
 

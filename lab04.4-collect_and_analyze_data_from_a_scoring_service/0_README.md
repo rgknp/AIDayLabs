@@ -1,7 +1,7 @@
 # Collect data from a scoring service
 
 <<<<<<< HEAD
-This hands-on lab guides us through collecting Machine Learning scoring data using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) and Workbench.
+This hands-on lab guides us through collecting Machine Learning scoring data using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml).
 =======
 This hands-on lab guides us through collecting Machine Learning scoring data using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml). 
 >>>>>>> 1bb82d92185a9b471c45d526bb4888cca0d710bd
@@ -31,12 +31,7 @@ The process and flow for using Azure Machine Learning Services has this layout:
 
 ## Section 1: Collecting Model Data
 
-<<<<<<< HEAD
-In this section, we demonstrate the model data collection feature in Workbench to archive model inputs and predictions from a web service.
-=======
 In this section, we demonstrate the model data collection feature in AML to archive model inputs and predictions from a web service.
-
->>>>>>> 1bb82d92185a9b471c45d526bb4888cca0d710bd
 
 ### Step 1.1: Update the code to collect data with the appropriate libraries
 
@@ -198,7 +193,7 @@ The inputs and prediction folders in the container would be created as follows:
 
 Data can be consumed from Azure blobs in multiple ways. Some examples are
 
-- **Azure Machine Learning Workbench**: Open the .csv file in Azure Machine Learning Workbench by adding the .csv file as a data source.
+- **Workbench**: Open the .csv file in Workbench by adding the .csv file as a data source.
 - **Excel**: Open the daily .csv files as a spreadsheet.
 - **Power BI**: Create charts with data pulled from .csv data in blobs.
 - **Spark**: Create a data frame with a large portion of .csv data.

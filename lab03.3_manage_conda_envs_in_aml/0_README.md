@@ -6,11 +6,11 @@ Conda is a multi-platform, open-source package management system. Fundamentally 
 
 In the context of Python, Conda is similar to `pip` and can be used to install and update Python packages, but Conda goes beyond that and can also install library dependencies outside of Python, such as C++ dependencies.
 
-With Azure ML Workbench projects, we use Docker for managing system requirements and dependencies between compute environments (local, remote, Spark). Within Docker itself, we use Conda to manage Python dependencies for a given project. We use the command line `conda` command to interact with `conda` (in the case of Python, we also have some control in Jupyter Notebooks)
+With AML projects, we use Docker for managing system requirements and dependencies between compute environments (local, remote, Spark). Within Docker itself, we use Conda to manage Python dependencies for a given project. We use the command line `conda` command to interact with `conda` (in the case of Python, we also have some control in Jupyter Notebooks)
 
 CRITICAL NOTE: By default, conda is not used for local script runs -- local runs by default will use the `root` python environment instead. This can problems if we work on multiple projects, as different projects may have different types of dependencies. As a general rule, it is better to use Docker even when working locally.
 
-Open the Workbench and create a new project called `hello_bootcamp`, make it a blank project and place it in the `Documents` folder. Open the project and go to **File > Open Command Prompt** to access the command line from within the project parent folder. Type `python`, then in the python console paste this in:
+Open Workbench and create a new project called `hello_bootcamp`, make it a blank project and place it in the `Documents` folder. Open the project and go to **File > Open Command Prompt** to access the command line from within the project parent folder. Type `python`, then in the python console paste this in:
 
 ```
 import sys
@@ -54,7 +54,7 @@ Compare the path to the Python executable and the `matplotlib` version to the on
 
 To deactivate an environment simply type `deactivate` (or `source deactivate` if using `bash`). Note that an environment is only active for the open Command Prompt session and will be deactivated if we close the session. We can also permanently remove this environment using `conda env remove -n project_environment`. Deactivate and remove the Conda environment.
 
-So far we manually created and activated Conda environments. This is useful in order to see some of what happens behind the scene when we run an experiment in Workbench. However, in practice the above steps are built-in and automatically handled by Workbench itself.
+So far we manually created and activated Conda environments. This is useful in order to see some of what happens behind the scene when we run an experiment in AML. However, in practice the above steps are built-in and automatically handled by AML itself.
 
 Return to Code and create a new script and call it `my_script.py` then paste in the following into it:
 
@@ -80,7 +80,7 @@ The above command prepares a new Docker image that we can run our experiment in.
 az ml experiment submit -c docker my_script.py
 ```
 
-In the Workbench, go to the **Jobs** panel on the right and click on the green **Completed** button to see any results printed by the script. Does the `matplotlib` version number match the version number in `conda_dependencies.yml`?
+In Workbench, go to the **Jobs** panel on the right and click on the green **Completed** button to see any results printed by the script. Does the `matplotlib` version number match the version number in `conda_dependencies.yml`?
 Conda creates an execution environment for our project and binds our Python scripts and their dependencies so that its execution environment can be isolated from that of other projects. By submitting the above command, we created a Docker image with our project and used Conda to handle the script and its dependencies, which Conda does by creating a new "environment" for the project. We created a Conda environment automatically in the last step is because in the `aml_config/docker.runconfig` file we point to `conda_dependencies.yml` and we set `PrepareEnvironment: true`.
 
 Most of us do not develop or test our Python scripts from the Python console. Instead we prefer to use an IDE like Code or Jupyter Notebooks. To launch a Jupyter Notebook session for a given project, return to the command prompt and run `az ml notebook start`. This will open up a browser session (`localhost:8888`) and present our project parent directory. On the right side, click on **New** and examine the content of the dropdown. It should include `hello_bootcamp local` and `hello_bootcamp docker` with are the Conda environments associated with our project. Click on `hello_bootcamp docker` and paste in and run the following code in the cell of the new Jupyter Notebook that opens (To run a cell in a Jupyter Notebook, simply select the cell and press **CTRL+Enter**).

@@ -1,13 +1,13 @@
-# Building and comparing models with Azure ML Workbench
+# Building and comparing models with AML
 
-Data science is a very iterative process that involves lots of trial and error. As such, the Azure Machine Learning Workbench (Workbench for short) makes it easy for data scientists to iterate on the model building and deployment process. Among other things, Workbench facilitates two common problems we encounter when developing ML solutions: 
+Data science is a very iterative process that involves lots of trial and error. As such, Azure Machine Learning makes it easy for data scientists to iterate on the model building and deployment process. Among other things, it facilitates two common problems we encounter when developing ML solutions: 
 
 - **Model selection**: Run and compare different models across collected metrics (with a few extra lines of python code). In this context, a single model estimate is referred to as an **experiment** and we talk about training and scoring experiments. However this term should not be confused with a statistical experiment (a randomized controlled experiment) and to avoid this confusion we try to avoid overusing the term **experiment** and use **run** or **job** instead to refer to a singe experiment and use the term **model selection** to refer to the whole process of **experimentation** (running and comparing many different experiments).
 - **Model management**: Lets us bind specific models to their underlying code repository and allows the *promotion* of a model into staging and production without changes to the API servicing the model. The need for model management arises from the need to perform model selection in a tractable way and with the ability to perform rollbacks.
 
-In this lab we will focus on how to use Workbench to facilitate model selection. In a different lab, we will learn how Workbench can also be used to do model management.
+In this lab we will focus on how to use AML to facilitate model selection. In a different lab, we will learn how AML can also be used to do model management.
 
-## Praparing Workbench and running a single experiment
+## Praparing and running a single experiment
 
 Open the Workbench and create a new project called `classifying_iris`. Choose the **Classifying Iris** as the project template and `Documents` folder as its directory. Open the project and go to **File > Open Command Prompt** to access the command line from within the project parent folder.
 
@@ -19,7 +19,7 @@ From the command prompt, run the following command to submit the training experi
 az ml experiment submit -c docker-python iris_sklearn.py
 ```
 
-This runs a single training experiment. If we are doing this for the first time, then prior to running the experiment Workbench will create a docker image for us, which will take a few minutes. Once the image is ready, as long as we use the same image, we can run experiments on it quickly and without the initial delay. 
+This runs a single training experiment. If we are doing this for the first time, then prior to running the experiment the command creates a docker image, which takes a few minutes. Once the image is ready, as long as we use the same image, we can run experiments on it quickly and without the initial delay.
 
 ## Running multiple experiments
 
@@ -41,7 +41,7 @@ At the top we have four pannels, one showing information about the jobs we ran a
 
 To see how these metrics tie back to the Python script, open `iris_sklearn.py` in **Code** and find where the model's accuracy is being logged. Hint: the Python object storing it is called `accuracy` in the script. 
 
-Note that we have two ways of logging information in Workbench: 
+Note that we have two ways of logging information: 
 
 We can simply rely on Python's `print` function, as can be seen by `print("Accuracy is {}".format(accuracy))` for example. In such a case, we can go the the **Jobs** pannel and click on the green **Completed** button to see any printed logs for a given run.
 
