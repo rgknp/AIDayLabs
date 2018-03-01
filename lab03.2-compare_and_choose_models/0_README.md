@@ -122,8 +122,6 @@ A Windows Explorer window will open. From there go to the `classifying_iris` fol
 
 ![Images](./images/models-in-mm-portal.jpg)
 
-Later registered models can be used to create a scoring service. We learn more about this and the Model Management portal in later labs.
-
 Before we finish this lab, let's just briefly go over how to programmatically do what we did above by using the Azure CLI instead of the Workbench GUI. Go to **File > Open Command Prompt** from Workbench and enter `az ml history list -o table` to get the history of runs. Select a particular run by copying its `Run_id` then paste it into the following command to see artifacts from a given run:
 
 ```
