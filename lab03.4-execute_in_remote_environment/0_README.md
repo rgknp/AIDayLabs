@@ -71,7 +71,7 @@ We should see results as follows:
 
 In this section we create an experiment, examine its configuration, and run the experiment on a remote Docker container. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI).
 
-- [Open this Reference and create an Ubuntu Data Science Virtual Machine](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro#create-your-data-science-virtual-machine-for-linux)
+Go to the Azure portal and create an Ubuntu Data Science Virtual Machine]:
 
   - Choose a **Data Science Virtual Machine for Linux Ubuntu CSP**
   - Choose a size of *Standard D4s v3 (4 vcpus, 16 GB memory)*
