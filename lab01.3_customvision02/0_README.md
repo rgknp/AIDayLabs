@@ -192,12 +192,12 @@ namespace CustomVision.Sample
 
 ### Step 2: Add code to get and manage the training key
 
-On Line 127, create a method GetTrainingKey with two parameters of trainingKey 
+On Line 127, create a method `GetTrainingKey` with two parameters of `trainingKey` 
 with a data type of string, and a second parameter of args with the data type
 of string, using the value from the trainingkey variable.
 The code can include control of flow logic to either use the key if it already
 defined, or to prompt for the key should it be missing. Add the
-following code at the bootom of the cs file, underneath the } that is third from
+following code at the bottom of the cs file, underneath the } that is third from
 the bottom from the file.
  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -224,15 +224,14 @@ the bottom from the file.
 
 ### Step 3: Add code to get and manage the prediction key
 
-On Line 147, create a method GetPredictionKey with two parameters of trainingKey 
+On Line 147, create a method `GetPredictionKey` with two parameters of `predictionKey` 
 with a data type of string, and a second parameter of args with the data type
 of string, using the value from the predictionkey variable.
 The code can include control of flow logic to either use the key if it already
-defined, or to prompt for the key should it be missing. Add the
-following code at the bootom of the cs file, underneath the } that is third from
-the bottom from the file.
+defined, or to prompt for the key should it be missing. Create 
+code at the bottom of the cs file, underneath the code you have just created for step 2.
 
---NOTE THAT THE CODE IS MISSING BY DESIGN
+`--NOTE THAT THE CODE IS MISSING BY DESIGN`
  
 
 ### Step 4: Create code that will upload images from the local disk
