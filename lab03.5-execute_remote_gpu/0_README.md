@@ -35,15 +35,15 @@ Our first step is to make sure we have access to a VM with a GPU.
 A. Open your web browser and go to the [Azure portal](https://portal.azure.com/)
 
 B. Select `+ New` on the left of the portal.
-Search for "Data Science Virtual Machine for Linux (Ubuntu)" in the marketplace. Choosing **Ubuntu** is critical.
+Search for `Data Science Virtual Machine for Linux Ubuntu CSP` in the marketplace. Choosing **Ubuntu** is critical.
 
 C. Click Create to create an Ubuntu DSVM.
 
 D. Fill in the `Basics` blade with the required information. When selecting the location for your VM, note that GPU VMs (e.g. `NC-series`) are only available in certain Azure regions, for example, South Central US. See [compute products available by region](https://azure.microsoft.com/en-us/regions/services/). Click OK to save the Basics information.
 
-E. Choose the size of the virtual machine. Select one of the sizes with NC-prefixed VMs, which are equipped with NVidia GPU chips. Click View All to see the full list as needed. Learn more about [GPU-equipped Azure VMs](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-gpu).
+E. Choose the size of the virtual machine. Select one of the sizes with NC-prefixed VMs, which are equipped with NVidia GPU chips. Click **View All** to see the full list as needed. Learn more about [GPU-equipped Azure VMs](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-gpu).
 
-F. Finish the remaining settings and review the purchase information. Click Purchase to create the VM. Take note of the IP address allocated to the virtual machine - you will need this (or a domain name) in the next section when you are configuring AML. 
+F. Finish the remaining settings and review the purchase information. Click **Purchase** to create the VM. Take note of the IP address allocated to the virtual machine - you will need this (or a domain name) in the next section when you are configuring AML. 
 
 ### 2.2 Create a new Compute Target
 
