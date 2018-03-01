@@ -118,9 +118,7 @@ Click on **Project Dashboard** and then on the project path at the top.
 
 ![Images](./images/project-dashboard.jpg)
 
-A Windows Explorer window will open. From there go to the `classifying_iris` folder. When we promote a model, a new folder is created in our project directory called `assets` (if there was none before) and a link to the `model.pkl` is placed there, called `model.pkl.link`. The model object can also be directly downloaded using the **Download** button under **Outputs** in **Run Properties**. Once we have the model object, we can use it to create a scoring script.  
-
-Promoted models are registered and versioned in our **Azure Model Management** account and can be viewed in the Azure portal under the Model Management portal. This link can be used to later download the model object itself. 
+A Windows Explorer window will open. From there go to the `classifying_iris` folder. When we promote a model, a new folder is created in our project directory called `assets` (if there was none before) and a link to the `model.pkl` is placed there, called `model.pkl.link`. This link can be used to later download the model object itself. The model object can also be directly downloaded using the **Download** button under **Outputs** in **Run Properties**. Once we have the model object, we can use it to create a scoring script.  
 
 ![Images](./images/models-in-mm-portal.jpg)
 
