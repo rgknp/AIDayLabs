@@ -1,15 +1,15 @@
 # The Team Data Science Process using Azure Machine Learning
 
-This hands-on lab guides you through using the [Team Data Science Process](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/overview) using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning. We will be using a [Customer Churn Analysis example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction) throughout this Workshop (which we will download in a lab below).
+This hands-on lab guides you through using the [Team Data Science Process](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/overview) using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Azure Machine Learning. We will be using a [Customer Churn Analysis example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction) throughout this Workshop (which we will download in a lab below).
 
 In this lab, you will:
 - [ ] Understand and use the TDSP to clearly define business goals and success criteria
-- [ ] Understand how to use a code-repository system with the Azure Machine Learning using the TDSP structure
+- [ ] Understand how to use a code-repository system with Azure Machine Learning using the TDSP structure
 - [ ] Create an example environment
-- [ ] Use the TDSP and AMLS for data acquisition and understanding
-- [ ] Use the TDSP and AMLS for creating an experiment with a model and evaluation of models
-- [ ] Use the TDSP and AMLS for deployment
-- [ ] Use the TDSP and AMLS for project close-out and customer acceptance
+- [ ] Use the TDSP and AML for data acquisition and understanding
+- [ ] Use the TDSP and AML for creating an experiment with a model and evaluation of models
+- [ ] Use the TDSP and AML for deployment
+- [ ] Use the TDSP and AML for project close-out and customer acceptance
 
 You'll focus on the objectives above, not Data Science, Machine Learning or a difficult scenario.  
 
@@ -39,13 +39,13 @@ Your scenario is as follows:
 The Orange Telecom company in France is one of the largest operators of mobile and internet services in Europe and Africa and a global leader in corporate telecommunication services. They have 256 million customers worldwide. They have significant coverage in France, Spain, Belgium, Poland, Romania, Slovakia Moldova, and a large presence Africa and the Middle East.
 Customer Churn is always an issue in any company. Orange would like to predict the propensity of customers to switch provider (churn), buy new products or services (appetency), or buy upgrades or add-ons proposed to them to make the sale more profitable (up-selling). For this effort, they think churn is the first thing they would like to focus on. 
 
-To create a solution, you will use the Azure Machine Learning Services (AMLS) and the Azure Machine Learning Services in this lab. The general configuration for working with Azure Machine Learning has these components:
+In this lab, you will use Azure Machine Learning (AML) to create a solution. The general configuration for working with Azure Machine Learning has these components:
 
 ![Azure Machine Learning Components](resources/docs/images/aml-architecture.png)
 
-### Lab: Set up a generic TDSP Structure using the Azure Machine Learning
+### Lab: Set up a generic TDSP Structure using Azure Machine Learning
 
-In this section you'll set up your project's structure, conforming to the Team Data Science Process, using the Azure Machine Learning.
+In this section you'll set up your project's structure, conforming to the Team Data Science Process, using Azure Machine Learning.
 - [ ] [Open this link](https://docs.microsoft.com/en-us/azure/machine-learning/preview/how-to-use-tdsp-in-azure-ml), read from the top and complete the steps there. Do not complete the steps marked **"Next Steps"**. 
 - [ ] [Review this link](https://github.com/Azure/Azure-TDSP-ProjectTemplate) and verify that you have the structure shown in the directory you specified. You will use this structure throughout this lab.
 
@@ -115,15 +115,15 @@ In this lab you will examine the final project close out document. In production
 
 In this lab you learned how to:
 - [ ] Understand and use the TDSP to clearly define business goals and success criteria
-- [ ] Understand how to use a code-repository system with the Azure Machine Learning using the TDSP structure
+- [ ] Understand how to use a code-repository system with Azure Machine Learning using the TDSP structure
 - [ ] Create an example environment
-- [ ] Use the TDSP and AMLS for data acquisition and understanding
-- [ ] Use the TDSP and AMLS for creating an experiment with a model and evaluation of models
-- [ ] Use the TDSP and AMLS for deployment
-- [ ] Use the TDSP and AMLS for project close-out and customer acceptance
+- [ ] Use the TDSP and AML for data acquisition and understanding
+- [ ] Use the TDSP and AML for creating an experiment with a model and evaluation of models
+- [ ] Use the TDSP and AML for deployment
+- [ ] Use the TDSP and AML for project close-out and customer acceptance
 
 You may now delete and decommission the following resources if you wish:
-  * The Azure Machine Learning Services accounts and workspaces
+  * Azure Machine Learning accounts and workspaces
   * The Visual Studio Team Services Repository
   * Any Data Science Virtual Machines you have created. NOTE: Even if "Shutdown" in the Operating System, unless these Virtual Machines are "Stopped" using the Azure Portal you are incurring run-time charges. If you Stop them in the Azure Portal, you will be charged for the storage the Virtual Machines are consuimg. 
 
