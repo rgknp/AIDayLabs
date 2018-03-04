@@ -140,6 +140,26 @@ namespace CustomVision.Sample
             return trainingKey;
         }
 
+        private static string GetPredictionKey(string predictionKey, string[] args)
+        {
+            if (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Equals("<your key here>"))
+            {
+                if (args.Length >= 1)
+                {
+                    predictionKey = args[0];
+                }
+
+                while (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Length != 32)
+                {
+                    Console.Write("Enter your prediction key: ");
+                    predictionKey = Console.ReadLine();
+                }
+                Console.WriteLine();
+            }
+
+            return predictionKey;
+        }
+
         private static void LoadImagesFromDisk()
         {
             // this loads the images to be uploaded from disk into memory
@@ -247,22 +267,20 @@ entered.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Now there is a trained endpoint, it can be used to make a prediction
 
-// Get the prediction key, which is used in place of the training key when making predictions
-var account = trainingApi.GetAccountInfo();
-var predictionKey = account.Keys.PredictionKeys.PrimaryKey;
+// Add your prediction key from the settings page of the portal 
+// The prediction key is used in place of the training key when making predictions 
+string predictionKey = GetPredictionKey("<your key here>", args);
 
-// Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key
+// Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
 PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);
 PredictionEndpoint endpoint = new PredictionEndpoint(predictionEndpointCredentials);
-
-// Make a prediction against the new project
+// Make a prediction against the new project  
 Console.WriteLine("Making a prediction:");
 var result = endpoint.PredictImage(project.Id, testImage);
-
-// Loop over each prediction and write out the results
+// Loop over each prediction and write out the results  
 foreach (var c in result.Predictions)
 {
-     Console.WriteLine($"\t{c.Tag}: {c.Probability:P1}");
+    Console.WriteLine($"\t{c.Tag}: {c.Probability:P1}");
 }
 Console.ReadKey();
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

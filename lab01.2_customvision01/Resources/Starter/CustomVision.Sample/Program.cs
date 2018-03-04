@@ -82,6 +82,26 @@ namespace CustomVision.Sample
             return trainingKey;
         }
 
+        private static string GetPredictionKey(string predictionKey, string[] args)
+        {
+            if (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Equals("<your key here>"))
+            {
+                if (args.Length >= 1)
+                {
+                    predictionKey = args[0];
+                }
+
+                while (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Length != 32)
+                {
+                    Console.Write("Enter your prediction key: ");
+                    predictionKey = Console.ReadLine();
+                }
+                Console.WriteLine();
+            }
+
+            return predictionKey;
+        }
+
         private static void LoadImagesFromDisk()
         {
             // this loads the images to be uploaded from disk into memory
