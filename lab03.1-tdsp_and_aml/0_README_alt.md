@@ -1,8 +1,8 @@
 # The Team Data Science Process using Azure Machine Learning
 
-This workshop is comprised of many hands-on labs that will guide us through using the [Team Data Science Process (TDSP)](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/overview) using [Azure Machine Learning Services (AMLS)](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with the Azure Machine Learning Workbench (which we call Workbench for short). We will be using a [Customer Churn Analysis example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction) throughout this workshop.
+This workshop is comprised of many hands-on labs that will guide us through using the [Team Data Science Process (TDSP)](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/overview) using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml). We will be using a [Customer Churn Analysis example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-churn-prediction) throughout this workshop.
 
-The goal of the workshop is to learn the tools that facilitate being a data scientist. We do not cover machine learning and best practices in any detail, other than introduce some basic terminology. But we strongly emphasize data science as a process and how to use the Workbench to test and build data science solutions.
+The goal of the workshop is to learn the tools that facilitate being a data scientist. We do not cover machine learning and best practices in any detail, other than introduce some basic terminology. But we strongly emphasize data science as a process and how to test and build data science solutions.
 
 ### Introduction to the TDSP
 
@@ -114,25 +114,25 @@ Customer churn is always an issue in any company. Orange would like to predict t
 
 ---
 
-# Azure Machine Learning Workbench
+# Azure Machine Learning
 
-We learn throughout this workshop how Workbench can be used to accomplish the above tasks with relative ease. Our focus is primarily on phase 2 and 3 or the data science workfolw. We will explore how Workbench makes it easy to create and compare many different models and how it facilitates taking models into production.
+We learn throughout this workshop how AML can be used to accomplish the above tasks with relative ease. Our focus is primarily on phase 2 and 3 or the data science workfolw. We will explore how AML makes it easy to create and compare many different models and how it facilitates taking models into production.
 
-Workbench is a tool that allows a data scientist to train and deploy models with ease, in oder words to develop production-ready machine learning applications. It is comprised of a graphical user interface (GUI) and a command line utility called the Azure CLI. Using Workbench, we can quickly prototype machine learning solutions on a local machine, and use Microsoft Azure to serve them on the cloud. Workbench supports the Python programming language and its machine learning libraries. Let's take a high-level view of the different pieces that make up the Workbench architecture:
+Azure Machine Learning makes it easy for data scientists to train and deploy models, in oder words to develop production-ready machine learning applications. It is comprised of a graphical user interface (GUI) called Workbench and a command line utility called the Azure CLI. Using AML, we can quickly prototype machine learning solutions on a local machine, and use Microsoft Azure to serve them on the cloud. AML supports the Python programming language and its machine learning libraries. Let's take a high-level view of the different pieces that make up the architecture:
 
 ![Azure Machine Learning Components](resources/docs/images/aml-architecture.png)
 
 Throughout the workshop, we should return to the above chart and think about the pieces invoked by each lab. This will help us appropriate everything that happens behind the scenes as we build our machine learning application.
 
-We begin by installing Workbench on a local workstation or VM. This will install the Workbench desktop application, Python and its ML libraries, and the Azure CLI. We can then start a new project which will give us a folder structure containing our Python scripts, confguration files and other files.
+We begin by installing Workbench and the Azure CLI on a local workstation or VM. This will install the desktop application, Python and its ML libraries, and the Azure CLI. We can then start a new project which will give us a folder structure containing our Python scripts, confguration files and other files.
 
 ![Image](resources/docs/images/aml-architecture-1.png)
 
-While working on a local machine can make it easy to iterate and run experiments, dependency and compatibility issues can later cause problems in production. Therefore, Workbench relies on [Docker](https://www.docker.com/) to build and test our machine learning applications. Docker containers offer us a clean environment where we can build our applications in isolation.
+While working on a local machine can make it easy to iterate and run experiments, dependency and compatibility issues can later cause problems in production. Therefore, we rely on [Docker](https://www.docker.com/) to build and test our machine learning applications. Docker containers offer us a clean environment where we can build our applications in isolation.
 
 ![Image](resources/docs/images/aml-architecture-2.png)
 
-Finally, Workbench uses Microsoft Azure to serve our applications on the cloud and give us control over it. We can use manage our trained models and monitor our deployments.
+Finally, we use Microsoft Azure to serve our applications on the cloud and give us control over it. We can use manage our trained models and monitor our deployments.
 
 ![Image](resources/docs/images/aml-architecture-3.png)
 

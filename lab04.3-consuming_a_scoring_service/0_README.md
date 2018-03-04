@@ -1,8 +1,8 @@
 # Consuming a scoring service
 
-This hands-on lab guides us through consuming a Machine Learning scoring service using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
+This hands-on lab guides us through consuming a Machine Learning scoring service using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml). 
 
-In this workshop, we will see how to consume a deployed model from a Web API.
+In this lab, we will see how to consume a deployed model from a Web API.
 
 ***NOTE:*** There are several pre-requisites for this course, including an understanding and implementation of
 
@@ -14,9 +14,9 @@ In this workshop, we will see how to consume a deployed model from a Web API.
 
 There is a comprehensive Learning Path we can use to prepare for this course [located here](https://github.com/Azure/learnAnalytics-CreatingSolutionswiththeTeamDataScienceProcess-/blob/master/Instructions/Learning%20Path%20-%20Creating%20Solutions%20with%20the%20Team%20Data%20Science%20Process.md).
 
-### Lab 1: Consume the web-service
+### Section 1: Consume the web-service
 
-In this lab, we will send a request to the real-time web service created in a previous lab. We begin by obtaining the service key for the web service.
+In this section, we will send a request to the real-time web service created in a previous lab. We begin by obtaining the service key for the web service.
 
 ```
 az ml service keys realtime -i <SERVICE_ID>
@@ -52,7 +52,7 @@ import requests
 import json
 
 data = "{\"input_df\": [{\"feature1\": value1, \"feature2\": value2}]}"
-body = str.encode(json.dumps(data))
+# body = str.encode(json.dumps(data))
 
 url = 'http://<service ip address>:80/api/v1/service/<service name>/score'
 api_key = 'your service key' 
@@ -62,7 +62,7 @@ resp = requests.post(url, data, headers=headers)
 print(resp.text)
 ```
 
-### (Optional) Lab 3: Consume the web-service using C\#
+### (Optional) Section 2: Consume the web-service using C\#
 
 Use the service URL to send a request from a C\# Console App. 
 
@@ -144,5 +144,5 @@ namespace MyFirstService
 
 ## Lab Completion
 
-In this workshop we learned how to:
+In this lab we learned how to:
 - Understand how to consume a deployed model from a Web API

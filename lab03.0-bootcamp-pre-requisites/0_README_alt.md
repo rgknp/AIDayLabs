@@ -59,4 +59,4 @@ We now log into the Azure CLI using our Azure account. Return to the Workbench a
 
 Once we log in through the browser, we can return to the command prompt and enter `az account show` to see some information about our Azue account including our subscription ID and user name. This will confirm that we are logged in to the Azure CLI.
 
-**Note:** If we have multiple Azure subscriptions, from the command prompt we enter `az account list –o table` to see available accounts. Then copy the subscription ID from the Azure account used to create an AML Workbench account and type `az account set –s <SUBSCRIPTION_ID>`, replacing `<SUBSCRIPTION_ID>` with the account ID.
+**Note:** If we have multiple Azure subscriptions, from the command prompt we enter `az account list –o table` to see available accounts. Then copy the desired subscription ID and type `az account set –s <SUBSCRIPTION_ID>`, replacing `<SUBSCRIPTION_ID>` with the account ID.

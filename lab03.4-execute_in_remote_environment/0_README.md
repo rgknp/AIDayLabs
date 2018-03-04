@@ -1,8 +1,8 @@
 # Executing a Machine Learning Model In A Remote Environment
 
-This hands-on lab guides us through executing a machine learning data preparation or model training work load in a remote environment using [Azure Machine Learning Services](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml) with Workbench. 
+This hands-on lab guides us through executing a machine learning data preparation or model training work load in a remote environment using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml). 
 
-In this workshop, we will:
+In this lab, we will:
 
 - Understand how to execute our workloads on remote Data Science Virtual Machines 
 - Understand how to execute our workloads on HDInsight Clusters running Spark
@@ -26,10 +26,10 @@ The general configuration for working with Azure Machine Learning has these comp
 
 ### Configuration Files
 
-When we run a script in Workbench, the behavior of the execution is controlled (usually) by files in the **aml_config** folder in the experimentation directory. 
+When we run a script in AML, the behavior of the execution is controlled (usually) by files in the **aml_config** folder in the experimentation directory. 
 The files are:
 
-  - ***conda_dependencies.yml*** - A conda environment file that specifies the Python runtime version and packages that the code depends on. When Workbench executes a script in a Docker container or HDInsight cluster, it uses this file to create a conda environment for the script to run. 
+  - ***conda_dependencies.yml*** - A conda environment file that specifies the Python runtime version and packages that the code depends on. When AML executes a script in a Docker container or HDInsight cluster, it uses this file to create a conda environment for the script to run. 
   - ***spark_dependencies.yml*** - Specifies the Spark application name when we submit a PySpark script and Spark packages that needs to be installed. We can also specify any public Maven repository or Spark package that can be found in those Maven repositories.
   - ***compute target*** files - Specifies connection and configuration information for the compute target. It is a list of name-value pairs. ***[compute target name].compute*** contains configuration information for the following environments:
     - local
@@ -39,17 +39,17 @@ The files are:
   - ***run configuration*** files - Specifies the Azure ML experiment execution behavior such as tracking run history, or what compute target to use
     - [run configuration name].runconfig
 
-Workbench combines all of these components into one location. We can use a graphical or command-line approach to managing these components.  
+AML combines all of these components into one location. We can use a graphical or command-line approach to managing these components.  
 
 ![Local AMLS Experiment run](https://docs.microsoft.com/en-us/azure/machine-learning/preview/media/experimentation-service-configuration/local-native-run.png)
 
-### Lab 1: Execution - Local and Docker Container
+### Section 1: Execution - Local and Docker Container
 
-In this lab we create an experiment, examine its configuration, and run the experiment locally, using both a `local` compute and a `docker` compute. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI)
+In this section we create an experiment, examine its configuration, and run the experiment locally, using both a `local` compute and a `docker` compute. We set up the experiment and then run all experiments from the command line interface (Azure CLI)
 
 - Open Workbench and Create a new experiment using the Churn example.
 - Launch the Azure CLI. An easy way to launch the CLI is opening a project in Workbench and navigating to **File > Open Command Prompt**.
-- **Execution**: Workbench enables scripts to be run directly against the Workbench-installed Python 3.5.2 runtime. This configuration is not managed by Conda unlike Docker-based executions. The package dependencies would need to be manually provisioned for the local Workbench Python environment.
+- **Execution**: AML enables scripts to be run directly against its Python 3.5.2 runtime. This configuration is not managed by Conda unlike Docker-based executions. The package dependencies would need to be manually provisioned for the local Python environment.
 
 To run locally, run the below command:
 
@@ -67,11 +67,11 @@ We should see results as follows:
 
 ![Naive Bayes](images/naive-bayes.png)
 
-### Lab 2: Execute an Experiment on a remote Data Science Virtual Machine
+### Section 2: Execute an Experiment on a remote Data Science Virtual Machine
 
-In this lab we create an experiment, examine its configuration, and run the experiment on a remote Docker container. We set up the experiment in Workbench, and then run all experiments from the command line interface (CLI).
+In this section we create an experiment, examine its configuration, and run the experiment on a remote Docker container. We set up the experiment and then run all experiments from the command line interface (Azure CLI).
 
-- [Open this Reference and create an Ubuntu Data Science Virtual Machine](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro#create-your-data-science-virtual-machine-for-linux)
+Go to the Azure portal and create an Ubuntu Data Science Virtual Machine]:
 
   - Choose a **Data Science Virtual Machine for Linux Ubuntu CSP**
   - Choose a size of *Standard D4s v3 (4 vcpus, 16 GB memory)*
@@ -101,11 +101,13 @@ Once we configure the compute target, we can use the following command to run th
 az ml experiment submit -c <REMOTE_VM> CATelcoCustomerChurnModelingWithoutDprep.py
 ```
 
-Note that the execution environment is configured using the specifications in conda_dependencies.yml.
+Note that the execution environment is configured using the specifications in `conda_dependencies.yml`.
 
-### (Optional) Lab 3: Running on a remote Spark cluster
+Please take a moment to delete the Ubuntu DSVM before moving to the next section.
 
-Workbench is flexible to run experimentation on big data using HDInsight Spark clusters. Note that the HDInsight cluster must use Azure Blob as the primary storage (and Azure Data Lake storage is not supported yet). Additionally, we need SSH access to the HDInsight cluster in order to execute experiments in this mode.
+### (Optional) Section 3: Running on a remote Spark cluster
+
+AML is flexible to run experimentation on big data using HDInsight Spark clusters. Note that the HDInsight cluster must use Azure Blob as the primary storage (and Azure Data Lake storage is not supported yet). Additionally, we need SSH access to the HDInsight cluster in order to execute experiments in this mode.
 
 The first step in executing in HDInsight cluster is to create a compute target and run configuration for an HDInsight Spark cluster using the following command:
 
@@ -125,11 +127,11 @@ Once we have the compute context, we can run the following CLI command:
 az ml experiment submit -c <HDI_CLUSTER> CATelcoCustomerChurnModelingWithoutDprep.py
 ```
 
-The execution environment on HDInsight cluster is managed using Conda. Configuration is managed by conda_dependencies.yml and spark_dependencies.yml configuration files. 
+The execution environment on HDInsight cluster is managed using Conda. Configuration is managed by `conda_dependencies.yml` and `spark_dependencies.yml` configuration files. 
 
 ## Lab Completion
 
-In this workshop we learned how to:
+In this lab we learned how to:
 
 - Execute our workloads on remote Data Science Virtual Machines 
 - Execute our workloads on HDInsight Clusters running Spark

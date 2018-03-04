@@ -2,7 +2,7 @@
 
 This hands-on lab guides us through collecting Machine Learning scoring data using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/preview/overview-what-is-azure-ml). 
 
-In this workshop, we will
+In this lab, we will
 
 - Use the `azureml.datacollector` module to collect data from scoring calls
 - Use Azure Storage to view the results
@@ -25,10 +25,9 @@ The process and flow for using Azure Machine Learning Services has this layout:
 
 ![Image](https://docs.microsoft.com/en-us/azure/machine-learning/preview/media/model-management-overview/modelmanagementworkflow.png)
 
-## Lab 1: Collecting Model Data
+## Section 1: Collecting Model Data
 
-In this lab, we demonstrate the model data collection feature in AML to archive model inputs and predictions from a web service.
-
+In this section, we demonstrate the model data collection feature in AML to archive model inputs and predictions from a web service.
 
 ### Step 1.1: Update the code to collect data with the appropriate libraries
 
@@ -165,10 +164,10 @@ az ml service create realtime -f score.py --model-file model.pkl -s service_sche
 To test the data collection, run the `az ml service run realtime` command:
 
 ```
-az ml service run realtime -i churnapp -d "ADD INPUT DATA HERE!!"
+az ml service run realtime -i <SERVICE_ID> -d "ADD INPUT DATA HERE!!"
 ```
 
-## Lab 2: View Collect Data
+### Section 2: View Collected Data
 
 To view the collected data in blob storage:
 
@@ -186,7 +185,7 @@ The inputs and prediction folders in the container would be created as follows:
 
 Data can be consumed from Azure blobs in multiple ways. Some examples are
 
-- **Azure Machine Learning Workbench**: Open the .csv file in Azure Machine Learning Workbench by adding the .csv file as a data source.
+- **Workbench**: Open the .csv file in Workbench by adding the .csv file as a data source.
 - **Excel**: Open the daily .csv files as a spreadsheet.
 - **Power BI**: Create charts with data pulled from .csv data in blobs.
 - **Spark**: Create a data frame with a large portion of .csv data.
@@ -194,7 +193,7 @@ Data can be consumed from Azure blobs in multiple ways. Some examples are
 
 ## Lab Completion
 
-In this workshop we learned how to:
+In this lab we learned how to:
 
 - Use the `azureml.datacollector` module to collect data from scoring calls
 - Use Azure Storage to view the results

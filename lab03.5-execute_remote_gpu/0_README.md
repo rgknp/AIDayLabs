@@ -35,19 +35,19 @@ Our first step is to make sure we have access to a VM with a GPU.
 A. Open your web browser and go to the [Azure portal](https://portal.azure.com/)
 
 B. Select `+ New` on the left of the portal.
-Search for "Data Science Virtual Machine for Linux (Ubuntu)" in the marketplace. Choosing **Ubuntu** is critical.
+Search for `Data Science Virtual Machine for Linux Ubuntu CSP` in the marketplace. Choosing **Ubuntu** is critical.
 
 C. Click Create to create an Ubuntu DSVM.
 
 D. Fill in the `Basics` blade with the required information. When selecting the location for your VM, note that GPU VMs (e.g. `NC-series`) are only available in certain Azure regions, for example, South Central US. See [compute products available by region](https://azure.microsoft.com/en-us/regions/services/). Click OK to save the Basics information.
 
-E. Choose the size of the virtual machine. Select one of the sizes with NC-prefixed VMs, which are equipped with NVidia GPU chips. Click View All to see the full list as needed. Learn more about [GPU-equipped Azure VMs](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-gpu).
+E. Choose the size of the virtual machine. Select one of the sizes with NC-prefixed VMs, which are equipped with NVidia GPU chips. Click **View All** to see the full list as needed. Learn more about [GPU-equipped Azure VMs](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-gpu).
 
-F. Finish the remaining settings and review the purchase information. Click Purchase to create the VM. Take note of the IP address allocated to the virtual machine - you will need this (or a domain name) in the next section when you are configuring AML. 
+F. Finish the remaining settings and review the purchase information. Click **Purchase** to create the VM. Take note of the IP address allocated to the virtual machine - you will need this (or a domain name) in the next section when you are configuring AML. 
 
 ### 2.2 Create a new Compute Target
 
-A. With the new project called 'sentiment-gpu' open in AML Workbench, launch the command line. 
+A. With the new project called 'sentiment-gpu' open in Workbench, launch the command line. 
 
 B. Enter the following command. Replace the placeholder text from the example below with your own values for the name, IP address, username, and password. 
 
@@ -67,7 +67,7 @@ In order to run the script on a remote VM with GPU support, we need to edit thre
 - `<COMPUTETARGETNAME>.compute>` to make sure that the docker image that will be created can support GPU execution.
 - `<COMPUTETARGETNAME>.runconfig>` to make sure that the runtime environment is python.
 
-From the workbench, open File View, and hit the Refresh button. Navigate to the `aml_config` directory, and find the `conda_dependencies.yml`, `<COMPUTETARGETNAME>.compute`, and `<COMPUTETARGETNAME>.runconfig` files.
+From Workbench, open File View, and hit the Refresh button. Navigate to the `aml_config` directory, and find the `conda_dependencies.yml`, `<COMPUTETARGETNAME>.compute`, and `<COMPUTETARGETNAME>.runconfig` files.
 
 
 A. Edit `conda_dependencies.yml`. This file is referenced in `<COMPUTETARGETNAME>.runconfig` and specifies the python dependencies that we need to have installed on the compute target. We need to include the deep learning packages (`tensorflow-gpu` and `keras`) as dependencies that must be managed. The best way to include the `tensorflow-gpu` package is to include the specific version available in the `anaconda` channel. Once we add these dependencies, the `conda_dependencies.yml` should look as follows:
