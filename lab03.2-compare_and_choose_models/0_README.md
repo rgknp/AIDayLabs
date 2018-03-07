@@ -7,7 +7,7 @@ Data science is a very iterative process that involves lots of trial and error. 
 
 In this lab we will focus on how to use AML to facilitate model selection. In a different lab, we will learn how AML can also be used to do model management.
 
-## Praparing and running a single experiment
+## Preparing and running a single experiment
 
 Open the Workbench and create a new project called `classifying_iris`. Choose the **Classifying Iris** as the project template and `Documents` folder as its directory. Open the project and go to **File > Open Command Prompt** to access the command line from within the project parent folder.
 
