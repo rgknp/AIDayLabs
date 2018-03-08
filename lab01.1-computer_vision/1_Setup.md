@@ -54,6 +54,8 @@ This will lead you to fill out a few details for the API endpoint you'll be crea
 
 **Double check that you put your Computer Vision service in West US**  
 
+> The code in the following labs has been set up to use West US for calling the Computer Vision API. In your future endeavors, you can learn how to call other regions [here](https://docs.microsoft.com/en-us/azure/cognitive-services/Computer-vision/Vision-API-How-to-Topics/HowToSubscribe).
+
 
 **Modifying `settings.json`, part one**
 
