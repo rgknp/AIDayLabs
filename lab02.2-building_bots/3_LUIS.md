@@ -20,7 +20,7 @@ Next, give the class a LuisModel attribute with the LUIS App ID and LUIS key.  I
 
 namespace PictureBot.Dialogs
 {
-    [LuisModel("96f65e22-7dcc-4f4d-a83a-d2aca5c72b24", "1234bb84eva3481a80c8a2a0fa2122f0")]
+    [LuisModel("YOUR-APP-ID", "YOUR-SUBSCRIPTION-KEY")]
     [Serializable]
 
 ...
