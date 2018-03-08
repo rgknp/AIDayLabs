@@ -99,9 +99,9 @@ namespace CustomVision.Sample
 
             // Now there is a trained endpoint, it can be used to make a prediction  
 
-            // Get the prediction key, which is used in place of the training key when making predictions  
-            var account = trainingApi.GetAccountInfo();
-            var predictionKey = account.Keys.PredictionKeys.PrimaryKey;
+            // Add your prediction key from the settings page of the portal 
+            // The prediction key is used in place of the training key when making predictions 
+            string predictionKey = GetPredictionKey("<your key here>", args);
 
             // Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
             PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);

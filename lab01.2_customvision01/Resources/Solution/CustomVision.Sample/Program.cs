@@ -59,7 +59,7 @@ namespace CustomVision.Sample
             TrainingApi trainingApi = new TrainingApi(trainingCredentials);
 
             // Create a new project  
-            Console.WriteLine("Creating new project:")
+            Console.WriteLine("Creating new project:");
             var project = trainingApi.CreateProject("My First Project");
 
             // Make two tags in the new project
@@ -99,9 +99,9 @@ namespace CustomVision.Sample
 
             // Now there is a trained endpoint, it can be used to make a prediction  
 
-            // Get the prediction key, which is used in place of the training key when making predictions  
-            var account = trainingApi.GetAccountInfo();
-            var predictionKey = account.Keys.PredictionKeys.PrimaryKey;
+            // Add your prediction key from the settings page of the portal 
+            // The prediction key is used in place of the training key when making predictions 
+            string predictionKey = GetPredictionKey("<your key here>", args);
 
             // Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
             PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);
@@ -139,6 +139,26 @@ namespace CustomVision.Sample
             }
 
             return trainingKey;
+        }
+
+        private static string GetPredictionKey(string predictionKey, string[] args)
+        {
+            if (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Equals("<your key here>"))
+            {
+                if (args.Length >= 1)
+                {
+                    predictionKey = args[0];
+                }
+
+                while (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Length != 32)
+                {
+                    Console.Write("Enter your prediction key: ");
+                    predictionKey = Console.ReadLine();
+                }
+                Console.WriteLine();
+            }
+
+            return predictionKey;
         }
 
         private static void LoadImagesFromDisk()
