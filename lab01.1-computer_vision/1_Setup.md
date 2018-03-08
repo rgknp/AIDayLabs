@@ -22,7 +22,7 @@ After creating an Azure account, you may access the [Azure portal](https://porta
 *Validation step*: TestCLI should appear **bold** in the Solution Explorer  
 *Note: If you get a message that TestCLI is unable to load, right-click on TestCLI and select "Install Missing Features". This will prompt you to install **.Net Desktop Development**. Click **Install**, then **Install** again. You may get an error because Visual Studio needs to be closed to install updates. Close Visual Studio and then select **Retry**. It should only take 1-2 minutes to install. Reopen "ImageProcessing.sln", confirm that you are able to expand TestCLI and see its contents. Then, right-click on TestCLI and select "Set as StartUp Project".*
 4. Right-click on the solution in Solution Explorer and select "Build Solution".  
-*Validation step*: When you build the solution, the only errors you receive are related to `ImageProcessor.cs`. You do not need to worry about yellow warning messages.
+*Validation step*: When you build the solution, the only errors you receive are related to `ImageProcessor` in `Program.cs`. You do not need to worry about yellow warning messages.
 
 
 ### Lab 1.2: Collecting the Keys ###
