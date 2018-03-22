@@ -6,8 +6,8 @@ This hands-on lab guides you through creating an intelligent bot from end-to-end
 ## Objectives
 In this workshop, you will:
 - Understand how to implement Azure Search features to provide a positive search experience inside applications
-- Build an intelligent bot using Microsoft Bot Framework that leverages LUIS and Azure Search
-- Use Regular Expressions and Scorable Groups to make bots more efficient
+- Build an intelligent bot (with C#) using Microsoft Bot Framework that leverages LUIS and Azure Search
+- Use Middleware to make bots more efficient and optimize calls to LUIS.
 
 
 While there is a focus on LUIS and Azure Search, you will also leverage the following technologies:
@@ -65,8 +65,8 @@ There are several directories in the [resources](./resources) folder:
 Over the course of this lab, we will collect various keys. It is recommended that you save all of them in a text file, so you can easily access them throughout the workshop.
 
 >_Keys_
->- LUIS API:
->- Cosmos DB Connection String:
+>- LUIS App ID:
+>- LUIS Key:
 >- Azure Search Name:
 >- Azure Search Key:
 >- Bot Framework App Name:
@@ -77,7 +77,7 @@ Over the course of this lab, we will collect various keys. It is recommended tha
 ## Navigating the Labs
 
 This workshop has been broken down into five sections:
-- [1_Regex_and_ScorableGroups](./1_Regex_and_ScorableGroups.md): Here you will build a simple bot using Regular Expressions and Scorable Groups
+- [1_Topics_and_Regex](./1_Topics_and_Regex.md): Here you will build a bot that uses Regex to act on user input and learn about using Topics for organizing bots
 - [2_Azure_Search](./2_Azure_Search.md): We'll configure our bot for Azure Search and connect it to the Azure Search service from the previous lab
 - [3_LUIS](./3_LUIS): Next, we'll incorporate our LUIS model into our bot, so that we can call LUIS when Regex does not recognize a user's intent.
 - [4_Publish_and_Register](./4_Publish_and_Register.md): We'll finish by publishing and registering our bot.
@@ -85,6 +85,6 @@ This workshop has been broken down into five sections:
 
 
 
-### Continue to [1_Regex_and_ScorableGroups](./1_Regex_and_ScorableGroups.md)
+### Continue to [1_Topics_and_Regex](./1_Topics_and_Regex.md)
 
 
