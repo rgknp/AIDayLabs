@@ -1,5 +1,5 @@
 ## 1_Topics_and_Regex:
-Estimated Time: 45 minutes
+Estimated Time: 45-60 minutes
 
 ## Building a Bot
 
@@ -18,15 +18,14 @@ In Visual Studio, create a new ASP.NET Core Web Application called "PictureBot":
 * Pick the **Empty** project template.
 * Select **No Authentication**, if it isn't selected already. 
 
-**Note**: The locally built packages and the ones published to NuGet are sometimes out of sync, due to the product still being in prerelease, which is why we recommend building the SDK in 1.1.
+**Note**: The locally built packages and the ones published to NuGet are sometimes out of sync, due to the product still being in prerelease This is why you need to build the SDK in Lab 1.1.
 
-Add a reference to the latest Microsoft.Bot.Builder.Integration.AspNet.Core package. This is a prerelease package and includes references to other Botbuilder packages that you will need:  
+You will need to add some references by right-clicking "Dependencies" in your Solution Explorer and select "Add reference." These are prerelease packages and includes references to other Botbuilder packages that you will need (refer [here](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui#package-sources) if you need help): 
+* Microsoft.Bot.Builder.Integration.AspNet.Core 
 * Microsoft.Bot.Builder
 * Microsoft.Bot.Builder.Core
 * Microsoft.Bot.Connector
 * Microsoft.Bot.Schema  
-
-For the following labs, you will also need to add the following references from the SDK (refer [here](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui#package-sources) if you need help):
 * Microsoft.Bot.Builder.Core.Extensions
 * Microsoft.Bot.Builder.LUIS  
 
@@ -34,7 +33,7 @@ For the following labs, you will also want to add the following [NuGet packages]
 * Microsoft.Azure.Search 
 
 
-We need to add some code to tell the app what to show us in the browser when we run it. If this doesn't make sense now, before starting Lab 1.3, come back here and review (it should make sense). Add a `default.html` file under the wwwroot folder, and add the following:
+We need to add some code to tell the app what to show us in the browser when we run it. If this doesn't make sense now, before starting Lab 1.3, come back here and review (it should make sense). Add a `default.html` file under the wwwroot folder, and replace the default contents with the following:
 ```html
 <!DOCTYPE html>
 <html>
@@ -49,7 +48,6 @@ We need to add some code to tell the app what to show us in the browser when we 
 </html>
 ```
 
-In the Program.cs file, change the namespace to PictureBot.  
 
 Update the Startup.cs file to this:  
 
@@ -142,16 +140,16 @@ To interact with your bot:
 
 ![Bot Emulator](./resources/assets/BotEmulator2.png) 
 
-> Fun Aside: why this port number?  It is set in your project properties.  In your Solution Explorer, click **Properties>launchsettings.json** and examine its contents. Do the port numbers match what you connected to in the emulator?
+> Fun Aside: why this port number?  It is set in your project properties.  In your Solution Explorer, double-click **Properties>Debug** and examine its contents. Does the App URL match what you connected to in the emulator?
 
 Browse around and examine the sample bot code. In particular, note:
 + **Startup.cs** is where we will add services/middleware and configure the HTTP request pipeline.  
-+ In **PictureBot.cs**, `OnReceiveActivity` is the entry point which waits for a message from the user, and `context.Request.Type is ActivityTypes.Message` is where we can react to a message once received and then wait for further messages.  We can use `context.SendActivity` to send a message from the bot back to the user.  
++ In **PictureBot.cs**, `OnReceiveActivity` is the entry point which waits for a message from the user, and `context.Request.Type is ActivityTypes.Message` is where we can react to a message once received and wait for further messages.  We can use `context.SendActivity` to send a message from the bot back to the user.  
 
 
 ### Lab 1.3: Organzing Code for Bots
 
-There are many different methods and preferences for developing bots. The SDK allows you to organize your code in whatever way you want. In these labs, we'll organize our conversations topics, and we'll explore a [MVVM style](https://msdn.microsoft.com/en-us/library/hh848246.aspx) of organizing code around conversations.
+There are many different methods and preferences for developing bots. The SDK allows you to organize your code in whatever way you want. In these labs, we'll organize our conversations into topics, and we'll explore a [MVVM style](https://msdn.microsoft.com/en-us/library/hh848246.aspx) of organizing code around conversations.
 
 This PictureBot will be organized in the following way:
 * **Models** - the objects to be modified
@@ -161,7 +159,7 @@ This PictureBot will be organized in the following way:
 Next, create a folder for each piece in your PictureBot project (create three folders: "Models", "Topics", "Responses").  
 #### Topics  
 
-We'll start by defining an interface ITopic which gives it the basic ability to manage topics.  
+We'll start by defining an interface ITopic which gives it the basic ability to manage topics. We'll include the following pieces:  
 
 * **ITopic.StartTopic()** -Called when a topic is created.
 * **ITopic.ContinueTopic()** - Called for every activity as context.State.Conversation.ActivePrompt points to it.
@@ -255,10 +253,10 @@ namespace PictureBot.Topics
     }
 }
 ```
-As the code is now, the two classes are just simple implementations of **ITopic**, which we configured earlier. Review the ITopic class with the new Topic classes you've created to confirm you agree. In the next lab, we'll start adding things to our topics (removing the `throw new NotImplementedException();` as we go).
+As the code is now, the two classes are just simple implementations of **ITopic**, which we configured earlier. Review the ITopic class with the new Topic classes you've created to confirm you agree. In the next lab, we'll start adding things to our topics (removing `throw new NotImplementedException();` as we go).
 
 #### Responses
-Create two more classes, called "RootResponses.cs" and "SearchResponses.cs". As you may have figured out, the Responses files will simply contain the different outputs we may want to send to users, no logic.  
+Create two classes, called "RootResponses.cs" and "SearchResponses.cs" within the "Responses" folder. As you may have figured out, the Responses files will simply contain the different outputs we may want to send to users, no logic.  
 
 Within "RootResponses.cs" add the following:
 ```csharp
@@ -348,7 +346,7 @@ Are you missing anything? Now's a good time to check.
 > Note: We won't be adding any more classes for the rest of the labs! So do not fret or become overwhelmed. We'll spend the next few labs adding pieces to our bot.
 
 
-The last thing we need to do before we start building out our topics, is to update "PictureBot.cs" to use the ITopic to manage the handling conversations. Replace the contents of "PictureBot.cs" with the following:
+The last thing we need to do before we start building out our topics, is to update "PictureBot.cs" to use ITopic to manage the handling conversations. Replace the contents of "PictureBot.cs" with the following:
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -402,7 +400,7 @@ Take a few minutes to read the comments and be sure you understand what we're do
 
 There are a number of things that we can do to improve our bot.  First of all, we may not want to call LUIS for a simple "hi" greeting, which the bot will get fairly frequently from its users.  A simple regular expression could match this, and save us time (due to network latency) and money (due to cost of calling the LUIS service).  
 
-Also, as the complexity of our bot grows, and we are taking the user's input and using multiple services to interpret it, we need a process to manage that flow.  For example, try regular expressions first, and if that doesn't match, call LUIS, and then perhaps we also drop down to try other services like [QnA Maker](http://qnamaker.ai) and Azure Search. A great way to manage this is through [Middleware](https://github.com/Microsoft/botbuilder-dotnet/wiki/Creating-Middleware), and the SDK does a great job to support that. We call middleware from `ConfigureServices` under `Startup.cs`, simply by calling additional options add it (check your `Startup.cs` file to see the location). If you're familiar with [ScorableGroups](https://blog.botframework.com/2017/07/06/Scorables/), adding the flow via middleware eases the implementation and calling process.
+Also, as the complexity of our bot grows, and we are taking the user's input and using multiple services to interpret it, we need a process to manage that flow.  For example, try regular expressions first, and if that doesn't match, call LUIS, and then perhaps we also drop down to try other services like [QnA Maker](http://qnamaker.ai) and Azure Search. A great way to manage this is through [Middleware](https://github.com/Microsoft/botbuilder-dotnet/wiki/Creating-Middleware), and the SDK does a great job supporting that. We call middleware from `ConfigureServices` under `Startup.cs`, simply by calling additional options add it (check your `Startup.cs` file to see the location). 
 
 Before continuing with the lab, learn more about middleware and the Bot Framework SDK:  
 1.  [Overview and Architecture](https://github.com/Microsoft/botbuilder-dotnet/wiki/Overview)
@@ -411,7 +409,7 @@ Before continuing with the lab, learn more about middleware and the Bot Framewor
 
 Ultimately, we'll use middleware to try to understand what users are saying with regular expressions first, and if we can't, we'll call LUIS. If we still can't, then we'll drop down to a generic "I'm not sure what you mean" response, or whatever you put for "ReplyWithConfused."    
 
-In "Startup.cs", below the "Add middleware" comment within `ConfigureServices`, add the following:
+In "Startup.cs", below the "Add middleware below" comment within `ConfigureServices`, add the following:
 ```csharp
                 var middleware = options.Middleware;
 
@@ -431,7 +429,7 @@ You will probably get some errors within this. Fix them.
 
 **Hint (2):** You're missing a using statement.  
 
-> We're really just skimming the surface with regular expressions here. [Learn more](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference).  
+> We're really just skimming the surface of using regular expressions. [Learn more](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference).  
 
 Hopefully, it's fairly easy to see what we're doing here. Because of the order, we'll try Regex then LUIS. Without adding LUIS, our bot is really only going to pick up on a few variations, but it should capture a lot, if the users are using the bot for searching and sharing and ordering pictures. 
 
@@ -484,7 +482,7 @@ Make sure you understand the code, then replace the `StartTopic` method in "Root
 
 2.  ContinueTopic - We need to react to what the user says they want to do.
 
-Based on our results from Regex, direct the conversation in the next direction. Read the code carefully to confirm you understand what it's doing, then paste in the following code:
+Based on our results from Regex, we need to direct the conversation in the next direction. Read the code carefully to confirm you understand what it's doing, then paste in the following code to replace ContinueTopic:
 ```csharp
         /// <summary>
         /// Continue the topic, method which is routed to while this topic is active
@@ -527,9 +525,9 @@ Based on our results from Regex, direct the conversation in the next direction. 
             return true;
         }
 ```
-3.  ResumeTopic - In both Topics we'll create today, this serves as a "catch" if for some reason the active topic isn't handled and isn't RootTopic, this will basically start us over.  
+3.  ResumeTopic - In both Topics we'll create today, this serves as a "catch" if for some reason (maybe the user interrupts the bot) the active topic isn't handled and isn't RootTopic, this will basically start us over.  
 
-Add the following code:
+Replace ResumeTopic with the following code:
 ```csharp
         /// <summary>
         /// Resume the topic

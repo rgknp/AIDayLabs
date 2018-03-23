@@ -85,7 +85,7 @@ Open "SearchTopic.cs" and replace the contents of the class with the following c
 ```
 When we start the search topic, the first thing we need to do is ask the user, if we haven't already, what they want to search for. If we've already asked them, we want to wait for their response and continue the topic. The logic is very similar to greeting the user if they haven't been greeted yet. Review the code for `StartTopic` and confirm you understand.  
 
-You may have noticed that `ITopic` and `ContinueTopic` are throwing errors. Just as when we initially created SearchTopic, we have to have StartTopic, ContinueTopic, and ResumeTopic, because that's how we configured ITopic. So the errors are due to the fact that we haven't added ContinueTopic or ResumeTopic yet.  
+You may have noticed that `ITopic` and `ContinueTopic` are throwing errors. Just as when we initially created SearchTopic, we have to have StartTopic, ContinueTopic, and ResumeTopic, because that's how we configured ITopic. So the errors are due to the fact that we haven't added ContinueTopic or ResumeTopic back yet.  
 
 Let's add them now:
 
@@ -154,7 +154,7 @@ Discuss with a neighbor which methods below accomplish which tasks above, and ho
             }
             else // this means there was at least one hit for the search
             {
-                // create tue response with the result(s) and send to the user
+                // create the response with the result(s) and send to the user
                 SearchHitStyler searchHitStyler = new SearchHitStyler();
                 searchHitStyler.Apply(
                     ref activity,

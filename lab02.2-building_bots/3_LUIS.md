@@ -7,7 +7,7 @@ We will have to update our bot in order to use LUIS.  We can do this by modifyin
 
 ### Lab 3.1: Adding LUIS to Startup.cs
 
-Open "Startup.cs" and find where you added middleware to user the RegEx recognizer middleware. Since we want to call LUIS **after** we call RegEx, we'll put the LUIS recognizer middleware below:
+Open "Startup.cs" and find where you added middleware to use the RegEx recognizer middleware. Since we want to call LUIS **after** we call RegEx, we'll put the LUIS recognizer middleware below:
 ```csharp
                 middleware.Add(new LuisRecognizerMiddleware(
                     new LuisModel("luisAppId", "subscriptionId", new Uri("luisModelBaseUrl"))));
@@ -33,6 +33,7 @@ Replace:
                             // respond saying we don't know
                             await RootResponses.ReplyWithConfused(context);
                             return true;
+                    }
 ```
 With:
 ```csharp
@@ -92,17 +93,17 @@ With:
 ```
 Address the `RecognizerResult`, `LuisRecognizerMiddleware`, `JObject`, and `JsonConvert` errors by adding the necessary `using` statements.  
 
-Let's briefly go through what we're doing in the new code additions. First, instead of responding saying we don't understand, we're going to call LUIS. So we call LUIS using the LUIS Recognizer Middleware, and we store the Top Intent in a variable. We then use `switch` to respond in different ways, depending on what intent is picked up. This is almost identical to what we did with Regex.  
+Let's briefly go through what we're doing in the new code additions. First, instead of responding saying we don't understand, we're going to call LUIS. So we call LUIS using the LUIS Recognizer Middleware, and we store the Top Intent in a variable. We then use `switch` to respond in different ways, depending on which intent is picked up. This is almost identical to what we did with Regex.  
 
 > Note: If you named your intents differently in LUIS than instructed in "lab01.5-luis", you need to modify the `case` statements accordingly. 
 
-Another thing to note is that after every response, we're adding the LUIS intent value and score. The reason is simply to show you when LUIS is being called as opposed to Regex (you would remove these responses from the final product, but it's a good indicator for us as we test the bot).  
+Another thing to note is that after every response, we're adding the LUIS intent value and score. The reason is just to show you when LUIS is being called as opposed to Regex (you would remove these responses from the final product, but it's a good indicator for us as we test the bot).  
 
 Bring your attention to `case "SearchPics"`. Here, we check if LUIS also returned an entity, specifically the "facet" entity. If LUIS doesn't find the "facet," we take the user through the search topic, so we can determine what they want to search for and give them the results.  
 
-If LUIS does determine a "facet" entity from the utterance, we don't want to take the users through the whole search topic. We can go ahead and process their search request. `ProceedWithSearchAsync` does just that.  
+If LUIS does determine a "facet" entity from the utterance, we don't want to take the users through the whole search topic. We want to be efficient so the user has a good experience. So we'll go ahead and process their search request. `ProceedWithSearchAsync` does just that.  
 
-At the bottom of the class, but still within the class, add the `ProceedWithSearchAsync` method:
+At the bottom of the class, but still within the class, add the following:
 ```csharp
 // below tasks are required to process the search text and return the results     
         public async Task<bool> ProceedWithSearchAsync(ITurnContext context, string facet)
@@ -169,6 +170,7 @@ If you have extra time, see if there are things LUIS isn't picking up on that yo
 **Extra credit (to complete later)**: Create a process for ordering prints with the bot using topics, responses, and models.  Your bot will need to collect the following information: Photo size (8x10, 5x7, wallet, etc.), number of prints, glossy or matte finish, user's phone number, and user's email. The bot will then want to send you a confirmation before submitting the request.
 
 
+Get stuck? You can find the solution for this lab under [resources/code/Finished-PictureBot-Part3](./resources/code/Finished-PictureBot-Part3).
 
 
 ### Continue to [4_Publish_and_Register](./4_Publish_and_Register.md)  
