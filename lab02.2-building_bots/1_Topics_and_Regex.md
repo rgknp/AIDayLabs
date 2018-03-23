@@ -545,7 +545,7 @@ Add the following code:
 
 Hit F5 to run the bot. Test it by sending commands like "help", "share pics", "order pics", and "search pics". If the only thing that failed was "search pics", everything is working how you configured it. But why is "search pics" failing? Have an answer before you move on!
 
-You can find the solution for this lab under [resources/code/Finished-PictureBot-Part1](./resources/code/Finished-PictureBot-Part1).
+Get stuck? You can find the solution for this lab under [resources/code/Finished-PictureBot-Part1](./resources/code/Finished-PictureBot-Part1).
 
 
 

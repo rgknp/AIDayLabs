@@ -1,17 +1,34 @@
 ## 2_Azure_Search:
 Estimated Time: 10-15 minutes
 
+We now have a bot that can communicate with us if we use very specific words. The next thing we need to do is set up a connection to the Azure Search index we created in "lab02.1-azure_search." 
+
 ### Lab 2.1: Configure your bot for Azure Search 
 
-First, we need to provide our bot with the relevant information to connect to an Azure Search index.  The best place to store connection information is in the configuration file.  
+First, we need to provide our bot with the relevant information to connect to an Azure Search index.  The best place to store connection information is in a configuration file.  
 
-Open Web.config and in the appSettings section, add the following:
+Create a new "web.config" file by right-clicking on the project name and selecting **Add > New item > Web > Web Configuration File**.  
 
-```xml    
+Replace the contents of the file with the following:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=301879
+  -->
+<configuration>
+  <appSettings>
     <!-- Azure Search Settings -->
-    <add key="SearchDialogsServiceName" value="" />
-    <add key="SearchDialogsServiceKey" value="" />
-    <add key="SearchDialogsIndexName" value="images" />
+    <add key="SearchServiceName" value="" />
+    <add key="SearchServiceKey" value="" />
+    <add key="SearchIndexName" value="" />
+    <!-- update these with your BotId, Microsoft App Id and your Microsoft App Password-->
+    <add key="BotId" value="" />
+    <add key="MicrosoftAppId" value="" />
+    <add key="MicrosoftAppPassword" value="" />
+  </appSettings>
+</configuration>
 ```
 
 Set the value for the SearchDialogsServiceName to be the name of the Azure Search Service that you created earlier.  If needed, go back and look this up in the [Azure portal](https://portal.azure.com).  
@@ -20,43 +37,152 @@ Set the value for the SearchDialogsServiceKey to be the key for this service.  T
 
 ![Azure Search Settings](./resources/assets/AzureSearchSettings.jpg) 
 
+Finally, the SearchIndexName should be "images," but you may want to confirm that this is what you named your index.  
+
+> Note: Don't worry about your BotId, MicrosoftAppId or MicrosoftAppPassword just yet. We'll get to that in a later section.  
 ### Lab 2.2: Update the bot to use Azure Search
 
-Next, we'll update the bot to call Azure Search.  First, open Tools-->NuGet Package Manager-->Manage NuGet Packages for Solution.  In the search box, type "Microsoft.Azure.Search".  Select the corresponding library, check the box that indicates your project, and install it.  It may install other dependencies as well. Under installed packages, you may also need to update the "Newtonsoft.Json" package.
+Next, we need to update "SearchTopic.cs" so to request a search and process the response. We'll have to call Azure Search here, so make sure you've added the NuGet package (you should have done this in an earlier lab, but here's a friendly reminder).
 
 ![Azure Search NuGet](./resources/assets/AzureSearchNuGet.jpg) 
 
-Right-click on your project in the Solution Explorer of Visual Studio, and select Add-->New Folder.  Create a folder called "Models".  Then right-click on the Models folder, and select Add-->Existing Item.  Do this twice to add these two files under the Models folder (make sure to adjust your namespaces if necessary):
-1. [ImageMapper.cs](./resources/code/Models/ImageMapper.cs)
-2. [SearchHit.cs](./resources/code/Models/SearchHit.cs)
+Open "SearchTopic.cs" and replace the contents of the class with the following code:
+```csharp
+    public class SearchTopic : ITopic
+    {
+        public string Name { get; set; } = "Search";
+        // Search object representing the information being gathered by the conversation before it is submitted to search
+        public string searchText;
+        // Track in this topic if we have asked the user what they want to search for
+        public bool RequestedForSearch { get; set; } = false;
 
->You can find the files in this repository under [resources/code/Models](./resources/code/Models)
+        public async Task<bool> StartTopic(ITurnContext context)
+        {
+            switch (context.Request.Type)
+            {
+                case ActivityTypes.Message:
+                    {
+                        // Ask them what they want to search for if we haven't already
+                        if (!RequestedForSearch)
+                        {
+                            await SearchResponses.ReplyWithSearchRequest(context);
+                            // Now that we've asked, set to true, so we don't ask again 
+                            this.RequestedForSearch = true;
+                            return true;
+                        }
+                        return true;
+                    }
+                default:
+                    break;
+            }
+            return await this.ContinueTopic(context);
+        }
+    
+    // Add ContinueTopic and ReviewTopic below
+    
 
-Next, right-click on the Dialogs folder in the Solution Explorer of Visual Studio, and select Add-->Class.  Call your class "SearchDialog.cs". Add the contents from [here](./resources/code/SearchDialog.cs).
+    }
+```
+When we start the search topic, the first thing we need to do is ask the user, if we haven't already, what they want to search for. If we've already asked them, we want to wait for their response and continue the topic. The logic is very similar to greeting the user if they haven't been greeted yet. Review the code for `StartTopic` and confirm you understand.  
 
-Review the contents of the files you just added. Discuss with a neighbor what each of them does.
+You may have noticed that `ITopic` and `ContinueTopic` are throwing errors. Just as when we initially created SearchTopic, we have to have StartTopic, ContinueTopic, and ResumeTopic, because that's how we configured ITopic. So the errors are due to the fact that we haven't added ContinueTopic or ResumeTopic yet.  
 
-We also need to update your RootDialog to call the SearchDialog.  In RootDialog.cs in the Dialogs folder, directly under the `ResumeAfterChoice` method, add these "ResumeAfter" methods:
+Let's add them now:
 
 ```csharp
-
-        private async Task ResumeAfterSearchTopicClarification(IDialogContext context, IAwaitable<string> result)
+        public async Task<bool> ContinueTopic(ITurnContext context)
         {
-            string searchTerm = await result;
-            context.Call(new SearchDialog(searchTerm), ResumeAfterSearchDialog);
+            var conversation = ConversationState<ConversationData>.Get(context);
+
+            // Process the search request and send the results to the user
+            await ProcessSearchAsync(context);
+            // Then go back to the root topic
+            conversation.ActiveTopic = new RootTopic();
+            return false;
         }
 
-        private async Task ResumeAfterSearchDialog(IDialogContext context, IAwaitable<object> result)
+
+        public async Task<bool> ResumeTopic(ITurnContext context)
         {
-            await context.PostAsync("Done searching pictures");
+            await RootResponses.ReplyWithResumeTopic(context);
+            return true;
         }
+
+        // Add ProcessSearchAsync below
+
 
 ```
 
-In RootDialog.cs, you will also need to remove the comments (the `//` at the beginning) from the line: `PromptDialog.Text(context, ResumeAfterSearchTopicClarification, "What kind of picture do you want to search for?");` within the `ResumeAfterChoice` method.
+In ContinueTopic, you can see that we're gathering the context of the conversation, waiting for the results of the ProcessSearchAsync method, and finally starting a new root topic.
+
+In order to process the search, there are several tasks we need to accomplish:
+1.  Establish a connection to the search service
+2.  Store the search request and tell the user what we're searching for
+3.  Call the search service and store the results
+4.  Put the results in a message and respond to the user
+
+Discuss with a neighbor which methods below accomplish which tasks above, and how:
+```csharp
+        // below tasks are required to process the search text and return the results
+        public async Task<bool> ProcessSearchAsync(ITurnContext context)
+        {
+            // store the users response
+            searchText = (context.Request.Text ?? "").Trim();
+            var userState = context.GetUserState<UserData>();
+            await SearchResponses.ReplyWithSearchConfirmation(context, searchText);
+            await StartAsync(context);
+            return true;            
+        }
+
+        public async Task StartAsync(ITurnContext context)
+        {
+            ISearchIndexClient indexClientForQueries = CreateSearchIndexClient();
+            // For more examples of calling search with SearchParameters, see
+            // https://github.com/Azure-Samples/search-dotnet-getting-started/blob/master/DotNetHowTo/DotNetHowTo/Program.cs.  
+            // Call the search service and store the results
+            DocumentSearchResult results = await indexClientForQueries.Documents.SearchAsync(searchText);
+            await SendResultsAsync(context, results);
+        }
+
+        public async Task SendResultsAsync(ITurnContext context, DocumentSearchResult results)
+        {
+            IMessageActivity activity = context.Request.CreateReply();
+            // if the search returns no results
+            if (results.Results.Count == 0)
+            {
+                await SearchResponses.ReplyWithNoResults(context, searchText);
+            }
+            else // this means there was at least one hit for the search
+            {
+                // create tue response with the result(s) and send to the user
+                SearchHitStyler searchHitStyler = new SearchHitStyler();
+                searchHitStyler.Apply(
+                    ref activity,
+                    "Here are the results that I found:",
+                    results.Results.Select(r => ImageMapper.ToSearchHit(r)).ToList().AsReadOnly());
+
+                await context.SendActivity(activity);
+            }        
+        }
+
+        public ISearchIndexClient CreateSearchIndexClient()
+        {
+            // Configure the search service and establish a connection, call it in StartAsync()
+            // TODO: Determine how to integrate this 
+            string searchServiceName = "antho-test"; //ConfigurationManager.AppSettings["SearchDialogsServiceName"];
+            string queryApiKey = "72F8A2C87D4A3057EDAA8BFCFEB0D287"; //ConfigurationManager.AppSettings["SearchDialogsServiceKey"];
+            string indexName = "images";  //ConfigurationManager.AppSettings["SearchDialogsIndexName"];
+
+            SearchIndexClient indexClient = new SearchIndexClient(searchServiceName, indexName, new SearchCredentials(queryApiKey));
+            return indexClient;
+        }
+```
+
+Now that you understand which piece does what and why, add the code below the comment "Add ProcessSearchAsync below."  
 
 Press F5 to run your bot again.  In the Bot Emulator, try searching for something like "dogs" or "water".  Ensure that you are seeing results when tags from your pictures are requested.  
 
+Get stuck? You can find the solution for this lab under [resources/code/Finished-PictureBot-Part2](./resources/code/Finished-PictureBot-Part2).
 
 ### Continue to [3_LUIS](./3_LUIS.md)  
 Back to [README](./0_README.md)
