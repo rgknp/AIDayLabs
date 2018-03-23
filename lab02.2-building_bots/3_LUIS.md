@@ -1,150 +1,173 @@
 ## 3_LUIS:
 Estimated Time: 15-20 minutes
 
-### Lab 3.1: Update bot to use LUIS
+Our bot is now capable of taking in a user's input, calling Azure Search, and returning the results in a carousel of Hero cards. Unfortunately, our bot's communication skills are brittle. One typo, or a rephrasing of words, and the bot is not going to understand. This can cause frustration for the user. We can greatly increase the bot's conversation abilities by enabling it to understand natural language with the LUIS model we built yesterday in "lab01.5-luis."  
 
-We have to update our bot in order to use LUIS.  We can do this by using the [LuisDialog class](https://docs.botframework.com/en-us/csharp/builder/sdkreference/d8/df9/class_microsoft_1_1_bot_1_1_builder_1_1_dialogs_1_1_luis_dialog.html).  
+We will have to update our bot in order to use LUIS.  We can do this by modifying "Startup.cs" and "RootTopic.cs."
 
-In the **RootDialog.cs** file, add references to the following namespaces:
+### Lab 3.1: Adding LUIS to Startup.cs
 
+Open "Startup.cs" and find where you added middleware to user the RegEx recognizer middleware. Since we want to call LUIS **after** we call RegEx, we'll put the LUIS recognizer middleware below:
 ```csharp
-
-using Microsoft.Bot.Builder.Luis;
-using Microsoft.Bot.Builder.Luis.Models;
-
+                middleware.Add(new LuisRecognizerMiddleware(
+                    new LuisModel("luisAppId", "subscriptionId", new Uri("luisModelBaseUrl"))));
 ```
+Use the app ID, subscription ID, and base URL for your LUIS model. The base URL will be "https://region.api.cognitive.microsoft.com/luis/v2.0/apps/", where region is the region associated with the key you are using. Some examples of regions are, `westus`, `westcentralus`, `eastus2`, and `southeastasia`.  
 
-Next, give the class a LuisModel attribute with the LUIS App ID and LUIS key.  If you can't find these values, go back to http://luis.ai.  Click on your application, and go to the "Publish App" page. You can get the LUIS App ID and LUIS key from the Endpoint URL (HINT: The LUIS App ID will have hyphens in it, and the LUIS key will not). You will need to put the following line of code directly above the `[Serializable]` with your LUIS App ID and LUIS key:
+You can find your base URL by logging into www.luis.ai, going to the **Publish** tab, and looking at the **Endpoint** column under **Resources and Keys**. The base URL is the portion of the **Endpoint URL** before the subscription ID and other parameters.  
 
+**Hint**: The LUIS App ID will have hyphens in it, and the LUIS key will not.  
+
+You may get some errors for `LuisrecognizerMiddleware`, `LuisModel` and `Uri`. Address them before continuing.
+
+### Lab 3.2: Adding LUIS to RootTopic.cs
+
+Open "RootTopic.cs." There's no need for us to add anything to StartTopic, because regardless of user input, we want to greet the user when the conversation starts.  
+
+In ContinueTopic, we do want to start by trying Regex, so we'll leave most of that. However, if Regex doesn't find an intent, we want the `default` action to be different. That's when we want to call LUIS.  
+
+Replace:
 ```csharp
-
-namespace PictureBot.Dialogs
-{
-    [LuisModel("96f65e22-7dcc-4f4d-a83a-d2aca5c72b24", "1234bb84eva3481a80c8a2a0fa2122f0")]
-    [Serializable]
-
-...
+                        default:
+                            // adding app logic when Regex doesn't find an intent 
+                            // respond saying we don't know
+                            await RootResponses.ReplyWithConfused(context);
+                            return true;
 ```
-
-> Fun Aside: You can use [Autofac](https://autofac.org/) to dynamically load the LuisModel attribute on your class instead of hardcoding it, so it could be stored properly in a configuration file.  There is an example of this in the [AlarmBot sample](https://github.com/Microsoft/BotBuilder/blob/master/CSharp/Samples/AlarmBot/Models/AlarmModule.cs#L24).  
-
-
-Let's start simple by adding our "Greeting" intent (below all of the code you've already put within the DispatchDialog):
-
+With:
 ```csharp
-        [LuisIntent("Greeting")]
-        [ScorableGroup(1)]
-        public async Task Greeting(IDialogContext context, LuisResult result)
+                        default:
+                            // adding app logic when Regex doesn't find an intent - consult LUIS
+                            var result = context.Get<RecognizerResult>(LuisRecognizerMiddleware.LuisRecognizerResultKey);
+                            var topIntent = result?.GetTopScoringIntent();
+
+                            switch ((topIntent != null) ? topIntent.Value.key : null)
+                            {
+                                case null:
+                                    // Add app logic when there is no result.
+                                    await RootResponses.ReplyWithConfused(context);
+                                    break;
+                                case "None":
+                                    await RootResponses.ReplyWithConfused(context);
+                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                    break;
+                                case "Greeting":
+                                    await RootResponses.ReplyWithGreeting(context);
+                                    await RootResponses.ReplyWithHelp(context);
+                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                    break;
+                                case "OrderPic":
+                                    await RootResponses.ReplyWithOrderConfirmation(context);
+                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                    break;
+                                case "SharePic":
+                                    await RootResponses.ReplyWithShareConfirmation(context);
+                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                    break;
+                                case "SearchPics":
+                                    // Check if LUIS has identified the search term that we should look for.  
+                                    var entity = result?.Entities;
+                                    var obj = JObject.Parse(JsonConvert.SerializeObject(entity)).SelectToken("facet");
+                                    // if no entities are picked up on by LUIS, go through SearchTopic
+                                    if (obj == null)
+                                    {
+                                        conversation.ActiveTopic = new SearchTopic();
+                                        await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                    }
+                                    // if entities are picked up by LUIS, skip SearchTopic and process the search
+                                    else
+                                    {
+                                        facet = obj.ToString().Replace("\"", "").Trim(']', '[', ' ');
+                                        await ProceedWithSearchAsync(context, facet);
+                                        await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                        break;
+                                    }
+                                    return await conversation.ActiveTopic.StartTopic(context);
+                                default:
+                                    await RootResponses.ReplyWithConfused(context);
+                                    break;
+                            }
+                            return true;
+                    }
+```
+Address the `RecognizerResult`, `LuisRecognizerMiddleware`, `JObject`, and `JsonConvert` errors by adding the necessary `using` statements.  
+
+Let's briefly go through what we're doing in the new code additions. First, instead of responding saying we don't understand, we're going to call LUIS. So we call LUIS using the LUIS Recognizer Middleware, and we store the Top Intent in a variable. We then use `switch` to respond in different ways, depending on what intent is picked up. This is almost identical to what we did with Regex.  
+
+> Note: If you named your intents differently in LUIS than instructed in "lab01.5-luis", you need to modify the `case` statements accordingly. 
+
+Another thing to note is that after every response, we're adding the LUIS intent value and score. The reason is simply to show you when LUIS is being called as opposed to Regex (you would remove these responses from the final product, but it's a good indicator for us as we test the bot).  
+
+Bring your attention to `case "SearchPics"`. Here, we check if LUIS also returned an entity, specifically the "facet" entity. If LUIS doesn't find the "facet," we take the user through the search topic, so we can determine what they want to search for and give them the results.  
+
+If LUIS does determine a "facet" entity from the utterance, we don't want to take the users through the whole search topic. We can go ahead and process their search request. `ProceedWithSearchAsync` does just that.  
+
+At the bottom of the class, but still within the class, add the `ProceedWithSearchAsync` method:
+```csharp
+// below tasks are required to process the search text and return the results     
+        public async Task<bool> ProceedWithSearchAsync(ITurnContext context, string facet)
         {
-            // Duplicate logic, for a teachable moment on Scorables.  
-            await context.PostAsync("Hello from LUIS!  I am a Photo Organization Bot.  I can search your photos, share your photos on Twitter, and order prints of your photos.  You can ask me things like 'find pictures of food'.");
+            var userState = context.GetUserState<UserData>();
+            await SearchResponses.ReplyWithSearchConfirmation(context, facet);
+            await StartAsync(context, facet);
+            //end topic
+            return true;
         }
-```
-
-Hit F5 to run the app. In the Bot Emulator, try sending the bots different ways of sending hello. What happens when you send "whats up" versus "hello"?
-
-The "None" intent in LUIS means that the utterance didn't map to any intent.  In this situation, we want to fall down to the next level of ScorableGroup.  Add the "None" method in the RootDialog class as follows:
-```csharp
-        [LuisIntent("")]
-        [LuisIntent("None")]
-        public async Task None(IDialogContext context, LuisResult result)
+        
+        public async Task StartAsync(ITurnContext context, string facet)
         {
-            // Luis returned with "None" as the winning intent,
-            // so drop down to next level of ScorableGroups.  
-            ContinueWithNextGroup();
+            ISearchIndexClient indexClientForQueries = CreateSearchIndexClient();
+
+            // For more examples of calling search with SearchParameters, see
+            // https://github.com/Azure-Samples/search-dotnet-getting-started/blob/master/DotNetHowTo/DotNetHowTo/Program.cs.  
+
+            DocumentSearchResult results = await indexClientForQueries.Documents.SearchAsync(facet);
+            await SendResultsAsync(context, results);
         }
-```
 
-Finally, add methods for the rest of the intents.  The corresponding method will be invoked for the highest-scoring intent. Talk with a neighbor about the "SearchPics" and "SharePics" code. What else is the code doing? 
-
-
-```csharp
-        [LuisIntent("SearchPics")]
-        public async Task SearchPics(IDialogContext context, LuisResult result)
+        public async Task SendResultsAsync(ITurnContext context, DocumentSearchResult results)
         {
-            // Check if LUIS has identified the search term that we should look for.  
-            string facet = null;
-            EntityRecommendation rec;
-            if (result.TryFindEntity("facet", out rec)) facet = rec.Entity;
+            IMessageActivity activity = context.Request.CreateReply();
 
-            // If we don't know what to search for (for example, the user said
-            // "find pictures" or "search" instead of "find pictures of x"),
-            // then prompt for a search term.  
-            if (string.IsNullOrEmpty(facet))
+            if (results.Results.Count == 0)
             {
-                PromptDialog.Text(context, ResumeAfterSearchTopicClarification,
-                    "What kind of picture do you want to search for?");
+                await SearchResponses.ReplyWithNoResults(context, facet);
             }
             else
             {
-                await context.PostAsync("Searching pictures...");
-                context.Call(new SearchDialog(facet), ResumeAfterSearchDialog);
+                SearchHitStyler searchHitStyler = new SearchHitStyler();
+                searchHitStyler.Apply(
+                    ref activity,
+                    "Here are the results that I found:",
+                    results.Results.Select(r => ImageMapper.ToSearchHit(r)).ToList().AsReadOnly());
+                await context.SendActivity(activity);
             }
         }
 
-        [LuisIntent("OrderPic")]
-        public async Task OrderPic(IDialogContext context, LuisResult result)
+        public ISearchIndexClient CreateSearchIndexClient()
         {
-            await context.PostAsync("Ordering your pictures...");
+            // TODO: Determine how to integrate this 
+            string searchServiceName = "antho-test"; //ConfigurationManager.AppSettings["SearchServiceName"];
+            string queryApiKey = "72F8A2C87D4A3057EDAA8BFCFEB0D287";  //ConfigurationManager.AppSettings["SearchServiceAdminApiKey"];
+            string indexName = "images";  //ConfigurationManager.AppSettings["SearchDialogsIndexName"];
+
+            SearchIndexClient indexClient = new SearchIndexClient(searchServiceName, indexName, new SearchCredentials(queryApiKey));
+            return indexClient;
         }
-
-        [LuisIntent("SharePic")]
-        public async Task SharePic(IDialogContext context, LuisResult result)
-        {
-            PromptDialog.Confirm(context, AfterShareAsync,
-                "Are you sure you want to tweet this picture?");
-        }
-
-        private async Task AfterShareAsync(IDialogContext context, IAwaitable<bool> result)
-        {
-            if (result.GetAwaiter().GetResult() == true)
-            {
-                // Yes, share the picture.
-                await context.PostAsync("Posting tweet.");
-            }
-            else
-            {
-                // No, don't share the picture.  
-                await context.PostAsync("OK, I won't share it.");
-            }
-        }
+``` 
+This code should look very familiar to you. It's quite similar to the `ProcessSearchAsync` method in the search topic. Can you spot the differences and why they are there?  
 
 
-```
+Hit F5 to run the app. In the Bot Emulator, try sending the bots different ways of searching pictures. What happens when you say "search pics" or "show me water pics"? Try some other ways of searching, sharing and ordering pictures.  
+
+If you have extra time, see if there are things LUIS isn't picking up on that you expected it to. Maybe now is a good time to go to luis.ai, review your endpoint utterances or add more utterances, and retrain/republish your model. 
 
 
-
-> Hint: The "SharePic" method contains a little code to show how to do a prompt for a yes/no confirmation as well as setting the ScorableGroup. This code doesn't actually post a tweet because we didn't want to spend time getting everyone set up with Twitter developer accounts and such, but you are welcome to implement if you want.
-
-You may have noticed that we haven't implemented scorable groups for the intents we just added. Modify your code so that all of the `LuisIntent`s are of scorable group priority 1. Now that you've added LUIS functionality, you can uncomment the two `await` lines in the `ResumeAfterChoice` method.  
-
-Once you've modified your code, hit F5 to run in Visual Studio, and start up a new conversation in the Bot Framework Emulator.  Try chatting with the bot, and ensure that you get the expected responses.  If you get any unexpected results, note them down and [revise LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Train-Test).
-
-Don't forget, you must re-train and re-publish your LUIS model.  Then you can return to your bot in the emulator and try again.  
-
-> Fun Aside: The Suggested Utterances are extremely powerful.  LUIS makes smart decisions about which utterances to surface.  It chooses the ones that will help it improve the most to have manually labeled by a human-in-the-loop.  For example, if the LUIS model predicted that a given utterance mapped to Intent1 with 47% confidence and predicted that it mapped to Intent2 with 48% confidence, that is a strong candidate to surface to a human to manually map, since the model is very close between two intents.  
+> Fun Aside: Reviewing the endpoint utterances can be extremely powerful.  LUIS makes smart decisions about which utterances to surface.  It chooses the ones that will help it improve the most to have manually labeled by a human-in-the-loop.  For example, if the LUIS model predicted that a given utterance mapped to Intent1 with 47% confidence and predicted that it mapped to Intent2 with 48% confidence, that is a strong candidate to surface to a human to manually map, since the model is very close between two intents.  
 
 
-> Extra credit (to complete later): create an OrderDialog class in your "Dialogs" folder.  Create a process for ordering prints with the bot using [FormFlow](https://docs.botframework.com/en-us/csharp/builder/sdkreference/forms.html).  Your bot will need to collect the following information: Photo size (8x10, 5x7, wallet, etc.), number of prints, glossy or matte finish, user's phone number, and user's email.
+**Extra credit (to complete later)**: Create a process for ordering prints with the bot using topics, responses, and models.  Your bot will need to collect the following information: Photo size (8x10, 5x7, wallet, etc.), number of prints, glossy or matte finish, user's phone number, and user's email. The bot will then want to send you a confirmation before submitting the request.
 
-
-
-Finally, add a default handler if none of the above services were able to understand.  This ScorableGroup needs an explicit MethodBind because it is not decorated with a LuisIntent or RegexPattern attribute (which include a MethodBind).
-
-```csharp
-
-        // Since none of the scorables in previous group won, the dialog sends a help message.
-        [MethodBind]
-        [ScorableGroup(2)]
-        public async Task Default(IDialogContext context, IActivity activity)
-        {
-            await context.PostAsync("I'm sorry. I didn't understand you.");
-            await context.PostAsync("You can tell me to find photos, tweet them, and order prints.  Here is an example: \"find pictures of food\".");
-        }
-
-```
-
-Hit F5 to run your bot and test it in the Bot Emulator.  
 
 
 
