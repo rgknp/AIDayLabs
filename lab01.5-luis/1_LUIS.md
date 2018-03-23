@@ -71,12 +71,12 @@ Just as we did for Greetings, let's add some sample utterances (words/phrases/se
 + Find outdoor pics
 + Are there pictures of a train?
 + Find pictures of food.
-+ Search for photos of a 6-month-old boy
-+ Please give me pics of 20-year-old women
++ Search for photos of boys playing
++ Please give me pics of business women
 + Show me beach pics
 + I want to find dog photos
 + Search for pictures of men indoors
-+ Show me pictures of girls looking happy
++ Show me pictures of men wearing glasses
 + I want to see pics of sad boys
 + Show me happy baby pics
 
