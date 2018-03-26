@@ -8,7 +8,7 @@ using Microsoft.Bot.Schema;
 using System.Configuration;
 using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
-using System;
+using Microsoft.Bot.Connector.Authentication;
 
 namespace PictureBot.Topics
 {
@@ -22,7 +22,7 @@ namespace PictureBot.Topics
 
         public async Task<bool> StartTopic(ITurnContext context)
         {
-            switch (context.Request.Type)
+            switch (context.Activity.Type)
             {
                 case ActivityTypes.Message:
                     {
@@ -66,7 +66,7 @@ namespace PictureBot.Topics
         public async Task<bool> ProcessSearchAsync(ITurnContext context)
         {
             // store the users response
-            searchText = (context.Request.Text ?? "").Trim();
+            searchText = (context.Activity.Text ?? "").Trim();
             var userState = context.GetUserState<UserData>();
             await SearchResponses.ReplyWithSearchConfirmation(context, searchText);
             await StartAsync(context);
@@ -85,7 +85,7 @@ namespace PictureBot.Topics
 
         public async Task SendResultsAsync(ITurnContext context, DocumentSearchResult results)
         {
-            IMessageActivity activity = context.Request.CreateReply();
+            IMessageActivity activity = context.Activity.CreateReply();
             // if the search returns no results
             if (results.Results.Count == 0)
             {

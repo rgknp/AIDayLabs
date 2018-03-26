@@ -26,12 +26,12 @@ namespace PictureBot.Topics
         /// <returns></returns>
         public async Task<bool> StartTopic(ITurnContext context)
         {
-            switch (context.Request.Type)
+            switch (context.Activity.Type)
             {
                 case ActivityTypes.ConversationUpdate:
                     {
                         // greet when added to conversation
-                        var activity = context.Request.AsConversationUpdateActivity();
+                        var activity = context.Activity.AsConversationUpdateActivity();
                         if (activity.MembersAdded.Any(m => m.Id == activity.Recipient.Id))
                         {
                             await RootResponses.ReplyWithGreeting(context);
@@ -60,9 +60,9 @@ namespace PictureBot.Topics
         public async Task<bool> ContinueTopic(ITurnContext context)
         {
             var conversation = ConversationState<ConversationData>.Get(context);
-            var recognizedIntents = context.Get<IRecognizedIntents>();
+            var recognizedIntents = context.Services.Get<IRecognizedIntents>();
 
-            switch (context.Request.Type)
+            switch (context.Activity.Type)
             {
                 case ActivityTypes.Message:
                     switch (recognizedIntents.TopIntent?.Name)

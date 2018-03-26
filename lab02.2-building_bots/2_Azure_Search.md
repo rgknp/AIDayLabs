@@ -58,7 +58,7 @@ Open "SearchTopic.cs" and replace the contents of the class with the following c
 
         public async Task<bool> StartTopic(ITurnContext context)
         {
-            switch (context.Request.Type)
+            switch (context.Activity.Type)
             {
                 case ActivityTypes.Message:
                     {
@@ -127,7 +127,7 @@ Discuss with a neighbor which methods below accomplish which tasks above, and ho
         public async Task<bool> ProcessSearchAsync(ITurnContext context)
         {
             // store the users response
-            searchText = (context.Request.Text ?? "").Trim();
+            searchText = (context.Activity.Text ?? "").Trim();
             var userState = context.GetUserState<UserData>();
             await SearchResponses.ReplyWithSearchConfirmation(context, searchText);
             await StartAsync(context);

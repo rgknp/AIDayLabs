@@ -128,7 +128,7 @@ At the bottom of the class, but still within the class, add the following:
 
         public async Task SendResultsAsync(ITurnContext context, DocumentSearchResult results)
         {
-            IMessageActivity activity = context.Request.CreateReply();
+            IMessageActivity activity = context.Activity.CreateReply();
 
             if (results.Results.Count == 0)
             {

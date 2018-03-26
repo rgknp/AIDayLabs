@@ -117,7 +117,7 @@ namespace PictureBot
     {
         public async Task OnReceiveActivity(ITurnContext context)
         {
-            if (context.Request.Type is ActivityTypes.Message)
+            if (context.Activity.Type is ActivityTypes.Message)
             {
                 await context.SendActivity($"Hello world.");
             }
@@ -144,7 +144,7 @@ To interact with your bot:
 
 Browse around and examine the sample bot code. In particular, note:
 + **Startup.cs** is where we will add services/middleware and configure the HTTP request pipeline.  
-+ In **PictureBot.cs**, `OnReceiveActivity` is the entry point which waits for a message from the user, and `context.Request.Type is ActivityTypes.Message` is where we can react to a message once received and wait for further messages.  We can use `context.SendActivity` to send a message from the bot back to the user.  
++ In **PictureBot.cs**, `OnReceiveActivity` is the entry point which waits for a message from the user, and `context.Activity.Type is ActivityTypes.Message` is where we can react to a message once received and wait for further messages.  We can use `context.SendActivity` to send a message from the bot back to the user.  
 
 
 ### Lab 1.3: Organzing Code for Bots
@@ -453,7 +453,7 @@ Make sure you understand the code, then replace the `StartTopic` method in "Root
         /// <returns></returns>
         public async Task<bool> StartTopic(ITurnContext context)
         {
-            switch (context.Request.Type)
+            switch (context.Activity.Type)
             {
                 case ActivityTypes.ConversationUpdate:
                     {
@@ -492,9 +492,9 @@ Based on our results from Regex, we need to direct the conversation in the next 
         public async Task<bool> ContinueTopic(ITurnContext context)
         {
             var conversation = ConversationState<ConversationData>.Get(context);
-            var recognizedIntents = context.Get<IRecognizedIntents>();
+            var recognizedIntents = context.Services.Get<IRecognizedIntents>();
 
-            switch (context.Request.Type)
+            switch (context.Activity.Type)
             {
                 case ActivityTypes.Message:
                     switch (recognizedIntents.TopIntent?.Name)
