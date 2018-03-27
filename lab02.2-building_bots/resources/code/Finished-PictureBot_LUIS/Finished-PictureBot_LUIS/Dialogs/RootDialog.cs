@@ -10,19 +10,19 @@ using Finished_PictureBot_LUIS.Models;
 
 namespace Finished_PictureBot_LUIS.Dialogs
 {
-    [LuisModel("f542d017-743f-418c-8a56-894aaebbae38", "d159515b5f9c4c70b805b842bb2c021b")]
+    [LuisModel("YOUR-APP-ID", "YOUR-SUBSCRIPTION-KEY")]
     [Serializable]
     public class RootDialog : DispatchDialog<object>
     {
-        [RegexPattern("^hello")]
-        [RegexPattern("^hi")]
+        [RegexPattern("^Hello|hello")]
+        [RegexPattern("^Hi|hi")]
         [ScorableGroup(0)]
         public async Task Hello(IDialogContext context, IActivity activity)
         {
             await context.PostAsync("Hello from RegEx!  I am a Photo Organization Bot.  I can search your photos, share your photos on Twitter, and order prints of your photos.  You can ask me things like 'find pictures of food'.");
         }
 
-        [RegexPattern("^help")]
+        [RegexPattern("^Help|help")]
         [ScorableGroup(0)]
         public async Task Help(IDialogContext context, IActivity activity)
         {

@@ -25,7 +25,9 @@
 * Custom Speech Service - over come recognition barriers like speaking style, background, noise, and vocabulary
 * Speaker Recognition API - you could authenticate/identify return customers
 * Translator Speech API - give the user the option to speak in different languages
-* Recommendations API - predict and recommend items customers want
+* Custom Decision Service - could use this to rank recommended items
+
+> Note the [Recommendations API has been discontinued](https://docs.microsoft.com/en-us/azure/cognitive-services/Recommendations/overview), but there is still a [Recommendations Solution template](http://aka.ms/recopcs).
 
 In addition, the CIO has asked you for examples of how Custom Vision could be
 used to help to bring value to the business.

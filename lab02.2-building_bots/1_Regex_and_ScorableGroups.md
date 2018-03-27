@@ -66,15 +66,15 @@ Let's add some new methods that match regular expressions as our first priority 
 
 ```csharp
 
-        [RegexPattern("^hello")]
-        [RegexPattern("^hi")]
+        [RegexPattern("^Hello|hello")]
+        [RegexPattern("^Hi|hi")]
         [ScorableGroup(0)]
         public async Task Hello(IDialogContext context, IActivity activity)
         {
             await context.PostAsync("Hello from RegEx!  I am a Photo Organization Bot.  I can search your photos, share your photos on Twitter, and order prints of your photos.  You can ask me things like 'find pictures of food'.");
         }
 
-        [RegexPattern("^help")]
+        [RegexPattern("^Help|help")]
         [ScorableGroup(0)]
         public async Task Help(IDialogContext context, IActivity activity)
         {

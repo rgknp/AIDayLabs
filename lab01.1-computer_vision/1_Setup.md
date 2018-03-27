@@ -22,7 +22,7 @@ After creating an Azure account, you may access the [Azure portal](https://porta
 *Validation step*: TestCLI should appear **bold** in the Solution Explorer  
 *Note: If you get a message that TestCLI is unable to load, right-click on TestCLI and select "Install Missing Features". This will prompt you to install **.Net Desktop Development**. Click **Install**, then **Install** again. You may get an error because Visual Studio needs to be closed to install updates. Close Visual Studio and then select **Retry**. It should only take 1-2 minutes to install. Reopen "ImageProcessing.sln", confirm that you are able to expand TestCLI and see its contents. Then, right-click on TestCLI and select "Set as StartUp Project".*
 4. Right-click on the solution in Solution Explorer and select "Build Solution".  
-*Validation step*: When you build the solution, the only errors you receive are related to `ImageProcessor.cs`. You do not need to worry about yellow warning messages.
+*Validation step*: When you build the solution, the only errors you receive are related to `ImageProcessor` in `Program.cs`. You do not need to worry about yellow warning messages.
 
 
 ### Lab 1.2: Collecting the Keys ###
@@ -53,6 +53,8 @@ In the Portal, click the **"+ New"** button (when you hover over it, it will say
 This will lead you to fill out a few details for the API endpoint you'll be creating, choosing the API you're interested in and where you'd like your endpoint to reside (**put in the West US region or it will not work**), as well as what pricing plan you'd like. We'll be using **S1** so that we have the throughput we need for the tutorial. Use the same Resource Group that you used to create your DSVM. We'll also use this resource group for Blob Storage and Cosmos DB. _Pin to dashboard_ so that you can easily find it. Since the Computer Vision API stores images internally at Microsoft (in a secure fashion), to help improve future Cognitive Services Vision offerings, you'll need to check the box that states you're ok with this before you can create the resource.
 
 **Double check that you put your Computer Vision service in West US**  
+
+> The code in the following labs has been set up to use West US for calling the Computer Vision API. In your future endeavors, you can learn how to call other regions [here](https://docs.microsoft.com/en-us/azure/cognitive-services/Computer-vision/Vision-API-How-to-Topics/HowToSubscribe).
 
 
 **Modifying `settings.json`, part one**
