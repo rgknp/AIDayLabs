@@ -7,9 +7,35 @@ We assume that you've had some exposure to the Bot Framework. If you have, great
 
 ### Lab 1.1: Setting up for bot development
 
-We will be developing a bot using the C# SDK.  To get started, you need to:   
-1. Download the Bot Framework Emulator for testing your bot locally [here](https://github.com/Microsoft/BotFramework-Emulator/releases/download/v3.5.33/botframework-emulator-Setup-3.5.33.exe).  The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-3.5.33\botframework-emulator.exe` or your Downloads folder, depending on browser.
-2. Follow the [instructions to build the SDK](https://github.com/Microsoft/botbuilder-dotnet/wiki/Building-the-SDK).
+We will be developing a bot using the latest .NET SDK (v4).  To get started, we'll need to download the Bot Framework Emulator, and we'll need to clone and build the SDK.
+
+#### Download the Bot Framework Emulator  
+
+1. Download the Bot Framework Emulator for testing your bot locally [here](https://github.com/Microsoft/BotFramework-Emulator/releases/download/v3.5.33/botframework-emulator-Setup-3.5.33.exe).  The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-3.5.33\botframework-emulator.exe` or your Downloads folder, depending on browser.  
+
+#### Building the SDK
+
+Follow the [instructions here to build the SDK](https://github.com/Microsoft/botbuilder-dotnet/wiki/Building-the-SDK).  
+
+Make sure you follow the instructions for consuming the NuGet packages. I recommend copying the NuGet packages to a local folder you'll remember, perhaps under Documents/BotBuilderNuGet. This is a tedious process, because you need to grab the NuGet packages (they end in ".nupkg") from the following folders:
+* C:\Users\[username]\botbuilder-dotnet\libraries\integration\Microsoft.Bot.Builder.Integration.AspNet.Core\bin\Debug
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder\bin\Debug
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.Core\bin\Debug
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.Core.Extensions\bin\Debug
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.LUIS\bin\Debug
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Connector\bin\Debug
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Schema\bin\Debug  
+
+Once you've added the NuGet packages you've built to a local folder, we still have to add them to NuGet Package Manager. If you haven't done so already, complete the following steps to add the packages:
+
+1.  Open Visual Studio.
+2.  Select **Tools > NuGet Package Manager > Package Manager Settings > Package Sources**.
+3.  Select the green plus in the top right of the window. Rename the Package source to "botbuilder-dotnet."
+4.  Select the "..." next to the Source field and browse to your local folder with the NuGet packages you copied over, click "Select."
+5.  Hit OK twice.  
+
+
+Now, you should be able to add the NuGet packages locally in the followed labs.
 
 ### Lab 1.2: Creating a simple bot and running it
 
@@ -18,9 +44,10 @@ In Visual Studio, create a new ASP.NET Core Web Application called "PictureBot":
 * Pick the **Empty** project template.
 * Select **No Authentication**, if it isn't selected already. 
 
-**Note**: The locally built packages and the ones published to NuGet are sometimes out of sync, due to the product still being in prerelease This is why you need to build the SDK in Lab 1.1.
+**Note**: The locally built packages and the ones published to NuGet.org are sometimes out of sync, due to the product still being in prerelease. This is why you **need** to build the SDK and the local packages in Lab 1.1.
 
-You will need to add some references by right-clicking "Dependencies" in your Solution Explorer and select "Add reference." These are prerelease packages and includes references to other Botbuilder packages that you will need (refer [here](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui#package-sources) if you need help): 
+Right-click on the solution in Solution Explorer and select "Manage NuGet Packages for Solution." In the top right of the new window, you will need to change the Package source to "botbuilder-dotnet." Make sure you check the box "Include prerelease" and are on the "Browse" tab. Install all of the packages, starting with "Microsoft.Bot.Builder." Under Dependencies > NuGet in your Solution Explorer, you should see the following packages:  
+
 * Microsoft.Bot.Builder.Integration.AspNet.Core 
 * Microsoft.Bot.Builder
 * Microsoft.Bot.Builder.Core
@@ -29,11 +56,9 @@ You will need to add some references by right-clicking "Dependencies" in your So
 * Microsoft.Bot.Builder.Core.Extensions
 * Microsoft.Bot.Builder.LUIS  
 
-For the following labs, you will also want to add the following [NuGet packages](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui):
-* Microsoft.Azure.Search 
+There is one other NuGet package we'll need later. Use the same drop down in the NuGet window to switch back from "botbuilder-dotnet" to "All." Next, browse for the "Microsoft.Azure.Search" package and install it (read more about using the NuGet window to install packages [here](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui)).  
 
-
-We need to add some code to tell the app what to show us in the browser when we run it. If this doesn't make sense now, before starting Lab 1.3, come back here and review (it should make sense). Add a `default.html` file under the wwwroot folder, and replace the default contents with the following:
+We need to add some code to tell the app what to show us in the browser when we run it. Add an html file called `default.html` under the wwwroot folder (be sure to right-click **wwwroot > Add > New item**), and replace the default contents with the following:
 ```html
 <!DOCTYPE html>
 <html>
@@ -127,15 +152,15 @@ namespace PictureBot
 }
 ```
 
->The rest of the **Creating a simple bot and running it** lab is optional. Per the prerequisites, you should have experience working with the Bot Framework. You can hit F5 to confirm it builds correctly, and move on to the next lab.  
+>The rest of the **Creating a simple bot and running it** lab is optional. Per the prerequisites, you should have experience working with the Bot Framework. You can hit F5 to confirm it builds correctly, and move on to the next lab (1.3 Organizing Code for Bots).  
 
 
-Now start your bot (with or without debugging) by pressing F5. NuGet should take care of downloading the appropriate dependencies.  
+Now start your bot (with or without debugging) by pressing the "IIS Express" button that looks like a play button (or hit F5). NuGet should take care of downloading the appropriate dependencies.  
 * Your default.html page will be displayed in a browser.
 * Note the localhost port number for the page. You will need this information to interact with your bot.  
 
 To interact with your bot:
-* Launch the Bot Framework Emulator.  (If you just installed it, it may not be indexed to show up in a search on your local machine, so remember that it installs to c:\Users\your-username\AppData\Local\botframework\app-3.5.27\botframework-emulator.exe.)  Ensure that the Bot URL matches the port number that launched in the web browser, and has api/messages appended to the end (e.g. `http://localhost:portNumber/api/messages`).  You should be able to converse with the bot. 
+* Launch the Bot Framework Emulator.  (If you just installed it, it may not be indexed to show up in a search on your local machine, so remember that it installs to c:\Users\your-username\AppData\Local\botframework\app-3.5.27\botframework-emulator.exe.)  Ensure that the Bot URL matches the port number that launched in the web browser, and then api/messages appended to the end (e.g. `http://localhost:portNumber/api/messages`).  You should be able to converse with the bot. 
 * Type "hello", and the bot will respond with "Hello World" to every message.
 
 ![Bot Emulator](./resources/assets/BotEmulator2.png) 
@@ -438,7 +463,7 @@ Hopefully, it's fairly easy to see what we're doing here. Because of the order, 
 #### RootTopic, Again
 
 Let's get down to business. We need to update RootTopic so that it does a few things, but in a topic-fashion:
-1.  StartTopic - Greets the user when they join the conversation, and tell them what the bot can do. Once we've greeted them, continue the conversation.
+1.  StartTopic - Greets the user when they join the conversation, and tells them what the bot can do. Once we've greeted them, continue the conversation.
 
 Make sure you understand the code, then replace the `StartTopic` method in "RootTopic.cs" with the following:
 ```csharp
@@ -458,7 +483,7 @@ Make sure you understand the code, then replace the `StartTopic` method in "Root
                 case ActivityTypes.ConversationUpdate:
                     {
                         // greet when added to conversation
-                        var activity = context.Request.AsConversationUpdateActivity();
+                        var activity = context.Activity.AsConversationUpdateActivity();
                         if (activity.MembersAdded.Any(m => m.Id == activity.Recipient.Id))
                         {
                             await RootResponses.ReplyWithGreeting(context);
