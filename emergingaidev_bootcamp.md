@@ -47,7 +47,7 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
   - 1:30-2:00: [Lab 1.3: Creating an Image Classification Application using the Custom Vision Service II][lab-cogsrvc-322]
   - 2:00-2:30: [Lab 1.4: Creating an Image Classification Application using the Custom Vision Service III][lab-cogsrvc-323]
   - 2:30-3:45: [Lab 1.5: Developing Intelligent Applications with LUIS][lab-cogsrvc-341]
-  - 3:45-5: [Business Case I - Cognitive Services](./lab01.6-bootcamp_case_1/case_part1.md)
+  - 3:45-5: [Business Case I - Cognitive Services](./lab01.6-bootcamp_case_1/Case_Part1.md)
 - Day 2: Bots
   - 9-10: [Lab 2.1: Developing Intelligent Applications with Azure Search][lab-azsearch-301]
   - 10-10:30: Introduction and Context for Bots
