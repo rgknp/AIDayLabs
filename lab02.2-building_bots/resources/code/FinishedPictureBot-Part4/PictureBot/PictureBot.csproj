@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\default.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.Azure.Search" Version="4.0.2-preview" />
+    <PackageReference Include="Microsoft.Bot.Builder" Version="4.0.0-local" />
+    <PackageReference Include="Microsoft.Bot.Builder.Core" Version="4.0.0-local" />
+    <PackageReference Include="Microsoft.Bot.Builder.Core.Extensions" Version="4.0.0-local" />
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.0.0-local" />
+    <PackageReference Include="Microsoft.Bot.Builder.LUIS" Version="4.0.0-local" />
+    <PackageReference Include="Microsoft.Bot.Connector" Version="4.0.0-local" />
+    <PackageReference Include="Microsoft.Bot.Schema" Version="4.0.0-local" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+</Project>

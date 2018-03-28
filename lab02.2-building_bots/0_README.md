@@ -26,7 +26,7 @@ Secondly, you should have some experience developing bots with Microsoft's Bot F
 
 Thirdly, you should have experience with the portal and be able to create resources (and spend money) on Azure. We will not be providing Azure passes for this workshop.
 
->Note: This workshop was developed and tested on a Data Science Virtual Machine (DSVM) with Visual Studio Community Version 15.4.0
+>Note: This workshop was developed and tested on a Data Science Virtual Machine (DSVM) with Visual Studio Community Version 15.6.1
 
 ## Introduction
 
@@ -51,12 +51,13 @@ Once we had it in CosmosDB, we built an [Azure Search](https://azure.microsoft.c
 
 There are several directories in the [resources](./resources) folder:
 
-- **assets**, **case**, **instructor**: You can ignore these folders for the purposes of this lab.
+- **assets**, **instructor**: You can ignore these folders for the purposes of this lab.
 - **code**: In here, there are several directories that we will use:
 	- **Models**: These classes will be used when we add search to our PictureBot.
-	- **Finished-PictureBot_Regex**: Here there is the finished PictureBot.sln that includes additions for Regex. If you fall behind or get stuck, you can refer to this.
-	- **Finished-PictureBot_Search**: Here there is the finished PictureBot.sln that includes additions for Regex and Search. If you fall behind or get stuck, you can refer to this.
-	- **Finished-PictureBot_LUIS**: Here there is the finished PictureBot.sln that includes additions for Regex, LUIS and Azure Search. If you fall behind or get stuck, you can refer to this.
+	- **FinishedPictureBot-Part1**: Here there is the finished PictureBot.sln that includes additions for Regex. If you fall behind or get stuck, you can refer to this.
+	- **FinishedPictureBot-Part2**: Here there is the finished PictureBot.sln that includes additions for Regex and Search. If you fall behind or get stuck, you can refer to this.
+	- **FinishedPictureBot-Part3**: Here there is the finished PictureBot.sln that includes additions for Regex, LUIS and Azure Search. If you fall behind or get stuck, you can refer to this.
+	- **FinishedPictureBot-Part4**: Here is the finished PictureBot.sln including the necessary appsettings.json file to configure your app for publishing. If you fall behind or get stuck, you can refer to this.
 
 > You need Visual Studio to run these labs, but if you have already deployed a Windows Data Science Virtual Machine for one of the workshops, you could use that.
 
@@ -67,9 +68,9 @@ Over the course of this lab, we will collect various keys. It is recommended tha
 >_Keys_
 >- LUIS App ID:
 >- LUIS Key:
+>- LUIS URI:
 >- Azure Search Name:
 >- Azure Search Key:
->- Bot Framework App Name:
 >- Bot Framework App ID:
 >- Bot Framework App Password:
 
@@ -81,7 +82,7 @@ This workshop has been broken down into five sections:
 - [2_Azure_Search](./2_Azure_Search.md): We'll configure our bot for Azure Search and connect it to the Azure Search service from the previous lab
 - [3_LUIS](./3_LUIS): Next, we'll incorporate our LUIS model into our bot, so that we can call LUIS when Regex does not recognize a user's intent.
 - [4_Publish_and_Register](./4_Publish_and_Register.md): We'll finish by publishing and registering our bot.
-- [5_Challenge_and_Closing](./5_Challenge_and_Closing.md): If you get through all the labs, try this challenge. You will also find a summary of what you've done and where to learn more.
+- [5_Closing](./5_Closing.md): Here you'll find a summary of what you've done and where to learn more.
 
 
 

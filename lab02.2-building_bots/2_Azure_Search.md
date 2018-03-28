@@ -3,46 +3,9 @@ Estimated Time: 10-15 minutes
 
 We now have a bot that can communicate with us if we use very specific words. The next thing we need to do is set up a connection to the Azure Search index we created in "lab02.1-azure_search." 
 
-### Lab 2.1: Configure your bot for Azure Search 
+### Lab 2.1: Update the bot to use Azure Search
 
-First, we need to provide our bot with the relevant information to connect to an Azure Search index.  The best place to store connection information is in a configuration file.  
-
-Create a new "web.config" file by right-clicking on the project name and selecting **Add > New item > Web > Web Configuration File**.  
-
-Replace the contents of the file with the following:
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--
-  For more information on how to configure your ASP.NET application, please visit
-  http://go.microsoft.com/fwlink/?LinkId=301879
-  -->
-<configuration>
-  <appSettings>
-    <!-- Azure Search Settings -->
-    <add key="SearchServiceName" value="" />
-    <add key="SearchServiceKey" value="" />
-    <add key="SearchIndexName" value="" />
-    <!-- update these with your BotId, Microsoft App Id and your Microsoft App Password-->
-    <add key="BotId" value="" />
-    <add key="MicrosoftAppId" value="" />
-    <add key="MicrosoftAppPassword" value="" />
-  </appSettings>
-</configuration>
-```
-
-Set the value for the SearchDialogsServiceName to be the name of the Azure Search Service that you created earlier.  If needed, go back and look this up in the [Azure portal](https://portal.azure.com).  
-
-Set the value for the SearchDialogsServiceKey to be the key for this service.  This can be found in the [Azure portal](https://portal.azure.com) under the Keys section for your Azure Search.  In the below screenshot, the SearchDialogsServiceName would be "aiimmersionsearch" and the SearchDialogsServiceKey would be "375...".  
-
-![Azure Search Settings](./resources/assets/AzureSearchSettings.jpg) 
-
-Finally, the SearchIndexName should be "images," but you may want to confirm that this is what you named your index.  
-
-> Note: Don't worry about your BotId, MicrosoftAppId or MicrosoftAppPassword just yet. We'll get to that in a later section.  
-### Lab 2.2: Update the bot to use Azure Search
-
-Next, we need to update "SearchTopic.cs" so to request a search and process the response. We'll have to call Azure Search here, so make sure you've added the NuGet package (you should have done this in an earlier lab, but here's a friendly reminder).
+First, we need to update "SearchTopic.cs" so to request a search and process the response. We'll have to call Azure Search here, so make sure you've added the NuGet package (you should have done this in an earlier lab, but here's a friendly reminder).
 
 ![Azure Search NuGet](./resources/assets/AzureSearchNuGet.jpg) 
 
@@ -146,7 +109,7 @@ Discuss with a neighbor which methods below accomplish which tasks above, and ho
 
         public async Task SendResultsAsync(ITurnContext context, DocumentSearchResult results)
         {
-            IMessageActivity activity = context.Request.CreateReply();
+            IMessageActivity activity = context.Activity.CreateReply();
             // if the search returns no results
             if (results.Results.Count == 0)
             {
@@ -168,21 +131,33 @@ Discuss with a neighbor which methods below accomplish which tasks above, and ho
         public ISearchIndexClient CreateSearchIndexClient()
         {
             // Configure the search service and establish a connection, call it in StartAsync()
-            // TODO: Determine how to integrate this 
-            string searchServiceName = "antho-test"; //ConfigurationManager.AppSettings["SearchDialogsServiceName"];
-            string queryApiKey = "72F8A2C87D4A3057EDAA8BFCFEB0D287"; //ConfigurationManager.AppSettings["SearchDialogsServiceKey"];
-            string indexName = "images";  //ConfigurationManager.AppSettings["SearchDialogsIndexName"];
+            // replace "YourSearchServiceName" and "YourSearchServiceKey" with your search service values
+            string searchServiceName = "YourSearchServiceName"; 
+            string queryApiKey = "YourSearchServiceKey"; 
+            string indexName = "images";  
+            // if you named your index "images" as instructed, you do not need to change this value
 
             SearchIndexClient indexClient = new SearchIndexClient(searchServiceName, indexName, new SearchCredentials(queryApiKey));
             return indexClient;
         }
 ```
 
-Now that you understand which piece does what and why, add the code below the comment "Add ProcessSearchAsync below."  
+Now that you understand which piece does what and why, add the code below the comment "Add ProcessSearchAsync below" within SearchTopic.cs.  
+
+Set the value for the "YourSearchServiceName" to be the name of the Azure Search Service that you created earlier.  If needed, go back and look this up in the [Azure portal](https://portal.azure.com).  
+
+Set the value for the "YourSearchServiceKey" to be the key for this service.  This can be found in the [Azure portal](https://portal.azure.com) under the Keys section for your Azure Search.  In the below screenshot, the SearchDialogsServiceName would be "aiimmersionsearch" and the SearchDialogsServiceKey would be "375...".  
+
+![Azure Search Settings](./resources/assets/AzureSearchSettings.jpg) 
+
+Finally, the SearchIndexName should be "images," but you may want to confirm that this is what you named your index.  
+
+
+
 
 Press F5 to run your bot again.  In the Bot Emulator, try searching for something like "dogs" or "water".  Ensure that you are seeing results when tags from your pictures are requested.  
 
-Get stuck? You can find the solution for this lab under [resources/code/Finished-PictureBot-Part2](./resources/code/Finished-PictureBot-Part2).
+Get stuck? You can find the solution for this lab under [resources/code/Finished-PictureBot-Part2](./resources/code/Finished-PictureBot-Part2).  
 
 ### Continue to [3_LUIS](./3_LUIS.md)  
 Back to [README](./0_README.md)

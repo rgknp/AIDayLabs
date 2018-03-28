@@ -110,7 +110,7 @@ namespace PictureBot.Topics
             // replace "YourSearchServiceName" and "YourSearchServiceKey" with your search service values
             string searchServiceName = "";
             string queryApiKey = ""; 
-            string indexName = "images";
+            string indexName = "";
             // if you named your index "images" as instructed, you do not need to change this value
 
             SearchIndexClient indexClient = new SearchIndexClient(searchServiceName, indexName, new SearchCredentials(queryApiKey));
