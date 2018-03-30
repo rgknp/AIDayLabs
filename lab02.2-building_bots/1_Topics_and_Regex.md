@@ -7,7 +7,7 @@ We assume that you've had some exposure to the Bot Framework. If you have, great
 
 ### Lab 1.1: Setting up for bot development
 
-We will be developing a bot using the latest .NET SDK (v4).  To get started, we'll need to download the Bot Framework Emulator, and we'll need to clone and build the SDK.
+We will be developing a bot using the latest .NET SDK (v4).  To get started, we'll need to download the Bot Framework Emulator, and we'll need to clone and build the SDK. We'll emulate everything locally in this lab, and won't need any keys or services at this point.  
 
 #### Download the Bot Framework Emulator  
 
@@ -17,7 +17,7 @@ We will be developing a bot using the latest .NET SDK (v4).  To get started, we'
 
 Follow the [instructions here to build the SDK](https://github.com/Microsoft/botbuilder-dotnet/wiki/Building-the-SDK).  
 
-Make sure you follow the instructions for consuming the NuGet packages. I recommend copying the NuGet packages to a local folder you'll remember, perhaps under Documents/BotBuilderNuGet. This is a tedious process, because you need to grab the NuGet packages (they end in ".nupkg") from the following folders:
+Make sure you follow the instructions for consuming the NuGet packages. I recommend copying the NuGet packages to a new folder called "botbuilder-dotnet" where the rest of your NuGet packages are stored - **C:\Program Files (x86)\Microsoft SDKs\NuGetPackages**. This is a tedious process, because you need to grab the NuGet packages (they end in ".nupkg") from the following folders:
 * C:\Users\[username]\botbuilder-dotnet\libraries\integration\Microsoft.Bot.Builder.Integration.AspNet.Core\bin\Debug
 * C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder\bin\Debug
 * C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.Core\bin\Debug
@@ -26,16 +26,13 @@ Make sure you follow the instructions for consuming the NuGet packages. I recomm
 * C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Connector\bin\Debug
 * C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Schema\bin\Debug  
 
-Once you've added the NuGet packages you've built to a local folder, we still have to add them to NuGet Package Manager. If you haven't done so already, complete the following steps to add the packages:
-
-1.  Open Visual Studio.
-2.  Select **Tools > NuGet Package Manager > Package Manager Settings > Package Sources**.
-3.  Select the green plus in the top right of the window. Rename the Package source to "botbuilder-dotnet."
-4.  Select the "..." next to the Source field and browse to your local folder with the NuGet packages you copied over, click "Select."
-5.  Hit OK twice.  
-
-
-Now, you should be able to add the NuGet packages locally in the followed labs.
+> Note: If you don't have the rights (you need admin rights on your machine) to add the packages to this folder, add them to a local folder, perhaps under **Documents/botbuilder-dotnet**. Then follow the following instructions to add the packages to NuGet Package Manager:  
+>1.  Open Visual Studio.
+>2.  Select **Tools > NuGet Package Manager > Package Manager Settings > Package Sources**.
+>3.  Select the green plus in the top right of the window. Rename the Package source to "botbuilder-dotnet."
+>4.  Select the "..." next to the Source field and browse to your local folder with the NuGet packages you copied over, click "Select."
+>5.  Hit OK twice.  
+>Now, you should be able to add the NuGet packages locally in the followed labs.
 
 ### Lab 1.2: Creating a simple bot and running it
 
@@ -46,7 +43,9 @@ In Visual Studio, create a new ASP.NET Core Web Application called "PictureBot":
 
 **Note**: The locally built packages and the ones published to NuGet.org are sometimes out of sync, due to the product still being in prerelease. This is why you **need** to build the SDK and the local packages in Lab 1.1.
 
-Right-click on the solution in Solution Explorer and select "Manage NuGet Packages for Solution." In the top right of the new window, you will need to change the Package source to "botbuilder-dotnet." Make sure you check the box "Include prerelease" and are on the "Browse" tab. Install all of the packages, starting with "Microsoft.Bot.Builder." Under Dependencies > NuGet in your Solution Explorer, you should see the following packages:  
+>**TIP**:  If you only have one monitor and you would like to easily switch between instructions and Visual Studio, you can add the instruction files to your Visual Studio solution by right-clicking on the project in Solution Explorer and selecting **Add > Existing Item**. Navigate to "lab02.2-bulding_bots," and add all the files of type "MD File." 
+
+Right-click on the solution in Solution Explorer and select "Manage NuGet Packages for Solution." In the top right of the new window, you will need to change the Package source to "Microsoft Visual Studio Offline Packages" (or "botbuilder-dotnet" if you followed the extra steps to create a package source). Make sure you check the box "Include prerelease" and are on the "Browse" tab. Install all of the packages, starting with "Microsoft.Bot.Builder." After you've installed them, under **Dependencies > NuGet** in your Solution Explorer, you should see the following packages:  
 
 * Microsoft.Bot.Builder.Integration.AspNet.Core 
 * Microsoft.Bot.Builder
@@ -56,7 +55,7 @@ Right-click on the solution in Solution Explorer and select "Manage NuGet Packag
 * Microsoft.Bot.Builder.Core.Extensions
 * Microsoft.Bot.Builder.LUIS  
 
-There is one other NuGet package we'll need later. Use the same drop down in the NuGet window to switch back from "botbuilder-dotnet" to "All." Next, browse for the "Microsoft.Azure.Search" package and install it (read more about using the NuGet window to install packages [here](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui)).  
+There is one other NuGet package we'll need later. Use the same drop down in the NuGet window to switch back to "All" package sources. Next, browse for the "Microsoft.Azure.Search" package and install it (read more about using the NuGet window to install packages [here](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui)).  
 
 We need to add some code to tell the app what to show us in the browser when we run it. Add an html file called `default.html` under the wwwroot folder (be sure to right-click **wwwroot > Add > New item**), and replace the default contents with the following:
 ```html

@@ -46,7 +46,7 @@ namespace PictureBot
                     .AddIntent("help", new Regex("help(.*)", RegexOptions.IgnoreCase)));
                 // Add LUIS ability below
                 middleware.Add(new LuisRecognizerMiddleware(
-                    new LuisModel("", "", new Uri("https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/"))));
+                    new LuisModel("YourLuisAppId", "YourLuisKey", new Uri("YourLuisUri"))));
             });
         }
 
