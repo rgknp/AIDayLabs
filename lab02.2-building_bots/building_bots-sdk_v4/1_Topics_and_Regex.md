@@ -162,7 +162,7 @@ To interact with your bot:
 * Launch the Bot Framework Emulator.  (If you just installed it, it may not be indexed to show up in a search on your local machine, so remember that it installs to c:\Users\your-username\AppData\Local\botframework\app-3.5.27\botframework-emulator.exe.)  Ensure that the Bot URL matches the port number that launched in the web browser, and then api/messages appended to the end (e.g. `http://localhost:portNumber/api/messages`).  You should be able to converse with the bot. 
 * Type "hello", and the bot will respond with "Hello World" to every message.
 
-![Bot Emulator](./resources/assets/BotEmulator2.png) 
+![Bot Emulator](./resources/assets/botemulator2.png) 
 
 > Fun Aside: why this port number?  It is set in your project properties.  In your Solution Explorer, double-click **Properties>Debug** and examine its contents. Does the App URL match what you connected to in the emulator?
 
