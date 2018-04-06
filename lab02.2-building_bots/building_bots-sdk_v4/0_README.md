@@ -80,7 +80,7 @@ Over the course of this lab, we will collect various keys. It is recommended tha
 This workshop has been broken down into five sections:
 - [1_Topics_and_Regex](./1_Topics_and_Regex.md): Here you will build a bot that uses Regex to act on user input and learn about using Topics for organizing bots
 - [2_Azure_Search](./2_Azure_Search.md): We'll configure our bot for Azure Search and connect it to the Azure Search service from the previous lab
-- [3_LUIS](./3_LUIS): Next, we'll incorporate our LUIS model into our bot, so that we can call LUIS when Regex does not recognize a user's intent.
+- [3_LUIS](./3_LUIS.md): Next, we'll incorporate our LUIS model into our bot, so that we can call LUIS when Regex does not recognize a user's intent.
 - [4_Publish_and_Register](./4_Publish_and_Register.md): We'll finish by publishing and registering our bot.
 - [5_Closing](./5_Closing.md): Here you'll find a summary of what you've done and where to learn more.
 
