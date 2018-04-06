@@ -360,7 +360,7 @@ namespace PictureBot.Responses
 Note here a whole task is missing. Fill in as you see fit, but make sure the new task has the name "ReplyWithSearchRequest", or you may have issues later.  
 
 #### Models 
-Due to time limitations, we will not be walking through creating all the models. They are straightforward, and we recommend taking some time to review the code within after you've added them. Right-click on the "Models" folder and select **Add>Existing Item**. Navigate to "lab02.2-building_bots/resources/code/Models", select all four files, and select "Add."  
+Due to time limitations, we will not be walking through creating all the models. They are straightforward, and we recommend taking some time to review the code within after you've added them. Right-click on the "Models" folder and select **Add>Existing Item**. Navigate to "lab02.2-building_bots/building_bots-sdk_v4/resources/code/Models", select all four files, and select "Add."  
 
 At this point, your Solution Explorer should look similar to the following image:
 ![Solution Folder view for Bot](./resources/assets/solutionExplorer.png) 
@@ -567,7 +567,7 @@ Replace ResumeTopic with the following code:
 
 Hit F5 to run the bot. Test it by sending commands like "help", "share pics", "order pics", and "search pics". If the only thing that failed was "search pics", everything is working how you configured it. But why is "search pics" failing? Have an answer before you move on!
 
-Get stuck? You can find the solution for this lab under [resources/code/Finished-PictureBot-Part1](./resources/code/Finished-PictureBot-Part1).
+Get stuck? You can find the solution for this lab under [resources/code/FinishedPictureBot-Part1](./resources/code/FinishedPictureBot-Part1).
 
 
 

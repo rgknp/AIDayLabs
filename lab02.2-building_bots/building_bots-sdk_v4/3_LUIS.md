@@ -20,7 +20,7 @@ You can find your base URL by logging into www.luis.ai, going to the **Publish**
 
 You may get some errors for `LuisrecognizerMiddleware`, `LuisModel` and `Uri`. Address them before continuing.
 
-**Hint**: You're missing a `using` statement for the LUIS package.
+**Hint**: You're missing a `using` statement for the LUIS library and a `using` statement for the System library.
 
 ### Lab 3.2: Adding LUIS to RootTopic.cs
 
