@@ -76,12 +76,12 @@ Just as we did for Greetings, let's add some sample utterances (words/phrases/se
 + Find outdoor pics
 + Are there pictures of a train?
 + Find pictures of food.
-+ Search for photos of a 6-month-old boy
-+ Please give me pics of 20-year-old women
++ Search for photos of boys playing
++ Please give me pics of business women
 + Show me beach pics
 + I want to find dog photos
 + Search for pictures of men indoors
-+ Show me pictures of girls looking happy
++ Show me pictures of men wearing glasses
 + I want to see pics of sad boys
 + Show me happy baby pics
 
@@ -124,18 +124,6 @@ Now I need to retrain my app by selecting the Train button. I then tested the sa
 
 You can also [test your published endpoint in a browser](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp#test-your-published-endpoint-in-a-browser). Copy the URL, then replace the `{YOUR-KEY-HERE}` with one of the keys listed in the Key String column for the resource you want to use. To open this URL in your browser, set the URL parameter `&q` to your test query. For example, append `&q=Find pictures of dogs` to your URL, and then press Enter. The browser displays the JSON response of your HTTP endpoint.
 
-**Finish early? Try these extra credit tasks:**
-
-
-Create additional entities that can be leveraged by the "SearchPics" intent.
-
-Explore using custom entities of entity type "List" to capture emotion and gender. See the example of emotion below. 
-
-![Custom Emotion Entity with List](./resources/assets/emotionList.png) 
-
-
-
-> Note: When you add more entities or features, don't forget to go to **Intents>Utterances** and confirm/add more utterances with the entities you add. Also, you will need to retrain and publish your model.
 
 
 If you still have time, spend time exploring the www.luis.ai site. Select "Prebuilt domains" and see [what is already available for you](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-domains). You can also review some of the [other features](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-feature). 

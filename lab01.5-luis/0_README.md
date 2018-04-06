@@ -21,7 +21,6 @@ You should have some experience developing bots with Microsoft's Bot Framework. 
 
 Also, you should have experience with the portal and be able to create resources (and spend money) on Azure. We will not be providing Azure passes for this workshop.
 
->Note: This workshop was developed and tested on a Data Science Virtual Machine (DSVM) with Visual Studio Community Version 15.4.0
 
 ## Introduction
 
