@@ -174,7 +174,7 @@ If you have extra time, see if there are things LUIS isn't picking up on that yo
 **Extra credit (to complete later)**: Create a process for ordering prints with the bot using topics, responses, and models.  Your bot will need to collect the following information: Photo size (8x10, 5x7, wallet, etc.), number of prints, glossy or matte finish, user's phone number, and user's email. The bot will then want to send you a confirmation before submitting the request.
 
 
-Get stuck? You can find the solution for this lab under [resources/code/Finished-PictureBot-Part3](./resources/code/Finished-PictureBot-Part3).
+Get stuck? You can find the solution for this lab under [resources/code/FinishedPictureBot-Part3](./resources/code/FinishedPictureBot-Part3).
 
 
 ### Continue to [4_Publish_and_Register](./4_Publish_and_Register.md)  
