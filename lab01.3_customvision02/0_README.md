@@ -20,29 +20,6 @@ Community Edition](https://www.visualstudio.com/downloads/)
 
  
 
-### Training client library
-
-You may need to install the client library depending on your settings within
-Visual Studio. The easiest way to get the training client library is to install
-the
-[Microsoft.Cognitive.CustomVision.Training](https://www.nuget.org/packages/Microsoft.Cognitive.CustomVision.Training/)
-package from nuget.
-
-You can install it through the Visual Studio Package manager. Access the package
-manager by navigating through:
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Tools -> Nuget Package Manager -> Package Manager Console
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In that Console, add the nuget with:
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Install-Package Microsoft.Cognitive.CustomVision.Training -Version 1.0.0
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
- 
-
 ### The Training API key
 
 You also need to have a training API key. The training API key allows you to
