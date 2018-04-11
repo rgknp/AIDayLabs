@@ -85,7 +85,7 @@ Just as we did for Greetings, let's add some sample utterances (words/phrases/se
 + I want to see pics of sad boys
 + Show me happy baby pics
 
-Once we have some utterances, we have to teach LUIS how to pick out the **search topic** as the "facet" entity. Whatever the "facet" entity picks up is what will be searched. Hover and click over the word (or drag to select a group of words) and then select the "facet" entity. 
+Once we have some utterances, we have to teach LUIS how to pick out the **search topic** as the "facet" entity. Whatever the "facet" entity picks up is what will be searched. Hover and click the word (or click consecutive words to select a group of words) and then select the "facet" entity. 
 
 ![Labelling Entity](./resources/assets/LuisFacet.png) 
 
