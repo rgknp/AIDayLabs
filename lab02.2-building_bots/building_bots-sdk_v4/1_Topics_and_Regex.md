@@ -189,7 +189,7 @@ We'll start by defining an interface ITopic which gives it the basic ability to 
 * **ITopic.ContinueTopic()** - Called for every activity as context.State.Conversation.ActivePrompt points to it.
 * **ITopic.ResumeTopic()** - Called whenever someone has interrupted your topic so you can resume your topic cleanly. 
 
-The UserStateMangerMiddleware() and ConversationStateManagerMiddleware() adds automatic persistence of the 
+The UserStateManagerMiddleware() and ConversationStateManagerMiddleware() adds automatic persistence of the 
 **context.state.ConversationProperties** and **context.state.UserProperties** objects.  
 
 We'll set the **context.state.Conversation.ActiveTopic** to point to an instance of the active ITopic class,
