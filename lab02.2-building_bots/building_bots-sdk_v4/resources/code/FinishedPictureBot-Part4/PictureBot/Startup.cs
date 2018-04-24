@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Bot.Builder.Core.Extensions;
 using System.Text.RegularExpressions;
 using PictureBot.Models;
-using Microsoft.Bot.Builder.LUIS;
+using Microsoft.Bot.Builder.Ai.LUIS;
 using System;
 
 namespace PictureBot
@@ -46,7 +46,8 @@ namespace PictureBot
                     .AddIntent("help", new Regex("help(.*)", RegexOptions.IgnoreCase)));
                 // Add LUIS ability below
                 middleware.Add(new LuisRecognizerMiddleware(
-                    new LuisModel("YourLuisAppId", "YourLuisKey", new Uri("YourLuisUri"))));
+                    new LuisModel("4791c88c-89b9-4a30-99c8-637c74a0e4bd", "0db36f78de5f41749a985b66201bebb6", new Uri("https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/"))));
+
             });
         }
 

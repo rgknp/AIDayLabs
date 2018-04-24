@@ -13,7 +13,7 @@ namespace PictureBot
 {
     public class PictureBot : IBot
     {
-        public async Task OnReceiveActivity(ITurnContext context)
+        public async Task OnTurn(ITurnContext context)
         {
             // Get the current ActiveTopic from my persisted conversation state
             var conversation = ConversationState<ConversationData>.Get(context);
