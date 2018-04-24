@@ -68,14 +68,14 @@ Set the fields **Caption and Tags** to be **Searchable** (to allow the client to
 
 At this point we will configure the Azure Search Analyzers.  At a high level, you can think of an analyzer as the thing that takes the terms a user enters and works to find the best matching terms in the Index.  Azure Search includes analyzers that are used in technologies like Bing and Office that have deep understanding of 56 languages.  
 
-Click the **Analyzer** tab and set the fields **Caption and Tags** to use the **English-Microsoft** [analyzer](https://docs.microsoft.com/en-us/azure/search/search-analyzers).
+Click the **Analyzer** checkbox and set the fields **Caption and Tags** to use the **English-Microsoft** [analyzer](https://docs.microsoft.com/en-us/azure/search/search-analyzers).
 
 ![Language Analyzers](./resources/assets/AzureSearch-Analyzer.png) 
 
 For the final Index configuration step, we will create a [**Suggester**](https://docs.microsoft.com/en-us/rest/api/searchservice/suggesters) to set the fields that will be used for type ahead, allowing the user to type parts of a word where Azure Search will look for best matches in these fields. To learn more about suggestors and how to extend your searches to support fuzzy matching, which allows you to get results based on close matches even if the user misspells a word, check out [this example](https://docs.microsoft.com/en-us/azure/search/search-query-lucene-examples#fuzzy-search-example).
 
 
-Click the **Suggester** tab and enter a Suggester Name: **sg** and choose **Tags** to be the fields to look for term suggestions
+Click the **Suggester** checkbox and enter a Suggester Name: **sg** and choose **Tags** to be the fields to look for term suggestions
 
 ![Search Suggestions](./resources/assets/AzureSearch-Suggester.png) 
 
