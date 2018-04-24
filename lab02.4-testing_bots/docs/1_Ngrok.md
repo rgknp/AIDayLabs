@@ -10,7 +10,7 @@ When designing / building / testing your code, you do not always want to have to
   
  a.	  If you do not have ngrok installed, download ngrok from https://ngrok.com/download and install for your OS. Unzip ngrok file downloaded and install it.
 
- b.	  Open any Bot project (from the previous labs) in Visual Studio and run it. If you are using EchoBot, you should be seeing the below message in the browser:
+ b.	  Open any Bot project (from the previous labs) OR create a new EchoBot using the "Bot Application" project template. Run the bot. If you create an EchoBot, you should see the below message in the browser:
 
 **EchoBot**
 

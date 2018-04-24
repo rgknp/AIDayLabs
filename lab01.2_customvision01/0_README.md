@@ -29,6 +29,8 @@ automate all aspects of the Custom Vision Service. You can obtain a key by
 creating a new project at <https://customvision.ai> and then clicking on the
 "setting" gear in the top right.
 
+> Note: Internet Explorer is not supported. We recommend using Edge, Firefox, or Chrome.
+
 ### The Images used for Training and Predicting
 
 In the Resources\Images folder are three folders:
