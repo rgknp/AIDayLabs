@@ -9,8 +9,8 @@ using System.Configuration;
 using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
 using System;
+using Microsoft.Bot.Builder.Ai.LUIS;
 using Newtonsoft.Json.Linq;
-using Microsoft.Bot.Builder.LUIS;
 using Newtonsoft.Json;
 
 namespace PictureBot.Topics
@@ -92,7 +92,7 @@ namespace PictureBot.Topics
                             var result = context.Services.Get<RecognizerResult>(LuisRecognizerMiddleware.LuisRecognizerResultKey);
                             var topIntent = result?.GetTopScoringIntent();
 
-                            switch ((topIntent != null) ? topIntent.Value.key : null)
+                            switch ((topIntent != null) ? topIntent.Value.intent : null)
                             {
                                 case null:
                                     // Add app logic when there is no result.
@@ -100,20 +100,20 @@ namespace PictureBot.Topics
                                     break;
                                 case "None":
                                     await RootResponses.ReplyWithConfused(context);
-                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.intent, topIntent.Value.score);
                                     break;
                                 case "Greeting":
                                     await RootResponses.ReplyWithGreeting(context);
                                     await RootResponses.ReplyWithHelp(context);
-                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.intent, topIntent.Value.score);
                                     break;
                                 case "OrderPic":
                                     await RootResponses.ReplyWithOrderConfirmation(context);
-                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.intent, topIntent.Value.score);
                                     break;
                                 case "SharePic":
                                     await RootResponses.ReplyWithShareConfirmation(context);
-                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                    await RootResponses.ReplyWithLuisScore(context, topIntent.Value.intent, topIntent.Value.score);
                                     break;
                                 case "SearchPics":
                                     // Check if LUIS has identified the search term that we should look for.  
@@ -123,14 +123,14 @@ namespace PictureBot.Topics
                                     if (obj == null)
                                     {
                                         conversation.ActiveTopic = new SearchTopic();
-                                        await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                        await RootResponses.ReplyWithLuisScore(context, topIntent.Value.intent, topIntent.Value.score);
                                     }
                                     // if entities are picked up by LUIS, skip SearchTopic and process the search
                                     else
                                     {
                                         facet = obj.ToString().Replace("\"", "").Trim(']', '[', ' ');
                                         await ProceedWithSearchAsync(context, facet);
-                                        await RootResponses.ReplyWithLuisScore(context, topIntent.Value.key, topIntent.Value.score);
+                                        await RootResponses.ReplyWithLuisScore(context, topIntent.Value.intent, topIntent.Value.score);
                                         break;
                                     }
                                     return await conversation.ActiveTopic.StartTopic(context);
@@ -198,9 +198,9 @@ namespace PictureBot.Topics
         public ISearchIndexClient CreateSearchIndexClient()
         {
             // replace "YourSearchServiceName" and "YourSearchServiceKey" with your search service values
-            string searchServiceName = "YourSearchServiceName"; 
-            string queryApiKey = "YourSearchServiceKey"; 
-            string indexName = "images";  
+            string searchServiceName = "YourSearchServiceName";
+            string queryApiKey = "YourSearchServiceKey";
+            string indexName = "images";
             // if you named your index "images" as instructed, you do not need to change this value
 
             SearchIndexClient indexClient = new SearchIndexClient(searchServiceName, indexName, new SearchCredentials(queryApiKey));

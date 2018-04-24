@@ -15,18 +15,20 @@ We will be developing a bot using the latest .NET SDK (v4).  To get started, we'
 
 #### Building the SDK
 
+> Note: You can either install the packages locally, or use NuGet Package Manager and add the packages. Because the product is in pre-release (as of today 4/24/2018), sometimes changes will be reflected in the SDK faster than in the NuGet packages. You can try using the NuGet packages, but if you run into issues, you'll need to follow the below steps to build the SDK. We recommend building the SDK, not using the NuGet, until the SDK is officially released.
+
 Follow the [instructions here to build the SDK](https://github.com/Microsoft/botbuilder-dotnet/wiki/Building-the-SDK).  
 
 Make sure you follow the instructions for consuming the NuGet packages. I recommend copying the NuGet packages to a new folder called "botbuilder-dotnet" where the rest of your NuGet packages are stored - **C:\Program Files (x86)\Microsoft SDKs\NuGetPackages**. This is a tedious process, because you need to grab the NuGet packages (they end in ".nupkg") from the following folders:
-* C:\Users\[username]\botbuilder-dotnet\libraries\integration\Microsoft.Bot.Builder.Integration.AspNet.Core\bin\Debug
-* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder\bin\Debug
-* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.Core\bin\Debug
-* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.Core.Extensions\bin\Debug
-* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.LUIS\bin\Debug
-* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Connector\bin\Debug
-* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Schema\bin\Debug  
+* C:\Users\[username]\botbuilder-dotnet\libraries\integration\Microsoft.Bot.Builder.Integration.AspNet.Core\bin\Debug - NuGet Packages
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder\bin\Debug - NuGet Packages
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.Core\bin\Debug - NuGet Packages
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.Core.Extensions\bin\Debug - NuGet Packages
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Builder.AI.LUIS\bin\Debug - NuGet Packages
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Connector\bin\Debug - NuGet Packages
+* C:\Users\[username]\botbuilder-dotnet\libraries\Microsoft.Bot.Schema\bin\Debug - NuGet Packages  
 
-> Note: If you don't have the rights (you need admin rights on your machine) to add the packages to this folder, add them to a local folder, perhaps under **Documents/botbuilder-dotnet**. Then follow the following instructions to add the packages to NuGet Package Manager:  
+> **Note**: If you don't have the rights (you need admin rights on your machine) to add the packages to this folder, add them to a local folder, perhaps under **Documents/botbuilder-dotnet**. Then follow the following instructions to add the packages to NuGet Package Manager:  
 >1.  Open Visual Studio.
 >2.  Select **Tools > NuGet Package Manager > Package Manager Settings > Package Sources**.
 >3.  Select the green plus in the top right of the window. Rename the Package source to "botbuilder-dotnet."
@@ -41,19 +43,19 @@ In Visual Studio, create a new ASP.NET Core Web Application called "PictureBot":
 * Pick the **Empty** project template.
 * Select **No Authentication**, if it isn't selected already. 
 
-**Note**: The locally built packages and the ones published to NuGet.org are sometimes out of sync, due to the product still being in prerelease. This is why you **need** to build the SDK and the local packages in Lab 1.1.
-
 >**TIP**:  If you only have one monitor and you would like to easily switch between instructions and Visual Studio, you can add the instruction files to your Visual Studio solution by right-clicking on the project in Solution Explorer and selecting **Add > Existing Item**. Navigate to "lab02.2-bulding_bots," and add all the files of type "MD File." 
 
 Right-click on the solution in Solution Explorer and select "Manage NuGet Packages for Solution." In the top right of the new window, you will need to change the Package source to "Microsoft Visual Studio Offline Packages" (or "botbuilder-dotnet" if you followed the extra steps to create a package source). Make sure you check the box "Include prerelease" and are on the "Browse" tab. Install all of the packages, starting with "Microsoft.Bot.Builder." After you've installed them, under **Dependencies > NuGet** in your Solution Explorer, you should see the following packages:  
 
 * Microsoft.Bot.Builder.Integration.AspNet.Core 
-* Microsoft.Bot.Builder
+* Microsoft.Bot.Builder.
 * Microsoft.Bot.Builder.Core
 * Microsoft.Bot.Connector
 * Microsoft.Bot.Schema  
 * Microsoft.Bot.Builder.Core.Extensions
-* Microsoft.Bot.Builder.LUIS  
+* Microsoft.Bot.Builder.AI.LUIS  
+
+> **Note**: The locally built packages and the ones published to NuGet.org are sometimes out of sync, due to the product still being in prerelease. This is why you **should** build the SDK and the local packages in Lab 1.1. If you prefer to just use NuGet Package Manager from nuget.org, take a look at the "Date published" to make sure it's relatively recent.
 
 There is one other NuGet package we'll need later. Use the same drop down in the NuGet window to switch back to "All" package sources. Next, browse for the "Microsoft.Azure.Search" package and install it (read more about using the NuGet window to install packages [here](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui)).  
 
@@ -139,7 +141,7 @@ namespace PictureBot
 {
     public class PictureBot : IBot
     {
-        public async Task OnReceiveActivity(ITurnContext context)
+        public async Task OnTurn(ITurnContext context)
         {
             if (context.Activity.Type is ActivityTypes.Message)
             {
@@ -168,7 +170,7 @@ To interact with your bot:
 
 Browse around and examine the sample bot code. In particular, note:
 + **Startup.cs** is where we will add services/middleware and configure the HTTP request pipeline.  
-+ In **PictureBot.cs**, `OnReceiveActivity` is the entry point which waits for a message from the user, and `context.Activity.Type is ActivityTypes.Message` is where we can react to a message once received and wait for further messages.  We can use `context.SendActivity` to send a message from the bot back to the user.  
++ In **PictureBot.cs**, `OnTurn` is the entry point which waits for a message from the user, and `context.Activity.Type is ActivityTypes.Message` is where we can react to a message once received and wait for further messages.  We can use `context.SendActivity` to send a message from the bot back to the user.  
 
 
 ### Lab 1.3: Organzing Code for Bots
@@ -367,9 +369,6 @@ At this point, your Solution Explorer should look similar to the following image
 
 Are you missing anything? Now's a good time to check.
 
-> Note: We won't be adding any more classes for the rest of the labs! So do not fret or become overwhelmed. We'll spend the next few labs adding pieces to our bot.
-
-
 The last thing we need to do before we start building out our topics, is to update "PictureBot.cs" to use ITopic to manage the handling conversations. Replace the contents of "PictureBot.cs" with the following:
 ```csharp
 using System;
@@ -387,7 +386,7 @@ namespace PictureBot
 {
     public class PictureBot : IBot
     {
-        public async Task OnReceiveActivity(ITurnContext context)
+        public async Task OnTurn(ITurnContext context)
         {
             // Get the current ActiveTopic from my persisted conversation state
             var conversation = ConversationState<ConversationData>.Get(context);
@@ -431,7 +430,9 @@ Before continuing with the lab, learn more about middleware and the Bot Framewor
 2.  [Creating Middleware](https://github.com/Microsoft/botbuilder-dotnet/wiki/Creating-Middleware)
 3.  Open the BotBuilder solution that you cloned and built at the beginning of this lab. Under `Microsoft.Bot.Builder.Core.Extensions`, you can look at some of the middleware that's built-in to the SDK.  
 
-Ultimately, we'll use middleware to try to understand what users are saying with regular expressions first, and if we can't, we'll call LUIS. If we still can't, then we'll drop down to a generic "I'm not sure what you mean" response, or whatever you put for "ReplyWithConfused."    
+Ultimately, we'll use some middleware to try to understand what users are saying with regular expressions first, and if we can't, we'll call LUIS. If we still can't, then we'll drop down to a generic "I'm not sure what you mean" response, or whatever you put for "ReplyWithConfused."    
+
+To add the middleware for Regex to your solution, create a new folder called "Middleware, and add the contents of the "Middleware" folder (you can find this under **resources > code**) to your solution.
 
 In "Startup.cs", below the "Add middleware below" comment within `ConfigureServices`, add the following:
 ```csharp
