@@ -198,8 +198,8 @@ namespace PictureBot.Topics
         public ISearchIndexClient CreateSearchIndexClient()
         {
             // replace "YourSearchServiceName" and "YourSearchServiceKey" with your search service values
-            string searchServiceName = "antho-test";
-            string queryApiKey = "72F8A2C87D4A3057EDAA8BFCFEB0D287";
+            string searchServiceName = "YourSearchServiceName";
+            string queryApiKey = "YourSearchServiceKey";
             string indexName = "images";
             // if you named your index "images" as instructed, you do not need to change this value
 
