@@ -93,7 +93,7 @@ With:
                             return true;
                     }
 ```
-Address the `RecognizerResult`, `LuisRecognizerMiddleware`, `JObject`, `JsonConvert`, and `Uri` errors by adding the necessary `using` statements.  
+Address the `LuisRecognizerMiddleware`, `JObject`, `JsonConvert`, and `Uri` errors by adding the necessary `using` statements.  
 
 Let's briefly go through what we're doing in the new code additions. First, instead of responding saying we don't understand, we're going to call LUIS. So we call LUIS using the LUIS Recognizer Middleware, and we store the Top Intent in a variable. We then use `switch` to respond in different ways, depending on which intent is picked up. This is almost identical to what we did with Regex.  
 
