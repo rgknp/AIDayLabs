@@ -13,7 +13,7 @@ We will be developing a bot using the latest .NET SDK (v4).  To get started, we'
 
 1. Download the Bot Framework Emulator for testing your bot locally [here](https://github.com/Microsoft/BotFramework-Emulator/releases/download/v3.5.33/botframework-emulator-Setup-3.5.33.exe).  The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-3.5.33\botframework-emulator.exe` or your Downloads folder, depending on browser.  
 
-#### Building the SDK
+#### Building the SDK (optional)
 
 > Note: You can either **install the packages locally**, or use **NuGet Package Manager** and add the packages. Because the product is in pre-release (as of today 5/1/2018), sometimes changes will be reflected in the SDK faster than in the NuGet packages. **We recommend using the NuGet packages** (explained in 1.2) for the purposes of these labs, but if you want to be on the latest build, you can follow the instructions below. 
 
@@ -152,6 +152,8 @@ namespace PictureBot
     }
 }
 ```
+
+>**TIP**: If you want to start from a template, you can [install the extension for Visual Studio](https://marketplace.visualstudio.com/items?itemName=BotBuilder.botbuilderv4), and there is more information about creating an Echo Bot from a template [here](https://docs.microsoft.com/en-us/azure/bot-service/dotnet/bot-builder-dotnet-sdk-quickstart?view=azure-bot-service-4.0).
 
 >The rest of the **Creating a simple bot and running it** lab is optional. Per the prerequisites, you should have experience working with the Bot Framework. You can hit F5 to confirm it builds correctly, and move on to the next lab (1.3 Organizing Code for Bots).  
 
@@ -425,8 +427,8 @@ There are a number of things that we can do to improve our bot.  First of all, w
 Also, as the complexity of our bot grows, and we are taking the user's input and using multiple services to interpret it, we need a process to manage that flow.  For example, try regular expressions first, and if that doesn't match, call LUIS, and then perhaps we also drop down to try other services like [QnA Maker](http://qnamaker.ai) and Azure Search. A great way to manage this is through [Middleware](https://github.com/Microsoft/botbuilder-dotnet/wiki/Creating-Middleware), and the SDK does a great job supporting that. We call middleware from `ConfigureServices` under `Startup.cs`, simply by calling additional options add it (check your `Startup.cs` file to see the location). 
 
 Before continuing with the lab, learn more about middleware and the Bot Framework SDK:  
-1.  [Overview and Architecture](https://github.com/Microsoft/botbuilder-dotnet/wiki/Overview)
-2.  [Creating Middleware](https://github.com/Microsoft/botbuilder-dotnet/wiki/Creating-Middleware)
+1.  [Overview and Architecture](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+2.  [Creating Middleware](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-create-middleware?view=azure-bot-service-4.0&tabs=csaddmiddleware%2Ccsetagoverwrite%2Ccsmiddlewareshortcircuit%2Ccsfallback%2Ccsactivityhandler)
 3.  [In the SDK, under `Microsoft.Bot.Builder.Core.Extensions`](https://github.com/Microsoft/botbuilder-dotnet/tree/master/libraries/Microsoft.Bot.Builder.Core.Extensions), you can look at some of the middleware that's built-in to the SDK.  
 
 Ultimately, we'll use some middleware to try to understand what users are saying with regular expressions (Regex) first, and if we can't, we'll call LUIS. If we still can't, then we'll drop down to a generic "I'm not sure what you mean" response, or whatever you put for "ReplyWithConfused."    

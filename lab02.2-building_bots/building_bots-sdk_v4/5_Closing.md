@@ -14,6 +14,7 @@ You should have learned:
 
 Resources for future projects/learning:
 - [Azure Bot Services documentation](https://docs.microsoft.com/en-us/bot-framework/)
+- [Bot Builder Tutorials](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-design-principles?view=azure-bot-service-4.0)
 - [Azure Search documentation](https://docs.microsoft.com/en-us/azure/search/search-what-is-azure-search)
 - [Azure Bot Builder Samples](https://github.com/Microsoft/BotBuilder-Samples)
 - [Azure Search Samples](https://github.com/Azure-Samples/search-dotnet-getting-started)
