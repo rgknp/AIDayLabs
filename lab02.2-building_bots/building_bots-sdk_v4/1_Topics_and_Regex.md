@@ -11,7 +11,11 @@ We will be developing a bot using the latest .NET SDK (v4).  To get started, we'
 
 #### Download the Bot Framework Emulator  
 
-1. Download the Bot Framework Emulator for testing your bot locally [here](https://github.com/Microsoft/BotFramework-Emulator/releases/download/v3.5.33/botframework-emulator-Setup-3.5.33.exe).  The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-3.5.33\botframework-emulator.exe` or your Downloads folder, depending on browser.  
+You can download either the v3 Bot Framework Emulator, or the v4 PREVIEW Bot Framework Emulator for testing your bot locally.. The instructions for the rest of the labs will assume you've downloaded the v4 Emulator.  
+1. **v4 PREVIEW Emulator**: Download the emulator by going to [this page](https://github.com/Microsoft/BotFramework-Emulator/releases) and selecting the most recent file ending in ".exe".
+2. **v3 Emulator**: Link [here](https://github.com/Microsoft/BotFramework-Emulator/releases/download/_app-version_/botframework-emulator-Setup-_app version_.exe).  
+
+The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-3.5.33\botframework-emulator.exe` or your Downloads folder, depending on browser.  
 
 #### Building the SDK (optional)
 
@@ -163,10 +167,12 @@ Now start your bot (with or without debugging) by pressing the "IIS Express" but
 * Note the localhost port number for the page. You will need this information to interact with your bot.  
 
 To interact with your bot:
-* Launch the Bot Framework Emulator.  (If you just installed it, it may not be indexed to show up in a search on your local machine, so remember that it installs to c:\Users\your-username\AppData\Local\botframework\app-3.5.27\botframework-emulator.exe.)  Ensure that the Bot URL matches the port number that launched in the web browser, and then api/messages appended to the end (e.g. `http://localhost:portNumber/api/messages`).  You should be able to converse with the bot. 
+* Launch the Bot Framework Emulator (note we are using the v4 PREVIEW Emulator).  (If you just installed it, it may not be indexed to show up in a search on your local machine, so remember that it installs to c:\Users\your-username\AppData\Local\botframework\app-_version_\botframework-emulator.exe.)  
+* Select "create a new bot configuration." Name the bot, and ensure the Endpoint URL matches the port number that launched in the web browser, and then api/messages appended to the end (e.g. `http://localhost:portNumber/api/messages`). 
+* Select "save and connect," and navigate to the root of the folder where your bot files are located. You should now be able to converse with the bot. 
 * Type "hello", and the bot will respond with "Hello World" to every message.
 
-![Bot Emulator](./resources/assets/botemulator2.png) 
+![Bot Emulator](./resources/assets/botemulator3.png) 
 
 > Fun Aside: why this port number?  It is set in your project properties.  In your Solution Explorer, double-click **Properties>Debug** and examine its contents. Does the App URL match what you connected to in the emulator?
 
