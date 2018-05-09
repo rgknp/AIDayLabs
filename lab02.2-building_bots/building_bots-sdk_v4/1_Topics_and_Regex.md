@@ -174,6 +174,7 @@ To interact with your bot:
 
 ![Bot Emulator](./resources/assets/botemulator3.png) 
 
+You can read more about using the Emulator [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0).  
 > Fun Aside: why this port number?  It is set in your project properties.  In your Solution Explorer, double-click **Properties>Debug** and examine its contents. Does the App URL match what you connected to in the emulator?
 
 Browse around and examine the sample bot code. In particular, note:
