@@ -60,7 +60,7 @@ Return to the portal to your Web App Bot resource. Under Bot Management, select 
 
 After you've confirmed your bot is published and working, check out some of the other features under Bot Management. Select "Channels" and notice there are many channels, and when you select one, you are instructed on how to configure it. 
 
-Want to learn more about the various aspects related to bots? Spend some time reading the [how to's and design principles](https://docs.microsoft.com/en-us/bot-framework/bot-service-design-principles).
+Want to learn more about the various aspects related to bots? Spend some time reading the [how to's and design principles](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-design-principles?view=azure-bot-service-4.0).
 
 ### Continue to [5_Closing](./5_Closing.md)  
 Back to [README](./0_README.md)

@@ -11,9 +11,13 @@ We will be developing a bot using the latest .NET SDK (v4).  To get started, we'
 
 #### Download the Bot Framework Emulator  
 
-1. Download the Bot Framework Emulator for testing your bot locally [here](https://github.com/Microsoft/BotFramework-Emulator/releases/download/v3.5.33/botframework-emulator-Setup-3.5.33.exe).  The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-3.5.33\botframework-emulator.exe` or your Downloads folder, depending on browser.  
+You can download either the v3 Bot Framework Emulator, or the v4 PREVIEW Bot Framework Emulator for testing your bot locally.. The instructions for the rest of the labs will assume you've downloaded the v4 Emulator.  
+1. **v4 PREVIEW Emulator**: Download the emulator by going to [this page](https://github.com/Microsoft/BotFramework-Emulator/releases) and selecting the most recent file ending in ".exe".
+2. **v3 Emulator**: Link [here](https://github.com/Microsoft/BotFramework-Emulator/releases/download/_app-version_/botframework-emulator-Setup-_app version_.exe).  
 
-#### Building the SDK
+The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-3.5.33\botframework-emulator.exe` or your Downloads folder, depending on browser.  
+
+#### Building the SDK (optional)
 
 > Note: You can either **install the packages locally**, or use **NuGet Package Manager** and add the packages. Because the product is in pre-release (as of today 5/1/2018), sometimes changes will be reflected in the SDK faster than in the NuGet packages. **We recommend using the NuGet packages** (explained in 1.2) for the purposes of these labs, but if you want to be on the latest build, you can follow the instructions below. 
 
@@ -153,6 +157,8 @@ namespace PictureBot
 }
 ```
 
+>**TIP**: If you want to start from a template, you can [install the extension for Visual Studio](https://marketplace.visualstudio.com/items?itemName=BotBuilder.botbuilderv4), and there is more information about creating an Echo Bot from a template [here](https://docs.microsoft.com/en-us/azure/bot-service/dotnet/bot-builder-dotnet-sdk-quickstart?view=azure-bot-service-4.0).
+
 >The rest of the **Creating a simple bot and running it** lab is optional. Per the prerequisites, you should have experience working with the Bot Framework. You can hit F5 to confirm it builds correctly, and move on to the next lab (1.3 Organizing Code for Bots).  
 
 
@@ -161,11 +167,14 @@ Now start your bot (with or without debugging) by pressing the "IIS Express" but
 * Note the localhost port number for the page. You will need this information to interact with your bot.  
 
 To interact with your bot:
-* Launch the Bot Framework Emulator.  (If you just installed it, it may not be indexed to show up in a search on your local machine, so remember that it installs to c:\Users\your-username\AppData\Local\botframework\app-3.5.27\botframework-emulator.exe.)  Ensure that the Bot URL matches the port number that launched in the web browser, and then api/messages appended to the end (e.g. `http://localhost:portNumber/api/messages`).  You should be able to converse with the bot. 
+* Launch the Bot Framework Emulator (note we are using the v4 PREVIEW Emulator).  (If you just installed it, it may not be indexed to show up in a search on your local machine, so remember that it installs to c:\Users\your-username\AppData\Local\botframework\app-_version_\botframework-emulator.exe.)  
+* Select "create a new bot configuration." Name the bot, and ensure the Endpoint URL matches the port number that launched in the web browser, and then api/messages appended to the end (e.g. `http://localhost:portNumber/api/messages`). 
+* Select "save and connect," and navigate to the root of the folder where your bot files are located. You should now be able to converse with the bot. 
 * Type "hello", and the bot will respond with "Hello World" to every message.
 
-![Bot Emulator](./resources/assets/botemulator2.png) 
+![Bot Emulator](./resources/assets/botemulator3.png) 
 
+You can read more about using the Emulator [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0).  
 > Fun Aside: why this port number?  It is set in your project properties.  In your Solution Explorer, double-click **Properties>Debug** and examine its contents. Does the App URL match what you connected to in the emulator?
 
 Browse around and examine the sample bot code. In particular, note:
@@ -425,8 +434,8 @@ There are a number of things that we can do to improve our bot.  First of all, w
 Also, as the complexity of our bot grows, and we are taking the user's input and using multiple services to interpret it, we need a process to manage that flow.  For example, try regular expressions first, and if that doesn't match, call LUIS, and then perhaps we also drop down to try other services like [QnA Maker](http://qnamaker.ai) and Azure Search. A great way to manage this is through [Middleware](https://github.com/Microsoft/botbuilder-dotnet/wiki/Creating-Middleware), and the SDK does a great job supporting that. We call middleware from `ConfigureServices` under `Startup.cs`, simply by calling additional options add it (check your `Startup.cs` file to see the location). 
 
 Before continuing with the lab, learn more about middleware and the Bot Framework SDK:  
-1.  [Overview and Architecture](https://github.com/Microsoft/botbuilder-dotnet/wiki/Overview)
-2.  [Creating Middleware](https://github.com/Microsoft/botbuilder-dotnet/wiki/Creating-Middleware)
+1.  [Overview and Architecture](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+2.  [Creating Middleware](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-create-middleware?view=azure-bot-service-4.0&tabs=csaddmiddleware%2Ccsetagoverwrite%2Ccsmiddlewareshortcircuit%2Ccsfallback%2Ccsactivityhandler)
 3.  [In the SDK, under `Microsoft.Bot.Builder.Core.Extensions`](https://github.com/Microsoft/botbuilder-dotnet/tree/master/libraries/Microsoft.Bot.Builder.Core.Extensions), you can look at some of the middleware that's built-in to the SDK.  
 
 Ultimately, we'll use some middleware to try to understand what users are saying with regular expressions (Regex) first, and if we can't, we'll call LUIS. If we still can't, then we'll drop down to a generic "I'm not sure what you mean" response, or whatever you put for "ReplyWithConfused."    
