@@ -8,7 +8,7 @@ In the context of Python, Conda is similar to `pip` and can be used to install a
 
 With AML projects, we use Docker for managing system requirements and dependencies between compute environments (local, remote, Spark). Within Docker itself, we use Conda to manage Python dependencies for a given project. We use the command line `conda` command to interact with `conda` (in the case of Python, we also have some control in Jupyter Notebooks)
 
-CRITICAL NOTE: By default, conda is not used for local script runs -- local runs by default will use the `root` python environment instead. This can problems if we work on multiple projects, as different projects may have different types of dependencies. As a general rule, it is better to use Docker even when working locally.
+CRITICAL NOTE: By default, conda is not used for local script runs -- local runs by default will use the `root` python environment instead. This can cause problems if we work on multiple projects, as different projects may have different types of dependencies. As a general rule, it is better to use Docker even when working locally.
 
 Open Workbench and create a new project called `hello_bootcamp`, make it a blank project and place it in the `Documents` folder. Open the project and go to **File > Open Command Prompt** to access the command line from within the project parent folder. Type `python`, then in the python console paste this in:
 
