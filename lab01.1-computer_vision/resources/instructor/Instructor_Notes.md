@@ -52,7 +52,42 @@ We had two people presenting this, and it worked really nicely to have a back-an
     *	Thoughts
     *	Experiences
     *	Challenges
+	
+## Known issue with RDP connection for the Lab
 
+With the release of the March 2018 Security bulletin, there was a fix that addressed a CredSSP, “Remote Code Execution” vulnerability (CVE-2018-0886) which could impact RDP connections. 
+
+*Symptoms*
+1.       The VM screenshot shows the OS fully loaded and waiting for the credentials
+2.       If you try to RDP the VM either internally or externally, you'll get the message: 
+						
+						An authentication error has occurred.
+						The function requested is not supported. 
+						
+*Resolution/ Fix*
+Ensure both client & server side have latest patch installed so that RDP can be established in a secure way by using one of the following methods
+
+Method 1
+1.	Press Win + R and type gpedit.msc in Run Command
+2.	Browse to Computer Configuration > Administrative Templates  > System > Credentials Delegation in the left pane
+3.	Change the Encryption Oracle Remediation policy to Enabled if it is not enable already
+4.	And change Protection Level to Vulnerable
+
+Method 2
+
+1.	Press Win  and type CMD.
+2.	Right click Command Prompt and click Run as Administrator, in the User Access Control window, click Yes.
+3.	Type the following code into the window and press ENTER after the code
+			REG  ADD HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters\ /v AllowEncryptionOracle /t REG_DWORD /d 2
+4.	Type the following code into the window and press ENTER after the code
+			gpupdate /force
+			
+check the RCP connection
+
+For more detailed steps, you can refer this blog here:
+https://blogs.technet.microsoft.com/mckittrick/unable-to-rdp-to-virtual-machine-credssp-encryption-oracle-remediation/ 
+
+			
 ## Lab 1.1 Tips
 * The meat of this lab is within 2_ImageProcessor, majority of people will spend the most time here
        * Encourage people to attempt the free form coding sections before peeking at the solution file, but make sure they know it is there when they get stuck
@@ -62,4 +97,4 @@ We had two people presenting this, and it worked really nicely to have a back-an
       * The general idea is for them to create an additional service helper and then translate the results from the Computer Vision API call
     * If all the students finish 3_TestCLI early, move on to the Custom Vision intro before lunch. Utilize all extra time that you are given, you never know where students will have more questions or difficulties, and the schedule is meant to be flexible.
 
-
+## Known issue with RDP connection
