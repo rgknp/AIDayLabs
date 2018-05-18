@@ -112,7 +112,7 @@ This code will match on expressions from the user that start with "hi", "hello",
 
 > Fun Aside: One might argue that the user shouldn't have to type "help" to get a menu of clear options on what the bot can do; rather, this should be the default experience on first contact with the bot.  **Discoverability** is one of the biggest challenges for bots - letting the users know what the bot is capable of doing.  Good [bot design principles](https://docs.microsoft.com/en-us/bot-framework/bot-design-principles) can help.   
 
-This setup will make it easier when we LUIS (later) as our second attempt if no regular expression matches, in Scorable Group 1.  
+This setup will make it easier when we resort to LUIS (later) as our second attempt if no regular expression matches, in Scorable Group 1.  
 
 
 
