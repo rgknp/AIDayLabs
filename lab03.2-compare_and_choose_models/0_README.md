@@ -31,7 +31,7 @@ Return to the command line and run `python run.py` to run multiple experiments. 
 
 ![Images](./images/jobs-pannel.jpg)
 
-Once all the jobs finish running, go to the the **Runs** tab on the left-hand side and click on **All Runs**. Then examine the metrics and visualizations we are presented with.
+Once all the jobs finish running, go to the **Runs** tab on the left-hand side and click on **All Runs**. Then examine the metrics and visualizations we are presented with.
 
 ![Images](./images/runs-tab.jpg)
   
@@ -43,7 +43,7 @@ To see how these metrics tie back to the Python script, open `iris_sklearn.py` i
 
 Note that we have two ways of logging information: 
 
-We can simply rely on Python's `print` function, as can be seen by `print("Accuracy is {}".format(accuracy))` for example. In such a case, we can go the the **Jobs** pannel and click on the green **Completed** button to see any printed logs for a given run.
+We can simply rely on Python's `print` function, as can be seen by `print("Accuracy is {}".format(accuracy))` for example. In such a case, we can go to the **Jobs** pannel and click on the green **Completed** button to see any printed logs for a given run.
 
 ![Images](./images/click-completed.jpg)
 
@@ -74,7 +74,7 @@ run_logger.log("MaxFscore", max(f_score))
 print ("Max F_1 is {}".format(max(f_score)))
 ```
 
-Return to the Workbench and go the the **Runs** tab and click on **All Runs**. Scroll down to the table listing all the runs, click on the checkbox next to `RUN NUMBER` to select them all and click on **Archive**. Repeat this until all the runs have been archived.
+Return to the Workbench and go to the **Runs** tab and click on **All Runs**. Scroll down to the table listing all the runs, click on the checkbox next to `RUN NUMBER` to select them all and click on **Archive**. Repeat this until all the runs have been archived.
 
 ![Images](./images/archive-runs.jpg)
 
