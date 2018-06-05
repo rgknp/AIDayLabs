@@ -2,7 +2,7 @@
 
 Data science is a very iterative process that involves lots of trial and error. As such, Azure Machine Learning makes it easy for data scientists to iterate on the model building and deployment process. Among other things, it facilitates two common problems we encounter when developing ML solutions: 
 
-- **Model selection**: Run and compare different models across collected metrics (with a few extra lines of python code). In this context, a single model estimate is referred to as an **experiment** and we talk about training and scoring experiments. However this term should not be confused with a statistical experiment (a randomized controlled experiment) and to avoid this confusion we try to avoid overusing the term **experiment** and use **run** or **job** instead to refer to a singe experiment and use the term **model selection** to refer to the whole process of **experimentation** (running and comparing many different experiments).
+- **Model selection**: Run and compare different models across collected metrics (with a few extra lines of python code). In this context, a single model estimate is referred to as an **experiment** and we talk about training and scoring experiments. However this term should not be confused with a statistical experiment (a randomized controlled experiment) and to avoid this confusion we try to avoid overusing the term **experiment** and use **run** or **job** instead to refer to a single experiment and use the term **model selection** to refer to the whole process of **experimentation** (running and comparing many different experiments).
 - **Model management**: Lets us bind specific models to their underlying code repository and allows the *promotion* of a model into staging and production without changes to the API servicing the model. The need for model management arises from the need to perform model selection in a tractable way and with the ability to perform rollbacks.
 
 In this lab we will focus on how to use AML to facilitate model selection. In a different lab, we will learn how AML can also be used to do model management.
@@ -31,7 +31,7 @@ Return to the command line and run `python run.py` to run multiple experiments. 
 
 ![Images](./images/jobs-pannel.jpg)
 
-Once all the jobs finish running, go to the the **Runs** tab on the left-hand side and click on **All Runs**. Then examine the metrics and visualizations we are presented with.
+Once all the jobs finish running, go to the **Runs** tab on the left-hand side and click on **All Runs**. Then examine the metrics and visualizations we are presented with.
 
 ![Images](./images/runs-tab.jpg)
   
@@ -43,7 +43,7 @@ To see how these metrics tie back to the Python script, open `iris_sklearn.py` i
 
 Note that we have two ways of logging information: 
 
-We can simply rely on Python's `print` function, as can be seen by `print("Accuracy is {}".format(accuracy))` for example. In such a case, we can go the the **Jobs** pannel and click on the green **Completed** button to see any printed logs for a given run.
+We can simply rely on Python's `print` function, as can be seen by `print("Accuracy is {}".format(accuracy))` for example. In such a case, we can go to the **Jobs** pannel and click on the green **Completed** button to see any printed logs for a given run.
 
 ![Images](./images/click-completed.jpg)
 
@@ -74,7 +74,7 @@ run_logger.log("MaxFscore", max(f_score))
 print ("Max F_1 is {}".format(max(f_score)))
 ```
 
-Return to the Workbench and go the the **Runs** tab and click on **All Runs**. Scroll down to the table listing all the runs, click on the checkbox next to `RUN NUMBER` to select them all and click on **Archive**. Repeat this until all the runs have been archived.
+Return to the Workbench and go to the **Runs** tab and click on **All Runs**. Scroll down to the table listing all the runs, click on the checkbox next to `RUN NUMBER` to select them all and click on **Archive**. Repeat this until all the runs have been archived.
 
 ![Images](./images/archive-runs.jpg)
 
