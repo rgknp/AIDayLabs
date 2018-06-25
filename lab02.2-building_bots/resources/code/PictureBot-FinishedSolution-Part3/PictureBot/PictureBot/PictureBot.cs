@@ -1,38 +1,100 @@
-## 3_LUIS:
-Estimated Time: 10-15 minutes
+﻿using System.Threading.Tasks;
+using Microsoft.Bot;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Core.Extensions;
+using Microsoft.Bot.Schema;
+using Microsoft.Bot.Builder.Dialogs;
+using PictureBot.Models;
+using PictureBot.Responses;
+using PictureBot.Dialogs;
+using System.Linq;
+using Microsoft.Bot.Builder.Ai.LUIS;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Microsoft.Azure.Search;
+using Microsoft.Azure.Search.Models;
 
-Our bot is now capable of taking in a user's input, calling Azure Search, and returning the results in a carousel of Hero cards. Unfortunately, our bot's communication skills are brittle. One typo, or a rephrasing of words, and the bot will not understand. This can cause frustration for the user. We can greatly increase the bot's conversation abilities by enabling it to understand natural language with the LUIS model we built yesterday in "lab01.5-luis."  
+namespace PictureBot
+{
+    public class PictureBot : IBot
+    {
+        private const string RootDialog = "rootDialog";
+        private DialogSet _dialogs { get; } = ComposeMainDialog();
 
-We will have to update our bot in order to use LUIS.  We can do this by modifying "Startup.cs" and "RootTopic.cs."
+        /// <summary>
+        /// Every Conversation turn for our bot calls this method. 
+        /// </summary>
+        /// <param name="context">The current turn context.</param>        
+        public async Task OnTurn(ITurnContext context)
+        {
 
-### Lab 3.1: Adding LUIS to Startup.cs
+            if (context.Activity.Type is ActivityTypes.Message)
+            {
+                // Get the user and conversation state from the turn context.
+                var state = UserState<UserData>.Get(context);
+                var conversationInfo = ConversationState<ConversationInfo>.Get(context);
 
-Open "Startup.cs" and find where you added middleware to use the RegEx recognizer middleware. Since we want to call LUIS **after** we call RegEx, we'll put the LUIS recognizer middleware below. Add the following under the comment "Add LUIS ability below":
-```csharp
-                middleware.Add(new LuisRecognizerMiddleware(
-                    new LuisModel("luisAppId", "subscriptionId", new Uri("luisModelBaseUrl"))));
-```
-Use the app ID, subscription ID, and base URI for your LUIS model. The base URI will be "https://region.api.cognitive.microsoft.com/luis/v2.0/apps/", where region is the region associated with the key you are using. Some examples of regions are, `westus`, `westcentralus`, `eastus2`, and `southeastasia`.  
+                // Establish dialog state from the conversation state.
+                var dc = _dialogs.CreateContext(context, conversationInfo);
 
-You can find your base URL by logging into www.luis.ai, going to the **Publish** tab, and looking at the **Endpoint** column under **Resources and Keys**. The base URL is the portion of the **Endpoint URL** before the subscription ID and other parameters.  
+                // Continue any current dialog.
+                await dc.Continue();
+                // Every turn sends a response, so if no response was sent,
+                // then there no dialog is currently active.
+                if (!context.Responded)
+                {
+                    // Greet them if we haven't already
+                    if (state.Greeted == "not greeted")
+                    {
+                        await RootResponses.ReplyWithGreeting(context);
+                        await RootResponses.ReplyWithHelp(context);
+                        state.Greeted = "greeted";
+                    }
+                    else
+                    {
+                        await dc.Begin(RootDialog);
+                    }
+                }
+            }
+        }
 
-**Hint**: The LUIS App ID will have hyphens in it, and the LUIS key will not.  
+        /// <summary>
+        /// Composes a main dialog for our bot.
+        /// </summary>
+        /// <returns>A new main dialog.</returns>
+        private static DialogSet ComposeMainDialog()
+        {
+            var dialogs = new DialogSet();
 
-### Lab 3.2: Adding LUIS to RootDialog
-
-Open "PictureBot.cs." There's no need for us to add anything to initial greeting, because regardless of user input, we want to greet the user when the conversation starts.  
-
-In RootDialog, we do want to start by trying Regex, so we'll leave most of that. However, if Regex doesn't find an intent, we want the `default` action to be different. That's when we want to call LUIS.  
-
-Replace:
-```csharp
-                        default:
-                            // respond that you don't understand
-                            await RootResponses.ReplyWithConfused(dc.Context);
-                            break;
-```
-With:
-```csharp
+            dialogs.Add(RootDialog, new WaterfallStep[]
+            {
+                // Duplicate the following row if your dialog will have 
+                // multiple turns. In this case, we just have one
+                async (dc, args, next) =>
+                {
+                    // Get the state of the conversation 
+                    var conversation = ConversationState<ConversationInfo>.Get(dc.Context);
+                    // If Regex picks up on anything, store it
+                    var recognizedIntents = dc.Context.Services.Get<IRecognizedIntents>();
+                    // Based on the recognized intent, direct the conversation
+                    switch (recognizedIntents.TopIntent?.Name)
+                    {
+                            case "search":
+                                // switch to SearchDialog
+                                await dc.Begin(SearchDialog.Id);
+                                break;
+                            case "share":
+                                // respond that you're sharing the photo
+                                await RootResponses.ReplyWithShareConfirmation(dc.Context);
+                                break;
+                            case "order":
+                                // respond that you're ordering
+                                await RootResponses.ReplyWithOrderConfirmation(dc.Context);
+                                break;
+                            case "help":
+                                // show help
+                                await RootResponses.ReplyWithHelp(dc.Context);
+                                break;
                         default:
                         // adding app logic when Regex doesn't find an intent - consult LUIS
                             var result = dc.Context.Services.Get<RecognizerResult>(LuisRecognizerMiddleware.LuisRecognizerResultKey);
@@ -87,20 +149,18 @@ With:
                                     break;
                             }
                             break;
-```
-Let's briefly go through what we're doing in the new code additions. First, instead of responding saying we don't understand, we're going to call LUIS. So we call LUIS using the LUIS Recognizer Middleware, and we store the Top Intent in a variable. We then use `switch` to respond in different ways, depending on which intent is picked up. This is almost identical to what we did with Regex.  
+                    }
+                }
 
-> Note: If you named your intents differently in LUIS than instructed in "lab01.5-luis", you need to modify the `case` statements accordingly.  
+            });
+            
+            // Add our child dialogs (in this case just one)
+            dialogs.Add(SearchDialog.Id, SearchDialog.Instance);
 
-Another thing to note is that after every response that called LUIS, we're adding the LUIS intent value and score. The reason is just to show you when LUIS is being called as opposed to Regex (you would remove these responses from the final product, but it's a good indicator for us as we test the bot).  
+            return dialogs;
+        }
 
-Bring your attention to `case "SearchPics"`. Here, we check if LUIS also returned an entity, specifically the "facet" entity. If LUIS doesn't find the "facet," we take the user through the search topic, so we can determine what they want to search for and give them the results.  
-
-If LUIS does determine a "facet" entity from the utterance, we don't want to take the users through the whole search dialog. We want to be efficient so the user has a good experience. So we'll go ahead and process their search request. `StartAsync` does just that.  
-
-At the bottom of the class, but still within the class, add the following:
-```csharp
-public static async Task StartAsync(ITurnContext context, string searchText)
+        public static async Task StartAsync(ITurnContext context, string searchText)
         {
             ISearchIndexClient indexClientForQueries = CreateSearchIndexClient();
             // For more examples of calling search with SearchParameters, see
@@ -143,24 +203,5 @@ public static async Task StartAsync(ITurnContext context, string searchText)
             SearchIndexClient indexClient = new SearchIndexClient(searchServiceName, indexName, new SearchCredentials(queryApiKey));
             return indexClient;
         }
-``` 
-This code should look very familiar to you. It's quite similar to the `StartAsync` method in the search dialog.  
-
-Hit F5 to run the app. In the Bot Emulator, try sending the bots different ways of searching pictures. What happens when you say "search pics" or "send me pictures of water"? Try some other ways of searching, sharing and ordering pictures.  
-
-If you have extra time, see if there are things LUIS isn't picking up on that you expected it to. Maybe now is a good time to go to luis.ai, [review your endpoint utterances](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/label-suggested-utterances), and retrain/republish your model. 
-
-
-> Fun Aside: Reviewing the endpoint utterances can be extremely powerful.  LUIS makes smart decisions about which utterances to surface.  It chooses the ones that will help it improve the most to have manually labeled by a human-in-the-loop.  For example, if the LUIS model predicted that a given utterance mapped to Intent1 with 47% confidence and predicted that it mapped to Intent2 with 48% confidence, that is a strong candidate to surface to a human to manually map, since the model is very close between two intents.  
-
-
-**Extra credit (to complete later):** Create and configure a "web.config" file to store your search service information. Next, change the code in RootDialog.cs and SearchDialog.cs to call the settings in web.config, so you don't have to enter them twice.
-
-**Extra credit (to complete later)**: Create a process for ordering prints with the bot using dialogs, responses, and models.  Your bot will need to collect the following information: Photo size (8x10, 5x7, wallet, etc.), number of prints, glossy or matte finish, user's phone number, and user's email. The bot will then want to send you a confirmation before submitting the request.
-
-
-Get stuck? You can find the solution for this lab under [resources/code/FinishedPictureBot-Part3](./resources/code/FinishedPictureBot-Part3).
-
-
-### Continue to [4_Publish_and_Register](./4_Publish_and_Register.md)  
-Back to [README](./0_README.md)
+    }
+}

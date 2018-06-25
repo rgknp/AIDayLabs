@@ -1,16 +1,25 @@
-## 2_Azure_Search:
-Estimated Time: 10-15 minutes
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Azure.Search;
+using Microsoft.Azure.Search.Models;
+using Microsoft.Bot.Builder.Dialogs;
+using PictureBot.Responses;
+using PictureBot.Models;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
 
-We now have a bot that can communicate with us if we use very specific words. The next thing we need to do is set up a connection to the Azure Search index we created in "lab02.1-azure_search." 
+namespace PictureBot.Dialogs
+{
+    public class SearchDialog : DialogContainer
+    {
+        public const string Id = "searchPictures";
 
-### Lab 2.1: Update the bot to use Azure Search
+        public static SearchDialog Instance { get; } = new SearchDialog();
 
-First, we need to update "SearchDialog.cs" so to request a search and process the response. We'll have to call Azure Search here, so make sure you've added the NuGet package (you should have done this in an earlier lab, but here's a friendly reminder).
-
-![Azure Search NuGet](./resources/assets/AzureSearchNuGet.jpg) 
-
-Open "SearchDialog.cs" and review the code below. After you have an understanding of what we're doing, add it after the commented line "add search dialog contents here":
-```csharp
+        // You can start this from the parent using the dialog's ID.
+        public SearchDialog() : base(Id)
+        {
+            // add search dialog contents here
             // Define the conversation flow using a waterfall model.
             this.Dialogs.Add(Id, new WaterfallStep[]
             {
@@ -38,18 +47,9 @@ Open "SearchDialog.cs" and review the code below. After you have an understandin
             });
             // Define the prompts used in this conversation flow.
             this.Dialogs.Add("textPrompt", new TextPrompt());
-```
-When we start the search dialog, the first thing we need to do is ask the user what they want to search for. You can read more about [prompting users here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-prompts?view=azure-bot-service-4.0&tabs=csharp).  
+        }
+        //process search below
 
-In the next turn of the conversation, you can see that we're taking in the response from the user, confirming with the user what we're searching for, and waiting for the results of the StartAsync method before ending the dialog.
-
-In order to process the search, there are several tasks we need to accomplish:
-1.  Establish a connection to the search service
-2.  Call the search service and store the results
-3.  Put the results in a message and respond to the user
-
-Discuss with a neighbor which methods below accomplish which tasks above, and how:
-```csharp
         public async Task StartAsync(ITurnContext context, string searchText)
         {
             ISearchIndexClient indexClientForQueries = CreateSearchIndexClient();
@@ -93,21 +93,6 @@ Discuss with a neighbor which methods below accomplish which tasks above, and ho
             SearchIndexClient indexClient = new SearchIndexClient(searchServiceName, indexName, new SearchCredentials(queryApiKey));
             return indexClient;
         }
-```
+    }
+}
 
-Now that you understand which piece does what and why, add the code below the comment "process search below" within SearchDialog.cs.  
-
-Set the value for the "YourSearchServiceName" to be the name of the Azure Search Service that you created earlier.  If needed, go back and look this up in the [Azure portal](https://portal.azure.com).  
-
-Set the value for the "YourSearchServiceKey" to be the key for this service.  This can be found in the [Azure portal](https://portal.azure.com) under the Keys section for your Azure Search.  In the below screenshot, the SearchServiceName would be "aiimmersionsearch" and the SearchServiceKey would be "375...".  
-
-![Azure Search Settings](./resources/assets/AzureSearchSettings.jpg) 
-
-Finally, the SearchIndexName should be "images," but you may want to confirm that this is what you named your index.  
-
-Press F5 to run your bot again.  In the Bot Emulator, try searching for something like "dogs" or "water".  Ensure that you are seeing results when tags from your pictures are requested.  
-
-Get stuck? You can find the solution for this lab under [resources/code/FinishedPictureBot-Part2](./resources/code/FinishedPictureBot-Part2).  
-
-### Continue to [3_LUIS](./3_LUIS.md)  
-Back to [README](./0_README.md)
