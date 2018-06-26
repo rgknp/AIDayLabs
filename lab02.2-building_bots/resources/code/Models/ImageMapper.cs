@@ -19,6 +19,19 @@ namespace PictureBot.Models
             {
                 searchHit.PropertyBag.Add("Tags", Tags);
             }
+
+            object NumFaces;
+            if (hit.Document.TryGetValue("NumFaces", out NumFaces))
+            {
+                searchHit.PropertyBag.Add("NumFaces", NumFaces);
+            }
+
+            object Faces;
+            if (hit.Document.TryGetValue("Faces", out Faces))
+            {
+                searchHit.PropertyBag.Add("Faces", Faces);
+            }
+
             return searchHit;
         }
 
