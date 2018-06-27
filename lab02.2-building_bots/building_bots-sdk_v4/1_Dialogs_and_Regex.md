@@ -124,7 +124,7 @@ namespace PictureBot
 }
 ```
 
-Save the file. This should address our error in Startup.cs. Confirm this.  
+Save the file. This is where we'll store information about the active conversation. You can see we're also keeping track of whether we've greeted the user, so we don't do it more than once. This should address our error in Startup.cs. Confirm this.  
 
 Create a PictureBot.cs class file. Update the file to this:  
 ```csharp
