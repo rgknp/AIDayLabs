@@ -23,6 +23,7 @@ Resources for future projects/learning:
 - [Azure Search Samples](https://github.com/Azure-Samples/search-dotnet-getting-started)
 - [LUIS documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Home)
 - [LUIS Sample](https://github.com/Microsoft/BotBuilder-Samples/blob/master/CSharp/intelligence-LUIS/README.md)
+- [Course on Designing and Architecting Intelligent Agents](https://aka.ms/daaia)
 
 
 Back to [README](./0_README.md)

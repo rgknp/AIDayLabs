@@ -14,29 +14,16 @@ You have just published a very simple EchoBot with their template. What we will 
 
 First we need to grab a few keys. Go to the Web App Bot you just created (in the portal). Under App Service Settings, select **Application Settings** and scroll down to the App settings section. Grab the MicrosoftAppId and MicrosoftAppPassword. You will need them in a moment.
 
-Return to your PictureBot in Visual Studio. Right-click on the project PictureBot and select **Add > New Item > App Settings File > Add**. This should add a file called "appsettings.json" to your project. In this file, add the following skeleton code:  
+Return to your PictureBot in Visual Studio. Navigate to the file called "appsettings.json" to your project. In this file, fill in your MicrosoftAppId and MicrosoftAppPassword with the values for your web app bot:  
 ```json
 {
-  "Logging": {
-    "IncludeScopes": false,
-    "Debug": {
-      "LogLevel": {
-        "Default": "Warning"
-      }
-    },
-    "Console": {
-      "LogLevel": {
-        "Default": "Warning"
-      }
-    }
-  },
 
   "MicrosoftAppId": "YourAppId",
   "MicrosoftAppPassword": "YourAppPassword"
 
 }
 ```
-Replace "YourAppId" and "YourAppPassword" with the values for your web app bot. Save the file.
+Save the file.  
 
 In the Solution Explorer, right-click on your Bot Application project and select "Publish".  This will launch a wizard to help you publish your bot to Azure.  
 
@@ -60,7 +47,7 @@ Return to the portal to your Web App Bot resource. Under Bot Management, select 
 
 After you've confirmed your bot is published and working, check out some of the other features under Bot Management. Select "Channels" and notice there are many channels, and when you select one, you are instructed on how to configure it. 
 
-Want to learn more about the various aspects related to bots? Spend some time reading the [how to's and design principles](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-design-principles?view=azure-bot-service-4.0).
+Want to learn more about the various aspects related to bots? Spend some time reading the [how to's and design principles](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-design-principles?view=azure-bot-service-4.0). You can also check out [this course on designing and architecting intelligent agents](https://aka.ms/daaia).
 
 ### Continue to [5_Closing](./5_Closing.md)  
 Back to [README](./0_README.md)
