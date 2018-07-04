@@ -17,9 +17,9 @@ of a larger [real-world example](https://docs.microsoft.com/en-us/azure/machine-
 
 A. Create a new blank project, and call it 'sentiment-gpu'.
 
-B. From the resources folder, copy `sentiment_analysis.py` to the project folder.
+B. From the resources folder, copy `sentiment_reviews.py` to the project folder.
 
-C. Review the `sentiment_analysis.py` file. Take particular note of the following:
+C. Review the `sentiment_reviews.py` file. Take particular note of the following:
   - The `keras` dependencies loaded at the top of the file
   - The `build_model()` method that both constructs the architecture of the network and fits it.
   - The last 20 lines, which correspond to the control flow of what the script does when executed.
