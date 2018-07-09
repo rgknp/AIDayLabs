@@ -10,7 +10,7 @@ This hands-on lab guides you with how to configure Azure Machine Learning to use
 
 ## Background
 
-Sentiment analysis is a well-known task in the realm of natural language processing (NLP), and it aims to determine the attitude of a speaker/writer. Frequently, artificial neural networks (and deep learning) are used to estimate such sentiment. In this lab, we will use this approach. In the [resources](resources) folder, there is a `sentiment_reviews.py` script that builds a neural network to predict sentiment from IMDB movie reviews. The script uses [keras](https://keras.io/) with [tensorflow](https://www.tensorflow.org/) as the backend. It is part
+Sentiment analysis is a well-known task in the realm of natural language processing (NLP), and it aims to determine the attitude of a speaker/writer. Frequently, artificial neural networks (and deep learning) are used to estimate such sentiment. In this lab, we will use this approach. In the [resources](https://github.com/Azure/LearnAI-Bootcamp/tree/master/lab03.5-execute_remote_gpu/resources) folder, there is a `sentiment_reviews.py` script that builds a neural network to predict sentiment from IMDB movie reviews. The script uses [keras](https://keras.io/) with [tensorflow](https://www.tensorflow.org/) as the backend. It is part
 of a larger [real-world example](https://docs.microsoft.com/en-us/azure/machine-learning/preview/scenario-sentiment-analysis-deep-learning).
 
 ## 1. Setup
