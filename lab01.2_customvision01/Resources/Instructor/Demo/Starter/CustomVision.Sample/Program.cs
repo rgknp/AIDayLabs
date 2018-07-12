@@ -73,11 +73,11 @@ namespace CustomVision.Sample
             // Images can be uploaded one at a time  
             foreach (var image in WriteOffImages)
             {
-                trainingApi.CreateImagesFromData(project.Id, image, new List< string> () { WriteOffTag.Id.ToString() });
+                trainingApi.CreateImagesFromData(project.Id, image, new List<string>() { WriteOffTag.Id.ToString() });
             }
 
             // Or uploaded in a single batch   
-            trainingApi.CreateImagesFromData(project.Id, DentImages, new List< Guid> () { DentTag.Id });
+            trainingApi.CreateImagesFromData(project.Id, DentImages, new List<Guid>() { DentTag.Id });
 
             // Now there are images with tags start training the project
             Console.WriteLine("\\tTraining");
@@ -124,53 +124,7 @@ namespace CustomVision.Sample
         }
 
 
-        private static string GetTrainingKey(string trainingKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    trainingKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Length != 32)
-                {
-                    Console.Write("Enter your training key: ");
-                    trainingKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return trainingKey;
-        }
 
 
-        private static string GetPredictionKey(string predictionKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    predictionKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(predictionKey) || predictionKey.Length != 32)
-                {
-                    Console.Write("Enter your prediction key: ");
-                    predictionKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return predictionKey;
-        }
-        private static void LoadImagesFromDisk()
-        {
-            // this loads the images to be uploaded from disk into memory
-            WriteOffImages = Directory.GetFiles(@"..\..\..\..\Images\writeoff").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            DentImages = Directory.GetFiles(@"..\..\..\..\Images\Dent").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\test\car1.jpg"));
-
-        }
     }
 }

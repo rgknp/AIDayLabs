@@ -2,16 +2,14 @@
 ==================================
 
 The goal of this tutorial is to explore a basic Windows application that uses
-the Custom Vision API to create a project, add tags to it, upload images,
-train the project, obtain the default prediction endpoint URL for the project,
-and use the endpoint to programmatically test an image. You can use this open
-source example as a template for building your own app for Windows using the
-Custom Vision API.  
+the Custom Vision API to create an object detection project, add tags to it, 
+upload images, train the project, obtain the default prediction endpoint URL 
+for the project, and use the endpoint to programmatically test an image. You 
+can use this open source example as a template for building your own app for 
+Windows using the Custom Vision API.  
 
 **Prerequisites**
 -----------------
-
- 
 
 ### Platform requirements
 
@@ -33,13 +31,13 @@ creating a new project at <https://customvision.ai> and then clicking on the
 
 In the Resources\Images folder are three folders:
 
-- Dent
-- writeoff
+- fork
+- scissors
 - test
 
-The Dent and writeoff folders contain images of these types of damages to vehicles
-that will be trained and tagged. The Test folder contains an image that will be used 
-to perform the test prediction.
+The fork and scissors folders contain images of these types of kitchen utensils from 
+different perspectives. The test folder contains an image that will be used to perform 
+the test prediction.
 
 
 **Lab: Creating a Custom Vision Application**
@@ -57,191 +55,221 @@ located:
 Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This code defines and calls two helper methods. The method called
-`GetTrainingKey` prepares the training key. The one called `LoadImagesFromDisk`
-loads two sets of images that this example uses to train the project, and one
-test image that the example loads to demonstrate the use of the default
-prediction endpoint. On opening the project the following code should be
-displayed from line 35:
-
- 
+The following (incomplete) code is shown. 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Microsoft.Cognitive.CustomVision;
 
-namespace CustomVision.Sample
+namespace ObjectDetection
 {
     class Program
     {
-        private static List<MemoryStream> WriteOffImages;
-
-        private static List<MemoryStream> DentImages;
-
-        private static MemoryStream testImage;
-
         static void Main(string[] args)
         {
-            // You can either add your training key here, pass it on the command line, or type it in when the program runs
-            string trainingKey = GetTrainingKey("<your key here>", args);
+            // Add your training & prediction key from the settings page of the portal
 
-            // Create the Api, passing in a credentials object that contains the training key
-            TrainingApiCredentials trainingCredentials = new TrainingApiCredentials(trainingKey);
-            TrainingApi trainingApi = new TrainingApi(trainingCredentials);
 
-            // Create a new project  
-            Console.WriteLine("Creating new project:");
-            var project = trainingApi.CreateProject("Car Assessment");
+            // Create the Api, passing in the training key
+            TrainingApi trainingApi = new TrainingApi() { ApiKey = trainingKey };
 
-            // Make two tags in the new project  
-            var WriteOffTag = trainingApi.CreateTag(project.Id, "WriteOff");
-            var DentTag = trainingApi.CreateTag(project.Id, "Dent");
+            // Find the object detection domain
+            
+            var objDetectionDomain = domains.FirstOrDefault(d => d.Type == "ObjectDetection");
 
-            // Add some images to the tags  
-            Console.WriteLine("\tUploading images");
-            LoadImagesFromDisk();
+            // Create a new project
+            Console._("Creating new project:");
+            var project = trainingApi._("Object Detection Project", null, objDetectionDomain.Id);
 
-            // Images can be uploaded one at a time  
-            foreach (var image in WriteOffImages)
+            // Make two tags in the new project
+            var forkTag = trainingApi.CreateTag(project.Id, "fork");
+            var scissorsTag = trainingApi.CreateTag(project.Id, "scissors");
+
+            Dictionary<string, double[]> fileToRegionMap = new Dictionary<string, double[]>()
             {
-                trainingApi.CreateImagesFromData(project.Id, image, new List< string> () { WriteOffTag.Id.ToString() });
-            }
+                // FileName, Left, Top, Width, Height
+                {"scissors_1", new double[] { 0.4007353, 0.194068655, 0.259803921, 0.6617647 } },
+                {"scissors_2", new double[] { 0.426470578, 0.185898721, 0.172794119, 0.5539216 } },
+                {"scissors_3", new double[] { 0.289215684, 0.259428144, 0.403186262, 0.421568632 } },
+                {"scissors_4", new double[] { 0.343137264, 0.105833367, 0.332107842, 0.8055556 } },
+                {"scissors_5", new double[] { 0.3125, 0.09766343, 0.435049027, 0.71405226 } },
+                {"scissors_6", new double[] { 0.379901975, 0.24308826, 0.32107842, 0.5718954 } },
+                {"scissors_7", new double[] { 0.341911763, 0.20714055, 0.3137255, 0.6356209 } },
+                {"scissors_8", new double[] { 0.231617644, 0.08459154, 0.504901946, 0.8480392 } },
+                {"scissors_9", new double[] { 0.170343131, 0.332957536, 0.767156839, 0.403594762 } },
+                {"scissors_10", new double[] { 0.204656869, 0.120539248, 0.5245098, 0.743464053 } },
+                {"scissors_11", new double[] { 0.05514706, 0.159754932, 0.799019635, 0.730392158 } },
+                {"scissors_12", new double[] { 0.265931368, 0.169558853, 0.5061275, 0.606209159 } },
+                {"scissors_13", new double[] { 0.241421565, 0.184264734, 0.448529422, 0.6830065 } },
+                {"scissors_14", new double[] { 0.05759804, 0.05027781, 0.75, 0.882352948 } },
+                {"scissors_15", new double[] { 0.191176474, 0.169558853, 0.6936275, 0.6748366 } },
+                {"scissors_16", new double[] { 0.1004902, 0.279036, 0.6911765, 0.477124184 } },
+                {"scissors_17", new double[] { 0.2720588, 0.131977156, 0.4987745, 0.6911765 } },
+                {"scissors_18", new double[] { 0.180147052, 0.112369314, 0.6262255, 0.6666667 } },
+                {"scissors_19", new double[] { 0.333333343, 0.0274019931, 0.443627447, 0.852941155 } },
+                {"scissors_20", new double[] { 0.158088237, 0.04047389, 0.6691176, 0.843137264 } },
+                {"fork_1", new double[] { 0.145833328, 0.3509314, 0.5894608, 0.238562092 } },
+                {"fork_2", new double[] { 0.294117659, 0.216944471, 0.534313738, 0.5980392 } },
+                {"fork_3", new double[] { 0.09191177, 0.0682516545, 0.757352948, 0.6143791 } },
+                {"fork_4", new double[] { 0.254901975, 0.185898721, 0.5232843, 0.594771266 } },
+                {"fork_5", new double[] { 0.2365196, 0.128709182, 0.5845588, 0.71405226 } },
+                {"fork_6", new double[] { 0.115196079, 0.133611143, 0.676470637, 0.6993464 } },
+                {"fork_7", new double[] { 0.164215669, 0.31008172, 0.767156839, 0.410130739 } },
+                {"fork_8", new double[] { 0.118872553, 0.318251669, 0.817401946, 0.225490168 } },
+                {"fork_9", new double[] { 0.18259804, 0.2136765, 0.6335784, 0.643790841 } },
+                {"fork_10", new double[] { 0.05269608, 0.282303959, 0.8088235, 0.452614367 } },
+                {"fork_11", new double[] { 0.05759804, 0.0894935, 0.9007353, 0.3251634 } },
+                {"fork_12", new double[] { 0.3345588, 0.07315363, 0.375, 0.9150327 } },
+                {"fork_13", new double[] { 0.269607842, 0.194068655, 0.4093137, 0.6732026 } },
+                {"fork_14", new double[] { 0.143382356, 0.218578458, 0.7977941, 0.295751631 } },
+                {"fork_15", new double[] { 0.19240196, 0.0633497, 0.5710784, 0.8398692 } },
+                {"fork_16", new double[] { 0.140931368, 0.480016381, 0.6838235, 0.240196079 } },
+                {"fork_17", new double[] { 0.305147052, 0.2512582, 0.4791667, 0.5408496 } },
+                {"fork_18", new double[] { 0.234068632, 0.445702642, 0.6127451, 0.344771236 } },
+                {"fork_19", new double[] { 0.219362751, 0.141781077, 0.5919118, 0.6683006 } },
+                {"fork_20", new double[] { 0.180147052, 0.239820287, 0.6887255, 0.235294119 } }
+            };
 
-            // Or uploaded in a single batch   
-            trainingApi.CreateImagesFromData(project.Id, DentImages, new List< Guid> () { DentTag.Id });
+            // Add all images for fork
+            var imagePath = Path.Combine("Images", "fork");
+            var imageFileEntries = new List<ImageFileCreateEntry>();
+            foreach (var fileName in Directory.EnumerateFiles(imagePath))
+            {
+                var region = fileToRegionMap[Path.GetFileNameWithoutExtension(fileName)];
+                imageFileEntries.Add(new ImageFileCreateEntry(fileName, File.ReadAllBytes(fileName), null, new List<Region>(new Region[] { new Region(forkTag.Id, region[0], region[1], region[2], region[3]) })));
+            }
+            trainingApi.CreateImagesFromFiles(project.Id, new ImageFileCreateBatch(imageFileEntries));
+
+            // Add all images for scissors
+            
 
             // Now there are images with tags start training the project
             Console.WriteLine("\tTraining");
             var iteration = trainingApi.TrainProject(project.Id);
 
-            // The returned iteration will be in progress, and can be queried periodically to see when it has completed  
+            // The returned iteration will be in progress, and can be queried periodically to see when it has completed
             while (iteration.Status == "Training")
             {
                 Thread.Sleep(1000);
 
-                // Re-query the iteration to get it's updated status  
+                // Re-query the iteration to get its updated status
                 iteration = trainingApi.GetIteration(project.Id, iteration.Id);
             }
 
-            // The iteration is now trained. Make it the default project endpoint  
+            // The iteration is now trained. Make it the default project endpoint
             iteration.IsDefault = true;
             trainingApi.UpdateIteration(project.Id, iteration.Id, iteration);
-            Console.WriteLine("Done!\\n");
+            Console.WriteLine("Done!\n");
 
-            // Now there is a trained endpoint, it can be used to make a prediction  
+            // Now there is a trained endpoint, it can be used to make a prediction
 
-            // Add your prediction key from the settings page of the portal 
-            // The prediction key is used in place of the training key when making predictions 
-            string predictionKey = GetPredictionKey("<your key here>", args);
+            // Create a prediction endpoint, passing in the obtained prediction key
+            PredictionEndpoint endpoint = new PredictionEndpoint() { ApiKey = predictionKey };
 
-            // Create a prediction endpoint, passing in a prediction credentials object that contains the obtained prediction key  
-            PredictionEndpointCredentials predictionEndpointCredentials = new PredictionEndpointCredentials(predictionKey);
-            PredictionEndpoint endpoint = new PredictionEndpoint(predictionEndpointCredentials);
-
-            // Make a prediction against the new project  
+            // Make a prediction against the new project
             Console.WriteLine("Making a prediction:");
-            var result = endpoint.PredictImage(project.Id, testImage);
-
-            // Loop over each prediction and write out the results  
-            foreach (var c in result.Predictions)
+            var imageFile = Path.Combine("Images", "test", "test_image.jpg");
+            using (var stream = File.OpenRead(imageFile))
             {
-                Console.WriteLine($"\t{c.Tag}: {c.Probability:P1}");
+                var result = endpoint.PredictImage(project.Id, File.OpenRead(imageFile));
+
+                // Loop over each prediction and write out the results
+                foreach (var c in result.Predictions)
+                {
+                    Console.WriteLine($"\t{c.TagName}: {c.Probability:P1} [ {c.BoundingBox.Left}, {c.BoundingBox.Top}, {c.BoundingBox.Width}, {c.BoundingBox.Height} ]");
+                }
             }
             Console.ReadKey();
-
-
-
-
         }
-
-
-
     }
 }
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  
 
-### Step 2: Add code to get and manage the training key
+### Step 2: Add references to the to the two Custom Vision nuget packages
 
-On Line 127, create a method `GetTrainingKey` with two parameters of `trainingKey` 
-with a data type of string, and a second parameter of args with the data type
-of string, using the value from the trainingkey variable.
-The code can include control of flow logic to either use the key if it already
-defined, or to prompt for the key should it be missing. Add the
-following code at the bottom of the cs file, underneath the } that is third from
-the bottom from the file.
+At the very top of the Program.cs file, add references to the two nuget packages:
+    Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training
+    Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction
+ 
+### Step 3: Add reference 
+
+Under the comment "// Add your training & prediction key from the settings page of the portal" 
+type in the following code to add the training and prediction key to enable access to the 
+Custom Vision services
  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        private static string GetTrainingKey(string trainingKey, string[] args)
-        {
-            if (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Equals("<your key here>"))
-            {
-                if (args.Length >= 1)
-                {
-                    trainingKey = args[0];
-                }
-
-                while (string.IsNullOrWhiteSpace(trainingKey) || trainingKey.Length != 32)
-                {
-                    Console.Write("Enter your training key: ");
-                    trainingKey = Console.ReadLine();
-                }
-                Console.WriteLine();
-            }
-
-            return trainingKey;
-        }
+            string trainingKey = "<<enter your training key here>>";
+            string predictionKey = "<<enter your prediction key here>>";
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-### Step 3: Add code to get and manage the prediction key
-
-On Line 147, create a method `GetPredictionKey` with two parameters of `predictionKey` 
-with a data type of string, and a second parameter of args with the data type
-of string, using the value from the predictionkey variable.
-The code can include control of flow logic to either use the key if it already
-defined, or to prompt for the key should it be missing. Create 
-code at the bottom of the cs file, underneath the code you have just created for step 2.
-
-`--NOTE THAT THE CODE IS MISSING BY DESIGN`
  
 
-### Step 4: Create code that will upload images from the local disk
+### Step 4: Create code that will enable the application to use the object detection domain 
 
-To upload files form disk, review and insert the following code after the code
-you have just inserted "return trainingKey; }"
+To set the application to make use of the objection domain, under the line "// Find the object detection domain"
+write code that will create a variable named domains using the GetDomains method of the trainingApi
+
+
+### Step 5: Create a project named Object Detection Project
+
+Under the line "// Create a new project", create a project named Object Detection project and display in the 
+application that a project is being created.
+
+Replace the _ with a method that will display a message in the application that a project is being created?
+In the second line below, what method will replace the _ to create the project named Object Detection Project?
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        private static void LoadImagesFromDisk()
-        {
-            // this loads the images to be uploaded from disk into memory
-            WriteOffImages = Directory.GetFiles(@"..\..\..\..\Images\writeoff").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            DentImages = Directory.GetFiles(@"..\..\..\..\Images\Dent").Select(f => new MemoryStream(File.ReadAllBytes(f))).ToList();
-            testImage = new MemoryStream(File.ReadAllBytes(@"..\..\..\..\Images\test\car1.jpg"));
-
-        }
+            Console._("Creating new project:");
+            var project = trainingApi._("Object Detection Project", null, objDetectionDomain.Id);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- 
+
+### Step 6: Create a project named Object Detection Project
+
+Under the lines:
+
+"// Make two tags in the new project
+ var forkTag = trainingApi.CreateTag(project.Id, "fork");"
+
+write code that create a variable named scissorsTag that creates a tag named scissors against the current project.
 
 
-### Step 4: Run the example
+### Step 7: Upload the scissor images and map them to the scissorsTag
 
-Build and run the solution. You will be required to input your training API key
-into the console app when running the solution so have this at the ready. The
-training and prediction of the images can take 2 minutes. The prediction results
+Under the line "// Add all images for scissors" add code that will upload the scissors image and assign the images
+to the tag of scissorsTag. Hint. Use the code under "// Add all images for fork" as a template for creating the code
+to upload the scissor images and map them to the scissorsTag
+
+### Step 8: Create a project named Object Detection Project
+
+Under the line "// Now there are images with tags start training the project", train the project and have the application
+display that the project is being trained.
+
+Replace the _ with a method that will display a message in the application that a project is being trained?
+In the second line below, what method will replace the _ to train the project?
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Console._("\tTraining");
+            var iteration = trainingApi._(project.Id);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Step 9: Run the example
+
+Build and run the solution. The training and prediction of the images can take 2 minutes. The prediction results
 appear on the console.
+
 
 Further Reading
 ---------------
 
-The source code for the Windows client library is available on
-[github](https://github.com/Microsoft/Cognitive-CustomVision-Windows/).
+The source code for this client application is available on
+[github](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/CustomVision).
 
 The client library includes multiple sample applications, and this tutorial is
 based on the `CustomVision.Sample` demo within that repository.
