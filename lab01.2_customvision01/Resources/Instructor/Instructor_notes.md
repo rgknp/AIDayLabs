@@ -17,6 +17,7 @@ We had two people presenting this, and it worked really nicely to have a back-an
         
     *	Agenda and logistics
         *	Create a Custom Vision project
+        *   Classification and Object Detection
         *	Upload and Tag images into the Custom Vision project  
         *	Train a Custom Vision model
         *	Understand iterations and how to set a default iteration
@@ -28,7 +29,32 @@ We had two people presenting this, and it worked really nicely to have a back-an
 
     *	Materials
         *	Show them where the materials are
-        *   Stress how we want people to work together, use your neighbor first, etc  
+        *   Stress how we want people to work together, use your neighbor first, etc 
+
+## Demo information 
+
+## Demo 1.2 Tips [~15 minutes]
+
+    The files for the demo are located in the Resources\Instructor\Demo folder.
+        *   You can run the solution file for the complete solutionfrom the Resources\Instructor\Demo\Solution folder.
+        *   A partial solution is available that enables you to code while teaching in the Resources\Instructor\Demo\Starter folder.
+
+    The Demo classifies cars that have been in an auto accident. There are two classifications:
+        *   Dents - for cars that have a dent
+        *   Write-off - for cars that are written off.
+
+    Use case for this demo is the automation of handling car insurance claims. As the class if they can see any bias in the images used to train the solution.
+
+    Answer. Cars that are classified with dents have images that have close ups of the dents on a car. Write-offs shows images with a full picture of a car. 
+    Ask the class how they would address such bias?
+
+## Demo 1.3 Tips [~15 minutes]
+
+    Use the Solution folder of the repository and perform a walkthrough of the code that they will be creating as part of this lab
+
+## Demo 1.4 Tips [0 minutes]
+
+    There is no demo for this section
 
 ## Lab information
 
@@ -45,16 +71,18 @@ We had two people presenting this, and it worked really nicely to have a back-an
     *	Train the project 
     *	Make a prediction
 
-    The README.md file for this lab contains the code answers by design. Encourage the students to explore and understand the code before inserting it
-    A solution file has been provided for those students who learn better by reading code.
+    The README.md file for this lab contains the partial code answers by design. Encourage the students to explore and understand the code and work in groups to answer the questions. A solution file has been provided for those students who learn better by reading code.
 
 ## Lab 1.3 Tips [~15 minutes]
 * The purpose of this lab is to focus on the following programatic elements of the .Net solution
-    *	retrieving and using a training key
-    *	Upload images from a local disk into memory
+    *	Creating a new project
+    *   Instantiating the Object Detection Domain
+    *	Define two tags in the new project
+    *	Add some images to the tags
+    *	Train the project 
+    *	Make a prediction
 
-    The README.md file for this lab contains the code answers by design. Encourage the students to explore and understand the code before inserting it
-    A solution file has been provided for those students who learn better by reading code.
+    The README.md file for this lab contains the partial code answers by design. Encourage the students to explore and understand the code and work in groups to answer the questions. A solution file has been provided for those students who learn better by reading code.
 
 ## Lab 1.4 Tips [~45 minutes]
 ## This lab is a challenge exercise

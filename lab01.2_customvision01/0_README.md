@@ -11,13 +11,10 @@ Custom Vision API.  
 **Prerequisites**
 -----------------
 
- 
-
 ### Platform requirements
 
 This example has been tested using the .NET Framework using [Visual Studio 2017,
 Community Edition](https://www.visualstudio.com/downloads/)
-
 
 
 ### The Training API key
@@ -158,12 +155,13 @@ namespace CustomVision.Sample
 To create a new Custom Vision Service project, add the following code in the
 body of the `Main()` method after the call to `new TrainingApi().`
 
- 
+What method should you replace the _ with to create a new Custom Vision Service project?
 
+ 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Create a new project
 Console.WriteLine("Creating new project:");
-var project = trainingApi.CreateProject("My New Project");
+var project = trainingApi._("My New Project");
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  
@@ -171,12 +169,14 @@ var project = trainingApi.CreateProject("My New Project");
 ### Step 3: Add tags to your project
 
 To add tags to your project, insert the following code after the call to
-`CreateProject("My New Project");`.
+`("My New Project");`.
+
+What method should you replace the _ with to create a tag for Japanese Cherry?
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Make two tags in the new project
 var hemlockTag = trainingApi.CreateTag(project.Id, "Hemlock");
-var japaneseCherryTag = trainingApi.CreateTag(project.Id, "Japanese Cherry");
+var japaneseCherryTag = trainingApi._(project.Id, "Japanese Cherry");
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  
@@ -184,7 +184,7 @@ var japaneseCherryTag = trainingApi.CreateTag(project.Id, "Japanese Cherry");
 ### Step 4: Upload images to the project
 
 To add the images we have in memory to the project, insert the following code
-after the call to `CreateTag(project.Id, "Japanese Cherry")` method.
+after the call to `(project.Id, "Japanese Cherry")` method.
 
  
 
@@ -212,12 +212,14 @@ the following code after the end of code that you added in the prior step. This
 creates the first iteration in the project. We can then mark this iteration as
 the default iteration.
 
+What method should you replace the _ with to train the project? 
+
  
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Now there are images with tags start training the project
 Console.WriteLine("\tTraining");
-var iteration = trainingApi.TrainProject(project.Id);
+var iteration = trainingApi._(project.Id);
 
 // The returned iteration will be in progress, and can be queried periodically to see when it has completed
 while (iteration.Status == "Training")
