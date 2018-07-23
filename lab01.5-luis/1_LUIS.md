@@ -104,17 +104,20 @@ When choosing utterances, it can be helpful to use a combination of questions, c
 
 We are now ready to train our model.  Click "Train" in the top right bar.  This builds a model to do utterance --> intent mapping with the training data you've provided. Training is not always immediate. Sometimes, it gets queued and can take several minutes.
 
-Then click on "Publish" in the top bar.  You have several options when you publish your app, including enabling [including all predicted intent scores or Bing spell checker](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp). If you have not already done so, select the endpoint key that you set up earlier, or follow the link to add a key from your Azure account.  You can leave the endpoint slot as "Production".  Then click "Publish".  
+Then click on "Publish" in the top bar.  You have several options when you publish your app, including enabling [including all predicted intent scores, Bing spell checker, speech priming, and sentiment analysis](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp). If you have not already done so, select the endpoint key that you set up earlier, or follow the link to add a key from your Azure account 
+(for testing and learning purposes, you can also just use the "Starter_Key"
+). You can leave the endpoint slot as "Production".  Then click "Publish".  
 
 
 
-![Publish LUIS App](./resources/assets/LuisPublish.png) 
+![Publish LUIS App](./resources/assets/LuisPublish.png)  
+![AddKey](./resources/assets/LuisPublish2.png)  
 
 Publishing creates an endpoint to call the LUIS model.  The URL will be displayed, which will be explained in a later lab.
 
-Click on "Test" in the top right bar. Try typing a few utterances and see the intents returned. Familiarize yourself with [Interactive Testing](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Train-Test#interactive-testing) and [Relabeling Utterances/Retraining](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Train-Test#relabel-utterances-and-retrain) as you may want to do this now or in a future lab. 
+Click on "Test" in the top right bar. Try typing a few utterances and see the intents returned. Familiarize yourself with [interactive testing](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Train-Test#interactive-testing) and [reviewing endpoint utterances](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/luis-how-to-review-endoint-utt) as you may want to do this now or in a future lab. 
 
-One quick example is shown below. I have noticed that my model incorrectly assigned "send me a swimming photo" as SharePic, when it should be SearchPic. I reassigned the intent.
+One quick example is shown below. I have noticed that my model incorrectly assigned "send me a swimming photo" as SharePic, when it should be SearchPics. I reassigned the intent.
 
 
 ![Test LUIS](./resources/assets/ReassignIntent.png) 
@@ -128,6 +131,7 @@ You can also [test your published endpoint in a browser](https://docs.microsoft.
 
 
 
-If you still have time, spend time exploring the www.luis.ai site. Select "Prebuilt domains" and see [what is already available for you](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-domains). You can also review some of the [other features](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-feature), and check out the [BotBuilder-tools](https://github.com/Microsoft/botbuilder-tools) for creating LUIS models, managing LUIS models, simulating conversations, and more. Later, you may also be interested in [another course that includes how to design LUIS schema](https://aka.ms/daaia).
+If you still have time, spend time exploring the www.luis.ai site. Select "Prebuilt domains" and see [what is already available for you](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-domains). You can also review some of the [other features](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-feature) and [patterns](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-patterns)
+, and check out the [BotBuilder-tools](https://github.com/Microsoft/botbuilder-tools) for creating LUIS models, managing LUIS models, simulating conversations, and more. Later, you may also be interested in [another course that includes how to design LUIS schema](https://aka.ms/daaia).
 
 Back to [README](./0_README.md)
