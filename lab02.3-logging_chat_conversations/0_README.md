@@ -67,7 +67,7 @@ Over the course of this lab, we will collect various keys. It is recommended tha
 
 ## Navigating the Labs
 
-This workshop has been broken down into five sections:
+This workshop has been broken down into three sections:
 - [1_File](./1_File.md): After using the Emulator to see activity in our published bot, we'll connect PictureBot to file storage and examine the contents.  
 - [2_Azure](./2_Azure.md): Next, we'll set up our bot to use an Azure Storage Account to log the list of utterances that users are sending to our bot.  
 - [3_Cosmos](./3_Cosmos.md): Finally, we'll configure logging so we are able to get a user's message and the reply together, and we'll set up storing that data in Cosmos DB using Middleware.  
