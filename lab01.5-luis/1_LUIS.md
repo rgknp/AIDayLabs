@@ -21,9 +21,9 @@ Take some time to review the links referenced to above.
 
 ### Lab 1.1: Creating the LUIS service in the portal
 
-In the Portal, hit **Create a resource** and then enter **LUIS** in the search box and choose **Language Understanding Intelligent Service**:
+In the Portal, hit **Create a resource** and then enter **LUIS** in the search box and choose **Language Understanding**:
 
-This will lead you to fill out a few details for the API endpoint you'll be creating, choosing the API you're interested in and where you'd like your endpoint to reside, as well as what pricing plan you'd like. Put it in a location that is close to you and available. The free tier is sufficient for this lab. Since LUIS stores images internally at Microsoft (in a secure fashion), to help improve future Cognitive Services offerings, you'll need to check the box to confirm you're ok with this.
+This will lead you to fill out a few details for the API endpoint you'll be creating, choosing the API you're interested in and where you'd like your endpoint to reside, as well as what pricing plan you'd like. Put it in a location that is close to you and available. The free tier is sufficient for this lab.  
 
 
 Once you have created your new API subscription, you can grab the key from the appropriate section of the blade and add it to your list of keys.
@@ -96,11 +96,12 @@ So your utterances may become something like this when facets are labeled:
 ![Add Facet Entity](./resources/assets/SearchPicsIntentAfter.png) 
  
 
-Finally, click "Intents" in the left sidebar and add two more intents:
+Next, click "Intents" in the left sidebar and add two more intents:
 + Name one intent **"SharePic"**.  This might be identified by utterances like "Share this pic", "Can you tweet that?", or "post to Twitter".  
 + Create another intent named **"OrderPic"**.  This could be communicated with utterances like "Print this picture", "I would like to order prints", "Can I get an 8x10 of that one?", and "Order wallets".  
 When choosing utterances, it can be helpful to use a combination of questions, commands, and "I would like to..." formats.  
 
+Finally, you need to add some sample utterances to the "None" intent. This helps LUIS label when things are outside the scope of your application. Add things like "I'm hungry for pizza", "Search videos", etc. You should have about 10-15% of your app's utterances within the None intent.  
 
 We are now ready to train our model.  Click "Train" in the top right bar.  This builds a model to do utterance --> intent mapping with the training data you've provided. Training is not always immediate. Sometimes, it gets queued and can take several minutes.
 
@@ -113,7 +114,7 @@ Then click on "Publish" in the top bar.  You have several options when you publi
 ![Publish LUIS App](./resources/assets/LuisPublish.png)  
 ![AddKey](./resources/assets/LuisPublish2.png)  
 
-Publishing creates an endpoint to call the LUIS model.  The URL will be displayed, which will be explained in a later lab.
+Publishing creates an endpoint to call the LUIS model.  The URL will be displayed, which will be explained in a later lab. For now, you can copy the Endpoint URL and add it to your list of keys.  
 
 Click on "Test" in the top right bar. Try typing a few utterances and see the intents returned. Familiarize yourself with [interactive testing](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Train-Test#interactive-testing) and [reviewing endpoint utterances](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/luis-how-to-review-endoint-utt) as you may want to do this now or in a future lab. 
 
@@ -122,12 +123,12 @@ One quick example is shown below. I have noticed that my model incorrectly assig
 
 ![Test LUIS](./resources/assets/ReassignIntent.png) 
 
-Now I need to retrain my app by selecting the Train button. I then tested the same utterance and compared the results between my recently trained and previously published model. 
+Now I need to retrain my app by selecting the Train button. I then tested the same utterance and compared the results between my recently trained and previously published model. Remember, you'll have to republish your model to see updates in the application that uses the model.
 
 ![Reassign Intent](./resources/assets/ReassignIntentAfter.png) 
 
 
-You can also [test your published endpoint in a browser](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp#test-your-published-endpoint-in-a-browser). Copy the URL, then replace the `{YOUR-KEY-HERE}` with one of the keys listed in the Key String column for the resource you want to use. To open this URL in your browser, set the URL parameter `&q` to your test query. For example, append `&q=Find pictures of dogs` to your URL, and then press Enter. The browser displays the JSON response of your HTTP endpoint.
+You can also [test your published endpoint in a browser](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/PublishApp#test-your-published-endpoint-in-a-browser). Copy the Endpoint URL. To open this URL in your browser, set the URL parameter `&q` to your test query. For example, append `&q=Find pictures of dogs` to your URL, and then press Enter. The browser displays the JSON response of your HTTP endpoint.
 
 
 
