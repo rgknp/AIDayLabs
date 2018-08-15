@@ -13,7 +13,7 @@ This workshop demonstrates how you can perform logging using Microsoft Bot Frame
 - Log utterances to either file storage or Azure storage.  
 - Use middleware to be able to log conversations to Cosmos DB.  
 
-> Note: for these labs, we will be using the v4 of the Microsoft Bot Framework SDK. If you would like to perform similar labs with the v3 SDK, refer [here](https://azure.github.io/learnAnalytics-AdvancedFeaturesforMicrosoftBotFramework/).
+> Note: for these labs, we will be using the v4 of the Microsoft Bot Framework SDK. If you would like to perform similar labs with the v3 SDK, refer [here](./resources/SDK_V3_Labs).
 
 ## Prerequisites  
 

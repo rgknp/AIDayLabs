@@ -10,6 +10,8 @@ This workshop demonstrates how you can perform testing using the Microsoft Bot F
 - Perform functional testing (using Direct Line)  
 - Be aware of other tools for bot development/testing
 
+> Note: for these labs, we will be using the v4 of the Microsoft Bot Framework SDK. If you would like to perform similar labs with the v3 SDK, refer [here](./resources/sdk_v3_labs).
+
 ## Prerequisites
 
 #### Lab02.2-building_bots  
