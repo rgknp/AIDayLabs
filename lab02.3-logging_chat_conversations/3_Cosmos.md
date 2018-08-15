@@ -10,7 +10,7 @@ Specifically, we'll set up a Cosmos DB instance, and create middleware to store 
 ### Lab 3.1: Setup  
 There are a few things we need to configure before we connect our PictureBot to Cosmos DB:  
 
-- Follow [Step 1 of this QuickStart](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-get-started) to create an Azure Cosmos DB account.
+- Follow [Step 1 of this QuickStart](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-get-started) to create an Azure Cosmos DB account. You can alternatively use your Cosmos DB account from lab01.1.
     - Be sure to store the URI and Key, as you will need it shortly.
 - Within our PictureBot solution, there is a NuGet package we need to work with our Cosmos DB accounts. Add the `Microsoft.Azure.DocumentDb.Core` package. 
 
@@ -251,7 +251,7 @@ Navigate to the Startup class and add `using PictureBot.Middleware;` to your lis
 
 Now that we've created our middleware, we have to call it from the `ConfigureServices` method within our Startup class (with the rest of our middleware).  
 
-Since middleware is executed in the order it apepars within `ConfigureServices`, we will add it after our middleware for `UserState` and `ConversationState`, but before our `RegExpRecognizerMiddleware`. Do you know why?  
+Since middleware is executed in the order it appears within `ConfigureServices`, we will add it after our middleware for `UserState` and `ConversationState`, but before our `RegExpRecognizerMiddleware`. Do you know why?  
 
 Hint: it has something to do with if a user requests the history.  
 
@@ -259,7 +259,7 @@ Add the one line required to add the CosmosMiddleware to the pipeline.
 
 **If you get stuck, you can find the solution code under resources > code.**  
 
-Run the bot and have several conversations with it. Look in the Cosmos DB Data Explorer (within your Cosmos DB service in the Azure portal), and you should see your data in individual records. When examining one of the records, notice that the first three items are the three values of our log data, named as the string we specified at the beginning of this lab for their respective `JsonProperty`.  
+Run the bot and have several conversations with it. Look in your Cosmos DB account (which should be accessible using Azure Storage Explorer), and you should see your data in individual records. You may have to refresh the account by right-clicking on the Cosmos DB accounts and selecting "Refresh". When examining one of the records, notice that the first three items are the three values of our log data, named as the string we specified at the beginning of this lab for their respective `JsonProperty`.  
 
 This lab was modified from suggestions [from the documentation, where they walk through a different but similar example and best practices](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-cosmos-middleware?view=azure-bot-service-4.0&tabs=cs).  
 

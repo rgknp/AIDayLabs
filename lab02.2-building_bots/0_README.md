@@ -65,7 +65,7 @@ There are several directories in the [resources](./resources) folder:
 	- **FinishedPictureBot-Part3**: Here there is the finished PictureBot.sln that includes additions for Regex, LUIS and Azure Search. If you fall behind or get stuck, you can refer to this.
 	- **FinishedPictureBot-Part4**: Here is the finished PictureBot.sln including the necessary appsettings.json file to configure your app for publishing. If you fall behind or get stuck, you can refer to this.
 
-> You need Visual Studio to run these labs, but if you have already deployed a Windows Data Science Virtual Machine for one of the workshops, you could use that.
+> You need Visual Studio to run these labs, but if you have already deployed a Windows Data Science Virtual Machine for one of the labs, we recommend using that.
 
 ## Collecting the Keys
 

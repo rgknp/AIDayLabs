@@ -5,13 +5,13 @@ Estimated Time: 10-15 minutes
 
 With Microsoft Bot Framework, to configure the bot to be available to a particular channel, you will need to host the Bot service on a public URL endpoint. The channel will not be able to access your bot service if it is on a local server port hidden behind a NAT or firewall.  
 
-When designing/building/testing your code, you do not always want to have to keep redeploying. This will result in additional hosting costs. This is where ngrok can really help in speeding up the development/testing phases of bots. The goal of this lab is to use ngrok to expose your bot to public internet and use the public endpoints to test your bots in the emulator.
+When designing/building/testing your code, you do not always want to have to keep redeploying. This will result in additional hosting costs. This is where ngrok can really help in speeding up the development/testing phases of bots. The goal of this lab is to use ngrok to expose your bot to the public internet and use the public endpoints to test your bots in the emulator.
 
 ### Lab 1.1: Setup  
 
 There are a few things we need to configure before we get started:
 
-1. Download ngrok from this website: https://ngrok.com/download. Click "Save as" when you download it so you can control where it gets saved (pick your Documents or Downloads folder). Next, navigate to the install location and unzip the file (right click and select "Extract all...") and extract it one level up from the downloaded file (e.g. to  C:\Users\antho\Downloads\).  
+1. Download ngrok from this website: https://ngrok.com/download. Click "Save as" when you download it so you can control where it gets saved (pick your Documents or Downloads folder, it should default to Downloads). Next, navigate to the install location and unzip the file (right click and select "Extract all...") and extract it one level up from the downloaded file (e.g. to  C:\Users\antho\Downloads\).  
 2. Open the Bot Framework Emulator and hit the settings button (gear icon in bottom left corner). In the "Path to ngrok" box, hit "Browse," find "ngrok.exe", click "Select ngrok", and then click "Save".
 
 ### Lab 1.2: Forwarding  

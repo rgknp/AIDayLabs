@@ -17,7 +17,7 @@ The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\
 
 #### Download the Bot Builder Template  
 
-Download the [Bot Builder SDK v4 Template for C# here](https://marketplace.visualstudio.com/items?itemName=BotBuilder.botbuilderv4) and click "Save as" to save it to your Visual Studio ItemTemplates folder  for Visual C#. This is typically located in `C:\Users\`_your-username_`\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C#`. Navigate to the folder location and double-click on the install and click "Install" to add the template to your Visual Studio templates.
+Download the [Bot Builder SDK v4 Template for C# here](https://marketplace.visualstudio.com/items?itemName=BotBuilder.botbuilderv4) and click "Save as" to save it to your Visual Studio ItemTemplates folder  for Visual C#. This is typically located in `C:\Users\`_your-username_`\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C#`. Navigate to the folder location and double-click on the install and click "Install" to add the template to your Visual Studio templates. Depending on your browser, when you download the template, you can double-click on it and install it directly to Visual Studio Community 2017; that is fine.
 
 ### Lab 1.2: Creating a simple bot and running it
 
@@ -34,7 +34,7 @@ Right-click on the solution in Solution Explorer and select "Manage NuGet Packag
 * Microsoft.AspNetCore.All
 * Microsoft.Bot.Builder.Integration.AspNet.Core
 * Microsoft.Bot.Builder.Core
-* Microsoft.Bot.Dialogs  
+* Microsoft.Bot.Builder.Dialogs  
 * Microsoft.Bot.Builder.Core.Extensions
 * Microsoft.Bot.Builder.AI.LUIS  
 * Microsoft.Azure.Search  

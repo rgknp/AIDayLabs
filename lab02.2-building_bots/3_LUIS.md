@@ -16,7 +16,7 @@ Use the app ID, subscription ID, and base URI for your LUIS model. The base URI 
 
 You can find your base URL by logging into www.luis.ai, going to the **Publish** tab, and looking at the **Endpoint** column under **Resources and Keys**. The base URL is the portion of the **Endpoint URL** before the subscription ID and other parameters.  
 
-**Hint**: The LUIS App ID will have hyphens in it, and the LUIS key will not.  
+**Hint**: The LUIS App ID will have hyphens in it, and the LUIS subscription key will not.  
 
 ### Lab 3.2: Adding LUIS to RootDialog
 
@@ -154,7 +154,7 @@ If you have extra time, see if there are things LUIS isn't picking up on that yo
 > Fun Aside: Reviewing the endpoint utterances can be extremely powerful.  LUIS makes smart decisions about which utterances to surface.  It chooses the ones that will help it improve the most to have manually labeled by a human-in-the-loop.  For example, if the LUIS model predicted that a given utterance mapped to Intent1 with 47% confidence and predicted that it mapped to Intent2 with 48% confidence, that is a strong candidate to surface to a human to manually map, since the model is very close between two intents.  
 
 
-**Extra credit (to complete later):** Create and configure a "web.config" file to store your search service information. Next, change the code in RootDialog.cs and SearchDialog.cs to call the settings in web.config, so you don't have to enter them twice.
+**Extra credit (to complete later):** Create and configure a "web.config" or "appsettings.json" file to store your search service information. Next, change the code in RootDialog.cs and SearchDialog.cs to call the settings in web.config, so you don't have to enter them twice.
 
 **Extra credit (to complete later)**: Create a process for ordering prints with the bot using dialogs, responses, and models.  Your bot will need to collect the following information: Photo size (8x10, 5x7, wallet, etc.), number of prints, glossy or matte finish, user's phone number, and user's email. The bot will then want to send you a confirmation before submitting the request.
 

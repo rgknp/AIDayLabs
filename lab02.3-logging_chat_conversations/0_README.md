@@ -21,12 +21,12 @@ This workshop demonstrates how you can perform logging using Microsoft Bot Frame
 This lab starts from the assumption that you have built and published the bot from `lab02.2-building_bots`. It is recommended that you do that lab in order to be successful in the ones that follow. If you have not, reading carefully through all the exercises and looking at some of the code or using it in your own applications may be sufficient, depending on your needs.  
 
 #### Have access to Azure  
-You will need to have access to portal and be able to create resources on Azure. We will not be providing Azure passes for this workshop.  
+You will need to have access to portal and be able to create resources on Azure.   
 
 ## Introduction
 
 ### Looking back  
-In the previous labs, we build an end-to-end scenario that allows you to pull in your own pictures, use Cognitive Services to find objects and people in the images, figure out how those people are feeling, and store all of that data into a NoSQL Store (CosmosDB). Then we used that NoSQL Store to populate an Azure Search index, and then build a Bot Framework bot using LUIS to allow easy, targeted querying.
+In the previous labs, we built an end-to-end scenario that allows you to pull in your own pictures, use Cognitive Services to find objects and people in the images, figure out how those people are feeling, and store all of that data into a NoSQL Store (CosmosDB). Then we used that NoSQL Store to populate an Azure Search index, and then build a Bot Framework bot using LUIS to allow easy, targeted querying.
 
 ### What next?
 

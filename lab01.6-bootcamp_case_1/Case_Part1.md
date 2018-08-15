@@ -16,7 +16,7 @@ Routes calls from Skype to the bot
 Hosts the bot application, which manages logic and API calls
 * [Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/)  
 Stores bot state and event logs
-* [Bing Speech Service](https://docs.microsoft.com/en-us/azure/cognitive-services/speech/home)    
+* [Speech Service](https://docs.microsoft.com/en-us/azure/cognitive-services/speech/home)    
 Processes speech-to-text
 * [LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/Home)  (Language Understanding Intelligent Service)  
 Extracts intent and entities from text
