@@ -51,7 +51,7 @@ Please note: This is a rough agenda, and the schedule is subject to change pendi
 - Day 2: Bots
   - 9-10: [Lab 2.1: Developing Intelligent Applications with Azure Search][lab-azsearch-301]
   - 10-10:30: Introduction and Context for Bots
-  - 10:30-12: [Lab 2.2: Bulding Intelligent Bots][lab-intelbot-301]
+  - 10:30-12: [Lab 2.2: Building Intelligent Bots][lab-intelbot-301]
   - 12-1: Lunch
   - 1-2:  [Lab 2.3: Log Chat Conversations in your Bot][lab-intelbot-311]
   - 2-3: [Lab 2.4: Testing your Bot][lab-intelbot-321]
