@@ -11,7 +11,7 @@ We will be developing a bot using the latest .NET SDK (v4).  To get started, we'
 
 #### Download the Bot Framework Emulator  
 
-You can download the v4 Preview Bot Framework Emulator for testing your bot locally. The instructions for the rest of the labs will assume you've downloaded the v4 Emulator (as opposed to the v3 Emulator). Download the emulator by going to [this page](https://github.com/Microsoft/BotFramework-Emulator/releases) and selecting the most recent file ending in ".exe".  
+You can download the v4 Preview Bot Framework Emulator for testing your bot locally. The instructions for the rest of the labs will assume you've downloaded the v4 Emulator (as opposed to the v3 Emulator). Download the emulator by going to [this page](https://github.com/Microsoft/BotFramework-Emulator/releases) and download the most recent version of the emulator (select the ".exe" file, if you are using windows).  
 
 The emulator installs to `c:\Users\`_your-username_`\AppData\Local\botframework\app-4.0.15\botframework-emulator.exe` or to your Downloads folder, depending on browser.  
 
@@ -21,7 +21,7 @@ Download the [Bot Builder SDK v4 Template for C# here](https://marketplace.visua
 
 ### Lab 1.2: Creating a simple bot and running it
 
-Open Visual Studio, and create a new project (select **File > New > Project**) and title it "PictureBot".  
+Open Visual Studio, and create a new project (select **File > New > Project**) and title it "PictureBot".  Make sure to select the "Bot Builder Echo Bot" template and extension.
 
 ![New Project](./resources/assets/NewEchoBot.png)  
 
@@ -179,11 +179,11 @@ Browse around and examine the sample bot code. In particular, note:
 There are many different methods and preferences for developing bots. The SDK allows you to organize your code in whatever way you want. In these labs, we'll organize our conversations into different dialogs, and we'll explore a [MVVM style](https://msdn.microsoft.com/en-us/library/hh848246.aspx) of organizing code around conversations.
 
 This PictureBot will be organized in the following way:
-* **Models** - the objects to be modified
 * **Dialogs** - the business logic for editing the models
 * **Responses** - classes which define the outputs to the users  
+* **Models** - the objects to be modified
 
-Next, create a folder for each piece in your PictureBot project (create three folders: "Models", "Dialogs", "Responses").  
+Next, create a folder for each piece in your PictureBot project (create three folders: "Dialogs", "Responses", "Models").  
 
 #### Dialogs  
 
@@ -407,6 +407,7 @@ Note here a whole task is missing. Fill in as you see fit, but make sure the new
 Due to time limitations, we will not be walking through creating all the models. They are straightforward, and we recommend taking some time to review the code within after you've added them. Right-click on the "Models" folder and select **Add>Existing Item**. Navigate to "lab02.2-building_bots/resources/code/Models", select all three files, and select "Add."  
 
 At this point, your Solution Explorer should look similar to the following image:
+
 ![Solution Folder view for Bot](./resources/assets/solutionExplorer.png) 
 
 Are you missing anything? Now's a good time to check.
