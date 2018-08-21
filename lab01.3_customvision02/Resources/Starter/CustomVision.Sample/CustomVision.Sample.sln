@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27128.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectDetection", "..\..\..\..\..\cognitive-services-dotnet-sdk-samples\CustomVision\ObjectDetection\ObjectDetection.csproj", "{537E24A9-B6CC-4A8E-A597-8D03E994246B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectDetection", "ObjectDetection\ObjectDetection.csproj", "{4E1521CB-C961-4C8D-8548-DB7596E395F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{537E24A9-B6CC-4A8E-A597-8D03E994246B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{537E24A9-B6CC-4A8E-A597-8D03E994246B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{537E24A9-B6CC-4A8E-A597-8D03E994246B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{537E24A9-B6CC-4A8E-A597-8D03E994246B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E1521CB-C961-4C8D-8548-DB7596E395F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E1521CB-C961-4C8D-8548-DB7596E395F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E1521CB-C961-4C8D-8548-DB7596E395F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E1521CB-C961-4C8D-8548-DB7596E395F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A52A27FE-5ED5-4603-A73F-F4AAE1E71CAA}
+		SolutionGuid = {6C53920B-C887-4194-8D31-9C1D8DA32651}
 	EndGlobalSection
 EndGlobal
