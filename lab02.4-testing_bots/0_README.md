@@ -6,7 +6,7 @@ This hands-on lab guides you through some of the basics of testing bots.
 
 This workshop demonstrates how you can perform testing using the Microsoft Bot Framework. After completing these labs, you should be able to:  
 
-- Test your bots remotely using [ngrok](https://ngrok.com/)
+- Host your Bot service at a public URL while running it on a server that is behind a firewall [ngrok](https://ngrok.com/)
 - Perform functional testing (using Direct Line)  
 - Be aware of other tools for bot development/testing
 
