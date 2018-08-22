@@ -1,6 +1,6 @@
 # Developing Intelligent Applications with Azure Search
 
-This hands-on lab guides you through creating an Azure Search service that will be used to create an intelligent bot (that you will create in later labs) that returns images a user searches for. 
+This hands-on lab guides you through creating an Azure Search service that will be used to create an intelligent bot (that you will create in later labs) that returns images a user searches for. You could of course also use the [Bing Web Search API](https://azure.microsoft.com/en-us/services/cognitive-services/bing-web-search-api/), but that way you would only get results from publicly available websites. With Azure search, you can instead create a private search engine.
 
 
 ## Objectives
@@ -28,7 +28,7 @@ In `lab01.1-computer_vision`, we built a simple C# application that allows you t
 
 Once we had this data, we processed it and stored all the information needed in [CosmosDB](https://azure.microsoft.com/en-us/services/documentdb/), our [NoSQL](https://en.wikipedia.org/wiki/NoSQL) [PaaS](https://azure.microsoft.com/en-us/overview/what-is-paas/) offering.
 
-Now that we have it in CosmosDB, we'll build an [Azure Search](https://azure.microsoft.com/en-us/services/search/) Index on top of it (Azure Search is our PaaS offering for faceted, fault-tolerant search - think Elastic Search without the management overhead). We'll show you how to query your data, and then build a [Bot Framework](https://dev.botframework.com/) bot to query it. Finally, we'll extend this bot with [LUIS](https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis) to automatically derive intent from your queries and use those to direct your searches intelligently. 
+Now that we have it in CosmosDB, we'll build an [Azure Search](https://azure.microsoft.com/en-us/services/search/) Index on top of it (Azure Search is our PaaS offering for [faceted](https://en.wikipedia.org/wiki/Faceted_search), fault-tolerant search - think [Elastic Search](https://www.elastic.co/products/elasticsearch) without the management overhead). We'll show you how to query your data, and then build a [Bot Framework](https://dev.botframework.com/) bot to query it. Finally, we'll extend this bot with [LUIS](https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis) to automatically derive intent from your queries and use those to direct your searches intelligently. 
 
 > Note: In this lab, we will only be creating the Azure Search service that you will use in a future lab to build a more intelligent bot.
 
