@@ -12,7 +12,7 @@ Open "Startup.cs" and find where you added middleware to use the RegEx recognize
                 middleware.Add(new LuisRecognizerMiddleware(
                     new LuisModel("luisAppId", "subscriptionId", new Uri("luisModelBaseUrl"))));
 ```
-Use the app ID, subscription ID, and base URI for your LUIS model. The base URI will be "https://region.api.cognitive.microsoft.com/luis/v2.0/apps/", where region is the region associated with the key you are using. Some examples of regions are, `westus`, `westcentralus`, `eastus2`, and `southeastasia`.  
+Use the app ID, subscription ID, and base URI for your LUIS model. The base URI will be "https://region.api.cognitive.microsoft.com/luis/v2.0/apps/" (do include the final forward slash, and URL protocol specification), where region is the region associated with the key you are using. Some examples of regions are, `westus`, `westcentralus`, `eastus2`, and `southeastasia`.  
 
 You can find your base URL by logging into www.luis.ai, going to the **Publish** tab, and looking at the **Endpoint** column under **Resources and Keys**. The base URL is the portion of the **Endpoint URL** before the subscription ID and other parameters.  
 
