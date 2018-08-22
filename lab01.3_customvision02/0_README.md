@@ -6,7 +6,15 @@ the Custom Vision API to create an object detection project, add tags to it,
 upload images, train the project, obtain the default prediction endpoint URL 
 for the project, and use the endpoint to programmatically test an image. You 
 can use this open source example as a template for building your own app for 
-Windows using the Custom Vision API.  
+Windows using the Custom Vision API. 
+
+**Important Note shoul dyou recieve a Nuget Package Error**
+-----------------------------------------------------------
+ 
+Long files name can cause Nuget package failures. Should you recieve this error,
+it is recommended that you place the solution files in a folder you have created
+to reduce the number of characters in the filepath. For example, create a folder 
+temp in the C:\ and place the solution folders in their, and then start the lab.
 
 **Prerequisites**
 -----------------
@@ -54,6 +62,9 @@ located:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Should a "trust" message appear click "Yes".
+
 
 The following (incomplete) code is shown. 
 
@@ -201,7 +212,7 @@ At the very top of the Program.cs file, add references to the two nuget packages
     Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
-### Step 3: Add reference 
+### Step 3: Add your training and prediction key into the Program.cs file. 
 
 Under the comment "// Add your training & prediction key from the settings page of the portal" 
 type in the following code to add the training and prediction key to enable access to the 
