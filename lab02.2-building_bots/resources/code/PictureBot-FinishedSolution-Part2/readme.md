@@ -1,1 +1,0 @@
-Note! If you want to use the finished solution, you must fill in the keys for Azure Search in PictureBot > Dialogs > SearchDialog.cs 
