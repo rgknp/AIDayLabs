@@ -39,7 +39,7 @@ namespace PictureBot
                 var middleware = options.Middleware;
 
                 IStorage conversationDataStore = new MemoryStorage();
-                IStorage userDataStore = new AzureBlobStorage("YourConnectionStringHere", "userdatastore");
+                IStorage userDataStore = new AzureBlobStorage("ConnectionStringHere", "userdatastore");
 
                 // Add middleware below
                 middleware.Add(new UserState<UserData>(userDataStore));
