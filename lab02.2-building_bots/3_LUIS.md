@@ -98,7 +98,7 @@ Bring your attention to `case "SearchPics"`. Here, we check if LUIS also returne
 
 If LUIS does determine a "facet" entity from the utterance, we don't want to take the users through the whole search dialog. We want to be efficient so the user has a good experience. So we'll go ahead and process their search request. `StartAsync` does just that.  
 
-At the bottom of the class, but still within the class, add the following:
+After the `DialogSet` (i.e. after `return dialogs; }`, add the following:
 ```csharp
 public static async Task StartAsync(ITurnContext context, string searchText)
         {

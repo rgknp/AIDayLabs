@@ -107,6 +107,8 @@ Finally, the SearchIndexName should be "images," but you may want to confirm tha
 
 Press F5 to run your bot again.  In the Bot Emulator, try searching for something like "dogs" or "water".  Ensure that you are seeing results when tags from your pictures are requested.  
 
+You might notice that if you run the bot, and immediately try to search for pictures, you are greeted instead. Why is that? Hint: review the `OnTurn` task in PictureBot.cs.
+
 Get stuck? You can find the solution for this lab under [resources/code/FinishedPictureBot-Part2](./resources/code/FinishedPictureBot-Part2).  
 
 ### Continue to [3_LUIS](./3_LUIS.md)  

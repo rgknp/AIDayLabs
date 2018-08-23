@@ -29,7 +29,7 @@ Select **OK**. You'll now see a template for a simple Echo Bot that can echo use
 
 >**TIP**:  If you only have one monitor and you would like to easily switch between instructions and Visual Studio, you can add the instruction files to your Visual Studio solution by right-clicking on the project in Solution Explorer and selecting **Add > Existing Item**. Navigate to "lab02.2-bulding_bots," and add all the files of type "MD File." 
 
-Right-click on the solution in Solution Explorer and select "Manage NuGet Packages for Solution." Install all of the packages listed below (you may already have some of these and that is fine).  Make sure you check the box "Include prerelease" and are on the "Browse" tab. After you've installed them, under **Dependencies > NuGet** in your Solution Explorer, you should see the following packages:  
+Right-click on the solution in Solution Explorer and select "Manage NuGet Packages for Solution." Install all of the packages listed below (you may already have some of these and that is fine, you shouldn't need to reinstall or update them).  Make sure you check the box "Include prerelease" and are on the "Browse" tab. After you've installed them, under **Dependencies > NuGet** in your Solution Explorer, you should see the following packages:  
  
 * Microsoft.AspNetCore.All
 * Microsoft.Bot.Builder.Integration.AspNet.Core
@@ -157,6 +157,7 @@ Now start your bot (with or without debugging) by pressing the "IIS Express" but
 
 Get stuck? You can find the solution for the lab up until this point under [resources/code/FinishedPictureBot-Part0](./resources/code/FinishedPictureBot-Part0).
 
+#### Using the Bot Framework Emulator  
 To interact with your bot:
 * Launch the Bot Framework Emulator (note we are using the v4 PREVIEW Emulator).  (If you just installed it, it may not be indexed to show up in a search on your local machine, so remember that it installs to `C:\Users\`your-username`\AppData\Local\botframework\app-`_version_`\botframework-emulator.exe`.)  
 * Select "Open bot" on the Welcome page and navigate to the "PictureBot.bot" file in the root of your project (probably something similar to `C:\Users\`your-username`\Source\Repos\PictureBot\PictureBot\PictureBot`).
@@ -183,7 +184,7 @@ This PictureBot will be organized in the following way:
 * **Responses** - classes which define the outputs to the users  
 * **Models** - the objects to be modified
 
-Next, create a folder for each piece in your PictureBot project (create three folders: "Dialogs", "Responses", "Models").  
+Next, create a folder for each piece in your PictureBot project (create three folders: "**Dialogs**", "**Responses**", "**Models**").  
 
 #### Dialogs  
 
@@ -227,6 +228,8 @@ namespace PictureBot.Dialogs
 }
 ```
 In the shell above, we've labeled the dialog, and we've initiated a new instance of it. We'll call this from RootDialog.  
+
+> Note: Are you getting an error around `using PictureBot.Responses;` and `using PictureBot.Models;`? Make sure you've created folders for Responses and Models (see instructions just before the **Dialogs** section begins). If you still receive the error, that's fine, we'll address it in the next sections.  
 
 Let's back up and create our RootDialog. Because it is the main dialog for the dialog container, we'll create it right within PictureBot.cs.  
 

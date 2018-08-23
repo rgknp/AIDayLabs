@@ -27,7 +27,7 @@ Save the file.
 
 In the Solution Explorer, right-click on your Bot Application project and select "Publish".  This will launch a wizard to help you publish your bot to Azure.  
 
-Select the publish target of "Azure App Service" and "Select Existing." Use the drop-down menu to select "Create Profile" instead of "Publish Immediately." Select "Create Profile" to continue.
+Select the publish target of "Azure App Service" and "Select Existing." On the "Publish" button, use the drop-down menu to select "Create Profile" instead of "Publish Immediately." Select "Create Profile" to continue.
 
 
 ![Publish Bot to Azure App Service](./resources/assets/PublishTarget.png) 
