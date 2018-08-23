@@ -6,7 +6,15 @@ the Custom Vision API to create an object detection project, add tags to it,
 upload images, train the project, obtain the default prediction endpoint URL 
 for the project, and use the endpoint to programmatically test an image. You 
 can use this open source example as a template for building your own app for 
-Windows using the Custom Vision API.  
+Windows using the Custom Vision API. 
+
+**Important Note should you recieve a Nuget Package Error**
+-----------------------------------------------------------
+ 
+Long files name can cause Nuget package failures. Should you recieve this error,
+it is recommended that you place the solution files in a folder you have created
+to reduce the number of characters in the filepath. For example, create a folder 
+temp in the C:\ and place the solution folders in their, and then start the lab.
 
 **Prerequisites**
 -----------------
@@ -54,6 +62,9 @@ located:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Should a "trust" message appear click "Yes".
+
 
 The following (incomplete) code is shown. 
 
@@ -195,25 +206,28 @@ namespace ObjectDetection
 ### Step 2: Add references to the to the two Custom Vision nuget packages
 
 At the very top of the Program.cs file, add references to the two nuget packages:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training
     Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
-### Step 3: Add reference 
+### Step 3: Add your training and prediction key into the Program.cs file. 
 
 Under the comment "// Add your training & prediction key from the settings page of the portal" 
 type in the following code to add the training and prediction key to enable access to the 
 Custom Vision services
  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            string trainingKey = "<<enter your training key here>>";
-            string predictionKey = "<<enter your prediction key here>>";
+            string trainingKey = "<enter your training key here>";
+            string predictionKey = "<enter your prediction key here>";
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
 
 ### Step 4: Create code that will enable the application to use the object detection domain 
 
 To set the application to make use of the objection domain, under the line "// Find the object detection domain"
-write code that will create a variable named domains using the GetDomains method of the trainingApi
+write code that will create a variable named "domains" using the GetDomains method of the trainingApi
 
 
 ### Step 5: Create a project named Object Detection Project
@@ -221,7 +235,6 @@ write code that will create a variable named domains using the GetDomains method
 Under the line "// Create a new project", create a project named Object Detection project and display in the 
 application that a project is being created.
 
-Replace the _ with a method that will display a message in the application that a project is being created?
 In the second line below, what method will replace the _ to create the project named Object Detection Project?
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -229,8 +242,10 @@ In the second line below, what method will replace the _ to create the project n
             var project = trainingApi._("Object Detection Project", null, objDetectionDomain.Id);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Replace the _ after "trainingApi." with a method that will display a message in the application that a project is being created?
 
-### Step 6: Create a project named Object Detection Project
+
+### Step 6: Create a tag for the scissor images named scissorsTag
 
 Under the lines:
 
@@ -246,12 +261,11 @@ Under the line "// Add all images for scissors" add code that will upload the sc
 to the tag of scissorsTag. Hint. Use the code under "// Add all images for fork" as a template for creating the code
 to upload the scissor images and map them to the scissorsTag
 
-### Step 8: Create a project named Object Detection Project
+### Step 8: train a project named Object Detection Project
 
 Under the line "// Now there are images with tags start training the project", train the project and have the application
 display that the project is being trained.
 
-Replace the _ with a method that will display a message in the application that a project is being trained?
 In the second line below, what method will replace the _ to train the project?
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -259,10 +273,22 @@ In the second line below, what method will replace the _ to train the project?
             var iteration = trainingApi._(project.Id);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Replace the _ with a method that will display a message in the application that a project is being trained?
+
 ### Step 9: Run the example
 
 Build and run the solution. The training and prediction of the images can take 2 minutes. The prediction results
 appear on the console.
+
+### Need help?
+
+Start Visual Studio 2017, Community Edition, open the Visual Studio solution
+named **CustomVision.Sample.sln** in the solution sub-directory of where this lab is
+located:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Resources/Solution/CustomVision.Sample/CustomVision.Sample.sln
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Further Reading

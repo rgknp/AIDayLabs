@@ -188,6 +188,16 @@ into the console app when running the solution so have this at the ready. The
 training and prediction of the images can take 2 minutes. If you've completed the 
 lab successfully, the prediction results should appear on the console.
 
+### Need help?
+
+Start Visual Studio 2017, Community Edition, open the Visual Studio solution
+named **CustomVision.Sample.sln** in the solution sub-directory of where this lab is
+located:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Resources/Solution/CustomVision.Sample/CustomVision.Sample.sln
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Further Reading
 ---------------
 
