@@ -1,0 +1,23 @@
+{
+    "name": "PictureBot",
+    "description": "",
+    "secretKey": "",
+    "services": [
+      {
+        "appId": "YourAppId",
+        "id": "http://localhost:3978/api/messages",
+        "type": "endpoint",
+        "appPassword": "YourAppPassword",
+        "endpoint": "http://localhost:3978/api/messages",
+        "name": "PictureBot"
+      },
+      {
+        "id": "1df8e7a0-95b9-11e8-9fce-979ac485731e",
+        "name": "PictureBotNgrok",
+        "type": "endpoint",
+        "appId": "YourAppId",
+        "appPassword": "YourAppPassword",
+        "endpoint": "http://f2feb4ee.ngrok.io/api/messages"
+      }
+    ]
+}
