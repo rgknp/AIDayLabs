@@ -8,7 +8,7 @@ for the project, and use the endpoint to programmatically test an image. You
 can use this open source example as a template for building your own app for 
 Windows using the Custom Vision API. 
 
-**Important Note shoul dyou recieve a Nuget Package Error**
+**Important Note should you recieve a Nuget Package Error**
 -----------------------------------------------------------
  
 Long files name can cause Nuget package failures. Should you recieve this error,
