@@ -280,6 +280,16 @@ Replace the _ with a method that will display a message in the application that 
 Build and run the solution. The training and prediction of the images can take 2 minutes. The prediction results
 appear on the console.
 
+### Need help?
+
+Start Visual Studio 2017, Community Edition, open the Visual Studio solution
+named **CustomVision.Sample.sln** in the solution sub-directory of where this lab is
+located:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Resources/Solution/CustomVision.Sample/CustomVision.Sample.sln
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 Further Reading
 ---------------
