@@ -262,10 +262,11 @@ Replace the _ after "trainingApi." with a method that will display a message in 
 
 Under the lines:
 
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 >// Make two tags in the new project
 >
 >var forkTag = trainingApi.CreateTag(project.Id, "fork");"
->
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Write code that create a variable named scissorsTag that creates a tag named scissors against the current project.
 
