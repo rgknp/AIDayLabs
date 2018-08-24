@@ -13,8 +13,22 @@ Windows using the Custom Vision API.
  
 Long files name can cause Nuget package failures. Should you recieve this error,
 it is recommended that you place the solution files in a folder you have created
-to reduce the number of characters in the filepath. For example, create a folder 
-temp in the C:\ and place the solution folders in their, and then start the lab.
+to reduce the number of characters in the filepath. 
+
+If you recieve the following error
+
+>NuGet Package restore failed for project ObjectDetection: 
+>The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, 
+>and the directory name must be less than 248 characters.. Please see Error List window for detailed warnings and errors.		
+
+Peform the following steps
+
+1. Create a folder in the C:\ named Temp
+2. In Windows Explorer, browse to the folder C:\LearnAI-Bootcamp\lab01.3_customvision02\Resources\Starter
+3. Copy the CustomVision.Sample folder
+4. Browse to C:\Temp, right click and click Paste
+5. Wait until the copy completes 
+
 
 **Prerequisites**
 -----------------
@@ -24,7 +38,6 @@ temp in the C:\ and place the solution folders in their, and then start the lab.
 This example has been tested using the .NET Framework using [Visual Studio 2017,
 Community Edition](https://www.visualstudio.com/downloads/)
 
- 
 
 ### The Training API key
 
@@ -34,6 +47,8 @@ on <https://customvision.ai> are exposed through this library, allowing you to
 automate all aspects of the Custom Vision Service. You can obtain a key by
 creating a new project at <https://customvision.ai> and then clicking on the
 "setting" gear in the top right.
+
+
 
 ### The Images used for Training and Predicting
 
@@ -52,15 +67,13 @@ the test prediction.
 ---------------------------------------------
 
 ### Step 1: Create a console application and prepare the training key and the images needed for the example.
-
  
 
 Start Visual Studio 2017, Community Edition, open the Visual Studio solution
-named **CustomVision.Sample.sln** in the sub-directory of where this lab is
-located:
+named **CustomVision.Sample.sln** from the following location:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Resources/Starter/CustomVision.Sample/CustomVision.Sample.sln
+C:\CustomVision.Sample\CustomVision.Sample.sln
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Should a "trust" message appear click "Yes".
@@ -205,12 +218,12 @@ namespace ObjectDetection
 
 ### Step 2: Add references to the to the two Custom Vision nuget packages
 
-At the very top of the Program.cs file, add references to the two nuget packages:
+At the very top of the Program.cs file, use the correct syntax to add references to the two nuget packages:
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training
-    Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>   Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training
+>   Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
 ### Step 3: Add your training and prediction key into the Program.cs file. 
 
@@ -218,10 +231,10 @@ Under the comment "// Add your training & prediction key from the settings page 
 type in the following code to add the training and prediction key to enable access to the 
 Custom Vision services
  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            string trainingKey = "<enter your training key here>";
-            string predictionKey = "<enter your prediction key here>";
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>            string trainingKey = "<enter your training key here>";
+>            string predictionKey = "<enter your prediction key here>";
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
 
 ### Step 4: Create code that will enable the application to use the object detection domain 
@@ -237,10 +250,10 @@ application that a project is being created.
 
 In the second line below, what method will replace the _ to create the project named Object Detection Project?
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            Console._("Creating new project:");
-            var project = trainingApi._("Object Detection Project", null, objDetectionDomain.Id);
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>            Console.WriteLine("Creating new project:");
+>            var project = trainingApi._("Object Detection Project", null, objDetectionDomain.Id);
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Replace the _ after "trainingApi." with a method that will display a message in the application that a project is being created?
 
@@ -249,10 +262,13 @@ Replace the _ after "trainingApi." with a method that will display a message in 
 
 Under the lines:
 
-"// Make two tags in the new project
- var forkTag = trainingApi.CreateTag(project.Id, "fork");"
+>// Make two tags in the new project
+>
+>var forkTag = trainingApi.CreateTag(project.Id, "fork");"
+>
 
-write code that create a variable named scissorsTag that creates a tag named scissors against the current project.
+Write code that create a variable named scissorsTag that creates a tag named scissors against the current project.
+
 
 
 ### Step 7: Upload the scissor images and map them to the scissorsTag
@@ -268,10 +284,10 @@ display that the project is being trained.
 
 In the second line below, what method will replace the _ to train the project?
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            Console._("\tTraining");
-            var iteration = trainingApi._(project.Id);
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>            Console.WriteLine("\tTraining");
+>            var iteration = trainingApi._(project.Id);
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Replace the _ with a method that will display a message in the application that a project is being trained?
 
